@@ -63,5 +63,3 @@ docker compose build && docker compose up
 #### 커뮤니케이션
 
 <img src="./images/wechat.jpg" width="382px" height="511px" />
-
-<img src="./images/wechat1.png" width="382px" height="511px" />

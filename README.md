@@ -63,5 +63,3 @@ If the page keeps prompting: Please save the information first, and then refresh
 #### Contact
 
 <img src="./images/wechat.jpg" width="382px" height="511px" />
-
-<img src="./images/wechat1.png" width="382px" height="511px" />
