@@ -44,7 +44,7 @@ docker compose build && docker compose up
 
 ![session1](./images/session1.png)
 
-填寫後保存資訊，更改輸入identity可以即可修改帳號資訊。
+填寫後保存資訊，輸入identity可以更改修改帳號資訊。
 
 ![session2](./images/session2.png)
 
