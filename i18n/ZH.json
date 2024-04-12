@@ -1,0 +1,68 @@
+{
+  "Language": "简体中文",
+  "Translation": {
+    "Page Title": "Suno API AI音乐歌曲生成器",
+    "Page About": "Suno API AI音乐生成器是一款免费的AI音乐生成软件，调用现有的API接口即可实现AI音乐生成。\n\n如有问题请联系微信：18942907527",
+    "Page Header": "立即创作属于您独特的Suno AI音乐歌曲,免费使用并享受创新AI音乐生成的乐趣！",
+
+    "Custom": "自定义模式",
+    "Title": "歌曲名称：",
+    "Title Desc": "请输入歌曲名称，最多不超过100字数。",
+    "Tags": "音乐风格：",
+    "Tags Desc": "请输入音乐风格，最多不超过200字数。",
+    "Prompt": "您的歌词：",
+    "Prompt Desc": "请输入您的歌词，最多不超过1000字数。",
+
+    "Title Placeholder": "给您的音乐歌曲起一个名称，以便识别、分享和发现。",
+    "Tags Placeholder": "描述您想要的音乐风格（例如：中国流行音乐），Suno AI的模型不识别艺术家的名字，但能理解流派和氛围。",
+    "Prompt Placeholder": "输入您自己的歌词，或者是各种已经存在的歌词，专业歌词辅助工具：https://poe.com/SuperSunoMaster。",
+
+    "Desc Prompt": "歌曲描述：",
+    "Desc Value": "直接输入您想要的音乐风格和主题，一键制作专业水准的Suno AI音乐歌曲！",
+    "Desc Reamrk": "描述你想要的音乐风格和主题（例如：关于假期的原声流行音乐），使用流派和氛围而不是具体的艺术家和歌曲。",
+    "Instrumental": "纯音乐",
+
+    "Generate": "立即生成🎵",
+
+    "DescPrompt Error": "请输入歌曲描述例如：写一首类似于《夜曲》风格的《夜曲一响上台领奖》。",
+
+    "Custom Title Error": "请输入歌曲标题，例如：夜曲一响上台领奖。",
+    "Custom Tags Error": "请输入音乐风格，例如：中国流行音乐。",
+    "Custom Prompt Error": "请输入您的歌词，如果不会可以输入关键字词，然后点生成歌词。",
+
+    "Generate Submit Error": "Suno AI 音乐歌曲生成提交失败：",
+    "Generate Status Error": "Suno AI 音乐歌曲生成状态失败：",
+
+    "Fetch Status Progress": "Suno AI 音乐歌曲正生成请稍等...",
+    "Fetch Status Running": "Suno AI 音乐歌曲正在生成中：",
+    "Fetch Status Success": "Suno AI 音乐歌曲生成成功：",
+
+    "Generate Success": "Suno AI 音乐歌曲生成成功！",
+
+    "Identity Placeholder": "填写身份标识以便识别例如：Email账号。",
+    "Identity Help": "请输入您的Email账号以便自己识别。",
+    "Session Placeholder": "填写您的Session以便使用免费生成音乐。",
+    "Session Help": "请输入您的Session以便使用免费生成音乐。",
+    "Cookie Placeholder": "填写您的Cookie以便使用免费生成音乐。",
+    "Cookie Help": "请输入您的Cookie以便使用免费生成音乐。",
+
+    "Setting": "设置信息",
+    "SaveInfo Identity Error": "请输入Identity",
+    "SaveInfo Session Error": "请输入Session",
+    "SaveInfo Cookie Error": "请输入Cookie",
+    "SaveInfo": "保存信息",
+    "SaveInfo Success": "保存信息成功！",
+    "SaveInfo Error": "保存信息失败！",
+
+    "TokenAuth Error": "请先设置信息保存，然后再刷新页面才能正常使用！",
+
+    "FetchFeed": "获取音乐",
+    "FeedID": "音乐编号：",
+    "FeedID Placeholder": "请输入已经生成过的音乐编号，点击获取即可展示出来。",
+    "FeedID Help": "请输入已经生成过的音乐编号，点击获取即可展示出来。",
+    "FeedBtn": "获取信息",
+    "FetchFeed FeedID Error": "请输入已经生成过的音乐编号。",
+    "FetchFeed Error": "Suno AI 音乐歌曲信息获取失败：",
+    "FetchFeed Success": "Suno AI 音乐歌曲信息获取成功！"
+  }
+}

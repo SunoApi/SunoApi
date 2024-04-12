@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  SunoApi:
+    build: .
+    ports:
+      - "8051:8051"

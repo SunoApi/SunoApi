@@ -1,0 +1,68 @@
+{
+  "Language": "한국어",
+  "Translation": {
+    "Page Title": "Suno API AI 음악 노래 생성기",
+    "Page About": "Suno API AI 음악 생성기는 무료 AI 음악 생성 소프트웨어로, 기존 API 인터페이스를 호출하면 AI 음악 생성을 실현할 수 있습니다.\n\n 문제가 있으면 위챗으로 연락하십시오: 18942907527",
+    "Page Header": "당신만의 독특한 Suno AI 음악 노래를 즉시 창작하여 혁신적인 AI 음악 생성의 즐거움을 무료로 사용하고 즐길 수 있습니다! ",
+
+    "Custom": "사용자 지정 모드",
+    "Title": "노래 이름:",
+    "Title Desc": "노래 이름을 100자 이내로 입력하십시오.",
+    "Tags": "음악 스타일:",
+    "Tags Desc": "음악 스타일을 최대 200자 이내로 입력하십시오.",
+    "Prompt": "당신의 가사:",
+    "Prompt Desc": "최대 1000자 이하의 가사를 입력하십시오.",
+
+    "Title Placeholder": "음악 노래의 이름을 지정하여 식별, 공유 및 검색할 수 있습니다.",
+    "Tags Placeholder": "원하는 음악 스타일 (예:'중국 대중음악') 을 설명하면 Suno AI의 모델은 예술가의 이름을 인식하지 않지만 장르와 분위기를 이해할 수 있습니다.",
+    "Prompt Placeholder": "자신의 가사를 입력하거나 이미 존재하는 다양한 가사, 전문 가사 보조 도구:https://poe.com/SuperSunoMaster.",
+    
+    "Desc Prompt": "노래 설명:",
+    "Desc Value": "원하는 음악 스타일과 테마를 직접 입력하고 클릭 한 번으로 전문 수준의 Suno AI 음악 노래를 만들십시오!",
+    "Desc Reamrk": "원하는 음악 스타일과 주제 (예: 휴가에 관한 어쿠스틱 팝) 를 설명하고 구체적인 예술가와 노래가 아닌 장르와 분위기를 사용합니다.",
+    "Instrumental": "순수한 음악",
+
+    "Generate": "지금 생성🎵",
+
+    "DescPrompt Error": "노래 설명을 입력하십시오. 예를 들어'야곡'과 비슷한 스타일의'야곡이 울리면 무대에 올라 상을 받습니다'를 쓰십시오.",
+
+    "Custom Title Error": "밤 노래가 울리면 무대에 올라 상을 받는 것과 같은 노래 제목을 입력하십시오.",
+    "Custom Tags Error": "음악 스타일을 입력하십시오. 예를 들면 중국 유행음악입니다.",
+    "Custom Prompt Error": "가사를 입력하십시오. 키워드를 입력하지 못할 경우 가사 생성을 클릭하십시오.",
+
+    "Generate Submit Error": "Suno AI 음악 노래 생성 커밋 실패：",
+    "Generate Status Error": "Suno AI 음악 노래 생성 상태 실패：",
+
+    "Fetch Status Progress": "Suno AI 음악 노래가 생성되고 있습니다. 잠시만요...",
+    "Fetch Status Running": "Suno AI 음악 노래가 생성 중：",
+    "Fetch Status Success": "Suno AI 음악 노래가 성공적으로 생성되었습니다：",
+
+    "Generate Success": "Suno AI 음악 노래 생성 성공!",
+
+    "Identity Placeholder": "예를 들어 Email 계정을 식별하기 위해 ID를 입력합니다.",
+    "Identity Help": "본인이 식별할 수 있도록 이메일 계정을 입력하십시오.",
+    "Session Placeholder": "본인이 식별할 수 있도록 이메일 계정을 입력하십시오.",
+    "Session Help": "무료 빌드 음악을 사용하려면 Session을 입력하십시오.",
+    "Cookie Placeholder": "무료로 음악을 생성할 수 있도록 쿠키를 기입하십시오.",
+    "Cookie Help": "무료 생성 음악을 사용하려면 쿠키를 입력하십시오.",
+
+    "Setting": "설정 정보",
+    "SaveInfo Identity Error": "Identity 를 입력하십시오.",
+    "SaveInfo Session Error": "Session 을 입력하십시오.",
+    "SaveInfo Cookie Error": "Cookie 을 입력하십시오.",
+    "SaveInfo": "정보 저장",
+    "SaveInfo Success": "정보 저장 성공.",
+    "SaveInfo Error": "정보 저장 실패.",
+
+    "TokenAuth Error": "정보를 저장하도록 설정한 다음 페이지를 새로 고쳐야 제대로 사용할 수 있습니다!",
+
+    "FetchFeed": "음악 가져오기",
+    "FeedID": "음악 가져오기:",
+    "FeedID Placeholder": "생성된 음악 번호를 입력하고 가져오기를 클릭하면 표시됩니다.",
+    "FeedID Help": "생성된 음악 번호를 입력하고 가져오기를 클릭하면 표시됩니다.",
+    "FeedBtn": "정보 얻기",
+    "FetchFeed FeedID Error": "생성된 음악 번호를 입력하십시오.",
+    "FetchFeed Error": "Suno AI 음악 노래 정보 가져오기 실패:",
+    "FetchFeed Success": "Suno AI 음악 노래 정보 획득 성공! "
+  }
+}

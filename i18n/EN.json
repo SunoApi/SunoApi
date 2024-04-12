@@ -1,0 +1,68 @@
+{
+  "Language": "English",
+  "Translation": {
+    "Page Title": "Suno API AI Music Generator",
+    "Page About": "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please contact wechat: 18942907527",
+    "Page Header": "Create your own unique Suno AI music song now, use it for free and enjoy the fun of innovative AI music generation! ",
+
+    "Custom": "Custom mode",
+    "Title": "Song Title:",
+    "Title Desc": "Please enter the song name, with a maximum of 100 words.",
+    "Tags": "Style of music:",
+    "Tags Desc": "Please enter the music style, with a maximum of 200 words.",
+    "Prompt": "Your own lyrics:",
+    "Prompt Desc": "Please enter your lyrics, up to a maximum of 1000 words.",
+
+    "Title Placeholder": "Give your music songs a name to identify, share, and discover.",
+    "Tags Placeholder": "Describe the style of music what you want (e.g. : Chinese pop). Suno AI's models don't recognize artists by name, but understand genres and atmos.",
+    "Prompt Placeholder": "Enter your own lyrics, or various existing lyrics, professional lyric assistance tools: https://poe.com/SuperSunoMaster.",
+    
+    "Desc Prompt": "Song Description:",
+    "Desc Value": "Directly enter your desired style of music and theme, and create professional quality Suno AI music songs with one click!",
+    "Desc Reamrk": "Describe the style of music and theme you want (e.g. : Acoustic pop music about the holidays). Use genres and atmospheres rather than specific artists and songs.",
+    "Instrumental": "Instrumental",
+
+    "Generate": "Generate Now 🎵",
+
+    "DescPrompt Error": "Please enter the song description, for example: write a song similar to the style of 'Nocturne' called 'Nocturne: Take the Stage to Receive Awards'.",
+
+    "Custom Title Error": "Please enter the title of the song, for example: Nocturne on stage to accept the award.",
+    "Custom Tags Error": "Please enter the style of music, for example, Chinese pop.",
+    "Custom Prompt Error": "Please enter your own lyrics, if not you can enter a keyword word, then click Generate Lyrics.",
+
+    "Generate Submit Error": "Suno AI Music song generation submission failed：",
+    "Generate Status Error": "Suno AI Music song generation status failed：",
+
+    "Fetch Status Progress": "Suno AI Music song generation Please wait...",
+    "Fetch Status Running": "Suno AI Music song is being generated：",
+    "Fetch Status Success": "Suno AI Music song generation success：",
+
+    "Generate Success": "Suno AI Music song generation success!",
+
+    "Identity Placeholder": "Enter your ID to identify e.g. : Email account.",
+    "Identity Help": "Please enter your Email account to identify yourself.",
+    "Session Placeholder": "Enter your Session to use free generated music.",
+    "Session Help": "Please enter your Session to use the free music generation.",
+    "Cookie Placeholder": "Enter your Cookie to use free music generation.",
+    "Cookie Help": "Please enter your Cookie to generate music for free.",
+
+    "Setting": "Set information",
+    "SaveInfo Identity Error": "Please enter Identity",
+    "SaveInfo Session Error": "Please enter Session",
+    "SaveInfo Cookie Error": "Please enter Cookie",
+    "SaveInfo": "Save information",
+    "SaveInfo Success": "Save information success!",
+    "SaveInfo Error": "Failed to save information!",
+
+    "TokenAuth Error": "Please save the information first, and then refresh the page to use it normally!",
+
+    "FetchFeed": "Get music feed",
+    "FeedID": "Music feed ID:",
+    "FeedID Placeholder": "Please enter the generated music feed ID, click get to display.",
+    "FeedID Help": "Please enter the generated music feed ID, click get to display.",
+    "FeedBtn": "Get information",
+    "FetchFeed FeedID Error": "Please enter the generated music feed number.",
+    "FetchFeed Error": "Suno AI Music feed information failed to obtain：",
+    "FetchFeed Success": "Suno AI Music feed information get success! "
+  }
+}
