@@ -64,12 +64,12 @@ If the page keeps prompting: Please save the information first, and then refresh
 
 <img src="./images/wechat.jpg" width="382px" height="511px" />
 
-## reference
+## Reference
 
 - Suno.com official website: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 
-## statement
+## Statement
 
 SunoApi is an unofficial open source project for learning and research purposes only.
