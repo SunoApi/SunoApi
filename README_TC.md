@@ -63,3 +63,14 @@ docker compose build && docker compose up
 #### 交流
 
 <img src="./images/wechat.jpg" width="382px" height="511px" />
+
+
+## 參攷
+
+- Suno.com 官網: [https://suno.com](https://suno.com)
+- Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
+
+
+## 聲明
+
+SunoApi是一個非官方的開源項目，僅供學習和研究使用。

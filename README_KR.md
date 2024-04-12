@@ -63,3 +63,14 @@ docker compose build && docker compose up
 #### 커뮤니케이션
 
 <img src="./images/wechat.jpg" width="382px" height="511px" />
+
+
+## 참조
+
+- Suno.com 공식 홈페이지: [https://suno.com](https://suno.com)
+- Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
+
+
+## 선언
+
+SunoApi는 학습 및 연구에만 사용되는 비공식 오픈 소스 프로젝트입니다.
