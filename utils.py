@@ -4,7 +4,6 @@ import json
 import os
 import time
 
-import aiohttp
 import requests
 
 COMMON_HEADERS = {
