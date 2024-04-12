@@ -45,7 +45,7 @@ def load_locales():
 locales = load_locales()
 display_languages = []
 selected_index = 0
-st.session_state.Language = "ZH"
+st.session_state.Language = "EN"
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
