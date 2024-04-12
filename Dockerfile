@@ -10,5 +10,5 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8051
-CMD [ "streamlit", "run", "main.py" ]
+CMD [ "nohup", "streamlit", "run", "main.py" ]
 
