@@ -44,7 +44,7 @@ docker compose build && docker compose up
 
 ![session1](./images/session1.png)
 
-작성 후 정보를 저장하고 변경 아이덴티티를 입력하면 계정 정보를 수정할 수 있다.
+작성 후 정보를 저장하고 identity 를 입력하면 수정된 계정 정보를 변경할 수 있습니다.
 
 ![session2](./images/session2.png)
 
