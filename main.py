@@ -291,6 +291,7 @@ def fetch_status(aid: str):
             progress_text = i18n("Fetch Status Success") + status
             my_bar.progress(100, text=progress_text)
             time.sleep(15) #等待图片音频视频生成完成再返回
+            my_bar.empty()
             break
         elif status == "Unauthorized":
             while True:

@@ -64,67 +64,7 @@ Once the project is up and running, visit http://localhost:8501/ in your browser
 
 #### Creation
 
-The following are ten creative concepts for cheerful music, each with its own unique theme and style. Simply copy the corresponding rhythm, instrument, and theme to the song description on the project run page, and click Generate Now to produce music songs with corresponding theme melodies:
-
-Sunshine Beach
-
-Rhythm: Medium to fast Samba rhythm
-Musical instruments: steel drum, ukulele, trumpet
-Theme: Beach Party, Sunshine, Beach, Waves
-
-Urban Rush
-
-Rhythm: Fast paced electronic dance music
-Instruments: synthesizer, electronic drum, bass
-Theme: The Fast Rhythm of Urban Life, Neon Lights
-
-Starry Sky Camping
-
-Rhythm: A light and lively rural style
-Instruments: guitar, banjo, harmonica
-Theme: Camping under the starry sky, the beauty of nature
-
-Retro Swing 
-
-Rhythm: The retro rhythm of swing music
-Instruments: saxophone, piano, double bass
-Theme: Back to the Swing Ball of the 1940s
-
-Tropical rainforest
-
-Rhythm: Light and lively reggae rhythm
-Instruments: electric guitar, bass, percussion
-Theme: Relaxation and Freedom in Tropical Rainforests
-
-Happy Carnival 
-
-Rhythm: Fast Polka rhythm
-Instruments: accordion, trumpet, percussion
-Theme: Carnival Carnival and Joy
-
-Summer Afternoon 
-
-Rhythm: Leisure Jazz
-Instruments: saxophone, piano, brush drum
-Theme: Leisure time in summer afternoons, enjoying sunshine and breeze
-
-Happy violin
-
-Rhythm: lively Celtic style
-Instruments: violin, flute, Irish drum
-Theme: The Joy and Vitality of Celtic Music
-
-Electronic Game Park
-
-Rhythm: Vibrant 8-bit electronic music
-Instruments: synthesizer, electronic drum, 8-bit sound
-Theme: The fun and excitement of retro electronic games
-
-Street dance
-
-Rhythm: A hip-hop rhythm with a strong sense of rhythm
-Musical instruments: synthesizer, drum player, bass
-Theme: The combination of street culture and dance, showcasing the vitality of the city
+专业歌词辅助工具：https://poe.com/SuperSunoMaster
 
 
 #### Contact
