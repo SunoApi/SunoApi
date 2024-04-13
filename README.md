@@ -64,7 +64,7 @@ Once the project is up and running, visit http://localhost:8501/ in your browser
 
 #### Contact
 
-<img src="./images/wechat.jpg" width="382px" height="511px" />
+<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 ## Reference
 

@@ -64,7 +64,7 @@ docker compose build && docker compose up
 
 #### こうりゅう
 
-<img src="./images/wechat.jpg" width="382px" height="511px" />
+<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
 ## リファレンス
