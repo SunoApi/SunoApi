@@ -54,6 +54,8 @@ Enter and save the information. You can modify the account information if you en
 
 Once the project is up and running, visit http://localhost:8501/ in your browser.
 
+![index1](https://sunoapi.net/images/index1.png)
+
 ![index](https://sunoapi.net/images/index.png)
 
 

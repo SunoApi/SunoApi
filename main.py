@@ -7,7 +7,7 @@ from datetime import datetime
 
 import schemas
 from cookie import suno_sqlite,get_suno_auth,new_suno_auth
-from utils import generate_lyrics, generate_music, get_feed, get_lyrics
+from utils import generate_lyrics, generate_music, get_feed, get_lyrics, check_url_available
 
 from sqlite import SqliteTool
 
@@ -270,6 +270,8 @@ def generate_with_song_description(data: schemas.DescriptionModeGenerateParam):
     except Exception as e:
         return {"detail":str(e)}
 
+
+
 def fetch_status(aid: str):
     progress_text = i18n("Fetch Status Progress")
     my_bar = col2.progress(0, text=progress_text)
@@ -292,7 +294,8 @@ def fetch_status(aid: str):
         elif status == "complete":
             progress_text = i18n("Fetch Status Success") + status
             my_bar.progress(100, text=progress_text)
-            time.sleep(15) #等待图片音频视频生成完成再返回
+            # time.sleep(15) #等待图片音频视频生成完成再返回
+            check_url_available(resp[0]["video_url"])
             my_bar.empty()
             break
         elif status == "Unauthorized":

@@ -54,6 +54,8 @@ docker compose build && docker compose up
 
 프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
 
+![index1](https://sunoapi.net/images/index1.png)
+
 ![index](https://sunoapi.net/images/index.png)
 
 

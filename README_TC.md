@@ -54,6 +54,8 @@ docker compose build && docker compose up
 
 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
+![index1](https://sunoapi.net/images/index1.png)
+
 ![index](https://sunoapi.net/images/index.png)
 
 

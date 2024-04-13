@@ -64,3 +64,21 @@ def get_lyrics(lid, token):
 
 def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+def check_url_available(url: str):
+    while True:
+        # 每间隔一秒钟检查一次url文件大小
+        file_size = get_file_size(url)
+        if file_size >= 1024*1024:
+            print(local_time() + f" ***check_url_available -> {url} 文件大小：{file_size} 大于1MB可访问到***\n")
+            break
+        print(local_time() + f" ***check_url_available -> {url} 文件大小：{file_size} 小于1MB继续检查***\n")
+        time.sleep(1)
+
+def get_file_size(url):
+    resp = requests.head(url)
+    if resp.status_code == 200:
+        file_size = resp.headers.get('Content-Length')
+        if file_size:
+            return int(file_size)
+    return 0
