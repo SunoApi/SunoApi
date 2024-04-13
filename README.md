@@ -64,7 +64,7 @@ Once the project is up and running, visit http://localhost:8501/ in your browser
 
 #### Creation
 
-专业歌词辅助工具：https://poe.com/SuperSunoMaster
+Professional lyric assistance tools: https://poe.com/SuperSunoMaster
 
 
 #### Contact

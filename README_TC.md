@@ -64,7 +64,7 @@ docker compose build && docker compose up
 
 #### 創作
 
-专业歌词辅助工具：https://poe.com/SuperSunoMaster
+專業歌詞輔助工具： https://poe.com/SuperSunoMaster
 
 
 #### 交流

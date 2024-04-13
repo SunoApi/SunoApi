@@ -64,7 +64,7 @@ docker compose build && docker compose up
 
 #### オーサリング
 
-专业歌词辅助工具：https://poe.com/SuperSunoMaster
+専門歌詞支援ツール：https://poe.com/SuperSunoMaster
 
 
 #### こうりゅう
