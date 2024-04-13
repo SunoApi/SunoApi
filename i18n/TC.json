@@ -61,7 +61,8 @@
     "FeedID Placeholder": "請輸入已經生成過的音樂編號，點擊獲取即可展示出來。",
     "FeedID Help": "請輸入已經生成過的音樂編號，點擊獲取即可展示出來。",
     "FeedBtn": "獲取資訊",
-    "FetchFeed FeedID Error": "請輸入已經生成過的音樂編號。",
+    "FetchFeed FeedID Empty": "請輸入已經生成過的音樂編號。",
+    "FetchFeed FeedID Error": "音樂編號格式錯誤。",
     "FetchFeed Error": "Suno AI音樂歌曲資訊獲取失敗：",
     "FetchFeed Success": "Suno AI音樂歌曲資訊獲取成功！"
   }

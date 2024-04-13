@@ -61,7 +61,8 @@
     "FeedID Placeholder": "作成済みの曲番号を入力して「取得」をクリックすると表示されます。",
     "FeedID Help": "作成済みの曲番号を入力して「取得」をクリックすると表示されます。",
     "FeedBtn": "情報を得ることです",
-    "FetchFeed FeedID Error": "作成済みの音楽番号の入力をお願いします。",
+    "FetchFeed FeedID Empty": "作成済みの音楽番号の入力をお願いします。",
+    "FetchFeed FeedID Error": "音楽番号のフォーマットが間違っています。",
     "FetchFeed Error": "Suno AI音楽歌です情報取得失敗します：",
     "FetchFeed Success": "Suno AI音楽歌です情報獲得に成功しました! "
   }

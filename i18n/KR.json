@@ -61,8 +61,9 @@
     "FeedID Placeholder": "생성된 음악 번호를 입력하고 가져오기를 클릭하면 표시됩니다.",
     "FeedID Help": "생성된 음악 번호를 입력하고 가져오기를 클릭하면 표시됩니다.",
     "FeedBtn": "정보 얻기",
-    "FetchFeed FeedID Error": "생성된 음악 번호를 입력하십시오.",
-    "FetchFeed Error": "Suno AI 음악 노래 정보 가져오기 실패:",
+    "FetchFeed FeedID Empty": "생성된 음악 번호를 입력하십시오.",
+    "FetchFeed FeedID Error": "음악 번호 형식이 잘못되었습니다.",
+    "FetchFeed Error": "Suno AI 음악 노래 정보 가져오기 실패: ",
     "FetchFeed Success": "Suno AI 음악 노래 정보 획득 성공! "
   }
 }

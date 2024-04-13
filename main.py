@@ -186,8 +186,8 @@ while True:
 
 # @st.cache_data
 def fetch_feed(aids: list):
-    if len(aids) == 1:
-        resp = get_feed(aids[0], st.session_state.token)
+    if len(aids) == 1 and len(aids[0].strip()) == 36:
+        resp = get_feed(aids[0].strip(), st.session_state.token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -197,9 +197,9 @@ def fetch_feed(aids: list):
             # col1.image(resp[0]["image_large_url"])
             col2.success(i18n("FetchFeed Success") + resp[0]["id"])
         else:
-            col2.error(i18n("FetchFeed Error")  + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
-    elif len(aids) == 2:
-        resp = get_feed(aids[0], st.session_state.token)
+            col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+    elif len(aids) == 2  and len(aids[0].strip()) == 36 and len(aids[1].strip()) == 36:
+        resp = get_feed(aids[0].strip(), st.session_state.token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -209,9 +209,9 @@ def fetch_feed(aids: list):
             # col1.image(resp[0]["image_large_url"])
             col2.success(i18n("FetchFeed Success") + resp[0]["id"])
         else:
-            col2.error(i18n("FetchFeed Error")  + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
-        resp = get_feed(aids[1], st.session_state.token)
+        resp = get_feed(aids[1].strip(), st.session_state.token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -221,7 +221,9 @@ def fetch_feed(aids: list):
             # col3.image(resp[0]["image_large_url"])
             col2.success(i18n("FetchFeed Success") + resp[0]["id"])
         else:
-            col2.error(i18n("FetchFeed Error")  + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+    else:
+        col2.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
 
 
 container2 = col2.container(border=True)
@@ -242,7 +244,7 @@ if FetchFeed:
     if FeedBtn:
         st.session_state.FeedBtn = True
         if FeedID == "":
-            col2.error(i18n("FetchFeed FeedID Error"))
+            col2.error(i18n("FetchFeed FeedID Empty"))
         else:
             FeedIDs = FeedID.split(",")
             fetch_feed(FeedIDs)

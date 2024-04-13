@@ -61,8 +61,9 @@
     "FeedID Placeholder": "Please enter the generated music feed ID, click get to display.",
     "FeedID Help": "Please enter the generated music feed ID, click get to display.",
     "FeedBtn": "Get information",
-    "FetchFeed FeedID Error": "Please enter the generated music feed number.",
-    "FetchFeed Error": "Suno AI Music feed information failed to obtain：",
-    "FetchFeed Success": "Suno AI Music feed information get success! "
+    "FetchFeed FeedID Empty": "Please enter the generated music feed ID.",
+    "FetchFeed FeedID Error": "The music feed ID format is incorrect.",
+    "FetchFeed Error": "Suno AI music feed information obtained failed: ",
+    "FetchFeed Success": "Suno AI music feed information obtained success! "
   }
 }
