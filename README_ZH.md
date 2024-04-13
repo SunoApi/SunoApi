@@ -38,21 +38,21 @@ docker compose build && docker compose up
 
 先从浏览器页面登录状态下中获取自己的session和cookie。
 
-![session](./images/session.png)
+![session](https://sunoapi.net/images/session.png)
 
 填写设置信息里面后面会自动保活，可以填写多个账号信息。
 
-![session1](./images/session1.png)
+![session1](https://sunoapi.net/images/session1.png)
 
 填写后保存信息，输入identity可以更改修改账号信息。
 
-![session2](./images/session2.png)
+![session2](https://sunoapi.net/images/session2.png)
 
 #### 完成
 
 启动运行项目后浏览器访问 http://localhost:8501/ 即可使用了。
 
-![docs](./images/index.png)
+![index](https://sunoapi.net/images/index.png)
 
 
 #### 问题
@@ -64,12 +64,12 @@ docker compose build && docker compose up
 
 #### 交流
 
-<img src="./images/wechat.jpg" width="382px" height="511px" />
+<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
 ## 参考
 
-- Suno.com 官网: [https://suno.com](https://suno.com)
+- Suno AI 官网: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 

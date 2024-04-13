@@ -38,21 +38,21 @@ docker compose build && docker compose up
 
 First, retrieve your session and cookie from the browser page when logged in.
 
-![session](./images/session.png)
+![session](https://sunoapi.net/images/session.png)
 
 After filling in the setting information, it will automatically keep alive. You can fill in multiple account information.
 
-![session1](./images/session1.png)
+![session1](https://sunoapi.net/images/session1.png)
 
 Enter and save the information. You can modify the account information if you enter identity.
 
-![session2](./images/session2.png)
+![session2](https://sunoapi.net/images/session2.png)
 
 #### Done
 
 Once the project is up and running, visit http://localhost:8501/ in your browser.
 
-![docs](./images/index.png)
+![index](https://sunoapi.net/images/index.png)
 
 
 #### Questions
@@ -68,7 +68,7 @@ Once the project is up and running, visit http://localhost:8501/ in your browser
 
 ## Reference
 
-- Suno.com official website: [https://suno.com](https://suno.com)
+- Suno AI official website: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 

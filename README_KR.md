@@ -38,21 +38,21 @@ docker compose build && docker compose up
 
 먼저 브라우저 페이지에서 로그인한 상태에서 자신의 세션과 쿠키를 가져옵니다.
 
-![session](./images/session.png)
+![session](https://sunoapi.net/images/session.png)
 
 설정 정보를 기입하면 뒤에 자동으로 유지됩니다. 여러 계정 정보를 기입할 수 있습니다.
 
-![session1](./images/session1.png)
+![session1](https://sunoapi.net/images/session1.png)
 
 작성 후 정보를 저장하고 identity 를 입력하면 수정된 계정 정보를 변경할 수 있습니다.
 
-![session2](./images/session2.png)
+![session2](https://sunoapi.net/images/session2.png)
 
 #### 완료
 
 프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
 
-![docs](./images/index.png)
+![index](https://sunoapi.net/images/index.png)
 
 
 #### 문제
@@ -68,7 +68,7 @@ docker compose build && docker compose up
 
 ## 참조
 
-- Suno.com 공식 홈페이지: [https://suno.com](https://suno.com)
+- Suno AI 공식 홈페이지: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 

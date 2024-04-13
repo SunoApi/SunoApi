@@ -38,21 +38,21 @@ docker compose build && docker compose up
 
 先從瀏覽器頁面登入狀態下中獲取自己的session和cookie。
 
-![session](./images/session.png)
+![session](https://sunoapi.net/images/session.png)
 
 填寫設定資訊裡面後面會自動保活，可以填寫多個帳號資訊。
 
-![session1](./images/session1.png)
+![session1](https://sunoapi.net/images/session1.png)
 
 填寫後保存資訊，輸入identity可以更改修改帳號資訊。
 
-![session2](./images/session2.png)
+![session2](https://sunoapi.net/images/session2.png)
 
 #### 完成
 
 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
-![docs](./images/index.png)
+![index](https://sunoapi.net/images/index.png)
 
 
 #### 問題
@@ -69,7 +69,7 @@ docker compose build && docker compose up
 
 ## 參攷
 
-- Suno.com 官網: [https://suno.com](https://suno.com)
+- Suno AI 官網: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 

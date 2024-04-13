@@ -38,21 +38,21 @@ docker compose build && docker compose up
 
 ブラウザのログイン状態から自分のセッションとクッキーを取得します。
 
-![session](./images/session.png)
+![session](https://sunoapi.net/images/session.png)
 
 設定情報に記入すると自動的に保存され、複数のアカウント情報を記入することができます。
 
-![session1](./images/session1.png)
+![session1](https://sunoapi.net/images/session1.png)
 
 記入後は情報を保存し、identityを入力することでアカウント情報を変更修正できます。
 
-![session2](./images/session2.png)
+![session2](https://sunoapi.net/images/session2.png)
 
 #### 完成です
 
 プロジェクト実行後のブラウザアクセスの開始http://localhost:8501/すぐに使用できます。
 
-![docs](./images/index.png)
+![index](https://sunoapi.net/images/index.png)
 
 
 #### 問題
@@ -69,7 +69,7 @@ docker compose build && docker compose up
 
 ## リファレンス
 
-- Suno.com 公式サイト: [https://suno.com](https://suno.com)
+- Suno AI 公式サイト: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 
