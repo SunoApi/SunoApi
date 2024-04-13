@@ -4,4 +4,4 @@ services:
   SunoApi:
     build: .
     ports:
-      - "8051:8051"
+      - "8501:8501"
