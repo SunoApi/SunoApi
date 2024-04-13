@@ -5,6 +5,8 @@
 This is an unofficial Suno API client based on Python and Streamlit currently supports functions such as generating music and obtaining music information.
 It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
 
+GitHub sometimes cannot be accessed. If it cannot be accessed, please move to Gitee address: https://gitee.com/SunoApi/SunoApi
+
 ### Features
 
 - Automatic maintenance and preservation of tokens

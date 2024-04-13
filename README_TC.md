@@ -5,6 +5,8 @@
 這是一個基於Python、Streamlit的非官方Suno API用戶端，現時支持生成音樂，獲取音樂資訊等功能。
 自帶維護token與保活功能，無需擔心token過期問題，可以設定多個帳號的資訊保存以便使用。
 
+GitHub有時候訪問不到，如無法訪問請移步Gitee地址： https://gitee.com/SunoApi/SunoApi
+
 ### 特點
 
 - token自動維護與保活

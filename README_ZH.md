@@ -2,12 +2,14 @@
 
 # Suno API 非官方 Suno AI 客户端
 
-这是一个基于 Python、Streamlit 的非官方 Suno API 客户端，目前支持生成音乐，获取音乐信息等功能。  
-自带维护 token 与保活功能，无需担心 token 过期问题，可以设置多个账号的信息保存以便使用。
+这是一个基于Python、Streamlit的非官方Suno API客户端，目前支持生成音乐，获取音乐信息等功能。  
+自带维护token与保活功能，无需担心token过期问题，可以设置多个账号的信息保存以便使用。
+
+GitHub有时候访问不到，如无法访问请移步Gitee地址：https://gitee.com/SunoApi/SunoApi
 
 ### 特点
 
-- token 自动维护与保活
+- token自动维护与保活
 - 可以设置多个账号的信息保存使用
 - 代码简单，易于维护，方便二次开发
 
