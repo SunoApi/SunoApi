@@ -19,7 +19,7 @@ st.set_page_config(page_title="Suno AI Suno API AI Music Generator",
                    initial_sidebar_state="auto",
                    menu_items={
                        'Report a bug': "https://github.com/SunoApi/SunoApi/issues",
-                       'About': "Suno AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
+                       'About': "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
                    })
 
 hide_streamlit_style = """
@@ -348,7 +348,7 @@ if StartBtn:
                 disabled_state = True
                 resp0 = fetch_status(resp["clips"][0]["id"])
                 if resp0[0]["status"] == "complete":
-                    col2.success(i18n("Generate Success"))
+                    col2.success(i18n("Generate Success") + resp0[0]["id"])
                     col1.audio(resp0[0]["audio_url"])
                     col1.video(resp0[0]["video_url"])
                     # col1.image(resp0[0]["image_large_url"])
@@ -358,7 +358,7 @@ if StartBtn:
                 resp1 = fetch_status(resp["clips"][1]["id"])
                 if resp1[0]["status"] == "complete":
                     st.balloons()
-                    col2.success(i18n("Generate Success"))
+                    col2.success(i18n("Generate Success") + resp1[0]["id"])
                     col3.audio(resp1[0]["audio_url"])
                     col3.video(resp1[0]["video_url"])
                     # col3.image(resp1[0]["image_large_url"])
@@ -387,7 +387,7 @@ if StartBtn:
                 disabled_state = True
                 resp0 = fetch_status(resp["clips"][0]["id"])
                 if resp0[0]["status"] == "complete":
-                    col2.success(i18n("Generate Success"))
+                    col2.success(i18n("Generate Success") + resp0[0]["id"])
                     col1.audio(resp0[0]["audio_url"])
                     col1.video(resp0[0]["video_url"])
                     # col1.image(resp0[0]["image_large_url"])
@@ -397,7 +397,7 @@ if StartBtn:
                 resp1 = fetch_status(resp["clips"][1]["id"])
                 if resp1[0]["status"] == "complete":
                     st.balloons()
-                    col2.success(i18n("Generate Success"))
+                    col2.success(i18n("Generate Success") + resp1[0]["id"])
                     col3.audio(resp1[0]["audio_url"])
                     col3.video(resp1[0]["video_url"])
                     # col3.image(resp1[0]["image_large_url"])

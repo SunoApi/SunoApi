@@ -57,7 +57,8 @@ Once the project is up and running, visit http://localhost:8501/ in your browser
 
 #### Questions
 
-If the page keeps prompting: Please save the information first, and then refresh the page to use it normally! Please first add your own account information and save it, then delete other invalid account information in the sunoapi.db database, including the account information I tested, and then you can use it normally.
+- If the page keeps prompting: Please save the information first, and then refresh the page to use it normally! Please first add your own account information and save it, then delete other invalid account information in the sunoapi.db database, including the account information I tested, and then you can use it normally.
+- After the music generation task is successfully submitted, the queue status of the generation task is pulled. When the status is "complete", it returns successfully. At this time, it defaults to waiting for the official generation file for 15 seconds. The official interface service directly returns the URL address of media files, and most of the time the page can display these media files normally. Occasionally, the interface may have returned the Url address of the media file, but the actual file cannot be accessed from the Url address and needs to wait for a while. At this point, the media file may not be able to be loaded on the page. You can right-click on the media player and copy the media file address. Open the address separately in the browser to access it, or right-click to save as download and save.
 
 
 #### Contact
