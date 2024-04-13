@@ -1,0 +1,68 @@
+{
+  "Language": "日本語",
+  "Translation": {
+    "Page Title": "Suno API AI音楽歌です生成器",
+    "Page About": "Suno API AI音楽生成器は、既存のAPIインタフェースを呼び出すことでAI音楽生成を実現する無料のAI音楽生成ソフトウェアです。 \n\n問題があれば、微信に連絡してください：18942907527",
+    "Page Header": "今すぐあなただけのSunoのAI音楽を作って、無料で使って新しいAI音楽の生成を楽しみます!",
+
+    "Custom": "カスタムモード",
+    "Title": "歌のタイトル：",
+    "Title Desc": "最大100文字以内の曲名を入力してください。",
+    "Tags": "音楽スタイル：",
+    "Tags Desc": "音楽スタイルを入力してください。最大200文字まで入力してください。",
+    "Prompt": "あなたの歌詞：",
+    "Prompt Desc": "歌詞を入力してください。最大1000文字以内です。",
+
+    "Title Placeholder": "あなたの音歌ですに名前を付けて、識別、共有、発見することができます。",
+    "Tags Placeholder": "ご希望の音楽スタイル（例：チャイニーズポップス）を説明します。Suno AIのモデルはアーティストの名前を認識していませんが、ジャンルや雰囲気は理解できます。",
+    "Prompt Placeholder": "自分の歌詞を入力するか、既存の歌詞を入力します。専門的な歌詞支援ツール：https://poe.com/SuperSunoMaster。",
+
+    "Desc Prompt": "曲の説明：",
+    "Desc Value": "ご希望の音楽スタイルやテーマを直接入力して、プロレベルのSuno AI音楽ソングをワンクリックで制作！ AI音乐歌です！",
+    "Desc Reamrk": "あなたが望む音楽スタイルやテーマ（例：休暇に関するサウンドトラック）を記述し、具体的なアーティストや曲ではなく流派や雰囲気を使用します。",
+    "Instrumental": "じゅん音楽",
+
+    "Generate": "今すぐ生成🎵",
+
+    "DescPrompt Error": "「夜曲」のようなスタイルの「夜曲が鳴ったらステージに上がって賞をもらう」という曲の説明を入力してください。",
+
+    "Custom Title Error": "夜曲が鳴ったらステージに上がって賞をもらうなど、曲のタイトルを入力してください。",
+    "Custom Tags Error": "中国のポピュラー音楽などの音楽スタイルを入力してください。",
+    "Custom Prompt Error": "歌詞を入力してください。キーワードを入力できない場合は、歌詞をポイント生成します。",
+
+    "Generate Submit Error": "Suno AI音歌ですの生成コミットに失敗しました：",
+    "Generate Status Error": "Suno AI音歌です生成状態に失敗：",
+
+    "Fetch Status Progress": "Suno AIミュージックソングが生成されていますので少々お待ちください...",
+    "Fetch Status Running": "Suno AI音楽ソングが生成中：",
+    "Fetch Status Success": "Suno AI音楽歌です生成成功：",
+
+    "Generate Success": "Suno AIミュージックソング生成に成功！",
+
+    "Identity Placeholder": "例えば、Emailアカウントを識別するためにIDを入力します。",
+    "Identity Help": "自分で識別するためにEmailアカウントを入力してください。",
+    "Session Placeholder": "無料で音楽を生成できるようにSessionに入力します。",
+    "Session Help": "無料で音楽を生成するためにSessionを入力してください。",
+    "Cookie Placeholder": "無料で音楽を生成できるようにCookieに記入してください。",
+    "Cookie Help": "無料で音楽を生成するためにCookieを入力してください。",
+
+    "Setting": "設定情報",
+    "SaveInfo Identity Error": "Identityを入力します。",
+    "SaveInfo Session Error": "Sessionを入力します。",
+    "SaveInfo Cookie Error": "Cookieを入力します。",
+    "SaveInfo": "保存信息",
+    "SaveInfo Success": "情報を保存します！",
+    "SaveInfo Error": "情報保存に失敗しました！",
+
+    "TokenAuth Error": "情報保存を設定してからページを更新しないと正常に使用できません! ",
+
+    "FetchFeed": "音楽を聴きます",
+    "FeedID": "音楽番号です：",
+    "FeedID Placeholder": "作成済みの曲番号を入力して「取得」をクリックすると表示されます。",
+    "FeedID Help": "作成済みの曲番号を入力して「取得」をクリックすると表示されます。",
+    "FeedBtn": "情報を得ることです",
+    "FetchFeed FeedID Error": "作成済みの音楽番号の入力をお願いします。",
+    "FetchFeed Error": "Suno AI音楽歌です情報取得失敗します：",
+    "FetchFeed Success": "Suno AI音楽歌です情報獲得に成功しました! "
+  }
+}

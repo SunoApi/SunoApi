@@ -1,4 +1,4 @@
-[繁體中文](README_TC.md) | [English](README.md) | [한국어](README_KR.md)
+[繁體中文](README_TC.md) | [English](README.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
 # Suno API 非官方 Suno AI 客户端
 
