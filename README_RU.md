@@ -30,7 +30,17 @@ streamlit run main.py
 
 ### Развертывание
 
-#### DockerЛокальное развертывание компиляции
+#### Docker Локальное развертывание
+
+```bash
+docker run -d \
+  --name sunoapi \
+  --restart always \
+  -p 8501:8501 \
+  sunoapi/sunoapi:latest
+```
+
+#### Docker Локальное развертывание компиляции
 
 ```bash
 docker compose build && docker compose up
@@ -53,7 +63,7 @@ EXPOSE 8501
 CMD [ "nohup", "streamlit", "run", "main.py" ]
 ```
 
-#### DockerРазвертывание зеркал
+#### Docker Развертывание зеркал
 
 ```bash
 docker-compose pull && docker-compose up -d
@@ -75,7 +85,7 @@ services:
     restart: always
 ```
 
-#### StreamlitДистанционное развертывание склада
+#### Streamlit Дистанционное развертывание склада
 
 - сначала форк введёт код суноапи в ваш склад в гитубе
 - выбер Github уполномоч залогин: https://share.streamlit.io/
@@ -84,6 +94,10 @@ services:
 - ввод: мэйн
 - Main file path введен: main py
 - нажми деплой!
+
+### Zeabur Локальное развертывание
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
 
 ### конфигурац

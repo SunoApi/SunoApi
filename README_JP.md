@@ -30,7 +30,17 @@ streamlit run main.py
 
 ### 配備します
 
-#### Dockerネイティブコンパイル配備します
+#### Docker ローカルワンクリック配備です
+
+```bash
+docker run -d \
+  --name sunoapi \
+  --restart always \
+  -p 8501:8501 \
+  sunoapi/sunoapi:latest
+```
+
+#### Docker ネイティブコンパイル配備します
 
 ```bash
 docker compose build && docker compose up
@@ -53,7 +63,7 @@ EXPOSE 8501
 CMD [ "nohup", "streamlit", "run", "main.py" ]
 ```
 
-#### Dockerミラーリング部署を引っ張ります
+#### Docker ミラーリング部署を引っ張ります
 
 ```bash
 docker-compose pull && docker-compose up -d
@@ -76,7 +86,7 @@ services:
 ```
 
 
-#### Streamlitリモート・ウェアハウスの配備します
+#### Streamlit リモート・ウェアハウスの配備します
 
 - まずFork SunoApiコードをGithub倉庫に
 - Github認証ログインを選択します。https://share.streamlit.io/
@@ -85,6 +95,10 @@ services:
 - Branch入力：main
 - Main file path入力：main.py
 - Deployをクリック！
+
+### Zeabur ローカルワンクリック配備です
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
 
 ### 設定

@@ -30,7 +30,17 @@ streamlit run main.py
 
 ### 部署
 
-#### Docker本地編譯部署
+#### Docker 本地一鍵部署
+
+```bash
+docker run -d \
+  --name sunoapi \
+  --restart always \
+  -p 8501:8501 \
+  sunoapi/sunoapi:latest
+```
+
+#### Docker 本地編譯部署
 
 ```bash
 docker compose build && docker compose up
@@ -53,7 +63,7 @@ EXPOSE 8501
 CMD [ "nohup", "streamlit", "run", "main.py" ]
 ```
 
-#### Docker拉取鏡像部署
+#### Docker 拉取鏡像部署
 
 ```bash
 docker-compose pull && docker-compose up -d
@@ -75,7 +85,7 @@ services:
     restart: always
 ```
 
-#### Streamlit遠程倉庫部署
+#### Streamlit 遠程倉庫部署
 
 - 先Fork一份SunoApi程式碼到你的Github倉庫裡面
 - 選擇Github授權登入： https://share.streamlit.io/
@@ -85,6 +95,9 @@ services:
 - Main file path輸入：main.py
 - 點擊Deploy！
 
+### Zeabur 一鍵部署
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
 ### 配寘
 

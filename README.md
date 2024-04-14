@@ -30,6 +30,16 @@ streamlit run main.py
 
 ### Deploy
 
+#### Docker Local one-click deployment
+
+```bash
+docker run -d \
+  --name sunoapi \
+  --restart always \
+  -p 8501:8501 \
+  sunoapi/sunoapi:latest
+```
+
 #### Docker local compilation and deployment
 
 ```bash
@@ -84,6 +94,10 @@ services:
 - Branch input: main
 - Main file path input: main.py
 - Click Deploy!
+
+### Zeabur one-click deployment
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
 
 #### Configuration

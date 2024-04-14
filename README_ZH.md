@@ -28,9 +28,21 @@ pip3 install -r requirements.txt
 streamlit run main.py
 ```
 
+
 ### 部署
 
-#### Docker本地编译部署
+#### Docker 本地一键部署
+
+```bash
+docker run -d \
+  --name sunoapi \
+  --restart always \
+  -p 8501:8501 \
+  sunoapi/sunoapi:latest
+```
+
+
+#### Docker 本地编译部署
 
 ```bash
 docker compose build && docker compose up
@@ -53,7 +65,7 @@ EXPOSE 8501
 CMD [ "nohup", "streamlit", "run", "main.py" ]
 ```
 
-#### Docker拉取镜像部署
+#### Docker 拉取镜像部署
 
 ```bash
 docker-compose pull && docker-compose up -d
@@ -75,7 +87,7 @@ services:
     restart: always
 ```
 
-#### Streamlit远程仓库部署
+#### Streamlit 远程仓库部署
 
 - 先Fork一份SunoApi代码到你的Github仓库里面
 - 选择Github授权登录：https://share.streamlit.io/
@@ -84,6 +96,10 @@ services:
 - Branch 输入：main
 - Main file path 输入：main.py
 - 点击Deploy！
+
+### Zeabur 一键部署
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
 
 ### 配置

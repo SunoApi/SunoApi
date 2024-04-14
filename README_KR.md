@@ -30,6 +30,16 @@ streamlit run main.py
 
 ### 배치
 
+#### Docker 로컬 원클릭 배포
+
+```bash
+docker run -d \
+  --name sunoapi \
+  --restart always \
+  -p 8501:8501 \
+  sunoapi/sunoapi:latest
+```
+
 #### Docker 로컬 컴파일 배치
 
 ```bash
@@ -85,6 +95,10 @@ services:
 - Branch 입력: main
 - ain file path 입력:main.py
 - 디플로이 클릭!
+
+### Zeabur 로컬 원클릭 배포
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
 
 ### 구성
