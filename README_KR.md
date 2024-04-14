@@ -2,7 +2,7 @@
 
 # Suno API 비공식 Suno AI 클라이언트
 
-- Github Issues： https://github.com/SunoApi/SunoApi/issues파이썬, 스트림릿 기반의 이 비공식 Suno API 클라이언트는 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
+- Python, Streamlit 기반의 비공식 Suno API 클라이언트로, 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
 
 - GitHub에 액세스할 수 없는 경우가 있습니다. 액세스할 수 없으면 Gitee 주소로 이동하십시오.https://gitee.com/SunoApi/SunoApi
 
