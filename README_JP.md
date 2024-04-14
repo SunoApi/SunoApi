@@ -34,6 +34,16 @@ streamlit run main.py
 docker compose build && docker compose up
 ```
 
+#### Streamlit
+
+- まずFork SunoApiコードをGithub倉庫に
+- Github認証ログインを選択します。https://share.streamlit.io/
+- 配備ページを開きます。https://share.streamlit.io/deploy
+- Repository選択：SunoApi/SunoApi
+- Branch入力：main
+- Main file path入力：main.py
+- Deployをクリック！
+
 
 #### 設定
 
