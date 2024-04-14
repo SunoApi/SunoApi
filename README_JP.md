@@ -2,10 +2,9 @@
 
 # Suno API 非公式 Suno AIクライアントです
 
-これはPython、Streamlitに基づく非公式Suno APIクライアントであり、現在は音楽の生成、音楽情報の取得などの機能をサポートしている。
-トケンの期限切れを心配することなく、複数のアカウントの情報保存を設定して使用することができます。
+- これはPython、Streamlitに基づく非公式Suno APIクライアントであり、現在は音楽の生成、音楽情報の取得などの機能をサポートしている。トケンの期限切れを心配することなく、複数のアカウントの情報保存を設定して使用することができます。
 
-GitHubにアクセスできない場合があります。アクセスできない場合はGiteeアドレスに移動してください：https://gitee.com/SunoApi/SunoApi
+- GitHubにアクセスできない場合があります。アクセスできない場合はGiteeアドレスに移動してください：https://gitee.com/SunoApi/SunoApi
 
 ### 特徴
 
@@ -17,13 +16,13 @@ GitHubにアクセスできない場合があります。アクセスできな�
 
 #### 実行
 
-依存関係をインストールする
+- 依存関係をインストールする
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-プロジェクトを開始します,StreamlitについてはStreamlitドキュメントをご参照ください
+- プロジェクトを開始します,StreamlitについてはStreamlitドキュメントをご参照ください
 
 ```bash
 streamlit run main.py
@@ -38,21 +37,21 @@ docker compose build && docker compose up
 
 #### 設定
 
-ブラウザのログイン状態から自分のセッションとクッキーを取得します。
+- ブラウザのログイン状態から自分のセッションとクッキーを取得します。
 
 ![session](https://sunoapi.net/images/session.png)
 
-設定情報に記入すると自動的に保存され、複数のアカウント情報を記入することができます。
+- 設定情報に記入すると自動的に保存され、複数のアカウント情報を記入することができます。
 
 ![session1](https://sunoapi.net/images/session1.png)
 
-記入後は情報を保存し、identityを入力することでアカウント情報を変更修正できます。
+- 記入後は情報を保存し、identityを入力することでアカウント情報を変更修正できます。
 
 ![session2](https://sunoapi.net/images/session2.png)
 
 #### 完成です
 
-プロジェクト実行後のブラウザアクセスの開始http://localhost:8501/すぐに使用できます。
+- プロジェクト実行後のブラウザアクセスの開始http://localhost:8501/すぐに使用できます。
 
 ![index1](https://sunoapi.net/images/index1.png)
 
@@ -68,10 +67,12 @@ docker compose build && docker compose up
 
 #### オーサリング
 
-専門歌詞支援ツール：https://poe.com/SuperSunoMaster
+- 専門歌詞支援ツール：https://poe.com/SuperSunoMaster
 
 
 #### こうりゅう
+
+- Github Issues： https://github.com/SunoApi/SunoApi/issues
 
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
@@ -84,4 +85,4 @@ docker compose build && docker compose up
 
 ## ステートメント
 
-SunoApiは非公式のオープンソースプロジェクトで、学習と研究用にのみ使用されています。ユーザは任意に無料のアカウント情報を入力して音楽を生成する。各アカウントは毎日5曲の曲を無料で生成でき、他の目的には使用しません。安心してお使いください！10000人のユーザーがいる場合、システムは毎日50,000曲を無料で生成することができます。各アカウントでは1日5曲の曲しか無料で生成できないので、できるだけ使用量を節約してください。一人一人が毎日5曲以上の曲を作るとしたら、それはまだ足りない。最終的には、必要なときにいつでも無料で生成できるようにすることを目指しています。
+- SunoApiは非公式のオープンソースプロジェクトで、学習と研究用にのみ使用されています。ユーザは任意に無料のアカウント情報を入力して音楽を生成する。各アカウントは毎日5曲の曲を無料で生成でき、他の目的には使用しません。安心してお使いください！10000人のユーザーがいる場合、システムは毎日50,000曲を無料で生成することができます。各アカウントでは1日5曲の曲しか無料で生成できないので、できるだけ使用量を節約してください。一人一人が毎日5曲以上の曲を作るとしたら、それはまだ足りない。最終的には、必要なときにいつでも無料で生成できるようにすることを目指しています。

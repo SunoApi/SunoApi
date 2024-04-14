@@ -2,10 +2,9 @@
 
 # Suno API is an unofficial Suno AI client
 
-This is an unofficial Suno API client based on Python and Streamlit currently supports functions such as generating music and obtaining music information.
-It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
+- This is an unofficial Suno API client based on Python and Streamlit currently supports functions such as generating music and obtaining music information. It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
 
-GitHub sometimes cannot be accessed. If it cannot be accessed, please move to Gitee address: https://gitee.com/SunoApi/SunoApi
+- GitHub sometimes cannot be accessed. If it cannot be accessed, please move to Gitee address: https://gitee.com/SunoApi/SunoApi
 
 ### Features
 
@@ -17,7 +16,7 @@ GitHub sometimes cannot be accessed. If it cannot be accessed, please move to Gi
 
 #### Run
 
-Installation dependencies
+- Installation dependencies
 
 ```bash
 pip3 install -r requirements.txt
@@ -38,21 +37,21 @@ docker compose build && docker compose up
 
 #### Configuration
 
-First, retrieve your session and cookie from the browser page when logged in.
+- First, retrieve your session and cookie from the browser page when logged in.
 
 ![session](https://sunoapi.net/images/session.png)
 
-After filling in the setting information, it will automatically keep alive. You can fill in multiple account information.
+- After filling in the setting information, it will automatically keep alive. You can fill in multiple account information.
 
 ![session1](https://sunoapi.net/images/session1.png)
 
-Enter and save the information. You can modify the account information if you enter identity.
+- Enter and save the information. You can modify the account information if you enter identity.
 
 ![session2](https://sunoapi.net/images/session2.png)
 
 #### Done
 
-Once the project is up and running, visit http://localhost:8501/ in your browser.
+- Once the project is up and running, visit http://localhost:8501/ in your browser.
 
 ![index1](https://sunoapi.net/images/index1.png)
 
@@ -68,10 +67,12 @@ Once the project is up and running, visit http://localhost:8501/ in your browser
 
 #### Creation
 
-Professional lyric assistance tools: https://poe.com/SuperSunoMaster
+- Professional lyric assistance tools: https://poe.com/SuperSunoMaster
 
 
 #### Contact
+
+- Github Issues： https://github.com/SunoApi/SunoApi/issues
 
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
@@ -83,4 +84,4 @@ Professional lyric assistance tools: https://poe.com/SuperSunoMaster
 
 ## Statement
 
-SunoApi is an unofficial open source project for study and research only. Users voluntarily enter free account information to generate music. Each account generates five songs per day for free, and we don't use them for other purposes. Please feel free to use! If there are 10,000 users, the system can generate 50,000 songs per day for free. Please try to save your usage as you can only generate five songs per account per day for free. If everyone writes more than five songs a day, it's still not enough. The ultimate goal is to make it free to build whenever you need it.
+- SunoApi is an unofficial open source project for study and research only. Users voluntarily enter free account information to generate music. Each account generates five songs per day for free, and we don't use them for other purposes. Please feel free to use! If there are 10,000 users, the system can generate 50,000 songs per day for free. Please try to save your usage as you can only generate five songs per account per day for free. If everyone writes more than five songs a day, it's still not enough. The ultimate goal is to make it free to build whenever you need it.

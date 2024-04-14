@@ -2,10 +2,9 @@
 
 # Suno API 非官方 Suno AI 用戶端
 
-這是一個基於Python、Streamlit的非官方Suno API用戶端，現時支持生成音樂，獲取音樂資訊等功能。
-自帶維護token與保活功能，無需擔心token過期問題，可以設定多個帳號的資訊保存以便使用。
+- 這是一個基於Python、Streamlit的非官方Suno API用戶端，現時支持生成音樂，獲取音樂資訊等功能。自帶維護token與保活功能，無需擔心token過期問題，可以設定多個帳號的資訊保存以便使用。
 
-GitHub有時候訪問不到，如無法訪問請移步Gitee地址： https://gitee.com/SunoApi/SunoApi
+- GitHub有時候訪問不到，如無法訪問請移步Gitee地址： https://gitee.com/SunoApi/SunoApi
 
 ### 特點
 
@@ -17,13 +16,13 @@ GitHub有時候訪問不到，如無法訪問請移步Gitee地址： https://git
 
 #### 運行
 
-安裝依賴
+- 安裝依賴
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-啟動項目，關於Streamlit請自行參攷Streamlit檔案
+- 啟動項目，關於Streamlit請自行參攷Streamlit檔案
 
 ```bash
 streamlit run main.py
@@ -38,21 +37,21 @@ docker compose build && docker compose up
 
 #### 配寘
 
-先從瀏覽器頁面登入狀態下中獲取自己的session和cookie。
+- 先從瀏覽器頁面登入狀態下中獲取自己的session和cookie。
 
 ![session](https://sunoapi.net/images/session.png)
 
-填寫設定資訊裡面後面會自動保活，可以填寫多個帳號資訊。
+- 填寫設定資訊裡面後面會自動保活，可以填寫多個帳號資訊。
 
 ![session1](https://sunoapi.net/images/session1.png)
 
-填寫後保存資訊，輸入identity可以更改修改帳號資訊。
+- 填寫後保存資訊，輸入identity可以更改修改帳號資訊。
 
 ![session2](https://sunoapi.net/images/session2.png)
 
 #### 完成
 
-啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
+- 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
 ![index1](https://sunoapi.net/images/index1.png)
 
@@ -68,10 +67,12 @@ docker compose build && docker compose up
 
 #### 創作
 
-專業歌詞輔助工具： https://poe.com/SuperSunoMaster
+- 專業歌詞輔助工具： https://poe.com/SuperSunoMaster
 
 
 #### 交流
+
+- Github Issues： https://github.com/SunoApi/SunoApi/issues
 
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
@@ -84,4 +85,4 @@ docker compose build && docker compose up
 
 ## 聲明
 
-SunoApi是一個非官方的開源項目，僅供學習和研究使用。用戶自願輸入免費的帳號資訊生成音樂。 每個帳戶每天可以免費生成五首歌曲，我們不會將它們用於其他目的。請放心使用！如果有10000名用戶，那麼系統每天可以免費生成50000首歌曲。請儘量節省使用量，因為每個帳戶每天只能免費生成五首歌曲。如果每個人每天創作五首以上的歌曲，這仍然不够。 最終目標是讓在需要的時候能隨時免費生成。
+- SunoApi是一個非官方的開源項目，僅供學習和研究使用。用戶自願輸入免費的帳號資訊生成音樂。 每個帳戶每天可以免費生成五首歌曲，我們不會將它們用於其他目的。請放心使用！如果有10000名用戶，那麼系統每天可以免費生成50000首歌曲。請儘量節省使用量，因為每個帳戶每天只能免費生成五首歌曲。如果每個人每天創作五首以上的歌曲，這仍然不够。 最終目標是讓在需要的時候能隨時免費生成。

@@ -2,10 +2,9 @@
 
 # Suno API 비공식 Suno AI 클라이언트
 
-파이썬, 스트림릿 기반의 이 비공식 Suno API 클라이언트는 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.
-자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
+- Github Issues： https://github.com/SunoApi/SunoApi/issues파이썬, 스트림릿 기반의 이 비공식 Suno API 클라이언트는 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
 
-GitHub에 액세스할 수 없는 경우가 있습니다. 액세스할 수 없으면 Gitee 주소로 이동하십시오.https://gitee.com/SunoApi/SunoApi
+- GitHub에 액세스할 수 없는 경우가 있습니다. 액세스할 수 없으면 Gitee 주소로 이동하십시오.https://gitee.com/SunoApi/SunoApi
 
 ### 특징
 
@@ -17,13 +16,13 @@ GitHub에 액세스할 수 없는 경우가 있습니다. 액세스할 수 없�
 
 #### 실행
 
-설치 종속
+- 설치 종속
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-프로젝트를 시작하고 Streamlit에 대해서는 Streamlit 설명서를 참조하십시오.
+- 프로젝트를 시작하고 Streamlit에 대해서는 Streamlit 설명서를 참조하십시오.
 
 ```bash
 streamlit run main.py
@@ -38,21 +37,21 @@ docker compose build && docker compose up
 
 #### 구성
 
-먼저 브라우저 페이지에서 로그인한 상태에서 자신의 세션과 쿠키를 가져옵니다.
+- 먼저 브라우저 페이지에서 로그인한 상태에서 자신의 세션과 쿠키를 가져옵니다.
 
 ![session](https://sunoapi.net/images/session.png)
 
-설정 정보를 기입하면 뒤에 자동으로 유지됩니다. 여러 계정 정보를 기입할 수 있습니다.
+- 설정 정보를 기입하면 뒤에 자동으로 유지됩니다. 여러 계정 정보를 기입할 수 있습니다.
 
 ![session1](https://sunoapi.net/images/session1.png)
 
-작성 후 정보를 저장하고 identity 를 입력하면 수정된 계정 정보를 변경할 수 있습니다.
+- 작성 후 정보를 저장하고 identity 를 입력하면 수정된 계정 정보를 변경할 수 있습니다.
 
 ![session2](https://sunoapi.net/images/session2.png)
 
 #### 완료
 
-프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
+- 프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
 
 ![index1](https://sunoapi.net/images/index1.png)
 
@@ -68,10 +67,12 @@ docker compose build && docker compose up
 
 #### 제작
 
-전문 가사 보조 도구:https://poe.com/supersunomaster
+- 전문 가사 보조 도구:https://poe.com/supersunomaster
 
 
 #### 커뮤니케이션
+
+- Github Issues： https://github.com/SunoApi/SunoApi/issues
 
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
@@ -84,4 +85,4 @@ docker compose build && docker compose up
 
 ## 선언
 
-SunoApi는 학습 및 연구에만 사용되는 비공식 오픈 소스 프로젝트입니다.사용자는 자발적으로 무료 계정 정보를 입력하여 음악을 생성한다.각 계정은 하루에 5 곡의 노래를 무료로 생성할 수 있으며 다른 목적으로 사용하지 않습니다.안심하고 사용하세요!10000명의 사용자가 있으면 매일 50000곡의 노래를 무료로 생성할 수 있다.계정당 하루 5곡만 무료로 생성할 수 있으므로 사용량을 최대한 절약하십시오.만약 한 사람이 매일 다섯 곡 이상의 노래를 창작한다면, 이것은 여전히 부족하다.최종 목표는 필요할 때 언제든지 무료로 생성할 수 있도록 하는 것이다.
+- SunoApi는 학습 및 연구에만 사용되는 비공식 오픈 소스 프로젝트입니다.사용자는 자발적으로 무료 계정 정보를 입력하여 음악을 생성한다.각 계정은 하루에 5 곡의 노래를 무료로 생성할 수 있으며 다른 목적으로 사용하지 않습니다.안심하고 사용하세요!10000명의 사용자가 있으면 매일 50000곡의 노래를 무료로 생성할 수 있다.계정당 하루 5곡만 무료로 생성할 수 있으므로 사용량을 최대한 절약하십시오.만약 한 사람이 매일 다섯 곡 이상의 노래를 창작한다면, 이것은 여전히 부족하다.최종 목표는 필요할 때 언제든지 무료로 생성할 수 있도록 하는 것이다.
