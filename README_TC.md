@@ -12,7 +12,7 @@
 - 可以設定多個帳號的資訊保存使用
 - 程式碼簡單，易於維護，方便二次開發
 
-### 使用
+### 調試
 
 #### Python本地調試運行
 
@@ -27,6 +27,8 @@ pip3 install -r requirements.txt
 ```bash
 streamlit run main.py
 ```
+
+### 部署
 
 #### Docker本地編譯部署
 
@@ -84,7 +86,7 @@ services:
 - 點擊Deploy！
 
 
-#### 配寘
+### 配寘
 
 - 先從瀏覽器頁面登入狀態下中獲取自己的session和cookie。
 
@@ -98,7 +100,7 @@ services:
 
 ![session2](https://sunoapi.net/images/session2.png)
 
-#### 完成
+### 完成
 
 - 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
@@ -107,31 +109,31 @@ services:
 ![index](https://sunoapi.net/images/index.png)
 
 
-#### 問題
+### 問題
 
 - 如果頁面一直提示：請先設定資訊保存，然後再刷新頁面才能正常使用！ 請先添加自己的帳號資訊保存，然後把sunoapi.db資料庫裡面其他無效的帳號資訊删除，其中包括我測試的帳號資訊，然後再就可以正常使用了。
 - 音樂生成任務提交成功後拉取生成任務隊列狀態，當狀態為“complete”時成功返回，這個時候默認停留了15秒等待官方生成檔案。 官方介面服務直接返回了媒體檔案Url地址，大部分時候頁面能正常顯示這些媒體檔案。 偶爾有時候介面已經返回了媒體檔案Url地址，但是實際檔案還不能從Url地址訪問到要等一會。 這個時候媒體檔案在頁面就可能無法加載到，可以點下媒體播放機滑鼠右鍵複製媒體檔案地址，用瀏覽器單獨打開這個地址就可以訪問到了或者直接右鍵另存為下載保存。
 - 關於設定帳號session和cookie資訊保存安全性問題，只要你的帳號不充值就沒必要擔心，因為不知道你的帳號密碼，你填寫的session和cookie資訊只要你的帳號在其他地方登入活動，或者在官方網站退出登入，那麼填寫的session和cookie就無效了，並且下次登入官網session和cookie都會發生變化的。
 
 
-#### 創作
+### 創作
 
 - 專業歌詞輔助工具： https://poe.com/SuperSunoMaster
 
 
-#### 交流
+### 交流
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
-## 參攷
+### 參攷
 
 - Suno AI 官網: [https://suno.com](https://suno.com)
 - Suno-API: [https://github.com/SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API)
 
 
-## 聲明
+### 聲明
 
 - SunoApi是一個非官方的開源項目，僅供學習和研究使用。用戶自願輸入免費的帳號資訊生成音樂。 每個帳戶每天可以免費生成五首歌曲，我們不會將它們用於其他目的。請放心使用！如果有10000名用戶，那麼系統每天可以免費生成50000首歌曲。請儘量節省使用量，因為每個帳戶每天只能免費生成五首歌曲。如果每個人每天創作五首以上的歌曲，這仍然不够。 最終目標是讓在需要的時候能隨時免費生成。
