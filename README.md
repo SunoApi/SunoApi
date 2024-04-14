@@ -16,7 +16,7 @@
 
 #### Python local debug running
 
-- 安装依赖
+- Installation dependencies
 
 ```bash
 pip3 install -r requirements.txt

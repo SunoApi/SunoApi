@@ -16,7 +16,7 @@
 
 #### Python 로컬 디버그 실행
 
-- 安装依赖
+- 설치 종속
 
 ```bash
 pip3 install -r requirements.txt

@@ -16,7 +16,7 @@
 
 #### Pythonローカルデバッグ実行
 
-- 安装依赖
+- インストール依存
 
 ```bash
 pip3 install -r requirements.txt

@@ -16,7 +16,7 @@
 
 #### Python本地調試運行
 
-- 安装依赖
+- 安裝依賴
 
 ```bash
 pip3 install -r requirements.txt
