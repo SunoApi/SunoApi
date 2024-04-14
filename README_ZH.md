@@ -8,13 +8,13 @@
 
 ### 特点
 
-- token自动维护与保活
+- Token自动维护与保活
 - 可以设置多个账号的信息保存使用
 - 代码简单，易于维护，方便二次开发
 
 ### 使用
 
-#### 运行
+#### Python本地调试运行
 
 - 安装依赖
 
@@ -28,13 +28,52 @@ pip3 install -r requirements.txt
 streamlit run main.py
 ```
 
-#### Docker
+#### Docker本地编译部署
 
 ```bash
 docker compose build && docker compose up
 ```
 
-#### Streamlit
+#### Dockerfile
+
+```docker
+FROM python:3.10-slim-buster
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt --no-cache-dir
+
+COPY . .
+
+EXPOSE 8501
+CMD [ "nohup", "streamlit", "run", "main.py" ]
+```
+
+#### Docker拉取镜像部署
+
+```bash
+docker-compose pull && docker-compose up -d
+```
+
+#### docker-compose.yml
+
+```docker
+version: '3.1'
+
+services:
+  sunoapi:
+    image: sunoapi/sunoapi:latest
+    container_name: sunoapi
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./sunoapi.db:/app/sunoapi.db
+    restart: always
+```
+
+#### Streamlit远程仓库部署
 
 - 先Fork一份SunoApi代码到你的Github仓库里面
 - 选择Github授权登录：https://share.streamlit.io/

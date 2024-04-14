@@ -14,27 +14,66 @@
 
 ### Usage
 
-#### Run
+#### Python local debug running
 
-- Installation dependencies
+- 安装依赖
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-Start the project, please refer to the Streamlit documentation for details on Streamlit
+- Start the project, please refer to the Streamlit documentation for details on Streamlit
 
 ```bash
 streamlit run main.py
 ```
 
-#### Docker
+#### Docker local compilation and deployment
 
 ```bash
 docker compose build && docker compose up
 ```
 
-#### Streamlit
+#### Dockerfile
+
+```docker
+FROM python:3.10-slim-buster
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt --no-cache-dir
+
+COPY . .
+
+EXPOSE 8501
+CMD [ "nohup", "streamlit", "run", "main.py" ]
+```
+
+#### Docker pull image deployment
+
+```bash
+docker-compose pull && docker-compose up -d
+```
+
+#### docker-compose.yml
+
+```docker
+version: '3.1'
+
+services:
+  sunoapi:
+    image: sunoapi/sunoapi:latest
+    container_name: sunoapi
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./sunoapi.db:/app/sunoapi.db
+    restart: always
+```
+
+#### Streamlit remote repositories deployment
 
 - First, Fork a copy of SunoApi code to your Github repository
 - Select Github authorization login: https://share.streamlit.io/

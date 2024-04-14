@@ -8,15 +8,15 @@
 
 ### 특징
 
-- token 자동 유지 보수 및 서비스
+- Token 자동 유지 보수 및 서비스
 - 여러 계정의 정보를 설정하여 저장하여 사용할 수 있음
 - 간단한 코드, 간편한 유지 관리, 간편한 2차 개발
 
 ### 사용
 
-#### 실행
+#### Python 로컬 디버그 실행
 
-- 설치 종속
+- 安装依赖
 
 ```bash
 pip3 install -r requirements.txt
@@ -28,13 +28,53 @@ pip3 install -r requirements.txt
 streamlit run main.py
 ```
 
-#### Docker
+#### Docker 로컬 컴파일 배포
 
 ```bash
 docker compose build && docker compose up
 ```
 
-#### Streamlit
+#### Dockerfile
+
+```docker
+FROM python:3.10-slim-buster
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt --no-cache-dir
+
+COPY . .
+
+EXPOSE 8501
+CMD [ "nohup", "streamlit", "run", "main.py" ]
+```
+
+#### Docker 미러 배포 끌어오기
+
+```bash
+docker-compose pull && docker-compose up -d
+```
+
+#### docker-compose.yml
+
+```docker
+version: '3.1'
+
+services:
+  sunoapi:
+    image: sunoapi/sunoapi:latest
+    container_name: sunoapi
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./sunoapi.db:/app/sunoapi.db
+    restart: always
+```
+
+
+#### Streamlit 원격 웨어하우스 배포
 
 - 먼저 Fork에서 SunoApi 코드를 Github 창고로 보내
 - Github 라이센스 로그인 선택:https://share.streamlit.io/

@@ -8,33 +8,73 @@
 
 ### 特徴
 
-- トケン自動保守と保活
+- Token自動保守と保活
 - 複数のアカウントを設定できる情報保存用
 - コードがシンプルでメンテナンスが容易で、二次開発が容易
 
 ### 使用
 
-#### 実行
+#### Pythonローカルデバッグ実行
 
-- 依存関係をインストールする
+- 安装依赖
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-- プロジェクトを開始します,StreamlitについてはStreamlitドキュメントをご参照ください
+- プロジェクトを開始し、StreamlitについてはStreamlitドキュメントを参照してください
 
 ```bash
 streamlit run main.py
 ```
 
-#### Docker
+#### Dockerローカルコンパイルの導入
 
 ```bash
 docker compose build && docker compose up
 ```
 
-#### Streamlit
+#### Dockerfile
+
+```docker
+FROM python:3.10-slim-buster
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt --no-cache-dir
+
+COPY . .
+
+EXPOSE 8501
+CMD [ "nohup", "streamlit", "run", "main.py" ]
+```
+
+#### Dockerミラーリング部署を引っ張ります
+
+```bash
+docker-compose pull && docker-compose up -d
+```
+
+#### docker-compose.yml
+
+```docker
+version: '3.1'
+
+services:
+  sunoapi:
+    image: sunoapi/sunoapi:latest
+    container_name: sunoapi
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./sunoapi.db:/app/sunoapi.db
+    restart: always
+```
+
+
+#### Streamlitリモート・ウェアハウスの導入
 
 - まずFork SunoApiコードをGithub倉庫に
 - Github認証ログインを選択します。https://share.streamlit.io/
