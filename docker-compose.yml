@@ -1,7 +1,11 @@
-version: '3'
+version: '3.1'
 
 services:
-  SunoApi:
-    build: .
+  sunoapi:
+    image: sunoapi/sunoapi:latest
+    container_name: sunoapi
     ports:
       - "8501:8501"
+    volumes:
+      - ./sunoapi.db:/app/sunoapi.db
+    restart: always
