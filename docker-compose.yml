@@ -1,8 +1,9 @@
-version: '3.1'
+version: '3.2'
 
 services:
   sunoapi:
-    image: sunoapi/sunoapi:latest
+    image: sunoapi/sunoapi:latest   #docker 拉取镜像
+    #image: registry.cn-hangzhou.aliyuncs.com/sunoapi/sunoapi:latest                  #aliyun 拉取镜像
     container_name: sunoapi
     ports:
       - "8501:8501"
