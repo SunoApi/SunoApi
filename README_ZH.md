@@ -1,8 +1,8 @@
-[繁體中文](README_TC.md) | [English](README.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
+[繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [English](README.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
 # Suno API 非官方 Suno AI 客户端
 
-- 这是一个基于Python、Streamlit的非官方Suno API客户端，目前支持生成音乐，获取音乐信息等功能。  自带维护token与保活功能，无需担心token过期问题，可以设置多个账号的信息保存以便使用。
+- 这是一个基于Python、Streamlit的非官方Suno API客户端，目前支持生成音乐，获取音乐信息等功能。自带维护token与保活功能，无需担心token过期问题，可以设置多个账号的信息保存以便使用。
 
 - GitHub有时候访问不到，如无法访问请移步Gitee地址：https://gitee.com/SunoApi/SunoApi
 

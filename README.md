@@ -1,4 +1,4 @@
-[简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
+[简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
 # Suno API is an unofficial Suno AI client
 

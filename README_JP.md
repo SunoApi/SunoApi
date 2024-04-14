@@ -1,4 +1,4 @@
-[简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [English](README.md) | [한국어](README_KR.md)
+[简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [English](README.md) | [한국어](README_KR.md)
 
 # Suno API 非公式 Suno AIクライアントです
 
