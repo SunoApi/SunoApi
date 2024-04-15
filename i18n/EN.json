@@ -2,8 +2,12 @@
   "Language": "English",
   "Translation": {
     "Page Title": "Suno API AI Music Generator",
-    "Page About": "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please contact wechat: 18942907527",
+    "Page About": "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net",
     "Page Header": "Create your own unique Suno AI music song now, use it for free and enjoy the fun of innovative AI music generation! ",
+
+    "Music Song Create": "Music Song Creation",
+    "Music Song List": "Music Song List",
+    "Music Song Site": "Visit official website",
 
     "Custom": "Custom mode",
     "Title": "Song Title:",
@@ -21,6 +25,9 @@
     "Desc Value": "Directly enter your desired style of music and theme, and create professional quality Suno AI music songs with one click!",
     "Desc Reamrk": "Describe the style of music and theme you want (e.g. : Acoustic pop music about the holidays). Use genres and atmospheres rather than specific artists and songs.",
     "Instrumental": "Instrumental",
+    "Instrumental Help": "Create a song without lyrics.",
+    "Private": "Private",
+    "Private Help": "Download and save non-public songs on your own.",
 
     "Generate": "Generate Now 🎵",
 

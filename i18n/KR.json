@@ -2,8 +2,12 @@
   "Language": "한국어",
   "Translation": {
     "Page Title": "Suno API AI 음악 노래 생성기",
-    "Page About": "Suno API AI 음악 생성기는 무료 AI 음악 생성 소프트웨어로, 기존 API 인터페이스를 호출하면 AI 음악 생성을 실현할 수 있습니다.\n\n 문제가 있으면 위챗으로 연락하십시오: 18942907527",
+    "Page About": "Suno API AI 음악 생성기는 무료 AI 음악 생성 소프트웨어로, 기존 API 인터페이스를 호출하면 AI 음악 생성을 실현할 수 있습니다.\n\n질문이 있으면 웹 사이트를 방문하십시오.https://sunoapi.net",
     "Page Header": "당신만의 독특한 Suno AI 음악 노래를 즉시 창작하여 혁신적인 AI 음악 생성의 즐거움을 무료로 사용하고 즐길 수 있습니다! ",
+
+    "Music Song Create": "음악 가곡 창작",
+    "Music Song List": "음악 노래 목록",
+    "Music Song Site": "공식 웹 사이트 방문",
 
     "Custom": "사용자 지정 모드",
     "Title": "노래 이름:",
@@ -21,6 +25,9 @@
     "Desc Value": "원하는 음악 스타일과 테마를 직접 입력하고 클릭 한 번으로 전문 수준의 Suno AI 음악 노래를 만들십시오!",
     "Desc Reamrk": "원하는 음악 스타일과 주제 (예: 휴가에 관한 어쿠스틱 팝) 를 설명하고 구체적인 예술가와 노래가 아닌 장르와 분위기를 사용합니다.",
     "Instrumental": "순수한 음악",
+    "Instrumental Help": "가사가 없는 노래를 만들다.",
+    "Private": "프라이빗",
+    "Private Help": "비공개곡 자체 다운로드 저장.",
 
     "Generate": "지금 생성🎵",
 

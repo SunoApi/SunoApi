@@ -13,10 +13,10 @@ from sqlite import SqliteTool
 
 suno_sqlite = SqliteTool()
 
-st.set_page_config(page_title="Suno AI Suno API AI Music Generator",
+st.set_page_config(page_title="Suno API AI Music Generator",
                    page_icon="🎵",
                    layout="wide",
-                   initial_sidebar_state="auto",
+                   initial_sidebar_state="collapsed",
                    menu_items={
                        'Report a bug': "https://github.com/SunoApi/SunoApi/issues",
                        'About': "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
@@ -45,7 +45,7 @@ def load_locales():
 locales = load_locales()
 display_languages = []
 selected_index = 0
-st.session_state.Language = "EN"
+st.session_state.Language = "ZH"
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
@@ -65,6 +65,14 @@ if selected_language:
 def i18n(key):
     loc = locales.get(st.session_state.Language, {})
     return loc.get("Translation", {}).get(key, key)
+
+st.sidebar.header(i18n("Page Title"))
+with st.sidebar:
+    st.sidebar.page_link("main.py", label=i18n("Music Song Create"), icon="🎵")
+    st.sidebar.page_link("main.py", label=i18n("Music Song List"), icon="🎶")
+    st.sidebar.page_link("https://sunoapi.net", label=i18n("Music Song Site"), icon="🎼")
+
+st.sidebar.empty()
 
 col2.title(i18n("Page Title"))
 
@@ -93,14 +101,27 @@ else:
     st.session_state.DescPrompt = DescPrompt
     # print(st.session_state.DescPrompt)
 
-st.session_state.Instrumental = False
-instrumental = container.checkbox(i18n("Instrumental"))
-if instrumental:
-    st.session_state.Instrumental = True
-    # print(st.session_state.Instrumental)
-else:
+with container.container():
+    cols = container.columns(3)
+
     st.session_state.Instrumental = False
-    # print(st.session_state.Instrumental)
+    instrumental = cols[0].checkbox(i18n("Instrumental"), help=i18n("Instrumental Help"))
+    if instrumental:
+        st.session_state.Instrumental = True
+        # print(st.session_state.Instrumental)
+    else:
+        st.session_state.Instrumental = False
+        # print(st.session_state.Instrumental)
+
+
+    st.session_state.Private = False
+    private = cols[1].checkbox(i18n("Private"), help=i18n("Private Help"))
+    if private:
+        st.session_state.Private = True
+        # print(st.session_state.Private)
+    else:
+        st.session_state.Private = False
+        # print(st.session_state.Private)
 
 
 container1 = col2.container(border=True)
@@ -188,10 +209,12 @@ while True:
 def fetch_feed(aids: list):
     if len(aids) == 1 and len(aids[0].strip()) == 36:
         resp = get_feed(aids[0].strip(), st.session_state.token)
+        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
         if status == "complete":
+            st.balloons()
             col1.audio(resp[0]["audio_url"])
             col1.video(resp[0]["video_url"])
             # col1.image(resp[0]["image_large_url"])
@@ -200,6 +223,7 @@ def fetch_feed(aids: list):
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     elif len(aids) == 2  and len(aids[0].strip()) == 36 and len(aids[1].strip()) == 36:
         resp = get_feed(aids[0].strip(), st.session_state.token)
+        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -212,10 +236,12 @@ def fetch_feed(aids: list):
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
         resp = get_feed(aids[1].strip(), st.session_state.token)
+        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
         if status == "complete":
+            st.balloons()
             col3.audio(resp[0]["audio_url"])
             col3.video(resp[0]["video_url"])
             # col3.image(resp[0]["image_large_url"])
@@ -312,6 +338,17 @@ def fetch_status(aid: str):
         else:
             progress_text = i18n("Fetch Status Running") + status
             my_bar.progress(percent_complete, text=progress_text)
+        
+        result = suno_sqlite.query_one("select aid, data from music where aid =?", (aid,))
+        print(result)
+        print("\n")
+        if result:
+            result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), status=? where aid =?", (str(resp[0]), status, aid))
+        else:
+            result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
+        print(result)
+        print("\n")
+
         time.sleep(10)
     
     return resp
@@ -352,22 +389,24 @@ if StartBtn:
             status = resp["status"] if "status" in resp else resp["detail"]
             if status == "running":
                 disabled_state = True
+                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
                 resp0 = fetch_status(resp["clips"][0]["id"])
                 if resp0[0]["status"] == "complete":
-                    col2.success(i18n("Generate Success") + resp0[0]["id"])
                     col1.audio(resp0[0]["audio_url"])
                     col1.video(resp0[0]["video_url"])
                     # col1.image(resp0[0]["image_large_url"])
+                    col2.success(i18n("Generate Success") + resp0[0]["id"])
                 else:
                     col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
                 
+                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
                 resp1 = fetch_status(resp["clips"][1]["id"])
                 if resp1[0]["status"] == "complete":
                     st.balloons()
-                    col2.success(i18n("Generate Success") + resp1[0]["id"])
                     col3.audio(resp1[0]["audio_url"])
                     col3.video(resp1[0]["video_url"])
                     # col3.image(resp1[0]["image_large_url"])
+                    col2.success(i18n("Generate Success") + resp1[0]["id"])
                 else:
                     col2.error(i18n("Generate Status Error")  + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
                 disabled_state = False
@@ -391,22 +430,24 @@ if StartBtn:
             status = resp["status"] if "status" in resp else resp["detail"]
             if status == "running":
                 disabled_state = True
+                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
                 resp0 = fetch_status(resp["clips"][0]["id"])
                 if resp0[0]["status"] == "complete":
-                    col2.success(i18n("Generate Success") + resp0[0]["id"])
                     col1.audio(resp0[0]["audio_url"])
                     col1.video(resp0[0]["video_url"])
                     # col1.image(resp0[0]["image_large_url"])
+                    col2.success(i18n("Generate Success") + resp0[0]["id"])
                 else:
                     col2.error(i18n("Generate Status Error") + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
 
+                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][0]), st.session_state.Private))
                 resp1 = fetch_status(resp["clips"][1]["id"])
                 if resp1[0]["status"] == "complete":
                     st.balloons()
-                    col2.success(i18n("Generate Success") + resp1[0]["id"])
                     col3.audio(resp1[0]["audio_url"])
                     col3.video(resp1[0]["video_url"])
                     # col3.image(resp1[0]["image_large_url"])
+                    col2.success(i18n("Generate Success") + resp1[0]["id"])
                 else:
                     col2.error(i18n("Generate Status Error") + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
                 disabled_state = False
