@@ -107,7 +107,7 @@ services:
 - Main file path input: main.py
 - Click Deploy!
 
-### Zeabur one-click deployment
+#### Zeabur one-click deployment
 
 [![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
@@ -154,7 +154,7 @@ services:
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
-## Participate
+### Participate
 
 - My personal strength is always limited, any form of contribution is welcome, including but not limited to contributing code, optimizing documents, submitting issues and PR. Due to limited time, we do not accept to submit bugs to developers in wechat or wechat group, please submit issues and PR if you have problems or optimization suggestions!
 

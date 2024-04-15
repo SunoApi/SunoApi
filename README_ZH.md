@@ -107,7 +107,7 @@ services:
 - Main file path 输入：main.py
 - 点击Deploy！
 
-### Zeabur 一键部署
+#### Zeabur 一键部署
 
 [![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
 
@@ -154,7 +154,7 @@ services:
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
-## 参与
+### 参与
 
 - 个人的力量始终有限，任何形式的贡献都是欢迎的，包括但不限于贡献代码，优化文档，提交Issue和PR，由于时间有限不接受在微信或者微信群给开发者提Bug，有问题或者优化建议请提交Issue和PR！
 
