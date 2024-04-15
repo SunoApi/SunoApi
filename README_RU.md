@@ -1,5 +1,13 @@
 [简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [English](README.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
+
+[GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi) | ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi) | ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi) | ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi)
+
+
+# Поздравляю с избранием проекта open source в уикли на этой неделе
+### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
+
+
 # Клиент Suno API неофициально
 
 - Это неофициальный клиент Suno API на основе Python и Streamlit, который в настоящее время поддерживает такие функции, как генерация музыки и получение информации о музыке. С функцией поддержки токенов и сохранения памяти, не беспокоясь об истечении срока действия токенов, можно настроить сохранение информации с нескольких учетных записей для использования.

@@ -1,5 +1,13 @@
 [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [English](README.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
+
+[GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi) | ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi) | ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi) | ![K8Z GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi)
+
+
+# 祝贺本开源项目入选本周weekly
+### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
+
+
 # Suno API 非官方 Suno AI 客户端
 
 - 这是一个基于Python、Streamlit的非官方Suno API客户端，目前支持生成音乐，获取音乐信息等功能。自带维护token与保活功能，无需担心token过期问题，可以设置多个账号的信息保存以便使用。

@@ -1,5 +1,13 @@
 [简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
+
+[GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi) | ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi) | ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi) | ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi)
+
+
+# Congratulations on this open source project's being selected for this week's weekly
+### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
+
+
 # Suno API is an unofficial Suno AI client
 
 - This is an unofficial Suno API client based on Python and Streamlit currently supports functions such as generating music and obtaining music information. It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
@@ -12,7 +20,7 @@
 - Multiple account information can be set to be saved and used
 - The code is simple, easy to maintain, and convenient for secondary development
 
-### debug
+### Debug
 
 #### Python local debug running
 
@@ -30,7 +38,7 @@ streamlit run main.py
 
 ### Deploy
 
-#### Docker Local one-click deployment
+#### Docker local one-click deployment
 
 ```bash
 docker run -d \

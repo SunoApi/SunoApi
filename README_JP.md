@@ -1,5 +1,13 @@
 [简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [English](README.md) | [한국어](README_KR.md)
 
+
+[GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi) | ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi) | ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi) | ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi)
+
+
+# 今週のweeklyへの本開源プロジェクトの入選を祝う
+### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
+
+
 # Suno API 非公式 Suno AIクライアントです
 
 - これはPython、Streamlitに基づく非公式Suno APIクライアントであり、現在は音楽の生成、音楽情報の取得などの機能をサポートしている。トケンの期限切れを心配することなく、複数のアカウントの情報保存を設定して使用することができます。
