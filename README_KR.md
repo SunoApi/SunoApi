@@ -1,3 +1,5 @@
+<div align="center">
+
 [简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [English](README.md) | [日本語](README_JP.md)
 
 
@@ -6,6 +8,8 @@
 
 # 이번 주 Weekly 오픈 소스 프로젝트 선정 축하합니다.
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
+
+</div>
 
 
 # Suno API 비공식 Suno AI 클라이언트

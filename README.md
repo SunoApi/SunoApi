@@ -1,3 +1,5 @@
+<div align="center">
+
 [简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский язык](README_RU.md) | [한국어](README_KR.md) | [日本語](README_JP.md)
 
 
@@ -6,6 +8,8 @@
 
 # Congratulations on this open source project's being selected for this week's weekly
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
+
+</div>
 
 
 # Suno API is an unofficial Suno AI client
