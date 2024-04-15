@@ -154,6 +154,13 @@ services:
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
+## Участие
+
+- Индивидуальные силы всегда ограничены, и любые вклады приветствуются, включая, но не ограничиваются кодами вкладов, оптимизированными документами, представленными Issue и PR, поскольку время ограниченное для того, чтобы не принимать микроверы или микроблоки для создания багов, вопросы или рекомендации оптимизации должны быть представлены Issue и PR!
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi&type=Timeline)](https://star-history.com/#SunoApi/SunoApi&Timeline)
+
+
 ### Ссылки
 
 - Suno AI 官网: [https://suno.com](https://suno.com)

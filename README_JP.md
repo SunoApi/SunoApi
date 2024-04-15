@@ -155,6 +155,13 @@ services:
 <img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
 
 
+## 参加する
+
+- 個人の力は常に限られており、どのような形の貢献も歓迎されています。貢献コード、文書の最適化、IssueとPRの提出などが含まれていますが、これに限られていないので、微信や微信グループで開発者にBugを提出することは受け入れられません。問題や最適化の提案があれば、IssueとPRを提出してください。
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi&type=Timeline)](https://star-history.com/#SunoApi/SunoApi&Timeline)
+
+
 ### リファレンス
 
 - Suno AI 公式サイト: [https://suno.com](https://suno.com)
