@@ -7,7 +7,7 @@ from datetime import datetime
 
 import schemas
 from cookie import suno_sqlite,get_suno_auth,new_suno_auth
-from utils import generate_lyrics, generate_music, get_feed, get_lyrics, check_url_available
+from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time
 
 from sqlite import SqliteTool
 
@@ -66,13 +66,18 @@ def i18n(key):
     loc = locales.get(st.session_state.Language, {})
     return loc.get("Translation", {}).get(key, key)
 
-st.sidebar.header(i18n("Page Title"))
+from streamlit_option_menu import option_menu
 with st.sidebar:
-    st.sidebar.page_link("main.py", label=i18n("Music Song Create"), icon="🎵")
-    st.sidebar.page_link("main.py", label=i18n("Music Song List"), icon="🎶")
-    st.sidebar.page_link("https://sunoapi.net", label=i18n("Music Song Site"), icon="🎼")
+    selected = option_menu("Suno AI Music", [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Visit Official WebSite")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=0)
+    
+    if selected == i18n("Music Share Square"):
+        st.switch_page("pages/square.py")
+    elif selected == i18n("Visit Official WebSite"):
+        st.page_link("https://suno.com", label=i18n("Visit Official WebSite1"), icon="🌐")
+        st.page_link("https://sunoapi.net", label=i18n("Visit Official WebSite2"), icon="🌐")
+    print(selected)
 
-st.sidebar.empty()
+st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 
 col2.title(i18n("Page Title"))
 
@@ -199,7 +204,7 @@ while True:
     st.session_state.suno_auth = get_suno_auth()
     st.session_state.token = st.session_state.suno_auth.get_token()
     if st.session_state.token != "":
-        print(f"***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
+        print(local_time() + f" ***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
         break
     else:
         col2.error(i18n("TokenAuth Error"))
@@ -250,6 +255,21 @@ def fetch_feed(aids: list):
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
         col2.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
+        # resp = get_page_feed(aids, st.session_state.token)
+        # print(resp)
+        # for row in resp:
+        #     result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(row["id"]), str(row), st.session_state.Private))
+        #     print(resp)
+        #     print("\n")
+        #     status = resp["detail"] if "detail" in resp else row["status"]
+        #     if status == "complete":
+        #         # st.balloons()
+        #         # col1.audio(row["audio_url"])
+        #         # col1.video(row["video_url"])
+        #         # col1.image(resp[0]["image_large_url"])
+        #         col2.success(i18n("FetchFeed Success") + row["id"])
+        #     else:
+        #         col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
 
 
 container2 = col2.container(border=True)
@@ -272,8 +292,9 @@ if FetchFeed:
         if FeedID == "":
             col2.error(i18n("FetchFeed FeedID Empty"))
         else:
-            FeedIDs = FeedID.split(",")
-            fetch_feed(FeedIDs)
+           FeedIDs = FeedID.split(",")
+        # FeedIDs = FeedID*1
+        fetch_feed(FeedIDs)
     else:
         st.session_state.FeedBtn = False
         # print(st.session_state.FeedBtn)
@@ -329,7 +350,7 @@ def fetch_status(aid: str):
                 st.session_state.suno_auth = get_suno_auth()
                 st.session_state.token = st.session_state.suno_auth.get_token()
                 if st.session_state.token != "":
-                    print(f"***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
+                    print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
                     break
             continue
         elif status == "error":
@@ -339,7 +360,7 @@ def fetch_status(aid: str):
             progress_text = i18n("Fetch Status Running") + status
             my_bar.progress(percent_complete, text=progress_text)
         
-        result = suno_sqlite.query_one("select aid, data from music where aid =?", (aid,))
+        result = suno_sqlite.query_one("select aid from music where aid =?", (aid,))
         print(result)
         print("\n")
         if result:

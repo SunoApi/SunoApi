@@ -130,9 +130,13 @@ services:
 
 - Once the project is up and running, visit http://localhost:8501/ in your browser.
 
+![index](https://sunoapi.net/images/index.png)
+
 ![index1](https://sunoapi.net/images/index1.png)
 
-![index](https://sunoapi.net/images/index.png)
+![index2](https://sunoapi.net/images/index2.png)
+
+![index3](https://sunoapi.net/images/index3.png)
 
 
 ### Questions

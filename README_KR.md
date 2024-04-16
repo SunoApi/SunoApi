@@ -131,9 +131,13 @@ services:
 
 - 프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
 
+![index](https://sunoapi.net/images/index.png)
+
 ![index1](https://sunoapi.net/images/index1.png)
 
-![index](https://sunoapi.net/images/index.png)
+![index2](https://sunoapi.net/images/index2.png)
+
+![index3](https://sunoapi.net/images/index3.png)
 
 
 ### 문제

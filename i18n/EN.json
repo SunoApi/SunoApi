@@ -6,8 +6,11 @@
     "Page Header": "Create your own unique Suno AI music song now, use it for free and enjoy the fun of innovative AI music generation! ",
 
     "Music Song Create": "Music Song Creation",
-    "Music Song List": "Music Song List",
-    "Music Song Site": "Visit official website",
+    "Music Song Square": "Music Share Square",
+    "Visit Official WebSite": "Visit Official Website",
+    "Visit Official WebSite1": "Visit Suno Official Website",
+    "Visit Official WebSite2": "Visit Project Official  Website",
+    "Join WeChat Group": "Join wechat group for discussion",
 
     "Custom": "Custom mode",
     "Title": "Song Title:",
@@ -37,8 +40,8 @@
     "Custom Tags Error": "Please enter the style of music, for example, Chinese pop.",
     "Custom Prompt Error": "Please enter your own lyrics, if not you can enter a keyword word, then click Generate Lyrics.",
 
-    "Generate Submit Error": "Suno AI Music song generation submission failed：",
-    "Generate Status Error": "Suno AI Music song generation status failed：",
+    "Generate Submit Error": "Suno AI Music song generation failed to submit：",
+    "Generate Status Error": "Suno AI Music song generation failed to status：",
 
     "Fetch Status Progress": "Suno AI Music song generation Please wait...",
     "Fetch Status Running": "Suno AI Music song is being generated：",

@@ -130,9 +130,13 @@ services:
 
 - Посещение браузера после запуска проекта http://localhost:8501/ Можно использовать.
 
+![index](https://sunoapi.net/images/index.png)
+
 ![index1](https://sunoapi.net/images/index1.png)
 
-![index](https://sunoapi.net/images/index.png)
+![index2](https://sunoapi.net/images/index2.png)
+
+![index3](https://sunoapi.net/images/index3.png)
 
 
 ### Вопросы
