@@ -179,3 +179,8 @@ services:
 ### 선언
 
 - SunoApi는 학습 및 연구에만 사용되는 비공식 오픈 소스 프로젝트입니다.사용자는 자발적으로 무료 계정 정보를 입력하여 음악을 생성한다.각 계정은 하루에 5 곡의 노래를 무료로 생성할 수 있으며 다른 목적으로 사용하지 않습니다.안심하고 사용하세요!10000명의 사용자가 있으면 매일 50000곡의 노래를 무료로 생성할 수 있다.계정당 하루 5곡만 무료로 생성할 수 있으므로 사용량을 최대한 절약하십시오.만약 한 사람이 매일 다섯 곡 이상의 노래를 창작한다면, 이것은 여전히 부족하다.최종 목표는 필요할 때 언제든지 무료로 생성할 수 있도록 하는 것이다.
+
+
+### Buy Me a Coffee
+
+<a href='https://ko-fi.com/M4M2X0A9M' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
