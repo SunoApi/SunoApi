@@ -5,6 +5,7 @@
 
 [![GitHub release](https://img.shields.io/static/v1?label=release&message=v1.0.0&color=blue)](https://www.github.com/novicezk/midjourney-proxy)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
+# Suno API is an unofficial Suno AI client
 
 # Congratulations on this open source project's being selected for this week's weekly
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -12,7 +13,7 @@
 </div>
 
 
-# Suno API is an unofficial Suno AI client
+### Introduction
 
 - This is an unofficial Suno API client based on Python and Streamlit currently supports functions such as generating music and obtaining music information. It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
 
@@ -20,9 +21,10 @@
 
 ### Features
 
-- Automatic maintenance and preservation of tokens
+- Set account information and automatically maintain and keep the program active
 - Multiple account information can be set to be saved and used
-- The code is simple, easy to maintain, and convenient for secondary development
+- Music Sharing Square showcases all publicly available songs
+- Enter the music feed ID to directly obtain song information
 
 ### Debug
 

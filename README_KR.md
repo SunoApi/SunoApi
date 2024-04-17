@@ -5,6 +5,7 @@
 
 [![GitHub release](https://img.shields.io/static/v1?label=release&message=v1.0.0&color=blue)](https://www.github.com/novicezk/midjourney-proxy)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
+# Suno API 비공식 Suno AI 클라이언트
 
 # 이번 주 Weekly 오픈 소스 프로젝트 선정 축하합니다.
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -12,7 +13,7 @@
 </div>
 
 
-# Suno API 비공식 Suno AI 클라이언트
+### 소개
 
 - Python, Streamlit 기반의 비공식 Suno API 클라이언트로, 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
 
@@ -20,9 +21,10 @@
 
 ### 특징
 
-- Token 자동 유지 보수 및 서비스
+- 계정 정보 작성 프로그램 자동 유지 보수 및 보존
 - 여러 계정의 정보를 설정하여 저장하여 사용할 수 있음
-- 간단한 코드, 간편한 유지 관리, 간편한 2차 개발
+- 음악나눔마당 공개곡 모두 전시
+- 음악 번호를 입력하면 바로 노래 정보를 얻을 수 있습니다.
 
 ### 디 버그
 

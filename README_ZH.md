@@ -4,13 +4,15 @@
 
 [![GitHub release](https://img.shields.io/static/v1?label=release&message=v1.0.0&color=blue)](https://www.github.com/novicezk/midjourney-proxy)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
+# Suno API 非官方 Suno AI 客户端
+
 # 祝贺本开源项目入选本周weekly
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
 
 </div>
 
 
-# Suno API 非官方 Suno AI 客户端
+### 介绍
 
 - 这是一个基于Python、Streamlit的非官方Suno API客户端，目前支持生成音乐，获取音乐信息等功能。自带维护token与保活功能，无需担心token过期问题，可以设置多个账号的信息保存以便使用。
 
@@ -18,9 +20,10 @@
 
 ### 特点
 
-- Token自动维护与保活
+- 填写账号信息程序自动维护与保活
 - 可以设置多个账号的信息保存使用
-- 代码简单，易于维护，方便二次开发
+- 音乐分享广场展示所有公开的歌曲
+- 输入音乐编号可直接获取歌曲信息
 
 ### 调试
 
