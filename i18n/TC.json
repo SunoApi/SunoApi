@@ -74,6 +74,8 @@
     "FetchFeed FeedID Empty": "請輸入已經生成過的音樂編號。",
     "FetchFeed FeedID Error": "音樂編號格式錯誤。",
     "FetchFeed Error": "Suno AI音樂歌曲資訊獲取失敗：",
-    "FetchFeed Success": "Suno AI音樂歌曲資訊獲取成功！"
+    "FetchFeed Success": "Suno AI音樂歌曲資訊獲取成功！",
+    
+    "Generation Task Status": "音樂生成任務還未完成，當前狀態為："
   }
 }

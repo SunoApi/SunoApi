@@ -75,6 +75,8 @@
     "FetchFeed FeedID Empty": "作成済みの音楽番号の入力をお願いします。",
     "FetchFeed FeedID Error": "音楽番号のフォーマットが間違っています。",
     "FetchFeed Error": "Suno AI音楽歌です情報取得失敗します：",
-    "FetchFeed Success": "Suno AI音楽歌です情報獲得に成功しました! "
+    "FetchFeed Success": "Suno AI音楽歌です情報獲得に成功しました! ",
+
+    "Generation Task Status": "音楽生成タスクはまだ完了していません。現在の状態は次のとおりです："
   }
 }
