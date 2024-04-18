@@ -167,7 +167,7 @@ services:
 
 - 個人の力は常に限られており、どのような形の貢献も歓迎されています。貢献コード、文書の最適化、IssueとPRの提出などが含まれていますが、これに限られていないので、微信や微信グループで開発者にBugを提出することは受け入れられません。問題や最適化の提案があれば、IssueとPRを提出してください。
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi&type=Timeline)](https://star-history.com/#SunoApi/SunoApi&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
 
 
 ### リファレンス

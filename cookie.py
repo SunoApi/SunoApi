@@ -91,7 +91,7 @@ def new_suno_auth(identity, session, cookie):
     suno_auths.append(suno_cookie)
     t = Thread(target=keep_alive, args=(suno_cookie,))
     t.start()
-    print(f"***new_suno_auth identity -> {identity} session -> {session} token -> {cookie} ***\n")
+    print(local_time() + f" ***new_suno_auth identity -> {identity} session -> {session} token -> {cookie} ***\n")
 
 def start_keep_alive():
     print("start_keep_alive")

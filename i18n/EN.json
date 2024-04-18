@@ -75,6 +75,9 @@
     "FetchFeed FeedID Error": "The music feed ID format is incorrect.",
     "FetchFeed Error": "Suno AI music feed information obtained failed: ",
     "FetchFeed Success": "Suno AI music feed information obtained success! ",
-    "Generation Task Status": "The task of music generation has not been completed yet, and the current status is: "
+
+    "Generation Task Status": "The task of music generation has not been completed yet, and the current status is: ",
+
+    "Enter Search Keywords": "Please enter search keywords"
   }
 }

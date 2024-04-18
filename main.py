@@ -75,7 +75,7 @@ with st.sidebar:
     elif selected == i18n("Visit Official WebSite"):
         st.page_link("https://suno.com", label=i18n("Visit Official WebSite1"), icon="🌐")
         st.page_link("https://sunoapi.net", label=i18n("Visit Official WebSite2"), icon="🌐")
-    print(selected)
+    # print(selected)
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 
@@ -214,59 +214,101 @@ while True:
 def fetch_feed(aids: list):
     if len(aids) == 1 and len(aids[0].strip()) == 36:
         resp = get_feed(aids[0].strip(), st.session_state.token)
-        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
-        if status == "complete":
-            st.balloons()
-            col1.audio(resp[0]["audio_url"])
-            col1.video(resp[0]["video_url"])
-            # col1.image(resp[0]["image_large_url"])
-            col2.success(i18n("FetchFeed Success") + resp[0]["id"])
+        if status != "Unauthorized" and status != "Not found." and status != "error":
+            result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
+            print(result)
+            print("\n")
+            if result:
+                result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], resp[0]["status"], aids[0].strip()))
+            else:
+                result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], resp[0]["status"], st.session_state.Private))
+            print(result)
+            print("\n")
+            if status == "complete":
+                st.balloons()
+                col1.audio(resp[0]["audio_url"])
+                col1.video(resp[0]["video_url"])
+                # col1.image(resp[0]["image_large_url"])
+                col2.success(i18n("FetchFeed Success") + resp[0]["id"])
+            else:
+                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
         else:
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     elif len(aids) == 2  and len(aids[0].strip()) == 36 and len(aids[1].strip()) == 36:
         resp = get_feed(aids[0].strip(), st.session_state.token)
-        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
-        if status == "complete":
-            col1.audio(resp[0]["audio_url"])
-            col1.video(resp[0]["video_url"])
-            # col1.image(resp[0]["image_large_url"])
-            col2.success(i18n("FetchFeed Success") + resp[0]["id"])
+        if status != "Unauthorized" and status != "Not found." and status != "error":
+            result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
+            print(result)
+            print("\n")
+            if result:
+                result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], resp[0]["status"], aids[0].strip()))
+            else:
+                result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], resp[0]["status"], st.session_state.Private))
+            print(result)
+            print("\n")
+            if status == "complete":
+                col1.audio(resp[0]["audio_url"])
+                col1.video(resp[0]["video_url"])
+                # col1.image(resp[0]["image_large_url"])
+                col2.success(i18n("FetchFeed Success") + resp[0]["id"])
+            else:
+                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
         else:
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
         resp = get_feed(aids[1].strip(), st.session_state.token)
-        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
-        if status == "complete":
-            st.balloons()
-            col3.audio(resp[0]["audio_url"])
-            col3.video(resp[0]["video_url"])
-            # col3.image(resp[0]["image_large_url"])
-            col2.success(i18n("FetchFeed Success") + resp[0]["id"])
+        if status != "Unauthorized" and status != "Not found." and status != "error":
+            result = suno_sqlite.query_one("select aid from music where aid =?", (aids[1].strip(),))
+            print(result)
+            print("\n")
+            if result:
+                result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], resp[0]["status"], aids[1].strip()))
+            else:
+                result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], resp[0]["status"], st.session_state.Private))
+            print(result)
+            print("\n")
+            if status == "complete":
+                st.balloons()
+                col3.audio(resp[0]["audio_url"])
+                col3.video(resp[0]["video_url"])
+                # col3.image(resp[0]["image_large_url"])
+                col2.success(i18n("FetchFeed Success") + resp[0]["id"])
+            else:
+                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
         else:
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
         col2.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
         # resp = get_page_feed(aids, st.session_state.token)
         # print(resp)
+        # print("\n")
         # for row in resp:
-        #     result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(row["id"]), str(row), st.session_state.Private))
-        #     print(resp)
+        #     print(row)
+        #     print("\n")
+        #     result = suno_sqlite.query_one("select aid from music where aid =?", (aids,))
+        #     print(result)
+        #     print("\n")
+        #     if result:
+        #         result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+        #     else:
+        #         result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], st.session_state.Private))
+        #     print(result)
         #     print("\n")
         #     status = resp["detail"] if "detail" in resp else row["status"]
         #     if status == "complete":
         #         # st.balloons()
         #         # col1.audio(row["audio_url"])
         #         # col1.video(row["video_url"])
-        #         # col1.image(resp[0]["image_large_url"])
+        #         # col1.image(row["image_large_url"])
         #         col2.success(i18n("FetchFeed Success") + row["id"])
         #     else:
         #         col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
@@ -328,7 +370,7 @@ def fetch_status(aid: str):
         resp = get_feed(aid, st.session_state.token)
         print(resp)
         print("\n")
-        percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 6
+        percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 5
         if percent_complete >= 100:
             percent_complete = 100
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -344,7 +386,6 @@ def fetch_status(aid: str):
             # time.sleep(15) #等待图片音频视频生成完成再返回
             check_url_available(resp[0]["video_url"])
             my_bar.empty()
-            break
         elif status == "Unauthorized":
             while True:
                 st.session_state.suno_auth = get_suno_auth()
@@ -353,9 +394,10 @@ def fetch_status(aid: str):
                     print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
                     break
             continue
+        elif status == "Not found.":
+            continue
         elif status == "error":
             my_bar.empty()
-            break;
         else:
             progress_text = i18n("Fetch Status Running") + status
             my_bar.progress(percent_complete, text=progress_text)
@@ -364,11 +406,15 @@ def fetch_status(aid: str):
         print(result)
         print("\n")
         if result:
-            result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), status=? where aid =?", (str(resp[0]), status, aid))
+            result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, aid))
+            print(local_time() + f" ***fetch_status_update aid -> {aid} status -> {status} data -> {str(resp[0])} ***\n")
         else:
-            result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp[0]["id"]), str(resp[0]), st.session_state.Private))
+            result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, st.session_state.Private))
         print(result)
         print("\n")
+
+        if status == "complete" or status == "error":
+            break
 
         time.sleep(10)
     
@@ -461,7 +507,7 @@ if StartBtn:
                 else:
                     col2.error(i18n("Generate Status Error") + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
 
-                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][0]), st.session_state.Private))
+                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
                 resp1 = fetch_status(resp["clips"][1]["id"])
                 if resp1[0]["status"] == "complete":
                     st.balloons()

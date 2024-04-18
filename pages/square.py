@@ -7,6 +7,7 @@ from streamlit_image_select import image_select
 
 from streamlit_modal import Modal
 import streamlit.components.v1 as components
+import streamlit_antd_components as sac
 
 from sqlite import SqliteTool
 
@@ -50,7 +51,7 @@ for i, code in enumerate(locales.keys()):
 
 col1, col2, col3 = st.columns(3)
 
-selected_language = col2.selectbox("Language", options=display_languages, label_visibility='collapsed',
+selected_language = col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',
                                  index=selected_index)
 if selected_language:
     code = selected_language.split(" - ")[0].strip()
@@ -63,7 +64,7 @@ def i18n(key):
 
 
 hide_streamlit_style = """
-<style>#root > div:nth-child(1) > div > div > div > div > section > div > div > ul {display:'block';}</style>
+<style>#root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 5rem;}</style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
@@ -75,20 +76,22 @@ with st.sidebar:
     elif selected == i18n("Visit Official WebSite"):
         st.page_link("https://suno.com", label=i18n("Visit Official WebSite1"), icon="🌐")
         st.page_link("https://sunoapi.net", label=i18n("Visit Official WebSite2"), icon="🌐")
-    print(selected)
+    # print(selected)
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 
-
-import streamlit_antd_components as sac
 
 if 'page' not in st.session_state:
     st.session_state.page = 1
 else:
     st.session_state.page = 1 if 'cmpage' not in st.session_state else st.session_state.cmpage
 
+title = col2.text_input(" ", "", placeholder=i18n("Enter Search Keywords"))
+
 records_per_page = 40
 result = suno_sqlite.query_one("select count(id) from music where private=0")
+if title != "":
+    result = suno_sqlite.query_one("select count(id) from music where LOWER(title) like ? and private=0", ("%"+ title +"%",))
 total_records = int(result[0])
 total_pages = (total_records // records_per_page) + (1 if total_records % records_per_page else 0)
 # col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
@@ -98,20 +101,26 @@ offset = (page_number - 1) * records_per_page
 
 result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where private=0 order by id desc LIMIT ? OFFSET ? ", (records_per_page, offset,))
 
+if title != "":
+    result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where LOWER(title) like ? and private=0 order by id desc LIMIT ? OFFSET ? ", ("%"+ title +"%", records_per_page, offset,))
+
 images = []
 captions = []
 for row in result:
     # print(ast.literal_eval(row[1]))
-    print("\n")
-    captions.append(ast.literal_eval(row[1])['title'])
-    images.append(ast.literal_eval(row[1])['image_url'])
+    # print("\n")
+    data = ast.literal_eval(row[1])
+    captions.append("sunoai" if data['title'] is None or "" else data['title'])
+    images.append("https://sunoapi.net/images/sunoai.jpg" if data['image_url'] is None or "" else data['image_url'])
+
+print("\n")
 
 index = image_select(
         label="",
-        images= images if len(images) > 0 else ["https://sunoapi.net/images/wechat.jpg"],
-        captions=captions if len(captions) > 0 else ["wechat"],
+        images=images if len(images) > 0 else ["https://sunoapi.net/images/wechat.jpg"],
+        captions=captions if len(captions) > 0 else ["Join wechat group"],
         use_container_width=False,
-        return_value="index",
+        return_value="index"
     )
 
 open_modal = True
@@ -125,10 +134,13 @@ else:
 
 st.session_state.index = index
 
-sac.pagination(total=total_records, page_size=records_per_page, align='center', jump=True, show_total=True, key='cmpage')
+data = {}
 
 if result:
-    video_modal = Modal(title=ast.literal_eval(result[index][1])['title'], key="video_modal", padding=20, max_width=520)
+    data = ast.literal_eval(result[index][1])
+    video_modal = Modal(title=data['title'], key="video_modal", padding=20, max_width=520)
+
+sac.pagination(total=total_records, page_size=records_per_page, align='center', jump=True, show_total=True, key='cmpage')
 
 # open_modal = st.button("查看")
 if result and open_modal:
@@ -136,5 +148,9 @@ if result and open_modal:
 
 if result and video_modal.is_open():
     with video_modal.container():
-        st.session_state.index = index
-        st.video(ast.literal_eval(result[index][1])['video_url'])
+        if data['status'] == "complete":
+            st.session_state.index = index
+            st.video(data['video_url'])
+        else:
+            st.error(i18n("Generation Task Status") + data["status"])
+        

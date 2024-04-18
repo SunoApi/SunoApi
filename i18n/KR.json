@@ -76,6 +76,8 @@
     "FetchFeed Error": "Suno AI 음악 노래 정보 가져오기 실패: ",
     "FetchFeed Success": "Suno AI 음악 노래 정보 획득 성공! ",
 
-    "Generation Task Status": "음악 생성 작업이 완료되지 않았습니다. 현재 상태는: "
+    "Generation Task Status": "음악 생성 작업이 완료되지 않았습니다. 현재 상태는: ",
+
+    "Enter Search Keywords": "키워드를 입력하다"
   }
 }

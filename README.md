@@ -166,7 +166,7 @@ services:
 
 - My personal strength is always limited, any form of contribution is welcome, including but not limited to contributing code, optimizing documents, submitting issues and PR. Due to limited time, we do not accept to submit bugs to developers in wechat or wechat group, please submit issues and PR if you have problems or optimization suggestions!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi&type=Timeline)](https://star-history.com/#SunoApi/SunoApi&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
 
 
 ### Reference
