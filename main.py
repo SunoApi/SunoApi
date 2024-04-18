@@ -287,33 +287,33 @@ def fetch_feed(aids: list):
         else:
             col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
-        # col2.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
-        resp = get_page_feed(aids, st.session_state.token)
-        print(resp)
-        print("\n")
-        for row in resp:
-            print(row)
-            print("\n")
-            result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
-            print(result)
-            print("\n")
-            if result:
-                result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
-                print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
-            else:
-                result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], st.session_state.Private))
-                print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
-            print(result)
-            print("\n")
-            status = resp["detail"] if "detail" in resp else row["status"]
-            if status == "complete":
-                # st.balloons()
-                # col1.audio(row["audio_url"])
-                # col1.video(row["video_url"])
-                # col1.image(row["image_large_url"])
-                col2.success(i18n("FetchFeed Success") + row["id"])
-            else:
-                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
+        col2.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
+        # resp = get_page_feed(aids, st.session_state.token)
+        # print(resp)
+        # print("\n")
+        # for row in resp:
+        #     print(row)
+        #     print("\n")
+        #     result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
+        #     print(result)
+        #     print("\n")
+        #     if result:
+        #         result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+        #         print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
+        #     else:
+        #         result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], st.session_state.Private))
+        #         print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
+        #     print(result)
+        #     print("\n")
+        #     status = resp["detail"] if "detail" in resp else row["status"]
+        #     if status == "complete":
+        #         # st.balloons()
+        #         # col1.audio(row["audio_url"])
+        #         # col1.video(row["video_url"])
+        #         # col1.image(row["image_large_url"])
+        #         col2.success(i18n("FetchFeed Success") + row["id"])
+        #     else:
+        #         col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
 
 
 container2 = col2.container(border=True)
@@ -332,12 +332,12 @@ if FetchFeed:
     st.session_state.FeedBtn = False
     FeedBtn = container2.button(i18n("FeedBtn"))
     if FeedBtn:
-        # st.session_state.FeedBtn = True
-        # if FeedID == "":
-        #     col2.error(i18n("FetchFeed FeedID Empty"))
-        # else:
-        #    FeedIDs = FeedID.split(",")
-        FeedIDs = FeedID*1
+        st.session_state.FeedBtn = True
+        if FeedID == "":
+            col2.error(i18n("FetchFeed FeedID Empty"))
+        else:
+           FeedIDs = FeedID.split(",")
+        # FeedIDs = FeedID*1
         fetch_feed(FeedIDs)
     else:
         st.session_state.FeedBtn = False
