@@ -337,8 +337,8 @@ if FetchFeed:
             col2.error(i18n("FetchFeed FeedID Empty"))
         else:
            FeedIDs = FeedID.split(",")
-        # FeedIDs = FeedID*1
-        fetch_feed(FeedIDs)
+        #    FeedIDs = FeedID*1
+           fetch_feed(FeedIDs)
     else:
         st.session_state.FeedBtn = False
         # print(st.session_state.FeedBtn)
