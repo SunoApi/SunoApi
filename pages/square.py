@@ -168,6 +168,6 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 components.html(
     '''
-    <script charset=UTF-8 id=LA_COLLECT src="//sdk.51.la/js-sdk-pro.min.js?id=JSIwlfs5KmPbYE8i&ck=JSIwlfs5KmPbYE8i&autoTrack=true&hashMode=true"></script>
+    <script charset=UTF-8 id=LA_COLLECT src="https://sdk.51.la/js-sdk-pro.min.js?id=JSIwlfs5KmPbYE8i&ck=JSIwlfs5KmPbYE8i&autoTrack=true&hashMode=true"></script>
     ''',
     height=30)
