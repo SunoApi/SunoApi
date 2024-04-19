@@ -78,6 +78,7 @@
 
     "Generation Task Status": "The task of music generation has not been completed yet, and the current status is: ",
 
-    "Enter Search Keywords": "Please enter search keywords"
+    "Enter Search Keywords": "Please enter search keywords",
+    "No Search Result": "No search results found."
   }
 }

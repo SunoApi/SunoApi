@@ -78,6 +78,7 @@
 
     "Generation Task Status": "Задача генерации музыки еще не выполнена, текущее состояние:",
 
-    "Enter Search Keywords": "Введите ключевое слово"
+    "Enter Search Keywords": "Введите ключевое слово поиска",
+    "No Search Result": "Результаты поиска не найдены."
   }
 }

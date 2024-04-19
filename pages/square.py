@@ -40,23 +40,29 @@ def load_locales():
 
 locales = load_locales()
 display_languages = []
-selected_index = 0
-st.session_state.Language = "ZH"
+# selected_index = 1
+# st.session_state.Language = "EN"
+
+if 'Language' not in st.session_state:
+    st.session_state.selected_index = 7
+    st.session_state.Language = "ZH"
+
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
     if code == st.session_state.Language:
-        selected_index = i
+        st.session_state.selected_index = i
         st.session_state.Language = code
 
 col1, col2, col3 = st.columns(3)
 
-selected_language = col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',
-                                 index=selected_index)
-if selected_language:
-    code = selected_language.split(" - ")[0].strip()
-    st.session_state.Language = code
-    # print("code:" + code)
+# selected_language = col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',
+#                                  index=st.session_state.selected_index)
+# if selected_language:
+#     code = selected_language.split(" - ")[0].strip()
+#     st.session_state.selected_index = selected_language
+#     st.session_state.Language = code
+#     # print("code:" + code)
 
 def i18n(key):
     loc = locales.get(st.session_state.Language, {})
@@ -64,7 +70,7 @@ def i18n(key):
 
 
 hide_streamlit_style = """
-<style>#root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 5rem;}</style>
+<style>#root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 2rem;}</style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
@@ -91,18 +97,16 @@ title = col2.text_input(" ", "", placeholder=i18n("Enter Search Keywords"))
 records_per_page = 40
 result = suno_sqlite.query_one("select count(id) from music where private=0")
 if title != "":
-    result = suno_sqlite.query_one("select count(id) from music where LOWER(title) like ? and private=0", ("%"+ title +"%",))
+    result = suno_sqlite.query_one("select count(id) from music where (LOWER(title) like ? or aid=?) and private=0", ("%"+ title +"%", title))
 total_records = int(result[0])
 total_pages = (total_records // records_per_page) + (1 if total_records % records_per_page else 0)
-# col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
-# page_number = col6.number_input("", min_value=1, max_value=total_pages, value=1)
 page_number = st.session_state.page
 offset = (page_number - 1) * records_per_page
 
 result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where private=0 order by id desc LIMIT ? OFFSET ? ", (records_per_page, offset,))
 
 if title != "":
-    result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where LOWER(title) like ? and private=0 order by id desc LIMIT ? OFFSET ? ", ("%"+ title +"%", records_per_page, offset,))
+    result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where (LOWER(title) like ? or aid=?) and private=0 order by id desc LIMIT ? OFFSET ? ", ("%"+ title +"%", title, records_per_page, offset,))
 
 images = []
 captions = []
@@ -117,8 +121,8 @@ print("\n")
 
 index = image_select(
         label="",
-        images=images if len(images) > 0 else ["https://sunoapi.net/images/wechat.jpg"],
-        captions=captions if len(captions) > 0 else ["Join wechat group"],
+        images=images if len(images) > 0 else ["https://sunoapi.net/images/sunoai.jpg"],
+        captions=captions if len(captions) > 0 else [i18n("No Search Result")],
         use_container_width=False,
         return_value="index"
     )
@@ -142,7 +146,6 @@ if result:
 
 sac.pagination(total=total_records, page_size=records_per_page, align='center', jump=True, show_total=True, key='cmpage')
 
-# open_modal = st.button("查看")
 if result and open_modal:
     video_modal.open()
 
@@ -153,4 +156,18 @@ if result and video_modal.is_open():
             st.video(data['video_url'])
         else:
             st.error(i18n("Generation Task Status") + data["status"])
-        
+
+# 隐藏右边的菜单以及页脚
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+components.html(
+    '''
+    <script charset=UTF-8 id=LA_COLLECT src="//sdk.51.la/js-sdk-pro.min.js?id=JSIwlfs5KmPbYE8i&ck=JSIwlfs5KmPbYE8i&autoTrack=true&hashMode=true"></script>
+    ''',
+    height=30)

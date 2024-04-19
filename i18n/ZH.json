@@ -78,6 +78,7 @@
 
     "Generation Task Status": "音乐生成任务还未完成，当前状态为：",
 
-    "Enter Search Keywords": "请输入关键字"
+    "Enter Search Keywords": "请输入搜索关键字",
+    "No Search Result": "没有找到任何搜索结果。"
   }
 }

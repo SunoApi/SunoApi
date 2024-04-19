@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import streamlit as st
+import streamlit.components.v1 as components
 import time,json,os
 
 from datetime import datetime
@@ -44,21 +45,27 @@ def load_locales():
 
 locales = load_locales()
 display_languages = []
-selected_index = 0
-st.session_state.Language = "ZH"
+# selected_index = 1
+# st.session_state.Language = "EN"
+
+if 'Language' not in st.session_state:
+    st.session_state.selected_index = 7
+    st.session_state.Language = "ZH"
+
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
     if code == st.session_state.Language:
-        selected_index = i
+        st.session_state.selected_index = i
         st.session_state.Language = code
 
 col1, col2, col3 = st.columns(3)
 
-selected_language = col2.selectbox("Language", options=display_languages, label_visibility='collapsed',
-                                 index=selected_index)
+selected_language = col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',
+                                 index=st.session_state.selected_index)
 if selected_language:
     code = selected_language.split(" - ")[0].strip()
+    st.session_state.selected_index = selected_language
     st.session_state.Language = code
     # print("code:" + code)
 
@@ -337,8 +344,8 @@ if FetchFeed:
             col2.error(i18n("FetchFeed FeedID Empty"))
         else:
            FeedIDs = FeedID.split(",")
-        #    FeedIDs = FeedID*1
-           fetch_feed(FeedIDs)
+        # FeedIDs = FeedID*1
+        fetch_feed(FeedIDs)
     else:
         st.session_state.FeedBtn = False
         # print(st.session_state.FeedBtn)
@@ -524,3 +531,17 @@ if StartBtn:
                 col2.error(i18n("Generate Submit Error") + status)
 
     
+# 隐藏右边的菜单以及页脚
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+components.html(
+    '''
+    <script charset=UTF-8 id=LA_COLLECT src="//sdk.51.la/js-sdk-pro.min.js?id=JSIwlfs5KmPbYE8i&ck=JSIwlfs5KmPbYE8i&autoTrack=true&hashMode=true"></script>
+    ''',
+    height=30)

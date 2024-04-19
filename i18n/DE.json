@@ -1,0 +1,84 @@
+{
+  "Language": "Deutsch",
+  "Translation": {
+    "Page Title": "Suno API AI-Musikgenerator",
+    "Page About": "Suno API AI-Musikgenerator ist ein kostenloser AI-Musikgenerator, der die Existenz eines API-Interfaces nutzt, um AI-Musik zu generieren. Wenn Sie Fragen haben, besuchen Sie unseren Website: https://sunoapi.net",
+    "Page Header": "Erfolgreich erschaffen Sie Ihre eigenen Suno AI-Musiklieder, nutzen Sie kostenlos und genießen Sie das Spaß an der innovativen AI-Musikgenerierung!",
+
+    "Music Song Create": "Musiklieder erschaffen",
+    "Music Share Square": "Musikteilnahmestadion",
+    "Visit Official WebSite": "Besuche das offizielle Wettsite",
+    "Visit Official WebSite1": "Besuche das offizielle Suno Website",
+    "Visit Official WebSite2": "Besuche das offizielle Projektwebsite",
+    "Join WeChat Group": "Wenn Sie interessiert sind, scannt bitte den QR-Code und teile mit in der Gruppe diskutieren",
+
+    "Custom": "Benutzerdefiniertem Modus",
+    "Title": "Titel des Liedes:",
+    "Title Desc": "Geben Sie bitte den Titel des Liedes ein, maximal 100 Zeichen.",
+    "Tags": "Musikstil:",
+    "Tags Desc": "Geben Sie bitte den Musikstil ein, maximal 200 Zeichen.",
+    "Prompt": "Ihr Lyrics:",
+    "Prompt Desc": "Geben Sie bitte Ihre Lyrics ein, maximal 1000 Zeichen.",
+
+    "Title Placeholder": "Nennen Sie Ihrem Musiklied einen Namen, um ihn zu identifizieren, teilen und finden.",
+    "Tags Placeholder": "Beschreibe den Musikstil, den Sie wollen (z. B.: chinesische Popmusik), das Suno AI Modell kennt keine Künstlernamen, versteht aber Genres und Stimmung.",
+    "Prompt Placeholder": "Geben Sie Ihre eigenen Lyrics ein oder andere bereits existierende Lyrics ein, professionell Lyricshilfetool：https://poe.com/SuperSunoMaster。",
+
+    "Desc Prompt": "Liedbeschreibung:",
+    "Desc Value": "Geben Sie direkt den gewünschten Musikstil und Thema ein, machen Sie einfach professionelle Suno AI-Musiklieder！",
+    "Desc Reamrk": "Beschreibe den gewünschten Musikstil und Thema (z. B.: Ursprüngliches Popmusik über Urlaub), Nutzen Sie Genres und Stimmung statt spezifische Künstler und Lieder.",
+    "Instrumental": "Klaviermusik",
+    "Instrumental Help": "Erschaffen Sie ein Lied ohne Lyrics.",
+    "Private": "Privat",
+    "Private Help": "Macht nicht öffentlich und herunterladen Sie das Lied selbst speichern.",
+
+    "Generate": "Sofort erschaffen🎵",
+
+    "DescPrompt Error": "Geben Sie zum Beispiel eine Beschreibung wie：Schreiben Sie ein Lied im Stil von《Nachtstick》.",
+
+    "Custom Title Error": "Geben Sie bitte einen Titel für das Lied ein, zum Beispiel: Nachtstick - Eintritt auf die Preisträne.",
+    "Custom Tags Error": "Geben Sie bitte den Musikstil an, zum Beispiel: chinesische Popmusik.",
+    "Custom Prompt Error": "Geben Sie bitte Ihre Lyrics ein, wenn Sie nicht weiß， können Sie einfach Stichworte eingeben und dann Generierungslyrics wählen.",
+
+    "Generate Submit Error": "Fehler beim Erstellen des Suno AI-Musikliedes: ",
+    "Generate Status Error": "Status des Suno AI-Musikliedes fehlgeschlagen: ",
+
+    "Fetch Status Progress": "Suno AI-Musiklieder werden sofort generiert, bitte warten...",
+    "Fetch Status Running": "Suno AI-Musiklieder werden generiert: ",
+    "Fetch Status Success": "Die Erstellung des Suno AI-Musikliedes war erfolgreich: ",
+
+    "Generate Success": "Die Erstellung des Suno AI-Musikliedes war erfolgreich！",
+
+    "Identity Placeholder": "Geben Sie Identitätsmerkmale ein, um zum Beispiel Ihren Email-Konto zu identifizieren.",
+    "Identity Help": "Bitte geben Sie Ihren Email-Konto ein, um Ihre Identität zu bestätigen.",
+    "Session Placeholder": "Geben Sie Ihre Session ein, um kostenlos Musik zu generieren.",
+    "Session Help": "Bitte geben Sie Ihre Session ein, um kostenlos Musik zu generieren.",
+    "Cookie Placeholder": "Geben Sie Ihre Cookie ein, um kostenlos Musik zu generieren.",
+    "Cookie Help": "Bitte geben Sie Ihre Cookie ein, um kostenlos Musik zu generieren.",
+
+    "Setting": "Einstellungeninformationen",
+    "SaveInfo Identity Error": "Geben Sie bitte Identität ein",
+    "SaveInfo Session Error": "Geben Sie bitte Session ein",
+    "SaveInfo Cookie Error": "Geben Sie bitte Cookie ein",
+    "SaveInfo": "Informationen speichern",
+    "SaveInfo Success": "Informationen erfolgreich gespeichert！",
+    "SaveInfo Error": "Speichern der Informationen fehlgeschlagen！",
+
+    "TokenAuth Error": "Bitte speichern Sie zunächst Informationen und speichern, damit Sie nach der Seite neu laden können normal verwenden！",
+
+    "FetchFeed": "Holen Sie Musik",
+    "FeedID": "Musikkennziffer:",
+    "FeedID Placeholder": "Geben Sie bitte die bereits generierten Musikkennziffer ein, klicken auf Holen, so kann man es direkt auszeichnen.",
+    "FeedID Help": "Geben Sie bitte die bereits generierten Musikkennziffer ein, klicken auf Holen, so kann man es direkt auszeichnen.",
+    "FeedBtn": "Holen Sie Informationen",
+    "FetchFeed FeedID Empty": "Geben Sie bitte die bereits generierten Musikkennziffer ein.",
+    "FetchFeed FeedID Error": "Format der Musikkennziffer ist falsch.",
+    "FetchFeed Error": "Holen der Informationen des Suno AI-Musikliedes fehlgeschlagen: ",
+    "FetchFeed Success": "Erfolg! Suno AI-Musikinformationen erfolgreich abgerufen!",
+
+    "Generation Task Status": "Die Musikgenerierungsaufgabe ist noch nicht beendet, der aktuelle Status ist: ",
+
+    "Enter Search Keywords": "Bitte geben Sie Suchbegriffe ein",
+    "No Search Result": "Keine Suchergebnisse gefunden."
+  }
+}
