@@ -26,6 +26,7 @@
 - il est possible de configurer plusieurs numéros de compte pour conserver les informations à utiliser
 - la place de partage de musique affiche toutes les chansons publiques
 - Entrez le numéro de musique pour obtenir directement les informations sur la chanson
+- Soutien chinois anglais coréen japonais et d'autres langues multinationales
 
 ### Débogage
 

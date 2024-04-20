@@ -26,6 +26,7 @@
 - Mehrere Kontoinformationen können gespeichert und verwendet werden
 - Music Sharing Square zeigt alle öffentlich zugänglichen Songs
 - Geben Sie die Musiknummer ein, um direkt Songinformationen zu erhalten
+- Unterstützen Sie mehrere Sprachen wie Chinesisch, Englisch, Koreanisch, Japanisch usw
 
 ### Debugging
 

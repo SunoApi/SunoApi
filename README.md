@@ -26,6 +26,7 @@
 - Multiple account information can be set to be saved and used
 - Music Sharing Square showcases all publicly available songs
 - Enter the music feed ID to directly obtain song information
+- Support multiple languages such as Chinese, English, Korean, Japanese, etc
 
 ### Debug
 
