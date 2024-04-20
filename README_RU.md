@@ -119,27 +119,27 @@ services:
 
 - Получите свои сеансы и файлы cookie из состояния входа на странице браузера.
 
-![session](https://sunoapi.net/images/session.png)
+- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
 
 - Заполните сообщение для установки, которое автоматически будет сохранено и может быть заполнено несколькими файлами.
 
-![session1](https://sunoapi.net/images/session1.png)
+- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
 
 - После заполнения сохраняется информация, введенная в identity, которая может изменить информацию о изменении аккаунта.
 
-![session2](https://sunoapi.net/images/session2.png)
+- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
 
 ### Завершено
 
 - Посещение браузера после запуска проекта http://localhost:8501/ Можно использовать.
 
-<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
 
 
 ### Вопросы

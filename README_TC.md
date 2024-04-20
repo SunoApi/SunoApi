@@ -118,27 +118,27 @@ services:
 
 - 先從瀏覽器頁面登入狀態下中獲取自己的session和cookie。
 
-![session](https://sunoapi.net/images/session.png)
+- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
 
 - 填寫設定資訊裡面後面會自動保活，可以填寫多個帳號資訊。
 
-![session1](https://sunoapi.net/images/session1.png)
+- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
 
 - 填寫後保存資訊，輸入identity可以更改修改帳號資訊。
 
-![session2](https://sunoapi.net/images/session2.png)
+- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
 
 ### 完成
 
 - 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
-<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
 
 
 ### 問題

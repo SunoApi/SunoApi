@@ -119,27 +119,27 @@ services:
 
 - First, retrieve your session and cookie from the browser page when logged in.
 
-![session](https://sunoapi.net/images/session.png)
+- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
 
 - After filling in the setting information, it will automatically keep alive. You can fill in multiple account information.
 
-![session1](https://sunoapi.net/images/session1.png)
+- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
 
 - Enter and save the information. You can modify the account information if you enter identity.
 
-![session2](https://sunoapi.net/images/session2.png)
+- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
 
 ### Done
 
 - Once the project is up and running, visit http://localhost:8501/ in your browser.
 
-<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
 
 
 ### Questions

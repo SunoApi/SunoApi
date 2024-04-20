@@ -120,27 +120,27 @@ services:
 
 - 먼저 브라우저 페이지에서 로그인한 상태에서 자신의 세션과 쿠키를 가져옵니다.
 
-![session](https://sunoapi.net/images/session.png)
+- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
 
 - 설정 정보를 기입하면 뒤에 자동으로 유지됩니다. 여러 계정 정보를 기입할 수 있습니다.
 
-![session1](https://sunoapi.net/images/session1.png)
+- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
 
 - 작성 후 정보를 저장하고 identity 를 입력하면 수정된 계정 정보를 변경할 수 있습니다.
 
-![session2](https://sunoapi.net/images/session2.png)
+- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
 
 ### 완료
 
 - 프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
 
-<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
 
 
 ### 문제

@@ -122,27 +122,27 @@ Klicken Sie auf Bereitstellen!
 
 - Rufen Sie zunächst Ihre Sitzung und Ihren Cookie von der Browserseite ab, wenn Sie eingeloggt sind.
 
-![session](https://sunoapi.net/images/session.png)
+- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
 
 - Nach dem Ausfüllen der Einstellungsinformationen werden diese automatisch gespeichert und mehrere Kontoinformationen können ausgefüllt werden.
 
-![session1](https://sunoapi.net/images/session1.png)
+- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
 
 - Nach dem Ausfüllen speichern Sie die Informationen und geben Sie die Identität ein, um die Kontoinformationen zu ändern.
 
-![session2](https://sunoapi.net/images/session2.png)
+- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
 
 ### Komplett
 
 - Browserzugriff nach Start und Ausführung des Projekts http://localhost:8501/ Du kannst es jetzt benutzen.
 
-<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
 
 
 ### Frage

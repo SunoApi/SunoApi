@@ -121,27 +121,27 @@ services:
 
 - Obtenez d’abord votre propre session et les cookies à partir de l’état de connexion de la page du navigateur.
 
-![session](https://sunoapi.net/images/session.png)
+- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
 
 - Remplissez les informations de réglage à l’intérieur derrière sera automatiquement préservé, vous pouvez remplir plusieurs informations de compte.
 
-![session1](https://sunoapi.net/images/session1.png)
+- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
 
 - Remplissez et sauvegardez les informations, entrez l’identité pour changer et modifier les informations du compte.
 
-![session2](https://sunoapi.net/images/session2.png)
+- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
 
 ### L’achèvement du
 
 - Après le lancement du projet d’exécution du navigateur visite http://localhost:8501/ peut être utilisé.
 
-<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
 
-<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
+- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
 
 
 ### La question
