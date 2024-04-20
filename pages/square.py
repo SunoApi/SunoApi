@@ -166,4 +166,4 @@ footer {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-components.iframe("https://sunoapi.net/analytics.html", height=30)
+components.iframe("https://sunoapi.net/analytics.html", height=0)

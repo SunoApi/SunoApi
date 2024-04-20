@@ -3,6 +3,9 @@
 import sys
 import os
 import sqlite3
+import threading
+
+lock = threading.Lock()
 
 class SqliteTool():
     """
@@ -15,7 +18,7 @@ class SqliteTool():
         :param dbName: 连接库的名字，注意，以'.db'结尾
         """
         # 连接数据库
-        self._conn = sqlite3.connect(dbName)
+        self._conn = sqlite3.connect(dbName, check_same_thread = False)
         # 创建游标
         self._cur = self._conn.cursor()
     def close_con(self):
@@ -62,17 +65,20 @@ class SqliteTool():
         :return: True表示插入或更新成功
         """
         try:
+            lock.acquire(True)
             self._cur.execute(sql, value)
             self._conn.commit()
             if 'INSERT' in sql.upper():
-                print("[insert one record success]")
+                print(f"[insert one record success]:{sql}")
             if 'UPDATE' in sql.upper():
-                print("[update one record success]")
+                print(f"[update one record success]:{sql}")
             return True
         except Exception as e:
-            print("[insert/update one record error]", e)
+            print(f"[insert/update one record error]:{sql}", e)
             self._conn.rollback()
             return False
+        finally:
+            lock.release()
     # 插入或更新表数据，一次插入或更新多条数据
     def operate_many(self, sql: str, value: list):
         """
@@ -82,18 +88,21 @@ class SqliteTool():
         :return: True表示插入或更新成功
         """
         try:
+            lock.acquire(True)
             # 调用executemany()方法
             self._cur.executemany(sql, value)
             self._conn.commit()
             if 'INSERT' in sql.upper():
-                print("[insert many  records success]")
+                print(f"[insert many  records success]:{sql}")
             if 'UPDATE' in sql.upper():
-                print("[update many  records success]")
+                print(f"[update many  records success]:{sql}")
             return True
         except Exception as e:
-            print("[insert/update many  records error]", e)
+            print(f"[insert/update many  records error]:{sql}", e)
             self._conn.rollback()
             return False
+        finally:
+            lock.release()
     # 删除表数据
     def delete_record(self, sql: str):
         """
@@ -102,17 +111,20 @@ class SqliteTool():
         :return: True表示删除成功
         """
         try:
+            lock.acquire(True)
             if 'DELETE' in sql.upper():
                 self._cur.execute(sql)
                 self._conn.commit()
-                print("[detele record success]")
+                print(f"[detele record success]:{sql}")
                 return True
             else:
-                print("[sql is not delete]")
+                print(f"[sql is not delete]:{sql}")
                 return False
         except Exception as e:
-            print("[detele record error]", e)
+            print(f"[detele record error]:{sql}", e)
             return False
+        finally:
+            lock.release()
     # 查询一条数据
     def query_one(self, sql: str, params=None):
         """
@@ -128,10 +140,10 @@ class SqliteTool():
                 self._cur.execute(sql)
             # 调用fetchone()方法
             r = self._cur.fetchone()
-            print("[select one record success]")
+            print(f"[select one record success]:{sql}")
             return r
         except Exception as e:
-            print("[select one record error]", e)
+            print(f"[select one record error]:{sql}", e)
     # 查询多条数据
     def query_many(self, sql: str, params=None):
         """
@@ -147,7 +159,7 @@ class SqliteTool():
                 self._cur.execute(sql)
             # 调用fetchall()方法
             r = self._cur.fetchall()
-            print("[select many records success]")
+            print(f"[select many records success]:{sql}")
             return r
         except Exception as e:
-            print("[select many records error]", e)
+            print(f"[select many records error]:{sql}", e)

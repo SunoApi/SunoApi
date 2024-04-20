@@ -8,9 +8,9 @@ from threading import Thread
 import requests,random
 from urllib import request
 
-from sqlite import SqliteTool
+from utils import COMMON_HEADERS,local_time,get_page_feed
 
-from utils import COMMON_HEADERS,local_time
+from sqlite import SqliteTool
 
 suno_sqlite = SqliteTool()
 
@@ -52,6 +52,9 @@ def update_token(suno_cookie: SunoCookie):
     session_id = suno_cookie.get_session_id()
     identity = suno_cookie.get_identity()
 
+    if suno_cookie.get_token() == "401":
+        return
+
     resp = requests.post(
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.70.5",
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.71.4",
@@ -59,19 +62,50 @@ def update_token(suno_cookie: SunoCookie):
         headers=headers,
     )
 
-    #if resp.status_code != 200:
-    print(local_time() + f" ***update_token identity -> {identity} session -> {session_id} status_code -> {resp.status_code} ***\n")
-    
-    resp_headers = dict(resp.headers)
-    set_cookie = resp_headers.get("Set-Cookie") if resp_headers.get("Set-Cookie") else suno_cookie.get_cookie()
-    # print(f"*** set_cookie -> {set_cookie} ***")
-    suno_cookie.load_cookie(set_cookie)
-    token = resp.json().get("jwt") if resp.json().get("jwt") else ""
-    suno_cookie.set_token(token)
-    # print(f"*** token -> {token} ***")
+    if resp.status_code != 200:
+        print(local_time() + f" ***update_token identity -> {identity} session -> {session_id} status_code -> {resp.status_code} ***\n")
+        suno_cookie.set_token("401")
+    else:
+        resp_headers = dict(resp.headers)
+        set_cookie = resp_headers.get("Set-Cookie") if resp_headers.get("Set-Cookie") else suno_cookie.get_cookie()
+        # print(f"*** set_cookie -> {set_cookie} ***")
+        suno_cookie.load_cookie(set_cookie)
+        token = resp.json().get("jwt") if resp.json().get("jwt") else ""
+        suno_cookie.set_token(token)
+        # print(f"*** token -> {token} ***")    
 
-    # result = suno_sqlite.operate_one("update session set session=?, cookie=?, status=? where identity =?", (session_id, set_cookie, resp.status_code, identity))
-    # print(result)
+    result = suno_sqlite.operate_one("update session set updated=(datetime('now', 'localtime')), status=? where identity =?", (resp.status_code, identity))
+    if result:
+        print(local_time() + f" ***update_session identity -> {identity} session -> {session_id} status_code -> {resp.status_code} ***\n")
+
+
+def page_feed(suno_cookie: SunoCookie):
+    token = suno_cookie.get_token()
+    identity = suno_cookie.get_identity()
+    session_id = suno_cookie.get_session_id()
+
+    if token != "":
+        resp = get_page_feed(0, token)
+        # print(resp)
+        # print("\n")
+        for row in resp:
+            # print(row)
+            # print("\n")
+            result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
+            print(result)
+            print("\n")
+            if result:
+                result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+            else:
+                result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], 0))
+            print(result)
+            print("\n")
+            status = resp["detail"] if "detail" in resp else row["status"]
+            if status == "complete":
+                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} row -> {row} ***\n")
+            else:
+                status = status if "metadata" not in resp else row['metadata']["error_message"]
+                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} status -> {status} ***\n")
 
 
 def keep_alive(suno_cookie: SunoCookie):
@@ -79,9 +113,26 @@ def keep_alive(suno_cookie: SunoCookie):
         update_token(suno_cookie)
         time.sleep(50)
 
+def get_page(suno_cookie: SunoCookie):
+    while True:
+        page_feed(suno_cookie)
+        time.sleep(1800)
+
+def clear_task():
+    while True:
+        result = suno_sqlite.delete_record("delete from music where status <> 'complete' and status <> 'streaming'")
+        if result:
+            print(local_time() + f" ***clear_task result -> {result} ***\n")
+        time.sleep(3600)
+
 suno_auths = []
 def get_suno_auth():
-    return random.choice(suno_auths)
+    suno_auth = random.choice(suno_auths)
+    if suno_auth.get_token() == "401":
+        return get_suno_auth()
+    else:
+        return suno_auth
+
 
 def new_suno_auth(identity, session, cookie):
     suno_cookie = SunoCookie()
@@ -91,11 +142,13 @@ def new_suno_auth(identity, session, cookie):
     suno_auths.append(suno_cookie)
     t = Thread(target=keep_alive, args=(suno_cookie,))
     t.start()
-    print(local_time() + f" ***new_suno_auth identity -> {identity} session -> {session} token -> {cookie} ***\n")
+
+    t1 = Thread(target=get_page, args=(suno_cookie,))
+    t1.start()
+    print(local_time() + f" ***new_suno_auth identity -> {identity} session -> {session} cookie -> {cookie} ***\n")
 
 def start_keep_alive():
-    print("start_keep_alive")
-    result = suno_sqlite.query_many("select id,identity,[session],cookie from session")
+    result = suno_sqlite.query_many("select id,identity,[session],cookie from session where status='200'")
     print(result)
     print("\n")
     if result:
@@ -108,6 +161,12 @@ def start_keep_alive():
             t = Thread(target=keep_alive, args=(suno_cookie,))
             t.start()
 
-        # print(len(suno_auths))
+            t1 = Thread(target=get_page, args=(suno_cookie,))
+            t1.start()
+
+        print(local_time() + f" ***start_keep_alive suno_auths -> {len(suno_auths)} ***\n")
+
+    t2 = Thread(target=clear_task, args=())
+    t2.start()
 
 start_keep_alive()

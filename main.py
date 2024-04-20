@@ -7,7 +7,7 @@ import time,json,os
 from datetime import datetime
 
 import schemas
-from cookie import suno_sqlite,get_suno_auth,new_suno_auth
+from cookie import get_suno_auth,new_suno_auth
 from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time
 
 from sqlite import SqliteTool
@@ -210,7 +210,7 @@ st.session_state.suno_auth = None
 while True:
     st.session_state.suno_auth = get_suno_auth()
     st.session_state.token = st.session_state.suno_auth.get_token()
-    if st.session_state.token != "":
+    if st.session_state.token != "" and st.session_state.token != "401":
         print(local_time() + f" ***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
         break
     else:
@@ -399,7 +399,7 @@ def fetch_status(aid: str):
             while True:
                 st.session_state.suno_auth = get_suno_auth()
                 st.session_state.token = st.session_state.suno_auth.get_token()
-                if st.session_state.token != "":
+                if st.session_state.token != "" and st.session_state.token != "401":
                     print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
                     break
             continue
@@ -540,4 +540,4 @@ footer {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-components.iframe("https://sunoapi.net/analytics.html", height=30)
+components.iframe("https://sunoapi.net/analytics.html", height=0)

@@ -40,12 +40,12 @@
     "Custom Tags Error": "음악 스타일을 입력하십시오. 예를 들면 중국 유행음악입니다.",
     "Custom Prompt Error": "가사를 입력하십시오. 키워드를 입력하지 못할 경우 가사 생성을 클릭하십시오.",
 
-    "Generate Submit Error": "Suno AI 음악 노래 생성 커밋 실패：",
-    "Generate Status Error": "Suno AI 음악 노래 생성 상태 실패：",
+    "Generate Submit Error": "Suno AI 음악 노래 생성 커밋 실패： ",
+    "Generate Status Error": "Suno AI 음악 노래 생성 상태 실패： ",
 
     "Fetch Status Progress": "Suno AI 음악 노래가 생성되고 있습니다. 잠시만요...",
     "Fetch Status Running": "Suno AI 음악 노래가 생성 중：",
-    "Fetch Status Success": "Suno AI 음악 노래가 성공적으로 생성되었습니다：",
+    "Fetch Status Success": "Suno AI 음악 노래가 성공적으로 생성되었습니다： ",
 
     "Generate Success": "Suno AI 음악 노래 생성 성공! ",
 
