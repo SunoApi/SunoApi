@@ -75,16 +75,19 @@ def i18n(key):
 
 from streamlit_option_menu import option_menu
 with st.sidebar:
-    selected = option_menu("Suno AI Music", [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Visit Official WebSite")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=0)
+    selected = option_menu("Suno AI Music", [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=0)
     
     if selected == i18n("Music Share Square"):
         st.switch_page("pages/square.py")
+    elif selected == i18n("Music Project Readme"):
+        st.switch_page("pages/readme.py")
     elif selected == i18n("Visit Official WebSite"):
         st.page_link("https://suno.com", label=i18n("Visit Official WebSite1"), icon="🌐")
         st.page_link("https://sunoapi.net", label=i18n("Visit Official WebSite2"), icon="🌐")
     # print(selected)
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
+st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
 
 col2.title(i18n("Page Title"))
 
@@ -534,8 +537,9 @@ if StartBtn:
 # 隐藏右边的菜单以及页脚
 hide_streamlit_style = """
 <style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+#MainMenu {display: none;}
+footer {display: none;}
+.eczjsme10 {display: none;}
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)

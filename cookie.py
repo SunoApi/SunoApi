@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
-import time
+import time,threading
 from http.cookies import SimpleCookie
 from threading import Thread
 
@@ -63,7 +63,7 @@ def update_token(suno_cookie: SunoCookie):
     )
 
     if resp.status_code != 200:
-        print(local_time() + f" ***update_token identity -> {identity} session -> {session_id} status_code -> {resp.status_code} ***\n")
+        print(local_time() + f" ***update_token identity -> {identity} session -> {session_id} status_code -> {resp.status_code} thread_id: {threading.get_ident()} ***\n")
         suno_cookie.set_token("401")
     else:
         resp_headers = dict(resp.headers)
@@ -76,7 +76,7 @@ def update_token(suno_cookie: SunoCookie):
 
     result = suno_sqlite.operate_one("update session set updated=(datetime('now', 'localtime')), status=? where identity =?", (resp.status_code, identity))
     if result:
-        print(local_time() + f" ***update_session identity -> {identity} session -> {session_id} status_code -> {resp.status_code} ***\n")
+        print(local_time() + f" ***update_session identity -> {identity} session -> {session_id} status_code -> {resp.status_code} thread_id: {threading.get_ident()} ***\n")
 
 
 def page_feed(suno_cookie: SunoCookie):
@@ -102,10 +102,10 @@ def page_feed(suno_cookie: SunoCookie):
             print("\n")
             status = resp["detail"] if "detail" in resp else row["status"]
             if status == "complete":
-                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} row -> {row} ***\n")
+                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} thread_id: {threading.get_ident()} row -> {row} ***\n")
             else:
                 status = status if "metadata" not in resp else row['metadata']["error_message"]
-                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} status -> {status} ***\n")
+                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} status -> {status} thread_id: {threading.get_ident()} ***\n")
 
 
 def keep_alive(suno_cookie: SunoCookie):

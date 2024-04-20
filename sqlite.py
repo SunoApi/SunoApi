@@ -134,6 +134,7 @@ class SqliteTool():
         :return: 语句查询单条结果
         """
         try:
+            lock.acquire(True)
             if params:
                 self._cur.execute(sql, params)
             else:
@@ -144,6 +145,8 @@ class SqliteTool():
             return r
         except Exception as e:
             print(f"[select one record error]:{sql}", e)
+        finally:
+            lock.release()
     # 查询多条数据
     def query_many(self, sql: str, params=None):
         """
@@ -153,6 +156,7 @@ class SqliteTool():
         :return: 语句查询多条结果
         """
         try:
+            lock.acquire(True)
             if params:
                 self._cur.execute(sql, params)
             else:
@@ -163,3 +167,5 @@ class SqliteTool():
             return r
         except Exception as e:
             print(f"[select many records error]:{sql}", e)
+        finally:
+            lock.release()

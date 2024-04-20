@@ -1,6 +1,6 @@
 <div align="center">
 
-[简体中文](README_ZH.md) | [Русский](README_RU.md) | [English](README.md) | [한국어](README_KR.md) | [日本語](README_JP.md) | [Français](README_FR.md) | [Deutsch](README_DE.md)
+[简体中文](https://github.com/SunoApi/SunoApi/blob/main/README_ZH.md) | [Русский](https://github.com/SunoApi/SunoApi/blob/main/README_RU.md) | [English](https://github.com/SunoApi/SunoApi/blob/main/README.md) | [한국어](https://github.com/SunoApi/SunoApi/blob/main/README_KR.md) | [日本語](https://github.com/SunoApi/SunoApi/blob/main/README_JP.md) | [Français](https://github.com/SunoApi/SunoApi/blob/main/README_FR.md) | [Deutsch](https://github.com/SunoApi/SunoApi/blob/main/README_DE.md)
 
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -132,13 +132,13 @@ services:
 
 - 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
-![index](https://sunoapi.net/images/index.png)
+<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
 
-![index1](https://sunoapi.net/images/index1.png)
+<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
 
-![index2](https://sunoapi.net/images/index2.png)
+<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
 
-![index3](https://sunoapi.net/images/index3.png)
+<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
 
 
 ### 問題
@@ -158,7 +158,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
+<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px"/>
 
 
 ### 參與
@@ -179,6 +179,6 @@ services:
 - SunoApi是一個非官方的開源項目，僅供學習和研究使用。用戶自願輸入免費的帳號資訊生成音樂。 每個帳戶每天可以免費生成五首歌曲，我們不會將它們用於其他目的。請放心使用！如果有10000名用戶，那麼系統每天可以免費生成50000首歌曲。請儘量節省使用量，因為每個帳戶每天只能免費生成五首歌曲。如果每個人每天創作五首以上的歌曲，這仍然不够。 最終目標是讓在需要的時候能隨時免費生成。
 
 
-### Buy Me a Coffee
+### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>

@@ -1,6 +1,6 @@
 <div align="center">
 
-[简体中文](README_ZH.md) | [繁體中文](README_TC.md) | [Русский](README_RU.md) | [한국어](README_KR.md) | [日本語](README_JP.md) | [Français](README_FR.md) | [Deutsch](README_DE.md)
+[简体中文](https://github.com/SunoApi/SunoApi/blob/main/README_ZH.md) | [繁體中文](https://github.com/SunoApi/SunoApi/blob/main/README_TC.md) | [Русский](https://github.com/SunoApi/SunoApi/blob/main/README_RU.md) | [한국어](README_KR.md) | [日本語](https://github.com/SunoApi/SunoApi/blob/main/README_JP.md) | [Français](https://github.com/SunoApi/SunoApi/blob/main/README_FR.md) | [Deutsch](https://github.com/SunoApi/SunoApi/blob/main/README_DE.md)
 
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -133,13 +133,13 @@ services:
 
 - Once the project is up and running, visit http://localhost:8501/ in your browser.
 
-![index](https://sunoapi.net/images/index.png)
+<img src="https://sunoapi.net/images/index.png" width="1215px" height="705px"/>
 
-![index1](https://sunoapi.net/images/index1.png)
+<img src="https://sunoapi.net/images/index1.png" width="1215px" height="705px"/>
 
-![index2](https://sunoapi.net/images/index2.png)
+<img src="https://sunoapi.net/images/index2.png" width="1215px" height="705px"/>
 
-![index3](https://sunoapi.net/images/index3.png)
+<img src="https://sunoapi.net/images/index3.png" width="1215px" height="705px"/>
 
 
 ### Questions
@@ -159,7 +159,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px" />
+<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px"/>
 
 
 ### Participate
@@ -182,4 +182,4 @@ services:
 
 ### Buy Me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
