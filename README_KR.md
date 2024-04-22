@@ -32,6 +32,13 @@
 
 #### Python 로컬 디버그 실행
 
+- 클론 소스 코드
+
+```bash
+git clone https://github.com/SunoApi/SunoApi.git
+```
+
+
 - 설치 종속
 
 ```bash
@@ -100,6 +107,10 @@ services:
       - ./sunoapi.db:/app/sunoapi.db
     restart: always
 ```
+
+##### 참고: 미러 배포 끌어오기 프로젝트의 sunoapi.db 다운로드를 docker-compose.yml 파일 디렉토리에 전송해야 합니다. 그렇지 않으면 docker가 시작되면 파일을 마운트하지 못하도록 프롬프트가 표시됩니다.
+
+
 
 
 #### Streamlit 원격 웨어하우스 배포

@@ -32,6 +32,13 @@
 
 #### Python local debug running
 
+- Clone source code
+
+```bash
+git clone https://github.com/SunoApi/SunoApi.git
+```
+
+
 - Installation dependencies
 
 ```bash
@@ -100,6 +107,9 @@ services:
       - ./sunoapi.db:/app/sunoapi.db
     restart: always
 ```
+
+##### Note: To pull image deployment, you need to download sunoapi.db from the project and transfer it to your Docker Compose.yml file directory. Otherwise, Docker startup will prompt that the file cannot be mounted.
+
 
 #### Streamlit remote repositories deployment
 

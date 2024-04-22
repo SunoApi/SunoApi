@@ -32,6 +32,13 @@
 
 #### Exécution du débogage local Python
 
+- Cloner le code source
+
+```bash
+git clone https://github.com/SunoApi/SunoApi.git
+```
+
+
 - Installation des dépendances
 
 ```bash
@@ -102,6 +109,9 @@ services:
       - ./sunoapi.db:/app/sunoapi.db
     restart: always
 ```
+
+##### Remarque: le déploiement de l'image extractive nécessite que le téléchargement sunoapi.db du projet soit transmis à votre répertoire de fichiers docker-compose.yml, sinon le démarrage de docker vous demandera de ne pas monter le fichier.
+
 
 #### Déploiement d’entrepôt distant Streamlit
 

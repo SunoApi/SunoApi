@@ -32,6 +32,12 @@
 
 #### Python本地调试运行
 
+- 克隆源码
+
+```bash
+git clone https://github.com/SunoApi/SunoApi.git
+```
+
 - 安装依赖
 
 ```bash
@@ -102,6 +108,9 @@ services:
       - ./sunoapi.db:/app/sunoapi.db
     restart: always
 ```
+
+##### 注意：拉取镜像部署需要把项目里面的sunoapi.db下载传到你的docker-compose.yml文件目录，不然docker启动会提示挂载不到文件。
+
 
 #### Streamlit 远程仓库部署
 

@@ -32,6 +32,13 @@
 
 #### Pythonローカルデバッグ実行
 
+- 複製ソースコードです
+
+```bash
+git clone https://github.com/SunoApi/SunoApi.git
+```
+
+
 - インストール依存
 
 ```bash
@@ -100,6 +107,8 @@ services:
       - ./sunoapi.db:/app/sunoapi.db
     restart: always
 ```
+
+##### 注意：ミラーリングの展開を引き出すには、プロジェクト内のsunoapi.dbをdocker-compose.ymlファイルディレクトリにダウンロードする必要があります。そうしないと、dockerの起動によりファイルをマウントできないことが示されます。
 
 
 #### Streamlit リモート・ウェアハウスの配備します

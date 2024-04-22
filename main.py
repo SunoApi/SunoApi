@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import streamlit as st
+from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
 import time,json,os
 
@@ -73,7 +74,6 @@ def i18n(key):
     loc = locales.get(st.session_state.Language, {})
     return loc.get("Translation", {}).get(key, key)
 
-from streamlit_option_menu import option_menu
 with st.sidebar:
     selected = option_menu("Suno AI Music", [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=0)
     

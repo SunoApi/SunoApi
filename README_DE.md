@@ -32,6 +32,13 @@
 
 #### Lokale Python-Debugging-Ausführung
 
+- Quellcode klonen
+
+```bash
+git clone https://github.com/SunoApi/SunoApi.git
+```
+
+
 - Installation sabhängigkeiten
 
 ```bash
@@ -102,6 +109,9 @@ services:
       - ./sunoapi.db:/app/sunoapi.db
     restart: always
 ```
+
+##### Hinweis: Um die Image-Bereitstellung abzurufen, müssen Sie sunoapi.db aus dem Projekt herunterladen und in Ihr Docker Compose.yml-Dateiverzeichnis übertragen. Andernfalls wird beim Docker-Start angezeigt, dass die Datei nicht eingehängt werden kann.
+
 
 #### Streamlit Remote Warehouse Deployment
 
