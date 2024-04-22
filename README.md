@@ -108,7 +108,7 @@ services:
     restart: always
 ```
 
-##### Note: To pull image deployment, you need to download sunoapi.db from the project and transfer it to your Docker Compose.yml file directory. Otherwise, Docker startup will prompt that the file cannot be mounted.
+##### Note: To pull image deployment, you need to download sunoapi.db from the project and transfer it to your docker-compose.yml file directory. Otherwise, Docker startup will prompt that the file cannot be mounted.
 
 
 #### Streamlit remote repositories deployment
