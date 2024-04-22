@@ -118,11 +118,9 @@ services:
 - Zuerst eine Kopie des SunoApi-Codes in Ihr Github-Repository forken
 - Github Autorisierungs-Login auswählen: https://share.streamlit.io/
 - Öffnen Sie die Bereitstellungsseite: https://share.streamlit.io/deploy
-Auswahl des Repositories: SunoApi/SunoApi
-Branch Input: main
+- Auswahl des Repositories: SunoApi/SunoApi Branch Input: main
 - Main Datei Pfad Eingabe: main.py
-Klicken Sie auf Bereitstellen!
-﻿
+- Klicken Sie auf Bereitstellen!
 
 #### Zeabur Ein Klick Bereitstellung
 
