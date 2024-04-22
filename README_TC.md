@@ -191,3 +191,7 @@ services:
 ### Buy me a Coffee
 
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+
+
+##### 此項目開源於GitHub，基於MIT協定且免費，沒有任何形式的付費行為！
+##### 如果你覺得此項目對你有幫助，請幫我點個Star並轉發擴散，在此感謝你！

@@ -196,3 +196,7 @@ services:
 ### Buy me a Coffee
 
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+
+
+##### ce projet provient de GitHub, est basé sur le protocole MIT et est gratuit, sans aucune forme de paiement!
+##### si vous trouvez cet article utile pour vous, s’il vous plaît commander une étoile pour moi et retweet diffusion. Merci ici!
