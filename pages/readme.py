@@ -50,6 +50,9 @@ if 'Language' not in st.session_state:
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
+    if code == st.session_state.Language:
+        st.session_state.selected_index = i
+        st.session_state.Language = code
 
 def change_language():
     # print("st.session_state.selectbox_value:" + st.session_state.selectbox_value)
