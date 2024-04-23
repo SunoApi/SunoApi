@@ -143,7 +143,7 @@ if Custom:
 
     random_lyrics = cols[1].button(i18n("Random Lyrics"), type="secondary")
     if random_lyrics:
-        lyrics = get_random_lyrics(st.session_state['prompt_input'], st.session_state.token)
+        lyrics = get_random_lyrics(Title if Title != "" else st.session_state['prompt_input'], st.session_state.token)
         st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
         st.session_state['prompt_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['prompt_input'] if st.session_state['prompt_input'] != "" else "")
         st.rerun()
