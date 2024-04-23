@@ -4,7 +4,7 @@ import json
 import os
 import time
 
-import requests
+import requests,random
 
 COMMON_HEADERS = {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -26,10 +26,11 @@ def fetch(url, headers=None, data=None, method="POST"):
 
     try:
         resp = None
+        requests.packages.urllib3.disable_warnings()
         if method == "GET":
-            resp = requests.get(url=url, headers=headers)
+            resp = requests.get(url=url, headers=headers, verify=False)
         else:
-            resp = requests.post(url=url, headers=headers, data=data)
+            resp = requests.post(url=url, headers=headers, data=data, verify=False)
         if resp.status_code != 200:
             print(resp.text)
         return resp.json()
@@ -73,7 +74,7 @@ def get_lyrics(lid, token):
 def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-def check_url_available(url: str):
+def check_url_available(str):
     while True:
         # 每间隔一秒钟检查一次url文件大小
         file_size = get_file_size(url)
@@ -84,9 +85,32 @@ def check_url_available(url: str):
         time.sleep(1)
 
 def get_file_size(url):
-    resp = requests.head(url)
+    requests.packages.urllib3.disable_warnings()
+    resp = requests.head(url, verify=False)
     if resp.status_code == 200:
         file_size = resp.headers.get('Content-Length')
         if file_size:
             return int(file_size)
     return 0
+
+def get_random_style():
+    genres = ["chinese pop","acoustic", "aggressive", "anthemic", "atmospheric", "bouncy", "chill", "dark", "dreamy", "electronic", "emotional", "epic", "experimental", "futuristic", "groovy", "heartfelt", "infectious", "melodic", "mellow", "powerful", "psychedelic", "romantic", "smooth", "syncopated", "uplifting"]
+    vibes = ["afrobeat", "anime", "ballad", "bedroom pop", "bluegrass", "blues", "classical", "country", "cumbia", "dance", "dancepop", "delta blues", "electropop", "disco", "dream pop", "drum and bass", "edm", "emo", "folk", "funk", "future bass", "gospel", "grunge", "grime", "hip hop", "house", "indie", "j-pop", "jazz", "k-pop", "kids music", "metal", "new jack swing", "new wave", "opera", "pop", "punk", "raga", "rap", "reggae", "reggaeton", "rock", "rumba", "salsa", "samba", "sertanejo", "soul", "synthpop", "swing", "synthwave", "techno", "trap", "uk garage"]
+    genres1 = random.choice(genres)
+    vibes1 = random.choice(vibes)
+    return genres1 + "," + vibes1
+
+def get_random_lyrics(prompt, token):
+    prompt = prompt.replace(",", " ")
+    lid = generate_lyrics(prompt.replace(",", " "), token)
+    print(local_time() + f" ***generate_lyrics lyrics -> {lid} ***\n")
+    if 'id' in lid:
+        print(local_time() + f" ***generate_lyrics  prompt -> {prompt} lid -> {lid['id']}***\n")
+        while True:
+            # 每间隔一秒钟检查一次歌词生成情况
+            lyrics = get_lyrics(lid['id'], token)
+            print(local_time() + f" ***get_lyrics lyrics -> {lyrics} ***\n")
+            if 'status' in lyrics and lyrics['status'] == "complete":
+                return lyrics
+            time.sleep(1)
+    return {'status': '', 'title': '', 'text':''}

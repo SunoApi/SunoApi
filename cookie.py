@@ -55,11 +55,13 @@ def update_token(suno_cookie: SunoCookie):
     if suno_cookie.get_token() == "401":
         return
 
+    requests.packages.urllib3.disable_warnings()
     resp = requests.post(
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.70.5",
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.71.4",
         url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.72.0-snapshot.vc141245",
         headers=headers,
+        verify=False
     )
 
     if resp.status_code != 200:
@@ -127,11 +129,16 @@ def clear_task():
 
 suno_auths = []
 def get_suno_auth():
-    suno_auth = random.choice(suno_auths)
-    if suno_auth.get_token() == "401":
-        return get_suno_auth()
+    if len(suno_auths) > 0:
+        suno_auth = random.choice(suno_auths)
+        if suno_auth.get_token() == "401":
+            suno_cookie = SunoCookie()
+            return suno_cookie
+        else:
+            return suno_auth
     else:
-        return suno_auth
+        suno_cookie = SunoCookie()
+        return suno_cookie
 
 
 def new_suno_auth(identity, session, cookie):
@@ -158,6 +165,7 @@ def start_keep_alive():
             suno_cookie.set_session_id(row[2])
             suno_cookie.load_cookie(row[3])
             suno_auths.append(suno_cookie)
+            print(local_time() + f" ***start_keep_alive suno_cookie set_identity -> {row[1]} set_session_id -> {row[2]} load_cookie -> {row[3]} ***\n")
             t = Thread(target=keep_alive, args=(suno_cookie,))
             t.start()
 

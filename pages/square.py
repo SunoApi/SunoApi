@@ -40,8 +40,6 @@ def load_locales():
 
 locales = load_locales()
 display_languages = []
-# selected_index = 1
-# st.session_state.Language = "EN"
 
 if 'Language' not in st.session_state:
     st.session_state.selected_index = 7
@@ -50,19 +48,20 @@ if 'Language' not in st.session_state:
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
-    if code == st.session_state.Language:
-        st.session_state.selected_index = i
-        st.session_state.Language = code
+
+def change_language():
+    # print("st.session_state.selectbox_value:" + st.session_state.selectbox_value)
+    for item in display_languages:
+        if item == st.session_state.selectbox_value:
+            # print("item:" + item)
+            st.session_state.selected_index = display_languages.index(item)
+            st.session_state.Language = item.split(" - ")[0]
+    # print("st.session_state.selected_index:" + str(st.session_state.selected_index))
 
 col1, col2, col3 = st.columns(3)
 
-# selected_language = col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',
-#                                  index=st.session_state.selected_index)
-# if selected_language:
-#     code = selected_language.split(" - ")[0].strip()
-#     st.session_state.selected_index = selected_language
-#     st.session_state.Language = code
-#     # print("code:" + code)
+# col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',index=st.session_state.selected_index, key="selectbox_value", on_change=change_language)
+
 
 def i18n(key):
     loc = locales.get(st.session_state.Language, {})

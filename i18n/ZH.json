@@ -17,12 +17,15 @@
     "Title": "歌曲名称：",
     "Title Desc": "请输入歌曲名称，最多不超过100字数。",
     "Tags": "音乐风格：",
-    "Tags Desc": "请输入音乐风格，最多不超过200字数。",
+    "Tags Desc": "请选择音乐风格，最多不超过四个风格。",
     "Prompt": "您的歌词：",
     "Prompt Desc": "请输入您的歌词，最多不超过1000字数。",
 
+    "Random Style": "随机风格",
+    "Random Lyrics": "随机歌词",
+
     "Title Placeholder": "给您的音乐歌曲起一个名称，以便识别、分享和发现。",
-    "Tags Placeholder": "描述您想要的音乐风格（例如：中国流行音乐），Suno AI的模型不识别艺术家的名字，但能理解流派和氛围。",
+    "Tags Placeholder": "选择您想要的音乐风格，Suno AI的模型能理解流派和气氛。",
     "Prompt Placeholder": "输入您自己的歌词，或者是各种已经存在的歌词，专业歌词辅助工具：https://poe.com/SuperSunoMaster。",
 
     "Desc Prompt": "歌曲描述：",

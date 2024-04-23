@@ -17,12 +17,15 @@
     "Title": "Titre de la chanson:",
     "Title Desc": "Veuillez entrer le titre de la chanson, pas plus de 100 caractères.",
     "Tags": "Style musical:",
-    "Tags Desc": "Veuillez entrer le style musical, pas plus de 200 caractères.",
+    "Tags Desc": "Veuillez choisir un style de musique, pas plus de quatre styles.",
     "Prompt": "Votre paroles:",
     "Prompt Desc": "Veuillez entrer vos paroles, pas plus de 1000 caractères.",
 
+    "Random Style": "Style aléatoire",
+    "Random Lyrics": "Paroles aléatoires",
+
     "Title Placeholder": "Donnez un nom à votre chanson musicale pour la rendre identifiable, partageable et découvrable.",
-    "Tags Placeholder": "Décrivez le style musical souhaité (par exemple : musique pop chinoise), le modèle Suno AI ne reconnaît pas les noms d'artistes, mais comprend les genres et les ambiances.",
+    "Tags Placeholder": "Choisissez le style de musique que vous voulez, les modèles de suno ai comprennent le genre et l'atmosphère.",
     "Prompt Placeholder": "Entrez vos propres paroles ou des paroles existantes, outil d'assistance aux paroles professionnel : https://poe.com/SuperSunoMaster.",
 
     "Desc Prompt": "Description de la chanson:",

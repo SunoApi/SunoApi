@@ -9,7 +9,7 @@ from datetime import datetime
 
 import schemas
 from cookie import get_suno_auth,new_suno_auth
-from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time
+from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics
 
 from sqlite import SqliteTool
 
@@ -46,8 +46,6 @@ def load_locales():
 
 locales = load_locales()
 display_languages = []
-# selected_index = 1
-# st.session_state.Language = "EN"
 
 if 'Language' not in st.session_state:
     st.session_state.selected_index = 7
@@ -56,19 +54,20 @@ if 'Language' not in st.session_state:
 
 for i, code in enumerate(locales.keys()):
     display_languages.append(f"{code} - {locales[code].get('Language')}")
-    if code == st.session_state.Language:
-        st.session_state.selected_index = i
-        st.session_state.Language = code
+
+def change_language():
+    # print("st.session_state.selectbox_value:" + st.session_state.selectbox_value)
+    for item in display_languages:
+        if item == st.session_state.selectbox_value:
+            # print("item:" + item)
+            st.session_state.selected_index = display_languages.index(item)
+            st.session_state.Language = item.split(" - ")[0]
+    # print("st.session_state.selected_index:" + str(st.session_state.selected_index))
 
 col1, col2, col3 = st.columns(3)
 
-selected_language = col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',
-                                 index=st.session_state.selected_index)
-if selected_language:
-    code = selected_language.split(" - ")[0].strip()
-    st.session_state.selected_index = selected_language
-    st.session_state.Language = code
-    # print("code:" + code)
+col2.selectbox(label="Language", options=display_languages, label_visibility='collapsed',index=st.session_state.selected_index, key="selectbox_value", on_change=change_language)
+
 
 def i18n(key):
     loc = locales.get(st.session_state.Language, {})
@@ -100,13 +99,51 @@ Custom = container.toggle(i18n("Custom"))
 if Custom:
     st.session_state.Custom = True
     # print(st.session_state.Custom)
-    Title = container.text_input(label=i18n("Title"), value='', placeholder=i18n("Title Placeholder"), max_chars=100, help=i18n("Title Desc"))
+
+    if 'title_input' not in st.session_state:
+        st.session_state['title_input'] = ""
+
+    Title = container.text_input(label=i18n("Title"), value=st.session_state['title_input'], placeholder=i18n("Title Placeholder"), max_chars=100, help=i18n("Title Desc"))
     st.session_state.Title = Title
     # print(st.session_state.Title)
-    Tags = container.text_area(label=i18n("Tags"), value='', placeholder=i18n("Tags Placeholder"), height=5, max_chars=200, help=i18n("Tags Desc"))
-    st.session_state.Tags = Tags
+    
+    if 'tags_input' not in st.session_state:
+        st.session_state['tags_input'] = ""
+
+    # Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'].replace(",", " "), placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
+
+    options = container.multiselect(
+    i18n("Tags"),
+    ["chinese pop","acoustic", "aggressive", "anthemic", "atmospheric", "bouncy", "chill", "dark", "dreamy", "electronic", "emotional", "epic", "experimental", "futuristic", "groovy", "heartfelt", "infectious", "melodic", "mellow", "powerful", "psychedelic", "romantic", "smooth", "syncopated", "uplifting","afrobeat", "anime", "ballad", "bedroom pop", "bluegrass", "blues", "classical", "country", "cumbia", "dance", "dancepop", "delta blues", "electropop", "disco", "dream pop", "drum and bass", "edm", "emo", "folk", "funk", "future bass", "gospel", "grunge", "grime", "hip hop", "house", "indie", "j-pop", "jazz", "k-pop", "kids music", "metal", "new jack swing", "new wave", "opera", "pop", "punk", "raga", "rap", "reggae", "reggaeton", "rock", "rumba", "salsa", "samba", "sertanejo", "soul", "synthpop", "swing", "synthwave", "techno", "trap", "uk garage"],
+    [] if st.session_state['tags_input']=="" else st.session_state['tags_input'].split(","),
+    placeholder=i18n("Tags Placeholder"),
+    help=i18n("Tags Desc"),
+    max_selections=4)
+
+    st.session_state.Tags = ' '.join(str(opts) for opts in options)
     # print(st.session_state.Tags)
-    Prompt = container.text_area(label=i18n("Prompt"), value='', placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"))
+
+    container.container()
+    cols = container.columns(3)
+    random_style = cols[0].button(i18n("Random Style"), type="secondary")
+    if random_style:
+        st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
+        st.rerun()
+
+    if 'promp_input' not in st.session_state:
+        st.session_state['promp_input'] = ""
+
+    random_lyrics = cols[1].button(i18n("Random Lyrics"), type="secondary")
+    if random_lyrics:
+        if Title == "":
+            container.error(i18n("Title Desc"))
+        else:
+            lyrics = get_random_lyrics(Title, st.session_state.token)
+            st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
+            st.session_state['promp_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['promp_input'] if st.session_state['promp_input'] != "" else "")
+            st.rerun()
+
+    Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['promp_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"))
     st.session_state.Prompt = Prompt
     # print(st.session_state.Prompt)
 else:
@@ -214,7 +251,7 @@ while True:
     st.session_state.suno_auth = get_suno_auth()
     st.session_state.token = st.session_state.suno_auth.get_token()
     if st.session_state.token != "" and st.session_state.token != "401":
-        print(local_time() + f" ***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
+        # print(local_time() + f" ***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
         break
     else:
         col2.error(i18n("TokenAuth Error"))

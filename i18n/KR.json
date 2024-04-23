@@ -17,12 +17,15 @@
     "Title": "노래 이름:",
     "Title Desc": "노래 이름을 100자 이내로 입력하십시오.",
     "Tags": "음악 스타일:",
-    "Tags Desc": "음악 스타일을 최대 200자 이내로 입력하십시오.",
+    "Tags Desc": "음악 스타일을 선택하십시오. 최대 네 가지 스타일을 초과하지 않습니다.",
     "Prompt": "당신의 가사:",
     "Prompt Desc": "최대 1000자 이하의 가사를 입력하십시오.",
 
+    "Random Style": "랜덤 스타일",
+    "Random Lyrics": "랜덤 가사",
+
     "Title Placeholder": "음악 노래의 이름을 지정하여 식별, 공유 및 검색할 수 있습니다.",
-    "Tags Placeholder": "원하는 음악 스타일 (예:'중국 대중음악') 을 설명하면 Suno AI의 모델은 예술가의 이름을 인식하지 않지만 장르와 분위기를 이해할 수 있습니다.",
+    "Tags Placeholder": "원하는 음악 스타일을 선택하면 Suno AI의 모델이 장르와 분위기를 이해할 수 있습니다.",
     "Prompt Placeholder": "자신의 가사를 입력하거나 이미 존재하는 다양한 가사, 전문 가사 보조 도구:https://poe.com/SuperSunoMaster.",
     
     "Desc Prompt": "노래 설명:",

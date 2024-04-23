@@ -17,12 +17,15 @@
     "Title": "Titel des Liedes:",
     "Title Desc": "Geben Sie bitte den Titel des Liedes ein, maximal 100 Zeichen.",
     "Tags": "Musikstil:",
-    "Tags Desc": "Geben Sie bitte den Musikstil ein, maximal 200 Zeichen.",
+    "Tags Desc": "Bitte wählen Sie maximal vier Musikstile aus.",
     "Prompt": "Ihr Lyrics:",
     "Prompt Desc": "Geben Sie bitte Ihre Lyrics ein, maximal 1000 Zeichen.",
 
+    "Random Style": "Zufälliger Stil",
+    "Random Lyrics": "Zufällige Texte",
+
     "Title Placeholder": "Nennen Sie Ihrem Musiklied einen Namen, um ihn zu identifizieren, teilen und finden.",
-    "Tags Placeholder": "Beschreibe den Musikstil, den Sie wollen (z. B.: chinesische Popmusik), das Suno AI Modell kennt keine Künstlernamen, versteht aber Genres und Stimmung.",
+    "Tags Placeholder": "Wählen Sie den Musikstil, den Sie möchten, Suno AI Modell kann Genres und Atmosphäre verstehen.",
     "Prompt Placeholder": "Geben Sie Ihre eigenen Lyrics ein oder andere bereits existierende Lyrics ein, professionell Lyricshilfetool：https://poe.com/SuperSunoMaster。",
 
     "Desc Prompt": "Liedbeschreibung:",
