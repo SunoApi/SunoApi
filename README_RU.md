@@ -169,7 +169,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px"/>
+<img src="https://sunoapi.net/images/wechat.jpg" width="450px" height="511px"/>
 
 
 ### Участие
@@ -193,8 +193,6 @@ SunoApi - это неофициальный проект с открытым и�
 ### Buy me a Coffee
 
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
-
-
 
 
 ##### Этот проект начинается с GitHub, основан на протоколе MIT и является бесплатным, без какой - либо формы платного поведения!

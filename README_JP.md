@@ -170,7 +170,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg" width="382px" height="511px"/>
+<img src="https://sunoapi.net/images/wechat.jpg" width="450px" height="511px"/>
 
 
 ### 参加する
