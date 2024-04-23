@@ -99,6 +99,11 @@ container = col2.container(border=True)
 
 st.session_state.Custom = False
 Custom = container.toggle(i18n("Custom"))
+
+def change_prompt():
+    # print("st.session_state.change_prompt:" + st.session_state.change_prompt)
+    st.session_state['prompt_input'] = st.session_state['change_prompt']
+
 if Custom:
     st.session_state.Custom = True
     # print(st.session_state.Custom)
@@ -133,20 +138,18 @@ if Custom:
         st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
         st.rerun()
 
-    if 'promp_input' not in st.session_state:
-        st.session_state['promp_input'] = ""
+    if 'prompt_input' not in st.session_state:
+        st.session_state['prompt_input'] = ""
 
     random_lyrics = cols[1].button(i18n("Random Lyrics"), type="secondary")
     if random_lyrics:
-        if Title == "":
-            container.error(i18n("Title Desc"))
-        else:
-            lyrics = get_random_lyrics(Title, st.session_state.token)
-            st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
-            st.session_state['promp_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['promp_input'] if st.session_state['promp_input'] != "" else "")
-            st.rerun()
+        lyrics = get_random_lyrics(st.session_state['prompt_input'], st.session_state.token)
+        st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
+        st.session_state['prompt_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['prompt_input'] if st.session_state['prompt_input'] != "" else "")
+        st.rerun()
+            
 
-    Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['promp_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"))
+    Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
     st.session_state.Prompt = Prompt
     # print(st.session_state.Prompt)
 else:
