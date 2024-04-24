@@ -93,21 +93,22 @@ def page_feed(suno_cookie: SunoCookie):
         for row in resp:
             # print(row)
             # print("\n")
-            result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
-            print(result)
-            print("\n")
-            if result:
-                result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
-            else:
-                result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], 0))
-            print(result)
-            print("\n")
-            status = resp["detail"] if "detail" in resp else row["status"]
-            if status == "complete":
-                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} thread_id: {threading.get_ident()} row -> {row} ***\n")
-            else:
-                status = status if "metadata" not in resp else row['metadata']["error_message"]
-                print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} status -> {status} thread_id: {threading.get_ident()} ***\n")
+            if 'id' in row:
+                result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
+                print(result)
+                print("\n")
+                if result:
+                    result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+                else:
+                    result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], 0))
+                print(result)
+                print("\n")
+                status = resp["detail"] if "detail" in resp else row["status"]
+                if status == "complete":
+                    print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} thread_id: {threading.get_ident()} row -> {row} ***\n")
+                else:
+                    status = status if "metadata" not in resp else row['metadata']["error_message"]
+                    print(local_time() + f" ***get_page_feed identity -> {identity} session -> {session_id} status -> {status} thread_id: {threading.get_ident()} ***\n")
 
 
 def keep_alive(suno_cookie: SunoCookie):

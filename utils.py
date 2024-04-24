@@ -33,7 +33,9 @@ def fetch(url, headers=None, data=None, method="POST"):
             resp = requests.post(url=url, headers=headers, data=data, verify=False)
         if resp.status_code != 200:
             print(resp.text)
-        return resp.json()
+        result = resp.text.replace('https://cdn1.suno.ai/', 'https://res.sunoapi.net/files/')
+        return json.loads(result)
+        # return resp.json()
     except Exception as e:
         return {"detail":str(e)}
 
@@ -85,13 +87,17 @@ def check_url_available(url):
         time.sleep(1)
 
 def get_file_size(url):
-    requests.packages.urllib3.disable_warnings()
-    resp = requests.head(url, verify=False)
-    if resp.status_code == 200:
-        file_size = resp.headers.get('Content-Length')
-        if file_size:
-            return int(file_size)
-    return 0
+    try:
+        requests.packages.urllib3.disable_warnings()
+        resp = requests.head(url, verify=False)
+        if resp.status_code == 200:
+            file_size = resp.headers.get('Content-Length')
+            if file_size:
+                return int(file_size)
+        else:
+            return 0
+    except Exception as e:
+        return 0
 
 def get_random_style():
     genres = ["chinese pop","acoustic", "aggressive", "anthemic", "atmospheric", "bouncy", "chill", "dark", "dreamy", "electronic", "emotional", "epic", "experimental", "futuristic", "groovy", "heartfelt", "infectious", "melodic", "mellow", "powerful", "psychedelic", "romantic", "smooth", "syncopated", "uplifting"]

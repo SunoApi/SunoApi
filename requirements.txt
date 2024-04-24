@@ -1,3 +1,6 @@
+fastapi
+uvicorn
+aiohttp
 pydantic
 requests
 streamlit
