@@ -74,7 +74,7 @@ def get_lyrics(lid, token):
 def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-def check_url_available(str):
+def check_url_available(url):
     while True:
         # 每间隔一秒钟检查一次url文件大小
         file_size = get_file_size(url)
