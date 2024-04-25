@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
-import json,os
+import json,os,io
 
 from fastapi import FastAPI, HTTPException, Request, status, Header
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import FileResponse
+from fastapi.responses import StreamingResponse
 from typing import Any, List, Optional, Union
 from pydantic import BaseModel, Field
 from starlette.requests import Request
@@ -39,12 +40,14 @@ async def files(request: Request, file_name: str):
     file_path = result.path.replace("/files", "files")
 
     if os.path.exists(file_path):
-        return FileResponse(file_path)
+        # return FileResponse(file_path)
+        return StreamingResponse(open(file_path, 'rb'))
     else:
         result = await download(file_url, file_path)
         try:
             if result == "200":
-                return FileResponse(file_path)
+                # return FileResponse(file_path)
+                return StreamingResponse(open(file_path, 'rb'))
             else:
                 return result
         except Exception as e:
