@@ -154,7 +154,7 @@ print("\n")
 index = 0
 use_container_width = False
 
-if len(images) > 0:
+if len(images) >= 10 :
     use_container_width = True
     
 index = image_select(
