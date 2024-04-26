@@ -95,7 +95,7 @@ docker-compose pull && docker-compose up -d
 #### docker-compose.yml
 
 ```docker
-version: '3.1'
+version: '3.2'
 
 services:
   sunoapi:
@@ -130,32 +130,33 @@ services:
 
 - ブラウザのログイン状態から自分のセッションとクッキーを取得します。
 
-- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
 
 - 設定情報に記入すると自動的に保存され、複数のアカウント情報を記入することができます。
 
-- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
 
 - 記入後は情報を保存し、identityを入力することでアカウント情報を変更修正できます。
 
-- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
 
 ### 完成です
 
 - プロジェクト実行後のブラウザアクセスの開始http://localhost:8501/すぐに使用できます。
 
-- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
 
 
 ### 問題
 
 - ページプロンプト情報：ページを更新する前に情報を設定して保存してください！まず自分のアカウント情報を追加して保存してから、sunoapi.dbデータベースの他の無効なアカウント情報を削除してください。その中には私がテストしたアカウント情報が含まれていて、それから正常に使用することができます。
+- ページプロンプト情報：Suno AI音楽歌曲生成のコミットに失敗した場合：Unauthorized.はアカウント登録状態が許可されていないことを示し、この場合は一般的に複数のブラウザクライアントがアカウントにログインしてプリエンプトを形成し、他のログインしたブラウザクライアントを終了し、アカウントをこのSuno API AI音楽歌曲生成器クライアントにログインしたままにし、他のブラウザクライアントにログインしないでください。
 - ページプロンプト情報：Suno AI楽曲生成のコミットに失敗した場合：Insufficient credits.アカウント情報creditsの点数が不足していることを示します。まず自分のアカウント情報を追加して保存してから、正常に使用することができます。
 - 音楽生成タスクのコミットに成功した後、生成タスクキュー状態をプルし、状態が「complete」の場合は正常に戻り、この場合はデフォルトで15秒滞在して公式生成ファイルを待ちます。公式インタフェースサービスはメディアファイルのUrlアドレスに直接戻り、ほとんどの場合ページにこれらのメディアファイルが正常に表示されます。インタフェースがメディアファイルのUrlアドレスを返している場合もありますが、実際のファイルはUrlアドレスからアクセスできないのでしばらく待ちます。この時点でメディアファイルはページにロードできない可能性があります。メディアプレイヤーをクリックしてメディアファイルのアドレスを右クリックしてコピーし、ブラウザでこのアドレスを単独で開くことでアクセスできます。または、直接右クリックしてダウンロードとして保存することができます。
 - アカウントsessionとcookieの情報保存セキュリティの設定については、あなたのアカウントがチャージされていない限り心配する必要はありません。あなたのアカウントのパスワードが分からないので、あなたが記入したsessionとcookieの情報は、あなたのアカウントが他の場所でイベントにログインしたり、公式サイトでログインを退出したりすれば、記入したsessionとcookieは無効になり、次の公式サイトsessionとcookieにログインしても変わります。

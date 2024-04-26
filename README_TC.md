@@ -94,7 +94,7 @@ docker-compose pull && docker-compose up -d
 #### docker-compose.yml
 
 ```docker
-version: '3.1'
+version: '3.2'
 
 services:
   sunoapi:
@@ -127,32 +127,33 @@ services:
 
 - 先從瀏覽器頁面登入狀態下中獲取自己的session和cookie。
 
-- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
 
 - 填寫設定資訊裡面後面會自動保活，可以填寫多個帳號資訊。
 
-- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
 
 - 填寫後保存資訊，輸入identity可以更改修改帳號資訊。
 
-- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
 
 ### 完成
 
 - 啟動運行項目後瀏覽器訪問 http://localhost:8501/ 即可使用了。
 
-- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
 
 
 ### 問題
 
 - 如果頁面提示資訊：請先設定資訊保存，然後再刷新頁面才能正常使用！ 請先添加自己的帳號資訊保存，然後把sunoapi.db資料庫裡面其他無效的帳號資訊删除，其中包括我測試的帳號資訊，然後再就可以正常使用了。
+- 如果頁面提示資訊：Suno AI音樂歌曲生成提交失敗：Unauthorized.表示帳號登入狀態未授權，這種情況一般是多個瀏覽器用戶端登入了帳號形成了搶佔，退出其他登入的瀏覽器用戶端，保持帳號在這個Suno API AI音樂歌曲生成器用戶端登入，不要在其他瀏覽器用戶端登入就可以了。
 - 如果頁面提示資訊：Suno AI音樂歌曲生成提交失敗：Insufficient credits.表示帳號資訊credits點數不足，請先添加自己的帳號資訊保存，然後再就可以正常使用了。
 - 音樂生成任務提交成功後拉取生成任務隊列狀態，當狀態為“complete”時成功返回，這個時候默認停留了15秒等待官方生成檔案。 官方介面服務直接返回了媒體檔案Url地址，大部分時候頁面能正常顯示這些媒體檔案。 偶爾有時候介面已經返回了媒體檔案Url地址，但是實際檔案還不能從Url地址訪問到要等一會。 這個時候媒體檔案在頁面就可能無法加載到，可以點下媒體播放機滑鼠右鍵複製媒體檔案地址，用瀏覽器單獨打開這個地址就可以訪問到了或者直接右鍵另存為下載保存。
 - 關於設定帳號session和cookie資訊保存安全性問題，只要你的帳號不充值就沒必要擔心，因為不知道你的帳號密碼，你填寫的session和cookie資訊只要你的帳號在其他地方登入活動，或者在官方網站退出登入，那麼填寫的session和cookie就無效了，並且下次登入官網session和cookie都會發生變化的。

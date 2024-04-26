@@ -95,7 +95,7 @@ docker-compose pull && docker-compose up -d
 #### docker-compose.yml
 
 ```docker
-version: '3.1'
+version: '3.2'
 
 services:
   sunoapi:
@@ -130,32 +130,33 @@ services:
 
 - First, retrieve your session and cookie from the browser page when logged in.
 
-- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
 
 - After filling in the setting information, it will automatically keep alive. You can fill in multiple account information.
 
-- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
 
 - Enter and save the information. You can modify the account information if you enter identity.
 
-- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
 
 ### Done
 
 - Once the project is up and running, visit http://localhost:8501/ in your browser.
 
-- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
 
 
 ### Questions
 
 - If the page promp the message: Please save the information first, and then refresh the page to use it normally! Please first add your own account information and save it, then delete other invalid account information in the sunoapi.db database, including the account information I tested, and then you can use it normally.
+- If the page prompts the message: Suno AI music song generation submission failed: Unauthorized. This indicates that the account login status is not authorized. This situation is usually caused by multiple browser clients logging in to the account and forming a preemption. Exit other logged in browser clients, keep the account logged in on this Suno API AI music song generator client, and do not log in on other browser clients.
 - If the page promp the message: "Suno AI Music song generation failed to submit: Insufficient credits." Indicates that the credits of account information are insufficient, please add your account information to save, and then you can use it normally.
 - After the music generation task is successfully submitted, the queue status of the generation task is pulled. When the status is "complete", it returns successfully. At this time, it defaults to waiting for the official generation file for 15 seconds. The official interface service directly returns the URL address of media files, and most of the time the page can display these media files normally. Occasionally, the interface may have returned the Url address of the media file, but the actual file cannot be accessed from the Url address and needs to wait for a while. At this point, the media file may not be able to be loaded on the page. You can right-click on the media player and copy the media file address. Open the address separately in the browser to access it, or right-click to save as download and save.
 - Regarding the security issue of saving account session and cookie information, as long as your account is not recharged, there is no need to worry because you do not know your account password. The session and cookie information you fill in will become invalid if your account logs in to other activities or logs out of the official website, and the session and cookie information you fill in will change the next time you log in to the official website.

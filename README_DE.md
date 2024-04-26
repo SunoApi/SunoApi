@@ -97,7 +97,7 @@ docker-compose pull && docker-compose up -d
 #### docker-compose.yml
 
 ```docker
-version: '3.1'
+version: '3.2'
 
 services:
   sunoapi:
@@ -131,32 +131,33 @@ services:
 
 - Rufen Sie zunächst Ihre Sitzung und Ihren Cookie von der Browserseite ab, wenn Sie eingeloggt sind.
 
-- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
 
 - Nach dem Ausfüllen der Einstellungsinformationen werden diese automatisch gespeichert und mehrere Kontoinformationen können ausgefüllt werden.
 
-- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
 
 - Nach dem Ausfüllen speichern Sie die Informationen und geben Sie die Identität ein, um die Kontoinformationen zu ändern.
 
-- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
 
 ### Komplett
 
 - Browserzugriff nach Start und Ausführung des Projekts http://localhost:8501/ Du kannst es jetzt benutzen.
 
-- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
 
 
 ### Frage
 
 - Wenn die Seite die Meldung auffordert: Bitte speichern Sie zuerst die Informationen und aktualisieren Sie dann die Seite, um sie normal zu verwenden! Bitte fügen Sie zuerst Ihre eigenen Kontoinformationen hinzu und speichern Sie sie, löschen Sie dann andere ungültige Kontoinformationen in der sunoapi.db Datenbank, einschließlich der von mir getesteten Kontoinformationen, und dann können Sie sie normal verwenden.
+- Wenn die Seite die Meldung auffordert: Suno AI Musiksonggenerierung fehlgeschlagen: Unautorisiert. Dies zeigt an, dass der Anmeldestatus für das Konto nicht autorisiert ist. Diese Situation wird normalerweise dadurch verursacht, dass sich mehrere Browser-Clients beim Konto anmelden und eine Preemption bilden. Verlassen Sie andere angemeldete Browser-Clients, halten Sie das Konto auf diesem Suno API AI Musiksonggenerator-Client angemeldet und melden Sie sich nicht auf anderen Browser-Clients an.
 - Wenn die Seite die Meldung auffordert: Suno AI Music Song Generation Submission failed: Insufficient credits. Dies zeigt an, dass die Kontoinformationen Credits nicht genügend Punkte haben. Bitte fügen Sie zuerst Ihre eigenen Kontoinformationen hinzu, um sie zu speichern, und dann können Sie sie normal verwenden.
 - Nachdem die Musikgenerierungsaufgabe erfolgreich übermittelt wurde, wird der Warteschlangenstatus des Erzeugungsaufgangs abgerufen. Wenn der Status "abgeschlossen" ist, wird er erfolgreich zurückgegeben. Zu diesem Zeitpunkt wird standardmäßig 15 Sekunden lang auf die offizielle Erzeugungsdatei gewartet. Der offizielle Schnittstellendienst gibt direkt die URL-Adresse von Mediendateien zurück, und die meiste Zeit kann die Seite diese Mediendateien normal anzeigen. Gelegentlich hat die Schnittstelle möglicherweise die Url-Adresse der Mediendatei zurückgegeben, aber die eigentliche Datei kann nicht von der Url-Adresse aus aufgerufen werden und muss eine Weile warten. Zu diesem Zeitpunkt kann die Mediendatei möglicherweise nicht auf der Seite geladen werden. Sie können mit der rechten Maustaste auf den Medienplayer klicken und die Mediendateinadresse kopieren. Öffnen Sie die Adresse separat im Browser, um darauf zuzugreifen, oder klicken Sie mit der rechten Maustaste, um sie als Download zu speichern und zu speichern.
 - In Bezug auf das Sicherheitsproblem der Speicherung von Kontositzungs- und Cookie-Informationen: Solange Ihr Konto nicht aufgeladen ist, brauchen Sie sich keine Sorgen zu machen, da Sie Ihr Konto-Passwort nicht kennen. Die Sitzungs- und Cookie-Informationen, die Sie eingeben, werden ungültig, wenn Ihr Konto sich bei anderen Aktivitäten anmeldet oder sich von der offiziellen Website abmeldet. Die Sitzungs- und Cookie-Informationen, die Sie eingeben, ändern sich, wenn Sie sich das nächste Mal auf der offiziellen Website anmelden.

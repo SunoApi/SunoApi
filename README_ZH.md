@@ -96,7 +96,7 @@ docker-compose pull && docker-compose up -d
 #### docker-compose.yml
 
 ```docker
-version: '3.1'
+version: '3.2'
 
 services:
   sunoapi:
@@ -131,32 +131,33 @@ services:
 
 - 先从浏览器页面登录状态下中获取自己的session和cookie。
 
-- <img src="https://sunoapi.net/images/session.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
 
 - 填写设置信息里面后面会自动保活，可以填写多个账号信息。
 
-- <img src="https://sunoapi.net/images/session1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
 
 - 填写后保存信息，输入identity可以更改修改账号信息。
 
-- <img src="https://sunoapi.net/images/session2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
 
 ### 完成
 
 - 启动运行项目后浏览器访问 http://localhost:8501/ 即可使用了。
 
-- <img src="https://sunoapi.net/images/index.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index1.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index2.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
 
-- <img src="https://sunoapi.net/images/index3.png" width="1012px"/>
+- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
 
 
 ### 问题
 
 - 如果页面提示信息：请先设置信息保存，然后再刷新页面才能正常使用！请先添加自己的账号信息保存，然后把sunoapi.db数据库里面其他无效的账号信息删除，其中包括我测试的账号信息，然后再就可以正常使用了。
+- 如果页面提示信息：Suno AI 音乐歌曲生成提交失败：Unauthorized.表示账号登录状态未授权，这种情况一般是多个浏览器客户端登录了账号形成了抢占，退出其他登录的浏览器客户端，保持账号在这个Suno API AI 音乐歌曲生成器客户端登录，不要在其他浏览器客户端登录就可以了。
 - 如果页面提示信息：Suno AI 音乐歌曲生成提交失败：Insufficient credits.表示账号信息credits点数不足，请先添加自己的账号信息保存，然后再就可以正常使用了。
 - 音乐生成任务提交成功后拉取生成任务队列状态，当状态为"complete"时成功返回，这个时候默认停留了15秒等待官方生成文件。官方接口服务直接返回了媒体文件Url地址，大部分时候页面能正常显示这些媒体文件。偶尔有时候接口已经返回了媒体文件Url地址，但是实际文件还不能从Url地址访问到要等一会。这个时候媒体文件在页面就可能无法加载到，可以点下媒体播放器鼠标右键复制媒体文件地址，用浏览器单独打开这个地址就可以访问到了或者直接右键另存为下载保存。
 - 关于设置账号session和cookie信息保存安全性问题，只要你的账号不充值就没必要担心，因为不知道你的账号密码，你填写的session和cookie信息只要你的账号在其他地方登录活动，或者在官方网站退出登录，那么填写的session和cookie就无效了，并且下次登录官网session和cookie都会发生变化的。
