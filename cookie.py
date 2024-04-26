@@ -1,12 +1,11 @@
 # -*- coding:utf-8 -*-
 
-import os
+import os,json,urllib
 import time,threading
 from http.cookies import SimpleCookie
 from threading import Thread
 
 import requests,random
-from urllib import request
 
 from utils import COMMON_HEADERS,local_time,get_page_feed
 
@@ -24,8 +23,24 @@ class SunoCookie:
     def load_cookie(self, cookie_str):
         self.cookie.load(cookie_str)
 
+    def set_cookie(self, cookie_str):
+        for cookie in cookie_str.split('; '):
+            key, value = cookie.split('=', 1)
+            try:
+                value = json.loads(value)
+            except json.JSONDecodeError:
+                pass  # 如果不是有效的JSON，则保持原始字符串
+
+            if key == "__client":
+                # print("__client: " + value)
+                value = urllib.parse.quote(value)
+                # print("__client: " + value)
+
+            self.cookie[key] = value
+
     def get_cookie(self):
-        return ";".join([f"{i}={self.cookie.get(i).value}" for i in self.cookie.keys()])
+        # print(local_time() + f" ***get_cookie output -> {self.cookie.output()} thread_id: {threading.get_ident()} ***\n")
+        return  ";".join([f"{i}={self.cookie.get(i).value}" for i in self.cookie.keys()])
 
     def set_identity(self, identity):
         self.identity = identity
@@ -55,6 +70,8 @@ def update_token(suno_cookie: SunoCookie):
     if suno_cookie.get_token() == "401":
         return
 
+    # print(local_time() + f" ***update_token identity -> {identity} session -> {session_id} headers -> {headers} thread_id: {threading.get_ident()} ***\n")
+
     requests.packages.urllib3.disable_warnings()
     resp = requests.post(
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.70.5",
@@ -70,7 +87,7 @@ def update_token(suno_cookie: SunoCookie):
     else:
         resp_headers = dict(resp.headers)
         set_cookie = resp_headers.get("Set-Cookie") if resp_headers.get("Set-Cookie") else suno_cookie.get_cookie()
-        # print(f"*** set_cookie -> {set_cookie} ***")
+        print(local_time() + f" ***update_session identity -> {identity} session -> {session_id}  set_cookie -> {set_cookie} ***")
         suno_cookie.load_cookie(set_cookie)
         token = resp.json().get("jwt") if resp.json().get("jwt") else ""
         suno_cookie.set_token(token)
@@ -146,14 +163,14 @@ def new_suno_auth(identity, session, cookie):
     suno_cookie = SunoCookie()
     suno_cookie.set_identity(identity)
     suno_cookie.set_session_id(session)
-    suno_cookie.load_cookie(cookie)
+    suno_cookie.set_cookie(cookie)
     suno_auths.append(suno_cookie)
     t = Thread(target=keep_alive, args=(suno_cookie,))
     t.start()
 
     t1 = Thread(target=get_page, args=(suno_cookie,))
     t1.start()
-    print(local_time() + f" ***new_suno_auth identity -> {identity} session -> {session} cookie -> {cookie} ***\n")
+    print(local_time() + f" ***new_suno_auth identity -> {identity} session -> {session} set_cookie -> {cookie} ***\n")
 
 def start_keep_alive():
     result = suno_sqlite.query_many("select id,identity,[session],cookie from session where status='200'")
@@ -164,9 +181,9 @@ def start_keep_alive():
             suno_cookie = SunoCookie()
             suno_cookie.set_identity(row[1])
             suno_cookie.set_session_id(row[2])
-            suno_cookie.load_cookie(row[3])
+            suno_cookie.set_cookie(row[3])
             suno_auths.append(suno_cookie)
-            print(local_time() + f" ***start_keep_alive suno_cookie set_identity -> {row[1]} set_session_id -> {row[2]} load_cookie -> {row[3]} ***\n")
+            print(local_time() + f" ***start_keep_alive suno_cookie set_identity -> {row[1]} set_session_id -> {row[2]} set_cookie -> {row[3]} ***\n")
             t = Thread(target=keep_alive, args=(suno_cookie,))
             t.start()
 

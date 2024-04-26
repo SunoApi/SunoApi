@@ -416,7 +416,7 @@ def generate_with_song_description(data: schemas.DescriptionModeGenerateParam):
 
 
 
-def fetch_status(aid: str):
+def fetch_status(aid: str, twice=False):
     progress_text = i18n("Fetch Status Progress")
     my_bar = col2.progress(0, text=progress_text)
     percent_complete = 0
@@ -439,7 +439,7 @@ def fetch_status(aid: str):
             progress_text = i18n("Fetch Status Success") + status
             my_bar.progress(100, text=progress_text)
             # time.sleep(15) #等待图片音频视频生成完成再返回
-            check_url_available(resp[0]["video_url"])
+            check_url_available(resp[0]["video_url"], twice)
             my_bar.empty()
         elif status == "Unauthorized":
             while True:
@@ -512,7 +512,7 @@ if StartBtn:
             if status == "running":
                 disabled_state = True
                 result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
-                resp0 = fetch_status(resp["clips"][0]["id"])
+                resp0 = fetch_status(resp["clips"][0]["id"], False)
                 if resp0[0]["status"] == "complete":
                     col1.audio(resp0[0]["audio_url"])
                     col1.video(resp0[0]["video_url"])
@@ -522,7 +522,7 @@ if StartBtn:
                     col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
                 
                 result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
-                resp1 = fetch_status(resp["clips"][1]["id"])
+                resp1 = fetch_status(resp["clips"][1]["id"], True)
                 if resp1[0]["status"] == "complete":
                     st.balloons()
                     col3.audio(resp1[0]["audio_url"])
@@ -553,7 +553,7 @@ if StartBtn:
             if status == "running":
                 disabled_state = True
                 result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
-                resp0 = fetch_status(resp["clips"][0]["id"])
+                resp0 = fetch_status(resp["clips"][0]["id"], False)
                 if resp0[0]["status"] == "complete":
                     col1.audio(resp0[0]["audio_url"])
                     col1.video(resp0[0]["video_url"])
@@ -563,7 +563,7 @@ if StartBtn:
                     col2.error(i18n("Generate Status Error") + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
 
                 result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
-                resp1 = fetch_status(resp["clips"][1]["id"])
+                resp1 = fetch_status(resp["clips"][1]["id"], True)
                 if resp1[0]["status"] == "complete":
                     st.balloons()
                     col3.audio(resp1[0]["audio_url"])

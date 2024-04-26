@@ -39,15 +39,25 @@ async def files(request: Request, file_name: str):
     file_url = "https://cdn1.suno.ai" + result.path.replace("/files", "")
     file_path = result.path.replace("/files", "files")
 
+    media_type = "text/plain"
+    if file_path.endswith(".png"):
+        media_type = "image/png"
+    elif file_path.endswith(".mp3"):
+        media_type = "audio/mpeg"
+    elif file_path.endswith(".mp4"):
+        media_type = "video/mp4"
+    else:
+        media_type = "application/json"
+
     if os.path.exists(file_path):
         return FileResponse(file_path)
-        # return StreamingResponse(open(file_path, 'rb'))
+        # return StreamingResponse(open(file_path, 'rb'), media_type=media_type)
     else:
         result = await download(file_url, file_path)
         try:
             if result == "200":
                 # return FileResponse(file_path)
-                return StreamingResponse(open(file_path, 'rb'))
+                return StreamingResponse(open(file_path, 'rb'), media_type=media_type)
             else:
                 return result
         except Exception as e:

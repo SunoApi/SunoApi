@@ -76,15 +76,19 @@ def get_lyrics(lid, token):
 def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-def check_url_available(url):
-    while True:
+def check_url_available(url, twice=False):
+    url = url.replace('https://res.sunoapi.net/files/', 'https://cdn1.suno.ai/')
+    i = 0
+    while not twice and i < 10:
         # 每间隔一秒钟检查一次url文件大小
         file_size = get_file_size(url)
         if file_size >= 1024*1024:
             print(local_time() + f" ***check_url_available -> {url} 文件大小：{file_size} 大于1MB可访问到***\n")
             break
+        i += 1
         print(local_time() + f" ***check_url_available -> {url} 文件大小：{file_size} 小于1MB继续检查***\n")
-        time.sleep(1)
+        time.sleep(2)
+    time.sleep(3)
 
 def get_file_size(url):
     try:
@@ -94,11 +98,14 @@ def get_file_size(url):
             file_size = resp.headers.get('Content-Length')
             if file_size:
                 return int(file_size)
-            else:
-                return 0
+            # else:
+            #     return 0
+            print(local_time() + f" ***check_url_available -> {url} file_size -> {file_size} ***\n")
         else:
+            print(local_time() + f" ***check_url_available -> {url} status_code -> {resp.status_code} ***\n")
             return 0
     except Exception as e:
+        print(local_time() + f" ***check_url_available -> {url} exception -> {str(e)} ***\n")
         return 0
 
 def get_random_style():
