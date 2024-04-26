@@ -45,7 +45,7 @@ git clone https://github.com/SunoApi/SunoApi.git
 pip3 install -r requirements.txt
 ```
 
-- 启动项目，关于Streamlit请自行参考Streamlit文档
+- Starten Sie das Projekt, lesen Sie bitte die Streamlit Dokumentation für Details zu Streamlit
 
 ```bash
 streamlit run main.py
