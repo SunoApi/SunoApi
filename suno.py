@@ -40,8 +40,8 @@ async def files(request: Request, file_name: str):
     file_path = result.path.replace("/files", "files")
 
     if os.path.exists(file_path):
-        # return FileResponse(file_path)
-        return StreamingResponse(open(file_path, 'rb'))
+        return FileResponse(file_path)
+        # return StreamingResponse(open(file_path, 'rb'))
     else:
         result = await download(file_url, file_path)
         try:

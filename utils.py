@@ -94,6 +94,8 @@ def get_file_size(url):
             file_size = resp.headers.get('Content-Length')
             if file_size:
                 return int(file_size)
+            else:
+                return 0
         else:
             return 0
     except Exception as e:
