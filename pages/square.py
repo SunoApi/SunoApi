@@ -1,13 +1,21 @@
 
 import streamlit as st
 import time,json,os,ast
+from datetime import timezone
+import dateutil.parser
 
 from streamlit_option_menu import option_menu
-from streamlit_image_select import image_select
-
 from streamlit_modal import Modal
 import streamlit.components.v1 as components
 import streamlit_antd_components as sac
+
+root_dir = os.path.dirname(os.path.realpath(__file__))
+# print(root_dir)
+import sys
+sys.path.append(root_dir)
+import site
+site.addsitedir(root_dir)
+from streamlit_image_select import image_select
 
 from sqlite import SqliteTool
 
@@ -22,9 +30,6 @@ st.set_page_config(page_title="Suno API AI Music Generator",
                        'About': "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
                    })
 
-
-root_dir = os.path.dirname(os.path.realpath(__file__))
-# print(root_dir)
 i18n_dir = os.path.join(root_dir, "../i18n")
 # print(i18n_dir)
 
@@ -112,24 +117,54 @@ result = suno_sqlite.query_many("select aid,data,created,updated,status,private 
 if title != "":
     result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where (LOWER(title) like ? or aid=?) and private=0 order by id desc LIMIT ? OFFSET ? ", ("%"+ title +"%", title, records_per_page, offset,))
 
+
+def localdatetime(str):
+    # 将字符串时间 转化为 datetime 对象
+    dateObject = dateutil.parser.isoparse(str)
+    # print(dateObject)  2021-09-03 20:56:35.450686+00:00
+    # 根据时区 转化为 datetime 数据
+    localdt = dateObject.replace(tzinfo = timezone.utc).astimezone(tz=None)
+    # print(localdt)  # 2021-09-04 04:56:35.450686+08:00
+    # 产生本地格式 字符串
+    # print(localdt.strftime('%Y-%m-%d %H:%M:%S'))
+    return localdt.strftime('%Y-%m-%d %H:%M:%S')
+
+
+titles = []
 images = []
 captions = []
 for row in result:
     # print(ast.literal_eval(row[1]))
     # print("\n")
     data = ast.literal_eval(row[1])
+    title = ""
+    title += "歌曲名称：" + ("无\n" if data['title'] is None or "" else data['title'] + "\n")
+    title += "音乐风格：" + ("无\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n")
+    title += "歌曲描述：" + ("无\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt'] + "\n")
+    title += "歌曲时长：" + ("无\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + "分" + str(int(data['metadata']['duration']%60))+ "秒\n")
+    title += "生成时间：" + ("无\n" if data['created_at'] is None or "" else localdatetime(data['created_at']) + "\n\n")
+    title += "生成歌词：\n" + ("无\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
+    
+    titles.append(title)
     captions.append("sunoai" if data['title'] is None or "" else data['title'])
     images.append("https://sunoapi.net/images/sunoai.jpg" if data['image_url'] is None or "" else data['image_url'])
 
 print("\n")
 
+index = 0
+use_container_width = False
+
+if len(images) > 0:
+    use_container_width = True
+    
 index = image_select(
-        label="",
-        images=images if len(images) > 0 else ["https://sunoapi.net/images/sunoai.jpg"],
-        captions=captions if len(captions) > 0 else [i18n("No Search Result")],
-        use_container_width=False,
-        return_value="index"
-    )
+            label="",
+            images=images if len(images) > 0 else ["https://sunoapi.net/images/sunoai.jpg"],
+            captions=captions if len(captions) > 0 else [i18n("No Search Result")],
+            titles=titles if len(titles) > 0 else [""],
+            use_container_width=use_container_width,
+            return_value="index"
+        )
 
 open_modal = True
 
