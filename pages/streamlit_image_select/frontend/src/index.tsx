@@ -75,6 +75,11 @@ function onRender(event: Event): void {
         box.classList.add("selected")
         img.classList.add("selected")
       }
+
+      img.onerror = function () {
+        img.src = "./images/sunoai.jpg"
+5       img.onerror = null; //控制不要一直跳动 
+      }
     })
   }
 

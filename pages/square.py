@@ -21,13 +21,13 @@ from sqlite import SqliteTool
 
 suno_sqlite = SqliteTool()
 
-st.set_page_config(page_title="Suno API AI Music Generator",
+st.set_page_config(page_title="SunoAPI AI Music Generator",
                    page_icon="🎵",
                    layout="wide",
                    initial_sidebar_state="collapsed",
                    menu_items={
                        'Report a bug': "https://github.com/SunoApi/SunoApi/issues",
-                       'About': "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
+                       'About': "SunoAPI AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
                    })
 
 i18n_dir = os.path.join(root_dir, "../i18n")
@@ -82,7 +82,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 with st.sidebar:
-    selected = option_menu("Suno AI Music", [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=1)
+    selected = option_menu(None, [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme"),i18n("Visit Official WebSite")], icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=1)
     
     if selected == i18n("Music Song Create"):
         st.switch_page("main.py")
@@ -137,13 +137,14 @@ for row in result:
     # print(ast.literal_eval(row[1]))
     # print("\n")
     data = ast.literal_eval(row[1])
+    # print("data['title']:" + data['title'])
     title = ""
-    title += "歌曲名称：" + ("无\n" if data['title'] is None or "" else data['title'] + "\n")
-    title += "音乐风格：" + ("无\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n")
-    title += "歌曲描述：" + ("无\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt'] + "\n")
-    title += "歌曲时长：" + ("无\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + "分" + str(int(data['metadata']['duration']%60))+ "秒\n")
-    title += "生成时间：" + ("无\n" if data['created_at'] is None or "" else localdatetime(data['created_at']) + "\n\n")
-    title += "生成歌词：\n" + ("无\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
+    title += i18n("Title") + ("None\n" if data['title'] is None or "" else data['title'] + "\n")
+    title += i18n("Tags") + ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n")
+    title += i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt'] + "\n")
+    title += i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else int(data['metadata']['duration']%60)) + " \n")
+    title += i18n("Music Created At")  + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at']) + "\n")
+    title += i18n("Music Prompt")  + ("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
     
     titles.append(title)
     captions.append("sunoai" if data['title'] is None or "" else data['title'])
