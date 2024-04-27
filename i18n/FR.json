@@ -1,8 +1,8 @@
 {
   "Language": "Français",
   "Translation": {
-    "Page Title": "Générateur de chansons musicales Suno API AI",
-    "Page About": "Le générateur de musique Suno API AI est un logiciel de génération de musique AI gratuit qui permet de générer de la musique avec l'API existante.\n\nSi vous avez des questions, veuillez visiter notre site Web : https://sunoapi.net",
+    "Page Title": "Générateur de chansons musicales SunoAPI AI",
+    "Page About": "Le générateur de musique SunoAPI AI est un logiciel de génération de musique AI gratuit qui permet de générer de la musique avec l'API existante.\n\nSi vous avez des questions, veuillez visiter notre site Web : https://sunoapi.net",
     "Page Header": "Créez maintenant votre propre chanson Suno AI, utilisez-la gratuitement et profitez du plaisir de la génération de musique AI innovante !",
 
     "Music Song Create": "Création de chansons musicales",
@@ -83,6 +83,10 @@
     "Generation Task Status": "La tâche de génération de la chanson n'est pas encore terminée, l'état actuel est: ",
 
     "Enter Search Keywords": "Veuillez entrer un mot clé de recherche",
-    "No Search Result": "Aucun résultat de recherche trouvé."
-    }
+    "No Search Result": "Aucun résultat de recherche trouvé.",
+
+    "Music Duration": "Durée de la chanson: ",
+    "Music Created At": "Temps de génération: ",
+    "Music Prompt": "Générer les paroles: \n"
   }
+}

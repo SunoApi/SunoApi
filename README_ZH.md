@@ -4,7 +4,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Suno API 非官方 Suno AI 客户端
+# SunoAPI 非官方 Suno AI 客户端
 
 # 祝贺本开源项目入选本周weekly
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -131,27 +131,27 @@ services:
 
 - 先从浏览器页面登录状态下中获取自己的session和cookie。
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - 填写设置信息里面后面会自动保活，可以填写多个账号信息。
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - 填写后保存信息，输入identity可以更改修改账号信息。
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### 完成
 
 - 启动运行项目后浏览器访问 http://localhost:8501/ 即可使用了。
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### 问题
@@ -172,14 +172,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### 参与
 
 - 个人的力量始终有限，任何形式的贡献都是欢迎的，包括但不限于贡献代码，优化文档，提交Issue和PR，由于时间有限不接受在微信或者微信群给开发者提Bug，有问题或者优化建议请提交Issue和PR！
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 
 ### 参考
@@ -190,12 +190,12 @@ services:
 
 ### 声明
 
-- SunoApi 是一个非官方的开源项目，仅供学习和研究使用。用户自愿输入免费的账号信息生成音乐。每个帐户每天可以免费生成五首歌曲，我们不会将它们用于其他目的。请放心使用！如果有10000名用户，那么系统每天可以免费生成50000首歌曲。请尽量节省使用量，因为每个帐户每天只能免费生成五首歌曲。如果每个人每天创作五首以上的歌曲，这仍然不够。最终目标是让在需要的时候能随时免费生成。
+- SunoApi是一个非官方的开源项目，仅供学习和研究使用。用户自愿输入免费的账号信息生成音乐。每个帐户每天可以免费生成五首歌曲，我们不会将它们用于其他目的。请放心使用！如果有10000名用户，那么系统每天可以免费生成50000首歌曲。请尽量节省使用量，因为每个帐户每天只能免费生成五首歌曲。如果每个人每天创作五首以上的歌曲，这仍然不够。最终目标是让在需要的时候能随时免费生成。
 
 
 ### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 ##### 此项目开源于GitHub ，基于MIT协议且免费，没有任何形式的付费行为！

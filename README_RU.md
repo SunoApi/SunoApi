@@ -5,7 +5,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Клиент Suno API неофициально
+# Клиент SunoAPI неофициально
 
 # Поздравляю с избранием проекта open source в уикли на этой неделе
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -16,7 +16,7 @@
 
 ### Введение
 
-- Это неофициальный клиент Suno API на основе Python и Streamlit, который в настоящее время поддерживает такие функции, как генерация музыки и получение информации о музыке. С функцией поддержки токенов и сохранения памяти, не беспокоясь об истечении срока действия токенов, можно настроить сохранение информации с нескольких учетных записей для использования.
+- Это неофициальный клиент SunoAPI на основе Python и Streamlit, который в настоящее время поддерживает такие функции, как генерация музыки и получение информации о музыке. С функцией поддержки токенов и сохранения памяти, не беспокоясь об истечении срока действия токенов, можно настроить сохранение информации с нескольких учетных записей для использования.
 
 - Иногда GitHub недоступен, если нет доступа, перейдите на Gitee адрес: https://gitee.com/SunoApi/SunoApi
 
@@ -129,33 +129,33 @@ services:
 
 - Получите свои сеансы и файлы cookie из состояния входа на странице браузера.
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - Заполните сообщение для установки, которое автоматически будет сохранено и может быть заполнено несколькими файлами.
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - После заполнения сохраняется информация, введенная в identity, которая может изменить информацию о изменении аккаунта.
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### Завершено
 
 - Посещение браузера после запуска проекта http://localhost:8501/ Можно использовать.
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### Вопросы
 
 - Если сообщение подсказки страницы: пожалуйста, сначала установите сохранность информации, а затем обновите страницу, чтобы она могла нормально использоваться!  Пожалуйста, сначала добавьте информацию о своем аккаунте в базу данных sunoapi db, затем удалите другие недействительные данные о аккаунтах, включая информацию о аккаунтах, которые я тестирую, прежде чем их можно будет использовать.
-- Если страница подсказывает сообщение: Suno AI Music Generation не удалось отправить: Unauthorized указывает, что статус входа в учетную запись не разрешен, это обычно несколько клиентов браузера, которые вошли в учетную запись, чтобы сформировать захват, выйти из других клиентов браузера входа, сохранить учетную запись в этом Suno API AI Music Generator клиент входа, не входить в систему в других клиентах браузера.
+- Если страница подсказывает сообщение: Suno AI Music Generation не удалось отправить: Unauthorized указывает, что статус входа в учетную запись не разрешен, это обычно несколько клиентов браузера, которые вошли в учетную запись, чтобы сформировать захват, выйти из других клиентов браузера входа, сохранить учетную запись в этом SunoAPI AI Music Generator клиент входа, не входить в систему в других клиентах браузера.
 - Если сообщение подсказки страницы: Suno AI Music Generation не удалось отправить: Insufficient credits указывает на то, что информация учетной записи не имеет достаточного количества баллов для credits, сначала добавьте сохраненную информацию учетной записи, прежде чем она будет доступна для нормального использования.
 - после того, как музыкальная миссия была успешно выполнена, удаление статуса генерируемой задачи было успешно возвращено, когда состояние было "complete", которое оставалось по умолчанию в течение 15 секунд в ожидании официального документа.  Официальная interface service вернулась непосредственно к адресу Url media файла, который в большинстве случаев был нормально отображен на странице.  Иногда интерфейс возвращал адрес Url media-файла, но настоящий файл не может быть доступен с Url-адреса, чтобы немного подождать.  В этот момент медиафайл может не быть загружен на страницу, и он может скопировать адрес медиа-файла с помощью правого ключа медиа-плеера мыши, который использует браузер, чтобы открыть этот адрес, или же он может быть доступен с помощью браузера или непосредственно с правого клавиша для хранения.
 - о сохранении информации о размещении аккаунтов session и cookie не стоит беспокоиться до тех пор, пока ваш аккаунт не будет переполнен, потому что не зная пароль вашего аккаунта, информацию о session и cookie, которую вы заполнили, до тех пор, пока ваш аккаунт регистрируется где-то еще или выходит из официального сайта, Тогда заполненные session и cookie будут недействительными, и в следующий раз будут внесены изменения в официальную сеть session и cookie.
@@ -170,15 +170,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### Участие
 
 - Индивидуальные силы всегда ограничены, и любые вклады приветствуются, включая, но не ограничиваются кодами вкладов, оптимизированными документами, представленными Issue и PR, поскольку время ограниченное для того, чтобы не принимать микроверы или микроблоки для создания багов, вопросы или рекомендации оптимизации должны быть представлены Issue и PR!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
-
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 ### Ссылки
 
@@ -188,12 +187,12 @@ services:
 
 ### Заявления
 
-SunoApi - это неофициальный проект с открытым исходным кодом, предназначенный только для обучения и исследований. Пользователи добровольно вводят бесплатную информацию о своей учетной записи для создания музыки. Каждый аккаунт может бесплатно генерировать пять песен в день, и мы не используем их для других целей. Будьте уверены в использовании! При 10 000 пользователей система может генерировать 50 000 песен в день бесплатно. Старайтесь максимально экономить, так как каждый аккаунт может генерировать только пять песен в день бесплатно. Если каждый человек создает более пяти песен в день, этого все равно недостаточно. Конечная цель состоит в том, чтобы обеспечить бесплатную генерацию в любое время, когда это необходимо.
+SunoApi-это неофициальный проект с открытым исходным кодом, предназначенный только для обучения и исследований. Пользователи добровольно вводят бесплатную информацию о своей учетной записи для создания музыки. Каждый аккаунт может бесплатно генерировать пять песен в день, и мы не используем их для других целей. Будьте уверены в использовании! При 10 000 пользователей система может генерировать 50 000 песен в день бесплатно. Старайтесь максимально экономить, так как каждый аккаунт может генерировать только пять песен в день бесплатно. Если каждый человек создает более пяти песен в день, этого все равно недостаточно. Конечная цель состоит в том, чтобы обеспечить бесплатную генерацию в любое время, когда это необходимо.
 
 
 ### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 ##### Этот проект начинается с GitHub, основан на протоколе MIT и является бесплатным, без какой - либо формы платного поведения!

@@ -5,7 +5,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Suno API 非公式 Suno AIクライアントです
+# SunoAPI 非公式 Suno AIクライアントです
 
 # 今週のweeklyへの本開源プロジェクトの入選を祝う
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -130,27 +130,27 @@ services:
 
 - ブラウザのログイン状態から自分のセッションとクッキーを取得します。
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - 設定情報に記入すると自動的に保存され、複数のアカウント情報を記入することができます。
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - 記入後は情報を保存し、identityを入力することでアカウント情報を変更修正できます。
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### 完成です
 
 - プロジェクト実行後のブラウザアクセスの開始http://localhost:8501/すぐに使用できます。
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### 問題
@@ -171,14 +171,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### 参加する
 
 - 個人の力は常に限られており、どのような形の貢献も歓迎されています。貢献コード、文書の最適化、IssueとPRの提出などが含まれていますが、これに限られていないので、微信や微信グループで開発者にBugを提出することは受け入れられません。問題や最適化の提案があれば、IssueとPRを提出してください。
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 
 ### リファレンス
@@ -194,7 +194,7 @@ services:
 
 ### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 #####このプロジェクトはGitHubから始まり、MITのプロトコルに基づいており、無料です。

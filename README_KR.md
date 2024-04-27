@@ -5,7 +5,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Suno API 비공식 Suno AI 클라이언트
+# SunoAPI 비공식 Suno AI 클라이언트
 
 # 이번 주 Weekly 오픈 소스 프로젝트 선정 축하합니다.
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -16,7 +16,7 @@
 
 ### 소개
 
-- Python, Streamlit 기반의 비공식 Suno API 클라이언트로, 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
+- Python, Streamlit 기반의 비공식 SunoAPI 클라이언트로, 현재 음악 생성, 음악 정보 얻기 등의 기능을 지원하고 있다.자체 유지 관리 token 및 보존 기능을 가지고 있으며, token 만료 문제를 걱정할 필요가 없으며, 여러 계정의 정보를 설정하여 사용할 수 있도록 저장할 수 있다.
 
 - GitHub에 액세스할 수 없는 경우가 있습니다. 액세스할 수 없으면 Gitee 주소로 이동하십시오.https://gitee.com/SunoApi/SunoApi
 
@@ -132,33 +132,33 @@ services:
 
 - 먼저 브라우저 페이지에서 로그인한 상태에서 자신의 세션과 쿠키를 가져옵니다.
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - 설정 정보를 기입하면 뒤에 자동으로 유지됩니다. 여러 계정 정보를 기입할 수 있습니다.
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - 작성 후 정보를 저장하고 identity 를 입력하면 수정된 계정 정보를 변경할 수 있습니다.
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### 완료
 
 - 프로젝트 실행 후 브라우저 액세스 시작http://localhost:8501/바로 사용할 수 있습니다.
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### 문제
 
 - 페이지 프롬프트가 표시되는 경우: 정보를 저장하도록 설정한 다음 페이지를 새로 고쳐야 제대로 사용할 수 있습니다!먼저 자신의 계정 정보를 추가하여 저장한 다음 sunoapi.db 데이터베이스에 있는 다른 잘못된 계정 정보를 삭제하십시오. 여기에는 제가 테스트한 계정 정보가 포함되어 있습니다. 그리고 정상적으로 사용할 수 있습니다.
-- 페이지 프롬프트: Suno AI 음악 노래 생성 제출 실패: Unauthorized.는 계정 로그인 상태가 승인되지 않았음을 나타냅니다. 이러한 상황은 일반적으로 여러 브라우저 클라이언트가 로그인하여 계정을 선점하고 다른 로그인한 브라우저 클라이언트를 종료하며 계정을 이 Suno API AI 음악 노래 생성기 클라이언트에서 로그인하고 다른 브라우저 클라이언트에서 로그인하지 않으면 됩니다.
+- 페이지 프롬프트: Suno AI 음악 노래 생성 제출 실패: Unauthorized.는 계정 로그인 상태가 승인되지 않았음을 나타냅니다. 이러한 상황은 일반적으로 여러 브라우저 클라이언트가 로그인하여 계정을 선점하고 다른 로그인한 브라우저 클라이언트를 종료하며 계정을 이 SunoAPI AI 음악 노래 생성기 클라이언트에서 로그인하고 다른 브라우저 클라이언트에서 로그인하지 않으면 됩니다.
 - 페이지 프롬프트가 표시되는 경우: Suno AI 음악 노래 생성 제출 실패: Insufficient credits. 계정 정보 credits 포인트가 부족함을 나타냅니다. 계정 정보를 추가하여 저장한 다음 정상적으로 사용할 수 있습니다.
 - 음악 생성 작업을 제출한 후 생성 작업 대기열 상태를 끌어다가 "complete" 상태일 때 성공적으로 되돌려줍니다. 이 때 기본적으로 15초 동안 공식 생성 파일을 기다립니다.공식 인터페이스 서비스는 미디어 파일 Url 주소를 직접 반환하며 대부분의 경우 페이지에 이러한 미디어 파일이 정상적으로 표시됩니다.가끔 인터페이스가 미디어 파일 Url 주소를 반환했지만 실제 파일은 Url 주소에서 잠시 기다려야 할 때까지 액세스할 수 없습니다.이 경우 미디어 파일이 페이지에서 로드되지 않을 수 있습니다. 미디어 플레이어를 클릭하여 마우스 오른쪽 버튼으로 미디어 파일 주소를 복사할 수 있습니다. 브라우저로 이 주소를 단독으로 열면 액세스할 수 있거나 직접 오른쪽 버튼으로 다운로드로 저장할 수 있습니다.
 - 계정 설정 세션 및 쿠키 정보 저장 보안 문제에 관하여, 당신의 계정이 충전되지 않는 한 걱정할 필요가 없습니다. 당신의 계정 비밀번호를 모르기 때문에, 당신이 기입한 세션과 쿠키 정보는 당신의 계정이 다른 곳에서 활동에 로그인하거나 공식 사이트에서 로그인을 환불하기만 하면, 기입한 세션과 쿠키는 무효가 됩니다. 또한 다음에 홈페이지에 로그인하면 세션과 쿠키가 모두 변경됩니다.
@@ -173,14 +173,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### 참여
 
 - 개인의 힘은 시종 제한되어 있고, 어떠한 형식의 공헌도 환영하며, 공헌 코드, 최적화 문서, Issue와 PR을 포함하되 이에 국한되지 않으며, 시간이 제한되어 있기 때문에 위챗이나 위챗 그룹에서 개발자에게 Bug를 제기하는 것을 받아들이지 않으며, 문제가 있거나 최적화 건의가 있으면 Issue와 PR을 제출하십시오!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 
 ### 참조
@@ -196,7 +196,7 @@ services:
 
 ### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 ##### #이 프로젝트는 github에서 시작되었으며 mit 프로토콜에 기반하고 무료이며 어떠한 형태로든 지불이 되지 않습니다!

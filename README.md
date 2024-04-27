@@ -5,7 +5,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Suno API is an unofficial Suno AI client
+# SunoAPI is an unofficial Suno AI client
 
 # Congratulations on this open source project's being selected for this week's weekly
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -16,7 +16,7 @@
 
 ### Introduction
 
-- This is an unofficial Suno API client based on Python and Streamlit currently supports functions such as generating music and obtaining music information. It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
+- This is an unofficial SunoAPI client based on Python and Streamlit currently supports functions such as generating music and obtaining music information. It comes with built-in maintenance and activation functions for tokens, so there is no need to worry about token expiration. You can set up multiple account information to be saved for use.
 
 - GitHub sometimes cannot be accessed. If it cannot be accessed, please move to Gitee address: https://gitee.com/SunoApi/SunoApi
 
@@ -130,33 +130,33 @@ services:
 
 - First, retrieve your session and cookie from the browser page when logged in.
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - After filling in the setting information, it will automatically keep alive. You can fill in multiple account information.
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - Enter and save the information. You can modify the account information if you enter identity.
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### Done
 
 - Once the project is up and running, visit http://localhost:8501/ in your browser.
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### Questions
 
 - If the page promp the message: Please save the information first, and then refresh the page to use it normally! Please first add your own account information and save it, then delete other invalid account information in the sunoapi.db database, including the account information I tested, and then you can use it normally.
-- If the page prompts the message: Suno AI music song generation submission failed: Unauthorized. This indicates that the account login status is not authorized. This situation is usually caused by multiple browser clients logging in to the account and forming a preemption. Exit other logged in browser clients, keep the account logged in on this Suno API AI music song generator client, and do not log in on other browser clients.
+- If the page prompts the message: Suno AI music song generation submission failed: Unauthorized. This indicates that the account login status is not authorized. This situation is usually caused by multiple browser clients logging in to the account and forming a preemption. Exit other logged in browser clients, keep the account logged in on this SunoAPI AI music song generator client, and do not log in on other browser clients.
 - If the page promp the message: "Suno AI Music song generation failed to submit: Insufficient credits." Indicates that the credits of account information are insufficient, please add your account information to save, and then you can use it normally.
 - After the music generation task is successfully submitted, the queue status of the generation task is pulled. When the status is "complete", it returns successfully. At this time, it defaults to waiting for the official generation file for 15 seconds. The official interface service directly returns the URL address of media files, and most of the time the page can display these media files normally. Occasionally, the interface may have returned the Url address of the media file, but the actual file cannot be accessed from the Url address and needs to wait for a while. At this point, the media file may not be able to be loaded on the page. You can right-click on the media player and copy the media file address. Open the address separately in the browser to access it, or right-click to save as download and save.
 - Regarding the security issue of saving account session and cookie information, as long as your account is not recharged, there is no need to worry because you do not know your account password. The session and cookie information you fill in will become invalid if your account logs in to other activities or logs out of the official website, and the session and cookie information you fill in will change the next time you log in to the official website.
@@ -171,14 +171,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### Participate
 
 - My personal strength is always limited, any form of contribution is welcome, including but not limited to contributing code, optimizing documents, submitting issues and PR. Due to limited time, we do not accept to submit bugs to developers in wechat or wechat group, please submit issues and PR if you have problems or optimization suggestions!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 
 ### Reference
@@ -194,7 +194,7 @@ services:
 
 ### Buy Me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 ##### This project originated from GitHub, based on MIT protocol and free, without any form of payment behavior!

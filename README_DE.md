@@ -5,7 +5,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Suno API inoffizieller Suno AI Client
+# SunoAPI inoffizieller Suno AI Client
 
 # Herzlichen Glückwunsch zu diesem Open-Source-Projekt, das für diese Woche ausgewählt wurde
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -16,7 +16,7 @@
 
 ### Einführung
 
-- Dies ist ein inoffizieller Suno API Client basierend auf Python und Streamlit, der derzeit Funktionen wie das Erzeugen von Musik und das Abrufen von Musikinformationen unterstützt. Es verfügt über integrierte Wartungs- und Aktivierungsfunktionen für Token, so dass Sie sich keine Sorgen über das Ablaufen von Token machen müssen. Sie können mehrere Kontoinformationen einrichten, die für die Verwendung gespeichert werden.
+- Dies ist ein inoffizieller SunoAPI Client basierend auf Python und Streamlit, der derzeit Funktionen wie das Erzeugen von Musik und das Abrufen von Musikinformationen unterstützt. Es verfügt über integrierte Wartungs- und Aktivierungsfunktionen für Token, so dass Sie sich keine Sorgen über das Ablaufen von Token machen müssen. Sie können mehrere Kontoinformationen einrichten, die für die Verwendung gespeichert werden.
 
 - Manchmal kann nicht auf GitHub zugegriffen werden. Wenn der Zugriff nicht möglich ist, wechseln Sie bitte zur Gitee-Adresse: https://gitee.com/SunoApi/SunoApi
 
@@ -131,33 +131,33 @@ services:
 
 - Rufen Sie zunächst Ihre Sitzung und Ihren Cookie von der Browserseite ab, wenn Sie eingeloggt sind.
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - Nach dem Ausfüllen der Einstellungsinformationen werden diese automatisch gespeichert und mehrere Kontoinformationen können ausgefüllt werden.
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - Nach dem Ausfüllen speichern Sie die Informationen und geben Sie die Identität ein, um die Kontoinformationen zu ändern.
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### Komplett
 
 - Browserzugriff nach Start und Ausführung des Projekts http://localhost:8501/ Du kannst es jetzt benutzen.
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### Frage
 
 - Wenn die Seite die Meldung auffordert: Bitte speichern Sie zuerst die Informationen und aktualisieren Sie dann die Seite, um sie normal zu verwenden! Bitte fügen Sie zuerst Ihre eigenen Kontoinformationen hinzu und speichern Sie sie, löschen Sie dann andere ungültige Kontoinformationen in der sunoapi.db Datenbank, einschließlich der von mir getesteten Kontoinformationen, und dann können Sie sie normal verwenden.
-- Wenn die Seite die Meldung auffordert: Suno AI Musiksonggenerierung fehlgeschlagen: Unautorisiert. Dies zeigt an, dass der Anmeldestatus für das Konto nicht autorisiert ist. Diese Situation wird normalerweise dadurch verursacht, dass sich mehrere Browser-Clients beim Konto anmelden und eine Preemption bilden. Verlassen Sie andere angemeldete Browser-Clients, halten Sie das Konto auf diesem Suno API AI Musiksonggenerator-Client angemeldet und melden Sie sich nicht auf anderen Browser-Clients an.
+- Wenn die Seite die Meldung auffordert: Suno AI Musiksonggenerierung fehlgeschlagen: Unautorisiert. Dies zeigt an, dass der Anmeldestatus für das Konto nicht autorisiert ist. Diese Situation wird normalerweise dadurch verursacht, dass sich mehrere Browser-Clients beim Konto anmelden und eine Preemption bilden. Verlassen Sie andere angemeldete Browser-Clients, halten Sie das Konto auf diesem SunoAPI AI Musiksonggenerator-Client angemeldet und melden Sie sich nicht auf anderen Browser-Clients an.
 - Wenn die Seite die Meldung auffordert: Suno AI Music Song Generation Submission failed: Insufficient credits. Dies zeigt an, dass die Kontoinformationen Credits nicht genügend Punkte haben. Bitte fügen Sie zuerst Ihre eigenen Kontoinformationen hinzu, um sie zu speichern, und dann können Sie sie normal verwenden.
 - Nachdem die Musikgenerierungsaufgabe erfolgreich übermittelt wurde, wird der Warteschlangenstatus des Erzeugungsaufgangs abgerufen. Wenn der Status "abgeschlossen" ist, wird er erfolgreich zurückgegeben. Zu diesem Zeitpunkt wird standardmäßig 15 Sekunden lang auf die offizielle Erzeugungsdatei gewartet. Der offizielle Schnittstellendienst gibt direkt die URL-Adresse von Mediendateien zurück, und die meiste Zeit kann die Seite diese Mediendateien normal anzeigen. Gelegentlich hat die Schnittstelle möglicherweise die Url-Adresse der Mediendatei zurückgegeben, aber die eigentliche Datei kann nicht von der Url-Adresse aus aufgerufen werden und muss eine Weile warten. Zu diesem Zeitpunkt kann die Mediendatei möglicherweise nicht auf der Seite geladen werden. Sie können mit der rechten Maustaste auf den Medienplayer klicken und die Mediendateinadresse kopieren. Öffnen Sie die Adresse separat im Browser, um darauf zuzugreifen, oder klicken Sie mit der rechten Maustaste, um sie als Download zu speichern und zu speichern.
 - In Bezug auf das Sicherheitsproblem der Speicherung von Kontositzungs- und Cookie-Informationen: Solange Ihr Konto nicht aufgeladen ist, brauchen Sie sich keine Sorgen zu machen, da Sie Ihr Konto-Passwort nicht kennen. Die Sitzungs- und Cookie-Informationen, die Sie eingeben, werden ungültig, wenn Ihr Konto sich bei anderen Aktivitäten anmeldet oder sich von der offiziellen Website abmeldet. Die Sitzungs- und Cookie-Informationen, die Sie eingeben, ändern sich, wenn Sie sich das nächste Mal auf der offiziellen Website anmelden.
@@ -172,14 +172,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### Teilnahme an
 
 - Meine persönliche Stärke ist immer begrenzt, und jede Form des Beitrags ist willkommen, einschließlich, aber nicht beschränkt auf das Beitragen von Code, die Optimierung von Dokumenten, das Einreichen von Problemen und PRs. Aufgrund von Zeitbeschränkungen akzeptiere ich keine Bugs an Entwickler in WeChat oder WeChat Gruppen. Wenn Sie Fragen oder Optimierungsvorschläge haben, senden Sie bitte Probleme und PRs!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 
 ### Referenz
@@ -195,7 +195,7 @@ services:
 
 ### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 ##### Dieses Projekt ist Open-Source auf GitHub, basiert auf dem MIT-Protokoll und kostenlos, ohne jegliche Form von Zahlungsverhalten!

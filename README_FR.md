@@ -5,7 +5,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=black)](https://img.shields.io/github/v/release/SunoApi/SunoApi?label=release&color=blue)  ![GitHub last commit](https://img.shields.io/github/last-commit/SunoApi/SunoApi)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/SunoApi/SunoApi)  ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SunoApi/SunoApi)  ![SunoApi GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/SunoApi/SunoApi/total)  [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# Suno API non officiel Suno AI client
+# SunoAPI non officiel Suno AI client
 
 # Félicitations à ce projet open source sélectionné pour l’weekly de la semaine
 ### [![ruanyf](https://avatars.githubusercontent.com/u/905434?s=20) ruanyf added the weekly label 12 hours ago](https://github.com/ruanyf/weekly/issues/4263)
@@ -132,33 +132,33 @@ services:
 
 - Obtenez d’abord votre propre session et les cookies à partir de l’état de connexion de la page du navigateur.
 
-- <img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session.png" style="max-width: 100%;"/></a>
 
 - Remplissez les informations de réglage à l’intérieur derrière sera automatiquement préservé, vous pouvez remplir plusieurs informations de compte.
 
-- <img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session1.png" style="max-width: 100%;"/></a>
 
 - Remplissez et sauvegardez les informations, entrez l’identité pour changer et modifier les informations du compte.
 
-- <img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/session2.png" style="max-width: 100%;"/></a>
 
 ### L’achèvement du
 
 - Après le lancement du projet d’exécution du navigateur visite http://localhost:8501/ peut être utilisé.
 
-- <img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index1.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index2.png" style="max-width: 100%;"/></a>
 
-- <img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/>
+- <a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/index3.png" style="max-width: 100%;"/></a>
 
 
 ### La question
 
 - si la page vous invite à un message: s’il vous plaît définir le message de sauvegarde d’abord, puis rafraîchir la page pour une utilisation normale! S’il vous plaît ajouter vos propres informations de compte pour les sauvegarder d’abord, puis supprimer les autres informations de compte invalides dans la base de données sunoapi.db, y compris les informations de compte que j’ai testé, puis il peut être utilisé normalement.
-- si la page affiche le message: suno ai music song Generation commit failed: unauthorized. Indique que l'état de connexion du compte n'est pas autorisé, cette situation est généralement que plusieurs clients du navigateur se sont connectés au compte pour former une préemption, quittez d'autres clients du navigateur connectés, gardez le compte connecté dans ce client suno API ai music song generator, ne vous connectez pas dans d'autres clients du navigateur.
+- si la page affiche le message: suno ai music song Generation commit failed: unauthorized. Indique que l'état de connexion du compte n'est pas autorisé, cette situation est généralement que plusieurs clients du navigateur se sont connectés au compte pour former une préemption, quittez d'autres clients du navigateur connectés, gardez le compte connecté dans ce client SunoAPI ai music song generator, ne vous connectez pas dans d'autres clients du navigateur.
 - si la page affiche le message: Suno AI music song generation soumission a échoué: crédits insuffisants. Cela signifie que les points de crédits d’informations de compte sont insuffisants. S’il vous plaît ajouter vos propres informations de compte pour les enregistrer d’abord, puis il peut être utilisé normalement.
 - tirez et générez l’état de la file d’attente des tâches après que la tâche de génération de musique a été soumise avec succès. Il est retourné avec succès lorsque l’état est "complet ". À ce moment, par défaut, il reste 15 secondes en attendant le fichier de génération officiel. Le service d’interface officiel renvoie directement l’adresse Url des fichiers multimédia. La plupart du temps, la page affiche normalement ces fichiers multimédia. Parfois, l’interface a retourné l’adresse Url du fichier multimédia, mais le fichier réel n’est pas encore accessible à partir de l’adresse Url à attendre un peu. À ce moment, le fichier multimédia sur la page peut ne pas être chargé, vous pouvez cliquer sur le bouton droit de la souris dans le lecteur multimédia pour copier l’adresse du fichier multimédia, ouvrir cette adresse avec un navigateur séparément pour accéder ou directement le bouton droit et enregistrer comme téléchargement pour enregistrer.
 - en ce qui concerne la mise en place de la session de compte et les informations de cookie pour sauver la question de sécurité, tant que votre compte ne recharge pas besoin de s’inquiéter, parce que vous ne savez pas votre mot de passe de compte, vous remplissez la session et les informations de cookie tant que votre compte dans d’autres activités de connexion ailleurs, ou sur le site officiel de se déconnecter, Ensuite, la session et les cookies remplis ne sont pas valides, et la prochaine fois que vous vous connectez sur le site officiel, la session et les cookies changeront.
@@ -173,14 +173,14 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<img src="https://sunoapi.net/images/wechat.jpg?20240430" width="450px" height="538px"/>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240430" style="max-width: 100%;"/></a>
 
 
 ### La participation
 
 - Le pouvoir personnel est toujours limité et les contributions de toute nature sont les bienvenues, y compris, mais sans s'y limiter, le Code de contribution, l'optimisation de la documentation, la soumission d'issue et de pr, les bogues ne sont pas acceptés sur WeChat ou wechat pour les développeurs en raison du temps limité, les questions ou les suggestions d'optimisation sont les bienvenues.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SunoApi/SunoApi)](https://star-history.com/#SunoApi/SunoApi)
+<a href="https://star-history.com/#SunoApi/SunoApi" target="_blank"><img src="https://api.star-history.com/svg?repos=SunoApi/SunoApi" style="max-width: 100%;"/></a>
 
 
 ### De référence
@@ -196,7 +196,7 @@ services:
 
 ### Buy me a Coffee
 
-<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" width="398px" height="398px"></a>
+<a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
 ##### ce projet provient de GitHub, est basé sur le protocole MIT et est gratuit, sans aucune forme de paiement!

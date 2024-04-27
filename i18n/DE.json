@@ -1,8 +1,8 @@
 {
   "Language": "Deutsch",
   "Translation": {
-    "Page Title": "Suno API AI-Musikgenerator",
-    "Page About": "Suno API AI-Musikgenerator ist ein kostenloser AI-Musikgenerator, der die Existenz eines API-Interfaces nutzt, um AI-Musik zu generieren. Wenn Sie Fragen haben, besuchen Sie unseren Website: https://sunoapi.net",
+    "Page Title": "SunoAPI AI-Musikgenerator",
+    "Page About": "SunoAPI AI-Musikgenerator ist ein kostenloser AI-Musikgenerator, der die Existenz eines API-Interfaces nutzt, um AI-Musik zu generieren. Wenn Sie Fragen haben, besuchen Sie unseren Website: https://sunoapi.net",
     "Page Header": "Erfolgreich erschaffen Sie Ihre eigenen Suno AI-Musiklieder, nutzen Sie kostenlos und genießen Sie das Spaß an der innovativen AI-Musikgenerierung!",
 
     "Music Song Create": "Musiklieder erschaffen",
@@ -83,6 +83,10 @@
     "Generation Task Status": "Die Musikgenerierungsaufgabe ist noch nicht beendet, der aktuelle Status ist: ",
 
     "Enter Search Keywords": "Bitte geben Sie Suchbegriffe ein",
-    "No Search Result": "Keine Suchergebnisse gefunden."
+    "No Search Result": "Keine Suchergebnisse gefunden.",
+
+    "Music Duration": "Songdauer: ",
+    "Music Created At": "Generationszeit: ",
+    "Music Prompt": "Texte generieren:\n"
   }
 }

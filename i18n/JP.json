@@ -1,8 +1,8 @@
 {
   "Language": "日本語",
   "Translation": {
-    "Page Title": "Suno API AI 音楽歌です生成器",
-    "Page About": "Suno API AI 音楽生成器は、既存のAPIインタフェースを呼び出すことでAI音楽生成を実現する無料のAI音楽生成ソフトウェアです。 \n\n何か問題がある場合は、次のWebサイトを参照してください。https://sunoapi.net",
+    "Page Title": "SunoAPI AI 音楽歌です生成器",
+    "Page About": "SunoAPI AI 音楽生成器は、既存のAPIインタフェースを呼び出すことでAI音楽生成を実現する無料のAI音楽生成ソフトウェアです。 \n\n何か問題がある場合は、次のWebサイトを参照してください。https://sunoapi.net",
     "Page Header": "今すぐあなただけのSunoのAI音楽を作って、無料で使って新しいAI音楽の生成を楽しみます!",
 
     "Music Song Create": "音楽歌曲の創作",
@@ -84,6 +84,10 @@
     "Generation Task Status": "音楽生成タスクはまだ完了していません。現在の状態は次のとおりです：",
 
     "Enter Search Keywords": "検索キーワードを入力してください",
-    "No Search Result": "検索結果は何も出ませんでした。"
+    "No Search Result": "検索結果は何も出ませんでした。",
+
+    "Music Duration": "曲の長さ：",
+    "Music Created At": "生成時間：",
+    "Music Prompt": "歌詞を生成する：\n"
   }
 }
