@@ -17,6 +17,7 @@ import site
 site.addsitedir(root_dir)
 from streamlit_image_select import image_select
 
+
 from sqlite import SqliteTool
 
 suno_sqlite = SqliteTool()
@@ -81,6 +82,8 @@ hide_streamlit_style = """
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+st.session_state['disabled_state'] = False
+
 with st.sidebar:
     selected = option_menu(None, [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme"),i18n("Visit Official WebSite")], icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=1)
     
@@ -142,7 +145,7 @@ for row in result:
     title += i18n("Title") + ("None\n" if data['title'] is None or "" else data['title'] + "\n")
     title += i18n("Tags") + ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n")
     title += i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt'] + "\n")
-    title += i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else int(data['metadata']['duration']%60)) + " \n")
+    title += i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n")
     title += i18n("Music Created At")  + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at']) + "\n")
     title += i18n("Music Prompt")  + ("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
     

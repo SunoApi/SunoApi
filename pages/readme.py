@@ -9,6 +9,7 @@ from streamlit_modal import Modal
 import streamlit.components.v1 as components
 import streamlit_antd_components as sac
 
+
 from sqlite import SqliteTool
 
 suno_sqlite = SqliteTool()
@@ -76,6 +77,8 @@ hide_streamlit_style = """
 <style>#root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 2rem;}</style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+st.session_state['disabled_state'] = False
 
 with st.sidebar:
     selected = option_menu(None, [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme"),i18n("Visit Official WebSite")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=2)
