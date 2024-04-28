@@ -89,8 +89,8 @@
     "Music Created At": "生成时间：",
     "Music Prompt": "生成歌词：\n",
 
-    "Images TuGeYue Music": "上传图片",
-    "Images TuGeYue Upload": "上传图生乐",
+    "Images TuGeYue Music": "上传图生乐",
+    "Images TuGeYue Upload": "选择图片：",
     "Images TuGeYue Help": "上传图片根据图片内容生成对应歌曲（上传图片文件大小限制为：2MB）",
     "Upload Images Error": "图片文件大小超过限制，上传图片文件大小限制为：",
     "Upload Images Success": "图片上传成功，正在智能识别请稍等！",
