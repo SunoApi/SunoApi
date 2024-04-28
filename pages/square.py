@@ -125,7 +125,7 @@ def localdatetime(str):
     # 将字符串时间 转化为 datetime 对象
     dateObject = dateutil.parser.isoparse(str)
     # print(dateObject)  2021-09-03 20:56:35.450686+00:00
-    from backports.zoneinfo import ZoneInfo
+    from zoneinfo import ZoneInfo
     # 根据时区 转化为 datetime 数据
     localdt = dateObject.replace(tzinfo = timezone.utc).astimezone(ZoneInfo("Asia/Shanghai"))
     # localdt = dateObject.replace(tzinfo = timezone.utc).astimezone(tz=None)
