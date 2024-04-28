@@ -87,6 +87,15 @@
 
     "Music Duration": "노래 시간: ",
     "Music Created At": "생성 시간: ",
-    "Music Prompt": "가사 생성: \n"
+    "Music Prompt": "가사 생성: \n",
+
+    "Images TuGeYue Music": "사진을 업로드하다",
+    "Images TuGeYue Upload": "그림 선택:",
+    "Images TuGeYue Help": "그림 업로드 그림 내용에 따라 해당 노래를 생성합니다 (업로드 그림 파일의 크기는 2mb로 제한)",
+    "Upload Images Error": "그림 파일 크기가 제한을 초과했습니다. 업로드 그림 파일 크기 제한: ",
+    "Upload Images Success": "그림 업로드에 성공했습니다. 인식중입니다. 잠시만 기다려 주십시오!",
+    "Upload Images Analytics": "이 그림의 내용을 분석하고 그림이 표현한 정보를 총결하여 묘사해 주세요.첫 번째 문장은 그림 표현의 간략한 주제를 출력하고, 두 번째 문장은 그림의 내용을 상세하게 묘사하며, 주제와 내용을 직접 출력하며,'이 그림이 표현했다','이 그림에서','이 그림이 전달했다'등의 문구가 나타나지 않도록 하고 주제와 내용을 직접 출력하면 된다.",
+    "Analytics Images Error": "이미지 인텔리전스 인식 실패: ",
+    "Analytics Images Success": "이미지 지능 인식 성공, 노래 생성 중 잠시만요!"
   }
 }

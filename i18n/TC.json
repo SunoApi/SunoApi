@@ -87,6 +87,15 @@
 
     "Music Duration": "歌曲時長：",
     "Music Created At": "生成時間：",
-    "Music Prompt": "生成歌詞：\n"
+    "Music Prompt": "生成歌詞：\n",
+
+    "Images TuGeYue Music": "上傳圖生樂",
+    "Images TuGeYue Upload": "選擇圖片：",
+    "Images TuGeYue Help": "上傳圖片根據圖片內容生成對應歌曲（上傳圖片文件大小限制為：2MB）",
+    "Upload Images Error": "圖片文件大小超過限制，上傳圖片文件大小限制為：",
+    "Upload Images Success": "圖片上傳成功，正在智慧識別請稍等！",
+    "Upload Images Analytics": "幫我分析一下這張圖片的內容，總結並描述圖片所表達的資訊。 第一句輸出圖片表達的簡要主題，第二句詳細描述圖片的內容，直接輸出主題和內容，不要出現'這張圖片表達了'，'在這幅圖畫中'，'這張圖片傳達了'等字眼，直接輸出主題和內容即可。",
+    "Analytics Images Error": "圖片智慧識別失敗：",
+    "Analytics Images Success": "圖片智慧識別成功，正在生成歌曲請稍等！"
   }
 }

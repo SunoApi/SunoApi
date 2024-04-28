@@ -26,6 +26,7 @@
 - Multiple account information can be set to be saved and used
 - Music Sharing Square showcases all publicly available songs
 - Enter the music feed ID to directly obtain song information
+- Support to upload pictures, according to the content of the image analysis to generate songs
 - Support multiple languages such as Chinese, English, Korean, Japanese, etc
 
 ### Debug
@@ -42,13 +43,23 @@ git clone https://github.com/SunoApi/SunoApi.git
 - Installation dependencies
 
 ```bash
+cd SunoApi
 pip3 install -r requirements.txt
 ```
+
+- .env environment variable, Image recognition requires the use of the gpt-4-vision review model, which can use OpenAI interfaces or replace them with other commonly used interfaces
+
+```bash
+OPENAI_BASE_URL = https://chatplusapi.cn
+OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
+WEB_SITE_URL = http://localhost:8501
+```
+
 
 - Start the project, please refer to the Streamlit documentation for details on Streamlit
 
 ```bash
-streamlit run main.py
+streamlit run main.py --server.maxUploadSize=2
 ```
 
 ### Deploy
@@ -60,8 +71,16 @@ docker run -d \
   --name sunoapi \
   --restart always \
   -p 8501:8501 \
+  -v ./sunoapi.db:/app/sunoapi.db \
+  -v ./images/upload:/app/images/upload \
+  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
+  -e OPENAI_BASE_URL=https://api.openai.com  \
+  -e WEB_SITE_URL=http://localhost:8501  \
   sunoapi/sunoapi:latest
 ```
+
+##### Attention: It is necessary to http://localhost:8501 Replace with the actual address you can access, and the final uploaded image file will pass through http://domain.com/images/upload/xxxxxx.jpg The format can be accessed, otherwise OpenAI cannot access the image you uploaded and cannot recognize its content. Therefore, the function of uploading images to generate music will not be available.
+
 
 #### Docker local compilation and deployment
 
@@ -83,7 +102,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
 ```
 
 #### Docker pull image deployment
@@ -105,6 +124,12 @@ services:
       - "8501:8501"
     volumes:
       - ./sunoapi.db:/app/sunoapi.db
+      - ./images/upload:/app/images/upload
+    environment:
+      - TZ=Asia/Shanghai
+      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+      - OPENAI_BASE_URL=https://api.openai.com
+      - WEB_SITE_URL=http://localhost:8501
     restart: always
 ```
 

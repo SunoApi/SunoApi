@@ -87,6 +87,15 @@
 
     "Music Duration": "Song duration: ",
     "Music Created At": "Generation time: ",
-    "Music Prompt": "Generate lyrics: \n"
+    "Music Prompt": "Generate lyrics: \n",
+
+    "Images TuGeYue Music": "Upload images",
+    "Images TuGeYue Upload": "Select image:",
+    "Images TuGeYue Help": "Upload images to generate corresponding songs based on the image content (upload image file size limit: 2MB)",
+    "Upload Images Error": "The size of the image file exceeds the limit. The size limit for uploading image files is: ",
+    "Upload Images Success": "Image upload successful, intelligent recognition in progress. Please wait!",
+    "Upload Images Analytics": "Please help me analyze the content of this picture, summarize and describe the information expressed in the picture. The first sentence provides a brief description of the theme conveyed by the image, while the second sentence provides a detailed description of the content of the image. Directly output the theme and content, without using words such as' this image expresses', 'in this image', or 'this image conveys'. Simply output the theme and content.",
+    "Analytics Images Error": "Image intelligent recognition failed: ",
+    "Analytics Images Success": "Image intelligent recognition success, generating songs, please wait!"
   }
 }

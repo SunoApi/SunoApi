@@ -3,13 +3,21 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
-import time,json,os
+import time,json,os,requests
 
 from datetime import datetime
+from pathlib import Path
 
 import schemas
 from cookie import get_suno_auth,new_suno_auth
 from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics
+
+from dotenv import load_dotenv
+load_dotenv()
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+WEB_SITE_URL = os.getenv("WEB_SITE_URL")
+
 
 from sqlite import SqliteTool
 
@@ -97,70 +105,158 @@ col2.markdown(i18n("Page Header"))
 
 container = col2.container(border=True)
 
-st.session_state.Custom = False
-Custom = container.toggle(i18n("Custom"))
-
 def change_prompt():
     # print("st.session_state.change_prompt:" + st.session_state.change_prompt)
     st.session_state['prompt_input'] = st.session_state['change_prompt']
 
-if Custom:
-    st.session_state.Custom = True
-    # print(st.session_state.Custom)
-
-    if 'title_input' not in st.session_state:
-        st.session_state['title_input'] = ""
-
-    Title = container.text_input(label=i18n("Title"), value=st.session_state['title_input'], placeholder=i18n("Title Placeholder"), max_chars=100, help=i18n("Title Desc"))
-    st.session_state.Title = Title
-    # print(st.session_state.Title)
-    
-    if 'tags_input' not in st.session_state:
-        st.session_state['tags_input'] = ""
-
-    # Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'].replace(",", " "), placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
-
-    options = container.multiselect(
-    i18n("Tags"),
-    ["chinese pop","acoustic", "aggressive", "anthemic", "atmospheric", "bouncy", "chill", "dark", "dreamy", "electronic", "emotional", "epic", "experimental", "futuristic", "groovy", "heartfelt", "infectious", "melodic", "mellow", "powerful", "psychedelic", "romantic", "smooth", "syncopated", "uplifting","afrobeat", "anime", "ballad", "bedroom pop", "bluegrass", "blues", "classical", "country", "cumbia", "dance", "dancepop", "delta blues", "electropop", "disco", "dream pop", "drum and bass", "edm", "emo", "folk", "funk", "future bass", "gospel", "grunge", "grime", "hip hop", "house", "indie", "j-pop", "jazz", "k-pop", "kids music", "metal", "new jack swing", "new wave", "opera", "pop", "punk", "raga", "rap", "reggae", "reggaeton", "rock", "rumba", "salsa", "samba", "sertanejo", "soul", "synthpop", "swing", "synthwave", "techno", "trap", "uk garage"],
-    [] if st.session_state['tags_input']=="" else st.session_state['tags_input'].split(","),
-    placeholder=i18n("Tags Placeholder"),
-    help=i18n("Tags Desc"),
-    max_selections=4)
-
-    st.session_state.Tags = ' '.join(str(opts) for opts in options)
-    # print(st.session_state.Tags)
-
-    container.container()
-    cols = container.columns(3)
-    random_style = cols[0].button(i18n("Random Style"), type="secondary")
-    if random_style:
-        st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
-        st.rerun()
-
-    if 'prompt_input' not in st.session_state:
-        st.session_state['prompt_input'] = ""
-
-    random_lyrics = cols[1].button(i18n("Random Lyrics"), type="secondary")
-    if random_lyrics:
-        lyrics = get_random_lyrics(Title if Title != "" else st.session_state['prompt_input'], st.session_state.token)
-        st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
-        st.session_state['prompt_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['prompt_input'] if st.session_state['prompt_input'] != "" else "")
-        st.rerun()
-            
-
-    Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
-    st.session_state.Prompt = Prompt
-    # print(st.session_state.Prompt)
-else:
-    st.session_state.Custom = False
-    # print(st.session_state.Custom)
-    DescPrompt = container.text_area(label=i18n("Desc Prompt"), value='', placeholder=i18n("Desc Value"), height=150, max_chars=500, help=i18n("Desc Reamrk"))
-    st.session_state.DescPrompt = DescPrompt
-    # print(st.session_state.DescPrompt)
+placeholder = col2.empty()
+if 'disabled_state' not in st.session_state:
+        st.session_state['disabled_state'] = False
+elif st.session_state['disabled_state']:
+    placeholder.error(i18n("Fetch Status Progress"))
 
 with container.container():
-    cols = container.columns(3)
+    cols = container.columns(2)
+
+    st.session_state.Custom = False
+    Custom = cols[0].toggle(i18n("Custom"))
+    if Custom:
+        st.session_state.Custom = True
+        # print(st.session_state.Custom)
+
+        if 'title_input' not in st.session_state:
+            st.session_state['title_input'] = ""
+
+        Title = container.text_input(label=i18n("Title"), value=st.session_state['title_input'], placeholder=i18n("Title Placeholder"), max_chars=100, help=i18n("Title Desc"))
+        st.session_state.Title = Title
+        # print(st.session_state.Title)
+        
+        if 'tags_input' not in st.session_state:
+            st.session_state['tags_input'] = ""
+
+        # Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'].replace(",", " "), placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
+
+        options = container.multiselect(
+        i18n("Tags"),
+        ["chinese pop","acoustic", "aggressive", "anthemic", "atmospheric", "bouncy", "chill", "dark", "dreamy", "electronic", "emotional", "epic", "experimental", "futuristic", "groovy", "heartfelt", "infectious", "melodic", "mellow", "powerful", "psychedelic", "romantic", "smooth", "syncopated", "uplifting","afrobeat", "anime", "ballad", "bedroom pop", "bluegrass", "blues", "classical", "country", "cumbia", "dance", "dancepop", "delta blues", "electropop", "disco", "dream pop", "drum and bass", "edm", "emo", "folk", "funk", "future bass", "gospel", "grunge", "grime", "hip hop", "house", "indie", "j-pop", "jazz", "k-pop", "kids music", "metal", "new jack swing", "new wave", "opera", "pop", "punk", "raga", "rap", "reggae", "reggaeton", "rock", "rumba", "salsa", "samba", "sertanejo", "soul", "synthpop", "swing", "synthwave", "techno", "trap", "uk garage"],
+        [] if st.session_state['tags_input']=="" else st.session_state['tags_input'].split(","),
+        placeholder=i18n("Tags Placeholder"),
+        help=i18n("Tags Desc"),
+        max_selections=4)
+
+        st.session_state.Tags = ' '.join(str(opts) for opts in options)
+        # print(st.session_state.Tags)
+
+        container.container()
+        cols = container.columns(2)
+        random_style = cols[0].button(i18n("Random Style"), type="secondary")
+        if random_style:
+            st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
+            st.rerun()
+
+        if 'prompt_input' not in st.session_state:
+            st.session_state['prompt_input'] = ""
+
+        random_lyrics = cols[1].button(i18n("Random Lyrics"), type="secondary")
+        if random_lyrics:
+            lyrics = get_random_lyrics(Title if Title != "" else st.session_state['prompt_input'], st.session_state.token)
+            st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
+            st.session_state['prompt_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['prompt_input'] if st.session_state['prompt_input'] != "" else "")
+            st.rerun()
+                
+
+        Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+        st.session_state.Prompt = Prompt
+        # print(st.session_state.Prompt)
+    else:
+        st.session_state.Custom = False
+        # print(st.session_state.Custom)
+
+        st.session_state.TuGeYue = False
+        TuGeYue = cols[1].toggle(i18n("Images TuGeYue Music"))
+
+        if 'DescPrompt' not in st.session_state:
+            st.session_state.DescPrompt = ""
+
+        if TuGeYue:
+            st.session_state.TuGeYue = True
+            # print(st.session_state.TuGeYue)
+            # 设置文件上传的配置
+            # st.set_option('deprecation.showfileUploaderEncoding', False)
+            upload_folder = Path("images/upload")
+            upload_folder.mkdir(exist_ok=True)
+            file_size_limit = 1024 * 1024 * 2  # 2MB
+            uploaded_file = container.file_uploader(i18n("Images TuGeYue Upload"), type=['bmp', 'webp', 'png', 'jpg', 'jpeg'], help=i18n("Images TuGeYue Help"), accept_multiple_files=False)
+
+            if uploaded_file is not None and not st.session_state['disabled_state']:
+                if uploaded_file.size > file_size_limit:
+                    placeholder.error(i18n("Upload Images Error") + f"{file_size_limit / (1024 * 1024)}MB")
+                else:
+                    file_ext = uploaded_file.type.split("/")[1]
+                    filename = f"{time.time()}.{file_ext}"
+                    my_bar = container.progress(0)
+                    bytes_data = uploaded_file.read()
+                    # container.write(bytes_data)
+                    with open(upload_folder / filename, "wb") as f:
+                        f.write(bytes_data)
+                    my_bar.progress(100)
+                    image_url = f"{WEB_SITE_URL}/images/upload/{filename}"
+                    placeholder.success(i18n("Upload Images Success"))
+                    my_bar.empty()
+                    try:
+                        headers = {"Authorization": f"Bearer {OPENAI_API_KEY}","Content-Type": "application/json"}
+                        requests.packages.urllib3.disable_warnings()
+                        resp = requests.post(
+                            url=f"{OPENAI_BASE_URL}/v1/chat/completions",
+                            headers=headers,
+                            verify=False,
+                            json={
+                                    "messages": [
+                                        {
+                                            "role": "user",
+                                            "content": [
+                                                {
+                                                    "type": "text",
+                                                    "text": i18n("Upload Images Analytics")
+                                                },
+                                                {
+                                                    "type": "image_url",
+                                                    "image_url": {
+                                                        "url": image_url #"https://sunoapi.net/images/upload/1714291652.6060529.png"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "max_tokens": 1000,
+                                    "temperature": 1,
+                                    "top_p": 1,
+                                    "n": 1,
+                                    "stream": False,
+                                    "presence_penalty": 0,
+                                    "frequency_penalty": 0,
+                                    "model": "gpt-4-vision-preview"
+                                }
+                        )
+                        if resp.status_code != 200:
+                            placeholder.error(i18n("Analytics Images Error") + f"{resp.text}")
+                        else:
+                            print(local_time() + f" ***gpt-4-vision-preview image_url -> {image_url} content -> {resp.text} ***\n")
+                            content = resp.json()["choices"][0]["message"]["content"].strip()
+                            st.session_state.DescPrompt = content
+                            placeholder.success(i18n("Analytics Images Success"))
+                    except Exception as e:
+                        placeholder.error(i18n("Analytics Images Error") + f"{str(e)}")
+        else:
+            st.session_state['clips_0'] = ""
+            st.session_state['clips_1'] = ""
+
+        DescPrompt = container.text_area(label=i18n("Desc Prompt"), value=st.session_state.DescPrompt, placeholder=i18n("Desc Value"), height=150, max_chars=500, help=i18n("Desc Reamrk"))
+        st.session_state.DescPrompt = DescPrompt
+        # print(st.session_state.DescPrompt)
+
+with container.container():
+    cols = container.columns(2)
 
     st.session_state.Instrumental = False
     instrumental = cols[0].checkbox(i18n("Instrumental"), help=i18n("Instrumental Help"))
@@ -223,11 +319,11 @@ if Setting:
     if SaveInfo:
         st.session_state.SaveInfo = True
         if Identity == "":
-            col2.error(i18n("SaveInfo Identity Error"))
+            placeholder.error(i18n("SaveInfo Identity Error"))
         elif Session == "":
-            col2.error(i18n("SaveInfo Session Error"))
+            placeholder.error(i18n("SaveInfo Session Error"))
         elif Cookie == "":
-            col2.error(i18n("SaveInfo Cookie Error"))
+            placeholder.error(i18n("SaveInfo Cookie Error"))
         else:
             result = suno_sqlite.query_one("select id,identity,[session],cookie from session where identity =?", (Identity,))
             print(result)
@@ -241,9 +337,10 @@ if Setting:
                 st.session_state.Identity = Identity
                 new_suno_auth(Identity, Session, Cookie)
                 # print(st.session_state.Identity)
+                placeholder.empty()
                 col2.success(i18n("SaveInfo Success"))
             else:
-                col2.error(i18n("SaveInfo Error"))
+                placeholder.error(i18n("SaveInfo Error"))
             print(result)
             print("\n")
             # print(st.session_state.SaveInfo)
@@ -260,7 +357,7 @@ while True:
         # print(local_time() + f" ***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
         break
     else:
-        col2.error(i18n("TokenAuth Error"))
+        placeholder.error(i18n("TokenAuth Error"))
         break
 
 # @st.cache_data
@@ -285,11 +382,12 @@ def fetch_feed(aids: list):
                 col1.audio(resp[0]["audio_url"])
                 col1.video(resp[0]["video_url"])
                 # col1.image(resp[0]["image_large_url"])
+                placeholder.empty()
                 col2.success(i18n("FetchFeed Success") + resp[0]["id"])
             else:
-                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+                placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
         else:
-            col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     elif len(aids) == 2  and len(aids[0].strip()) == 36 and len(aids[1].strip()) == 36:
         resp = get_feed(aids[0].strip(), st.session_state.token)
         print(resp)
@@ -311,9 +409,9 @@ def fetch_feed(aids: list):
                 # col1.image(resp[0]["image_large_url"])
                 col2.success(i18n("FetchFeed Success") + resp[0]["id"])
             else:
-                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+                placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
         else:
-            col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
         resp = get_feed(aids[1].strip(), st.session_state.token)
         print(resp)
@@ -336,11 +434,11 @@ def fetch_feed(aids: list):
                 # col3.image(resp[0]["image_large_url"])
                 col2.success(i18n("FetchFeed Success") + resp[0]["id"])
             else:
-                col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+                placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
         else:
-            col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
-        col2.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
+        placeholder.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
         # resp = get_page_feed(aids, st.session_state.token)
         # print(resp)
         # print("\n")
@@ -366,7 +464,7 @@ def fetch_feed(aids: list):
         #         # col1.image(row["image_large_url"])
         #         col2.success(i18n("FetchFeed Success") + row["id"])
         #     else:
-        #         col2.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
+        #         placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
 
 
 container2 = col2.container(border=True)
@@ -387,7 +485,7 @@ if FetchFeed:
     if FeedBtn:
         st.session_state.FeedBtn = True
         if FeedID == "":
-            col2.error(i18n("FetchFeed FeedID Empty"))
+            placeholder.error(i18n("FetchFeed FeedID Empty"))
         else:
            FeedIDs = FeedID.split(",")
            # FeedIDs = FeedID*1
@@ -397,8 +495,7 @@ if FetchFeed:
         # print(st.session_state.FeedBtn)
 
 
-disabled_state = False
-StartBtn = col2.button(i18n("Generate"), use_container_width=True, type="primary", disabled=disabled_state)
+StartBtn = col2.button(i18n("Generate"), use_container_width=True, type="primary", disabled=False)
 
 def generate(data: schemas.CustomModeGenerateParam):
     try:
@@ -475,106 +572,146 @@ def fetch_status(aid: str, twice=False):
     
     return resp
 
-if StartBtn:
-    if st.session_state.Custom:
-        if st.session_state.Title == "":
-            col2.error(i18n("Custom Title Error"))
-        elif st.session_state.Tags == "":
-            col2.error(i18n("Custom Tags Error"))
-        elif st.session_state.Prompt == "":
-            col2.error(i18n("Custom Prompt Error"))
-        else:
-            data = {}
-            if st.session_state.Instrumental:
-                data = {
-                    "title": st.session_state.Title,
-                    "tags": st.session_state.Tags,
-                    "prompt": "",
-                    "mv": "chirp-v3-0",
-                    "continue_at": None,
-                    "continue_clip_id": None
-                }
+if StartBtn or (st.session_state.TuGeYue and st.session_state.DescPrompt != ""):
+    if not st.session_state['disabled_state']: 
+        if st.session_state.Custom:
+            if st.session_state.Title == "":
+                placeholder.error(i18n("Custom Title Error"))
+            elif st.session_state.Tags == "":
+                placeholder.error(i18n("Custom Tags Error"))
+            elif st.session_state.Prompt == "":
+                placeholder.error(i18n("Custom Prompt Error"))
             else:
-                data = {
-                    "title": st.session_state.Title,
-                    "tags": st.session_state.Tags,
-                    "prompt": st.session_state.Prompt,
-                    "mv": "chirp-v3-0",
-                    "continue_at": None,
-                    "continue_clip_id": None
-                }
-            print(data)
-            print("\n")
-            resp = generate(data)
-            print(resp)
-            print("\n")
-            status = resp["status"] if "status" in resp else resp["detail"]
-            if status == "running":
-                disabled_state = True
-                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
-                resp0 = fetch_status(resp["clips"][0]["id"], False)
-                if resp0[0]["status"] == "complete":
-                    col1.audio(resp0[0]["audio_url"])
-                    col1.video(resp0[0]["video_url"])
-                    # col1.image(resp0[0]["image_large_url"])
-                    col2.success(i18n("Generate Success") + resp0[0]["id"])
+                data = {}
+                if st.session_state.Instrumental:
+                    data = {
+                        "title": st.session_state.Title,
+                        "tags": st.session_state.Tags,
+                        "prompt": "",
+                        "mv": "chirp-v3-0",
+                        "continue_at": None,
+                        "continue_clip_id": None
+                    }
                 else:
-                    col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
-                
-                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
-                resp1 = fetch_status(resp["clips"][1]["id"], True)
-                if resp1[0]["status"] == "complete":
-                    st.balloons()
-                    col3.audio(resp1[0]["audio_url"])
-                    col3.video(resp1[0]["video_url"])
-                    # col3.image(resp1[0]["image_large_url"])
-                    col2.success(i18n("Generate Success") + resp1[0]["id"])
-                else:
-                    col2.error(i18n("Generate Status Error")  + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
-                disabled_state = False
-            else:
-                col2.error(i18n("Generate Submit Error") + status)
-    else:
-        if st.session_state.DescPrompt == "":
-            col2.error(i18n("DescPrompt Error"))
-        else:
-            data = {
-                "gpt_description_prompt": st.session_state.DescPrompt,
-                "make_instrumental": st.session_state.Instrumental,
-                "mv": "chirp-v3-0",
-                "prompt": ""
-            }
-            print(data)
-            print("\n")
-            resp = generate_with_song_description(data)
-            print(resp)
-            print("\n")
-            status = resp["status"] if "status" in resp else resp["detail"]
-            if status == "running":
-                disabled_state = True
-                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
-                resp0 = fetch_status(resp["clips"][0]["id"], False)
-                if resp0[0]["status"] == "complete":
-                    col1.audio(resp0[0]["audio_url"])
-                    col1.video(resp0[0]["video_url"])
-                    # col1.image(resp0[0]["image_large_url"])
-                    col2.success(i18n("Generate Success") + resp0[0]["id"])
-                else:
-                    col2.error(i18n("Generate Status Error") + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
+                    data = {
+                        "title": st.session_state.Title,
+                        "tags": st.session_state.Tags,
+                        "prompt": st.session_state.Prompt,
+                        "mv": "chirp-v3-0",
+                        "continue_at": None,
+                        "continue_clip_id": None
+                    }
+                print(data)
+                print("\n")
+                resp = generate(data)
+                print(resp)
+                print("\n")
+                status = resp["status"] if "status" in resp else resp["detail"]
+                if status == "running":
+                    st.session_state['disabled_state'] = True
+                    result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
 
-                result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
-                resp1 = fetch_status(resp["clips"][1]["id"], True)
-                if resp1[0]["status"] == "complete":
-                    st.balloons()
-                    col3.audio(resp1[0]["audio_url"])
-                    col3.video(resp1[0]["video_url"])
-                    # col3.image(resp1[0]["image_large_url"])
-                    col2.success(i18n("Generate Success") + resp1[0]["id"])
+                    st.session_state['clips_0'] = str(resp["clips"][0]["id"])
+                    st.session_state['clips_1'] = str(resp["clips"][1]["id"])
+
+                    resp0 = fetch_status(resp["clips"][0]["id"], False)
+                    if resp0[0]["status"] == "complete":
+                        col1.audio(resp0[0]["audio_url"])
+                        col1.video(resp0[0]["video_url"])
+                        # col1.image(resp0[0]["image_large_url"])
+                        placeholder.empty()
+                        col2.success(i18n("Generate Success") + resp0[0]["id"])
+                    else:
+                        placeholder.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
+                    
+                    result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
+
+                    resp1 = fetch_status(resp["clips"][1]["id"], True)
+                    if resp1[0]["status"] == "complete":
+                        st.balloons()
+                        col3.audio(resp1[0]["audio_url"])
+                        col3.video(resp1[0]["video_url"])
+                        # col3.image(resp1[0]["image_large_url"])
+                        placeholder.empty()
+                        col2.success(i18n("Generate Success") + resp1[0]["id"])
+                    else:
+                        placeholder.error(i18n("Generate Status Error")  + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
+                    st.session_state['disabled_state'] = False
                 else:
-                    col2.error(i18n("Generate Status Error") + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
-                disabled_state = False
+                    placeholder.error(i18n("Generate Submit Error") + status)
+        else:
+            if st.session_state.DescPrompt == "":
+                placeholder.error(i18n("DescPrompt Error"))
             else:
-                col2.error(i18n("Generate Submit Error") + status)
+                data = {
+                    "gpt_description_prompt": st.session_state.DescPrompt,
+                    "make_instrumental": st.session_state.Instrumental,
+                    "mv": "chirp-v3-0",
+                    "prompt": ""
+                }
+                print(data)
+                print("\n")
+                resp = generate_with_song_description(data)
+                print(resp)
+                print("\n")
+                status = resp["status"] if "status" in resp else resp["detail"]
+                if status == "running":
+                    st.session_state['disabled_state'] = True
+                    result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
+
+                    st.session_state['clips_0'] = str(resp["clips"][0]["id"])
+                    st.session_state['clips_1'] = str(resp["clips"][1]["id"])
+
+                    resp0 = fetch_status(resp["clips"][0]["id"], False)
+                    if resp0[0]["status"] == "complete":
+                        col1.audio(resp0[0]["audio_url"])
+                        col1.video(resp0[0]["video_url"])
+                        # col1.image(resp0[0]["image_large_url"])
+                        placeholder.empty()
+                        st.session_state.DescPrompt = ""
+                        col2.success(i18n("Generate Success") + resp0[0]["id"])
+                    else:
+                        placeholder.error(i18n("Generate Status Error") + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
+
+                    result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][1]["id"]), str(resp["clips"][1]), st.session_state.Private))
+                    
+                    resp1 = fetch_status(resp["clips"][1]["id"], True)
+                    if resp1[0]["status"] == "complete":
+                        st.balloons()
+                        col3.audio(resp1[0]["audio_url"])
+                        col3.video(resp1[0]["video_url"])
+                        # col3.image(resp1[0]["image_large_url"])
+                        placeholder.empty()
+                        st.session_state.DescPrompt = ""
+                        col2.success(i18n("Generate Success") + resp1[0]["id"])
+                    else:
+                        placeholder.error(i18n("Generate Status Error") + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
+                    st.session_state['disabled_state'] = False
+                else:
+                    placeholder.error(i18n("Generate Submit Error") + status)
+    else:
+        if st.session_state['clips_0'] != "":
+            resp0 = fetch_status(st.session_state['clips_0'], False)
+            if resp0[0]["status"] == "complete":
+                col1.audio(resp0[0]["audio_url"])
+                col1.video(resp0[0]["video_url"])
+                # col1.image(resp0[0]["image_large_url"])
+                placeholder.empty()
+                col2.success(i18n("Generate Success") + resp0[0]["id"])
+            else:
+                placeholder.error(i18n("Generate Status Error") + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
+
+        if st.session_state['clips_1'] != "":
+            resp1 = fetch_status(st.session_state['clips_1'], True)
+            if resp1[0]["status"] == "complete":
+                st.balloons()
+                col3.audio(resp1[0]["audio_url"])
+                col3.video(resp1[0]["video_url"])
+                # col3.image(resp1[0]["image_large_url"])
+                placeholder.empty()
+                col2.success(i18n("Generate Success") + resp1[0]["id"])
+            else:
+                placeholder.error(i18n("Generate Status Error") + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
 
     
 # 隐藏右边的菜单以及页脚

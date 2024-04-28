@@ -4,6 +4,7 @@ aiohttp
 pydantic
 requests
 streamlit
+python-dotenv
 streamlit-modal
 streamlit-option-menu
 #streamlit-image-select

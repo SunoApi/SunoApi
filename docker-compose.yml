@@ -9,4 +9,10 @@ services:
       - "8501:8501"
     volumes:
       - ./sunoapi.db:/app/sunoapi.db
+      - ./images/upload:/app/images/upload
+    environment:
+      - TZ=Asia/Shanghai
+      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+      - OPENAI_BASE_URL=https://api.openai.com
+      - WEB_SITE_URL=http://localhost:8501
     restart: always

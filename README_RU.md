@@ -26,6 +26,7 @@
 - Можно настроить несколько учетных записей для сохранения информации
 - Музыкальная ярмарка показывает все публичные песни
 - Введите музыкальный номер, чтобы получить информацию о песне напрямую
+- Поддержка контента, загружающего изображение для анализа, для создания песни
 - Поддержка многонациональных языков, таких как китайский, английский, корейский и японский
 
 ### отладк
@@ -41,13 +42,23 @@ git clone https://github.com/SunoApi/SunoApi.git
 - Зависимость от установки
 
 ```bash
+cd SunoApi
 pip3 install -r requirements.txt
 ```
+
+- .env Переменные среды, Для распознавания изображений необходимо использовать модель gpt-4-vision-preview которая может использовать интерфейс OpenAI или может быть заменена другим интерфейсом, который вы обычно используете.
+
+```bash
+OPENAI_BASE_URL = https://chatplusapi.cn
+OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
+WEB_SITE_URL = http://localhost:8501
+```
+
 
 - Запустите проект, пожалуйста, обратитесь к документации Streamlit для Streamlit
 
 ```bash
-streamlit run main.py
+streamlit run main.py --server.maxUploadSize=2
 ```
 
 ### Развертывание
@@ -59,8 +70,16 @@ docker run -d \
   --name sunoapi \
   --restart always \
   -p 8501:8501 \
+  -v ./sunoapi.db:/app/sunoapi.db \
+  -v ./images/upload:/app/images/upload \
+  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
+  -e OPENAI_BASE_URL=https://api.openai.com  \
+  -e WEB_SITE_URL=http://localhost:8501  \
   sunoapi/sunoapi:latest
 ```
+
+##### Примечание: необходимо http://localhost:8501 Замените адрес, к которому вы действительно можете получить доступ, и файл изображения, который вы загрузите, будет проходить http://domain.com/images/upload/xxxxxx.jpg Форма доступна, иначе OpenAI не сможет распознать содержимое изображения без доступа к загруженному вами изображению, и функция загрузки изображений для создания музыки не будет работать.
+
 
 #### Docker Локальное развертывание компиляции
 
@@ -82,7 +101,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
 ```
 
 #### Docker Развертывание зеркал
@@ -104,6 +123,12 @@ services:
       - "8501:8501"
     volumes:
       - ./sunoapi.db:/app/sunoapi.db
+      - ./images/upload:/app/images/upload
+    environment:
+      - TZ=Asia/Shanghai
+      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+      - OPENAI_BASE_URL=https://api.openai.com
+      - WEB_SITE_URL=http://localhost:8501
     restart: always
 ```
 

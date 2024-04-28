@@ -26,6 +26,7 @@
 - 여러 계정의 정보를 설정하여 저장하여 사용할 수 있음
 - 음악나눔마당 공개곡 모두 전시
 - 음악 번호를 입력하면 바로 노래 정보를 얻을 수 있습니다
+- 그림 분석을 업로드하는 콘텐츠 생성 노래를 지원합니다
 - 중국어, 영어, 한국어, 일본어 등 다국어 지원
 
 ### 디 버그
@@ -42,13 +43,23 @@ git clone https://github.com/SunoApi/SunoApi.git
 - 설치 종속
 
 ```bash
+cd SunoApi
 pip3 install -r requirements.txt
 ```
+
+- .env 환경 변수, 그림 인식은 gpt-4-vision-preview 모델을 사용하여 OpenAI 인터페이스를 사용할 수도 있고, 자신이 자주 사용하는 다른 인터페이스로 대체할 수도 있다
+
+```bash
+OPENAI_BASE_URL = https://chatplusapi.cn
+OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
+WEB_SITE_URL = http://localhost:8501
+```
+
 
 - 프로젝트를 시작하고 Streamlit에 대해서는 Streamlit 설명서를 참조하십시오.
 
 ```bash
-streamlit run main.py
+streamlit run main.py --server.maxUploadSize=2
 ```
 
 ### 배치
@@ -60,8 +71,16 @@ docker run -d \
   --name sunoapi \
   --restart always \
   -p 8501:8501 \
+  -v ./sunoapi.db:/app/sunoapi.db \
+  -v ./images/upload:/app/images/upload \
+  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
+  -e OPENAI_BASE_URL=https://api.openai.com  \
+  -e WEB_SITE_URL=http://localhost:8501  \
   sunoapi/sunoapi:latest
 ```
+
+##### 주의: http://localhost:8501 실제로 접근할 수 있는 주소로 바꾸면 최종적으로 업로드된 그림 파일은 통과할 수 있다 http://domain.com/images/upload/xxxxxx.jpg 의 형식은 액세스할 수 있습니다. 그렇지 않으면 OpenAI가 당신이 올린 이 그림에 액세스하지 못하면 그림 내용을 식별할 수 없습니다. 그러면 그림을 업로드하여 음악을 생성하는 기능은 사용할 수 없습니다.
+
 
 #### Docker 로컬 컴파일 배치
 
@@ -83,7 +102,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
 ```
 
 #### Docker 미러 배포 끌어오기
@@ -105,6 +124,12 @@ services:
       - "8501:8501"
     volumes:
       - ./sunoapi.db:/app/sunoapi.db
+      - ./images/upload:/app/images/upload
+    environment:
+      - TZ=Asia/Shanghai
+      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+      - OPENAI_BASE_URL=https://api.openai.com
+      - WEB_SITE_URL=http://localhost:8501
     restart: always
 ```
 

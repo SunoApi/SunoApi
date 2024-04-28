@@ -87,6 +87,15 @@
 
     "Music Duration": "Durée de la chanson: ",
     "Music Created At": "Temps de génération: ",
-    "Music Prompt": "Générer les paroles: \n"
+    "Music Prompt": "Générer les paroles: \n",
+
+    "Images TuGeYue Music": "Télécharger une image",
+    "Images TuGeYue Upload": "Choisissez une image:",
+    "Images TuGeYue Help": "Upload picture génère la chanson correspondante en fonction du contenu de l'image (la taille du fichier upload picture est limitée à: 2MB)",
+    "Upload Images Error": "La taille du fichier image dépasse la limite, la limite de taille du fichier image téléchargé est: ",
+    "Upload Images Success": "Image téléchargée avec succès, en cours d'identification intelligente s'il vous plaît attendre un peu!",
+    "Upload Images Analytics": "Aidez-moi à analyser le contenu de cette image. Résumez et décrivez le message qu’elle exprime. La première phrase affiche un bref sujet de l’expression de l’image. La deuxième phrase décrit en détail le contenu de l’image. Exportez directement le sujet et le contenu. N’indiquez pas les mots tels que «cette image exprime», «dans cette image», «cette image communique». Exportez simplement le sujet et le contenu.",
+    "Analytics Images Error": "La reconnaissance intelligente de l'image a échoué: ",
+    "Analytics Images Success": "La reconnaissance intelligente de l'image a réussi, génère des chansons s'il vous plaît attendre un peu!"
   }
 }

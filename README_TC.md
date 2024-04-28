@@ -26,6 +26,7 @@
 - 可以設定多個帳號的資訊保存使用
 - 音樂分享廣場展示所有公開的歌曲
 - 輸入音樂編號可直接獲取歌曲資訊
+- 支援上傳圖片解析的內容生成歌曲
 - 支援中文英文韓語日語等多國語言
 
 ### 調試
@@ -41,13 +42,23 @@ git clone https://github.com/SunoApi/SunoApi.git
 - 安裝依賴
 
 ```bash
+cd SunoApi
 pip3 install -r requirements.txt
 ```
+
+- .env 環境變數，圖片識別需要用到gpt-4-vision-preview模型可以使用OpenAI的介面，也可以用其他的你自己常用的介面替換
+
+```bash
+OPENAI_BASE_URL = https://chatplusapi.cn
+OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
+WEB_SITE_URL = http://localhost:8501
+```
+
 
 - 啟動項目，關於Streamlit請自行參攷Streamlit檔案
 
 ```bash
-streamlit run main.py
+streamlit run main.py --server.maxUploadSize=2
 ```
 
 ### 部署
@@ -59,8 +70,16 @@ docker run -d \
   --name sunoapi \
   --restart always \
   -p 8501:8501 \
+  -v ./sunoapi.db:/app/sunoapi.db \
+  -v ./images/upload:/app/images/upload \
+  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
+  -e OPENAI_BASE_URL=https://api.openai.com  \
+  -e WEB_SITE_URL=http://localhost:8501  \
   sunoapi/sunoapi:latest
 ```
+
+##### 注意：需要把 http://localhost:8501 替換成你實際能訪問的地址，最終上傳的圖片檔案能通過 http://domain.com/images/upload/xxxxxx.jpg 的形式能訪問到，不然OpenAI訪問不到這個你上傳的圖片就無法識別圖片內容，那麼上傳圖片生成音樂的功能將無法使用。
+
 
 #### Docker 本地編譯部署
 
@@ -82,7 +101,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
 ```
 
 #### Docker 拉取鏡像部署
@@ -104,6 +123,12 @@ services:
       - "8501:8501"
     volumes:
       - ./sunoapi.db:/app/sunoapi.db
+      - ./images/upload:/app/images/upload
+    environment:
+      - TZ=Asia/Shanghai
+      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+      - OPENAI_BASE_URL=https://api.openai.com
+      - WEB_SITE_URL=http://localhost:8501
     restart: always
 ```
 
