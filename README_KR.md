@@ -47,12 +47,14 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env 환경 변수, 그림 인식은 gpt-4-vision-preview 모델을 사용하여 OpenAI 인터페이스를 사용할 수도 있고, 자신이 자주 사용하는 다른 인터페이스로 대체할 수도 있다
+- env 환경 변수 파일, 그림 인식은 gpt-4-비전-프리뷰 모델을 필요로 하며 OpenAI 인터페이스를 사용하거나 자신이 사용하는 다른 인터페이스로 바꿀 수 있다. console.bitiful.com 객체 저장소 계정 등록하기 S3_ACCESSKEY_ID, S3_SECRETKEY_ID는 자신이 만든 버킷에 그림을 업로드하는 데 사용되며, S3_WEB_SITE_URL은 객체 저장소 계정을 입력하여 버킷을 생성한 후 외부에서 접근할 수 있는 도메인 이름입니다.지역 환경이 사진 인식 테스트를 할 수 있습니다.
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
-WEB_SITE_URL = http://localhost:8501
+S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
+S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
 
 
@@ -75,11 +77,13 @@ docker run -d \
   -v ./images/upload:/app/images/upload \
   -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e OPENAI_BASE_URL=https://api.openai.com  \
-  -e WEB_SITE_URL=http://localhost:8501  \
+  -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
+  -e S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
+  -e S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
   sunoapi/sunoapi:latest
 ```
 
-##### 주의: http://localhost:8501 실제로 접근할 수 있는 주소로 바꾸면 최종적으로 업로드된 그림 파일은 통과할 수 있다 http://domain.com/images/upload/xxxxxx.jpg 의 형식은 액세스할 수 있습니다. 그렇지 않으면 OpenAI가 당신이 올린 이 그림에 액세스하지 못하면 그림 내용을 식별할 수 없습니다. 그러면 그림을 업로드하여 음악을 생성하는 기능은 사용할 수 없습니다.
+##### 주의: https://sunoapi.s3.bitiful.net 실제로 접근할 수 있는 주소로 바꾸면 최종적으로 업로드된 그림 파일은 통과할 수 있다 http://xxxxxx.s3.bitiful.net/images/upload/xxxxxx.jpg 의 형식은 액세스할 수 있습니다. 그렇지 않으면 OpenAI가 당신이 올린 이 그림에 액세스하지 못하면 그림 내용을 식별할 수 없습니다. 그러면 그림을 업로드하여 음악을 생성하는 기능은 사용할 수 없습니다.
 
 
 #### Docker 로컬 컴파일 배치
@@ -129,11 +133,13 @@ services:
       - TZ=Asia/Shanghai
       - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
-      - WEB_SITE_URL=http://localhost:8501
+      - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
+      - S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx
+      - S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx
     restart: always
 ```
 
-##### 참고: 미러 배포 끌어오기 프로젝트의 sunoapi.db 다운로드를 docker-compose.yml 파일 디렉토리에 전송해야 합니다. 그렇지 않으면 docker가 시작되면 파일을 마운트하지 못하도록 프롬프트가 표시됩니다.
+##### 주의: 미러 배포 끌어오기 프로젝트의 sunoapi.db 다운로드를 docker-compose.yml 파일 디렉토리에 전송해야 합니다. 그렇지 않으면 docker가 시작되면 파일을 마운트하지 못하도록 프롬프트가 표시됩니다.
 
 
 
@@ -150,7 +156,7 @@ services:
 
 #### Zeabur 로컬 원클릭 배포
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/ORTEGG)
 
 
 ### 구성
@@ -216,7 +222,7 @@ services:
 
 ### 선언
 
-- SunoApi는 학습 및 연구에만 사용되는 비공식 오픈 소스 프로젝트입니다.사용자는 자발적으로 무료 계정 정보를 입력하여 음악을 생성한다.각 계정은 하루에 5 곡의 노래를 무료로 생성할 수 있으며 다른 목적으로 사용하지 않습니다.안심하고 사용하세요!10000명의 사용자가 있으면 매일 50000곡의 노래를 무료로 생성할 수 있다.계정당 하루 5곡만 무료로 생성할 수 있으므로 사용량을 최대한 절약하십시오.만약 한 사람이 매일 다섯 곡 이상의 노래를 창작한다면, 이것은 여전히 부족하다.최종 목표는 필요할 때 언제든지 무료로 생성할 수 있도록 하는 것이다.
+- SunoAPI는 학습 및 연구에만 사용되는 비공식 오픈 소스 프로젝트입니다.사용자는 자발적으로 무료 계정 정보를 입력하여 음악을 생성한다.각 계정은 하루에 5 곡의 노래를 무료로 생성할 수 있으며 다른 목적으로 사용하지 않습니다.안심하고 사용하세요!10000명의 사용자가 있으면 매일 50000곡의 노래를 무료로 생성할 수 있다.계정당 하루 5곡만 무료로 생성할 수 있으므로 사용량을 최대한 절약하십시오.만약 한 사람이 매일 다섯 곡 이상의 노래를 창작한다면, 이것은 여전히 부족하다.최종 목표는 필요할 때 언제든지 무료로 생성할 수 있도록 하는 것이다.
 
 
 ### Buy me a Coffee
@@ -224,5 +230,4 @@ services:
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
-##### #이 프로젝트는 github에서 시작되었으며 mit 프로토콜에 기반하고 무료이며 어떠한 형태로든 지불이 되지 않습니다!
-##### ## 만약이 프로젝트가 당신에게 도움이 된다고 생각되면 저를 도와 star를 클릭하고 전재 확산시켜주세요. 여기에 감사합니다!
+##### #이 프로젝트는 github에서 시작되었으며 mit 프로토콜에 기반하고 무료이며 어떠한 형태로든 지불이 되지 않습니다! 만약이 프로젝트가 당신에게 도움이 된다고 생각되면 저를 도와 star를 클릭하고 전재 확산시켜주세요. 여기에 감사합니다!

@@ -14,5 +14,7 @@ services:
       - TZ=Asia/Shanghai
       - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
-      - WEB_SITE_URL=http://localhost:8501
+      - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
+      - S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
+      - S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
     restart: always

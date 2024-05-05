@@ -47,12 +47,14 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env 環境変数です，画像認識にはgpt-4-vision-previewモデルを使用する必要がありますOpenAIのインタフェースを使用することも、他の自分がよく使うインタフェースを使用することもできます
+- .env環境変数ファイル、画像認識にgpt-4-vision-previewを使用する必要があるモデルは、OpenAIのインタフェースを使用することも、他の自分がよく使うインタフェースに置き換えることもできます。console.bitiful.comオブジェクトストレージアカウントを登録してS3_ACCESSKEY_IDを取得し、S3_SECRETKEY_IDパラメータは画像を作成したストレージバケットにアップロードするために使用され、S3_WEB_SITE_URLはオブジェクトストレージアカウントを記入してストレージバケットを作成した後の外部アクセスドメイン名を記入します。これにより、ローカル環境で画像認識をテストすることができます。
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
-WEB_SITE_URL = http://localhost:8501
+S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
+S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
 
 
@@ -75,11 +77,13 @@ docker run -d \
   -v ./images/upload:/app/images/upload \
   -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e OPENAI_BASE_URL=https://api.openai.com  \
-  -e WEB_SITE_URL=http://localhost:8501  \
+  -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
+  -e S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
+  -e S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
   sunoapi/sunoapi:latest
 ```
 
-##### 注意です: http://localhost:8501 交替をあなたが実際の必要の住所を訪問し、最終の写真ファイルが http://domain.com/images/upload/xxxxxx.jpg の形で掲載できる訪問には、アップロードされた画像にOpenAIがアクセスできないと画像の内容を認識できず、画像をアップロードして音楽を生成する機能が使えなくなります。
+##### 注意です: https://sunoapi.s3.bitiful.net 交替をあなたが実際の必要の住所を訪問し、最終の写真ファイルが http://xxxxxx.s3.bitiful.net/images/upload/xxxxxx.jpg の形で掲載できる訪問には、アップロードされた画像にOpenAIがアクセスできないと画像の内容を認識できず、画像をアップロードして音楽を生成する機能が使えなくなります。
 
 
 #### Docker ネイティブコンパイル配備します
@@ -129,11 +133,13 @@ services:
       - TZ=Asia/Shanghai
       - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
-      - WEB_SITE_URL=http://localhost:8501
+      - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
+      - S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx
+      - S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx
     restart: always
 ```
 
-##### 注意：ミラーリングの展開を引き出すには、プロジェクト内のsunoapi.dbをdocker-compose.ymlファイルディレクトリにダウンロードする必要があります。そうしないと、dockerの起動によりファイルをマウントできないことが示されます。
+##### 注意です：ミラーリングの展開を引き出すには、プロジェクト内のsunoapi.dbをdocker-compose.ymlファイルディレクトリにダウンロードする必要があります。そうしないと、dockerの起動によりファイルをマウントできないことが示されます。
 
 
 #### Streamlit リモート・ウェアハウスの配備します
@@ -148,7 +154,7 @@ services:
 
 #### Zeabur ローカルワンクリック配備です
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/ORTEGG)
 
 
 ### 設定
@@ -214,7 +220,7 @@ services:
 
 ### ステートメント
 
-- SunoApiは非公式のオープンソースプロジェクトで、学習と研究用にのみ使用されています。ユーザは任意に無料のアカウント情報を入力して音楽を生成する。各アカウントは毎日5曲の曲を無料で生成でき、他の目的には使用しません。安心してお使いください！10000人のユーザーがいる場合、システムは毎日50,000曲を無料で生成することができます。各アカウントでは1日5曲の曲しか無料で生成できないので、できるだけ使用量を節約してください。一人一人が毎日5曲以上の曲を作るとしたら、それはまだ足りない。最終的には、必要なときにいつでも無料で生成できるようにすることを目指しています。
+- SunoAPIは非公式のオープンソースプロジェクトで、学習と研究用にのみ使用されています。ユーザは任意に無料のアカウント情報を入力して音楽を生成する。各アカウントは毎日5曲の曲を無料で生成でき、他の目的には使用しません。安心してお使いください！10000人のユーザーがいる場合、システムは毎日50,000曲を無料で生成することができます。各アカウントでは1日5曲の曲しか無料で生成できないので、できるだけ使用量を節約してください。一人一人が毎日5曲以上の曲を作るとしたら、それはまだ足りない。最終的には、必要なときにいつでも無料で生成できるようにすることを目指しています。
 
 
 ### Buy me a Coffee
@@ -222,5 +228,4 @@ services:
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
-#####このプロジェクトはGitHubから始まり、MITのプロトコルに基づいており、無料です。
-#####もしあなたはこの項目があなたに対して助けがあると感じるならば、私を手伝ってStarを点(点)して拡散を転送して、ここであなたに感謝します!
+##### このプロジェクトはGitHubから始まり、MITのプロトコルに基づいており、無料です。もしあなたはこの項目があなたに対して助けがあると感じるならば、私を手伝ってStarを点(点)して拡散を転送して、ここであなたに感謝します!

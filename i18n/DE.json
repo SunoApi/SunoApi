@@ -23,6 +23,7 @@
 
     "Random Style": "Zufälliger Stil",
     "Random Lyrics": "Zufällige Texte",
+    "Generate Lyrics": "Texte generieren",
 
     "Title Placeholder": "Nennen Sie Ihrem Musiklied einen Namen, um ihn zu identifizieren, teilen und finden.",
     "Tags Placeholder": "Wählen Sie den Musikstil, den Sie möchten, Suno AI Modell kann Genres und Atmosphäre verstehen.",
@@ -96,6 +97,6 @@
     "Upload Images Success": "Bildhochladen erfolgreich, intelligente Erkennung im Gange. Bitte warten Sie!",
     "Upload Images Analytics": "Bitte helfen Sie mir, den Inhalt dieses Bildes zu analysieren, zusammenzufassen und die im Bild ausgedrückten Informationen zu beschreiben. Der erste Satz enthält eine kurze Beschreibung des Themas, das durch das Bild vermittelt wird, während der zweite Satz eine detaillierte Beschreibung des Inhalts des Bildes bietet. Geben Sie das Thema und den Inhalt direkt aus, ohne Wörter wie 'dieses Bild ausdrückt', 'in diesem Bild' oder 'dieses Bild vermittelt'. Geben Sie einfach das Thema und den Inhalt aus.",
     "Analytics Images Error": "Intelligente Bilderkennung fehlgeschlagen: ",
-    "Analytics Images Success": "Bild intelligente Erkennung erfolgreich, generiert Song. Bitte warten Sie!"
+    "Analytics Images Success": "Bildintelligente Erkennung erfolgreich, kann bei Bedarf geändert werden und dann sofort generieren klicken!"
   }
 }

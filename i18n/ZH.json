@@ -23,6 +23,7 @@
 
     "Random Style": "随机风格",
     "Random Lyrics": "随机歌词",
+    "Generate Lyrics": "生成歌词",
 
     "Title Placeholder": "给您的音乐歌曲起一个名称，以便识别、分享和发现。",
     "Tags Placeholder": "选择您想要的音乐风格，Suno AI的模型能理解流派和气氛。",
@@ -96,6 +97,6 @@
     "Upload Images Success": "图片上传成功，正在智能识别请稍等！",
     "Upload Images Analytics": "帮我分析一下这张图片的内容，总结并描述图片所表达的信息。第一句输出图片表达的简要主题，第二句详细描述图片的内容，直接输出主题和内容，不要出现'这张图片表达了','在这幅图画中','这张图片传达了'等字眼，直接输出主题和内容即可。",
     "Analytics Images Error": "图片智能识别失败：",
-    "Analytics Images Success": "图片智能识别成功，正在生成歌曲请稍等！"
+    "Analytics Images Success": "图片智能识别成功，可以根据需要修改之后再点立即生成！"
   }
 }

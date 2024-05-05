@@ -46,12 +46,14 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env 環境變數，圖片識別需要用到gpt-4-vision-preview模型可以使用OpenAI的介面，也可以用其他的你自己常用的介面替換
+- .env環境變數檔案，圖片識別需要用到gpt-4-vision-preview的模型可以使用OpenAI的介面，也可以用其他的你自己常用的介面替換。 注册console.bitiful.com對象存儲帳號獲取S3_ACCESSKEY_ID，S3_SECRETKEY_ID參數用於圖片上傳到你創建的存儲桶，S3_WEB_SITE_URL填寫你的對象存儲帳號創建存儲桶後的外部訪問功能變數名稱。 這樣本地環境就可以測試圖片識別了。
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
-WEB_SITE_URL = http://localhost:8501
+S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
+S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
 
 
@@ -72,13 +74,14 @@ docker run -d \
   -p 8501:8501 \
   -v ./sunoapi.db:/app/sunoapi.db \
   -v ./images/upload:/app/images/upload \
-  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e OPENAI_BASE_URL=https://api.openai.com  \
-  -e WEB_SITE_URL=http://localhost:8501  \
+  -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
+  -e S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
+  -e S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
   sunoapi/sunoapi:latest
 ```
 
-##### 注意：需要把 http://localhost:8501 替換成你實際能訪問的地址，最終上傳的圖片檔案能通過 http://domain.com/images/upload/xxxxxx.jpg 的形式能訪問到，不然OpenAI訪問不到這個你上傳的圖片就無法識別圖片內容，那麼上傳圖片生成音樂的功能將無法使用。
+##### 注意：需要把 https://sunoapi.s3.bitiful.net 替換成你自己的對象存儲桶的外部訪問功能變數名稱，最終上傳的圖片檔案能通過 http://xxxxxx.s3.bitiful.net/images/upload/xxxxxx.jpg 的形式能訪問到，不然OpenAI訪問不到這個你上傳的圖片就無法識別圖片內容，那麼上傳圖片生成音樂的功能將無法使用。
 
 
 #### Docker 本地編譯部署
@@ -128,7 +131,9 @@ services:
       - TZ=Asia/Shanghai
       - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
-      - WEB_SITE_URL=http://localhost:8501
+      - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
+      - S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx
+      - S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx
     restart: always
 ```
 
@@ -146,7 +151,7 @@ services:
 
 #### Zeabur 一鍵部署
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/ORTEGG)
 
 ### 配寘
 
@@ -211,7 +216,7 @@ services:
 
 ### 聲明
 
-- SunoApi是一個非官方的開源項目，僅供學習和研究使用。用戶自願輸入免費的帳號資訊生成音樂。 每個帳戶每天可以免費生成五首歌曲，我們不會將它們用於其他目的。請放心使用！如果有10000名用戶，那麼系統每天可以免費生成50000首歌曲。請儘量節省使用量，因為每個帳戶每天只能免費生成五首歌曲。如果每個人每天創作五首以上的歌曲，這仍然不够。 最終目標是讓在需要的時候能隨時免費生成。
+- SunoAPI是一個非官方的開源項目，僅供學習和研究使用。用戶自願輸入免費的帳號資訊生成音樂。 每個帳戶每天可以免費生成五首歌曲，我們不會將它們用於其他目的。請放心使用！如果有10000名用戶，那麼系統每天可以免費生成50000首歌曲。請儘量節省使用量，因為每個帳戶每天只能免費生成五首歌曲。如果每個人每天創作五首以上的歌曲，這仍然不够。 最終目標是讓在需要的時候能隨時免費生成。
 
 
 ### Buy me a Coffee
@@ -219,5 +224,4 @@ services:
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
-##### 此項目開源於GitHub，基於MIT協定且免費，沒有任何形式的付費行為！
-##### 如果你覺得此項目對你有幫助，請幫我點個Star並轉發擴散，在此感謝你！
+##### 此項目開源於GitHub，基於MIT協定且免費，沒有任何形式的付費行為！如果你覺得此項目對你有幫助，請幫我點個Star並轉發擴散，在此感謝你！

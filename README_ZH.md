@@ -47,12 +47,14 @@ pip3 install -r requirements.txt
 ```
 
 
-- .env 环境变量，图片识别需要用到gpt-4-vision-preview模型可以使用OpenAI的接口，也可以用其他的你自己常用的接口替换
+- .env 环境变量文件，图片识别需要用到gpt-4-vision-preview的模型可以使用OpenAI的接口，也可以用其他的你自己常用的接口替换。注册console.bitiful.com对象存储账号获取S3_ACCESSKEY_ID，S3_SECRETKEY_ID参数用于图片上传到你创建的存储桶，S3_WEB_SITE_URL填写你的对象存储账号创建存储桶后的外部访问域名。这样本地环境就可以测试图片识别了。
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
-WEB_SITE_URL = http://localhost:8501
+S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
+S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
 
 
@@ -76,11 +78,13 @@ docker run -d \
   -v ./images/upload:/app/images/upload \
   -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e OPENAI_BASE_URL=https://api.openai.com  \
-  -e WEB_SITE_URL=http://localhost:8501  \
+  -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
+  -e S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
+  -e S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
   sunoapi/sunoapi:latest
 ```
 
-##### 注意：需要把 http://localhost:8501 替换成你实际能访问的地址，最终上传的图片文件能通过 http://domain.com/images/upload/xxxxxx.jpg 的形式能访问到，不然OpenAI访问不到这个你上传的图片就无法识别图片内容，那么上传图片生成音乐的功能将无法使用。
+##### 注意：需要把 https://sunoapi.s3.bitiful.net 替换成你自己的对象存储桶的外部访问域名，最终上传的图片文件能通过 http://xxxxxx.s3.bitiful.net/images/upload/xxxxxx.jpg 的形式能访问到，不然OpenAI访问不到这个你上传的图片就无法识别图片内容，那么上传图片生成音乐的功能将无法使用。
 
 
 #### Docker 本地编译部署
@@ -130,7 +134,9 @@ services:
       - TZ=Asia/Shanghai
       - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
-      - WEB_SITE_URL=http://localhost:8501
+      - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
+      - S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx
+      - S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx
     restart: always
 ```
 
@@ -149,7 +155,7 @@ services:
 
 #### Zeabur 一键部署
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/ORTEGG)
 
 
 ### 配置
@@ -215,7 +221,7 @@ services:
 
 ### 声明
 
-- SunoApi是一个非官方的开源项目，仅供学习和研究使用。用户自愿输入免费的账号信息生成音乐。每个帐户每天可以免费生成五首歌曲，我们不会将它们用于其他目的。请放心使用！如果有10000名用户，那么系统每天可以免费生成50000首歌曲。请尽量节省使用量，因为每个帐户每天只能免费生成五首歌曲。如果每个人每天创作五首以上的歌曲，这仍然不够。最终目标是让在需要的时候能随时免费生成。
+- SunoAPI是一个非官方的开源项目，仅供学习和研究使用。用户自愿输入免费的账号信息生成音乐。每个帐户每天可以免费生成五首歌曲，我们不会将它们用于其他目的。请放心使用！如果有10000名用户，那么系统每天可以免费生成50000首歌曲。请尽量节省使用量，因为每个帐户每天只能免费生成五首歌曲。如果每个人每天创作五首以上的歌曲，这仍然不够。最终目标是让在需要的时候能随时免费生成。
 
 
 ### Buy me a Coffee
@@ -223,5 +229,4 @@ services:
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
-##### 此项目开源于GitHub ，基于MIT协议且免费，没有任何形式的付费行为！
-##### 如果你觉得此项目对你有帮助，请帮我点个Star并转发扩散，在此感谢你！
+##### 此项目开源于GitHub ，基于MIT协议且免费，没有任何形式的付费行为！如果你觉得此项目对你有帮助，请帮我点个Star并转发扩散，在此感谢你！

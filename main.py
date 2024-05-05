@@ -10,13 +10,23 @@ from pathlib import Path
 
 import schemas
 from cookie import get_suno_auth,new_suno_auth
-from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics
+from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics,put_upload_file
+
+root_dir = os.path.dirname(os.path.realpath(__file__))
+# print(root_dir)
+import sys
+sys.path.append(root_dir)
+import site
+site.addsitedir(root_dir)
+from streamlit_image_select import image_select
 
 from dotenv import load_dotenv
 load_dotenv()
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-WEB_SITE_URL = os.getenv("WEB_SITE_URL")
+S3_WEB_SITE_URL = os.getenv("S3_WEB_SITE_URL")
+S3_ACCESSKEY_ID = os.getenv("S3_ACCESSKEY_ID")
+S3_SECRETKEY_ID = os.getenv("S3_SECRETKEY_ID")
 
 
 from sqlite import SqliteTool
@@ -37,8 +47,6 @@ hide_streamlit_style = """
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-root_dir = os.path.dirname(os.path.realpath(__file__))
-# print(root_dir)
 i18n_dir = os.path.join(root_dir, "i18n")
 # print(i18n_dir)
 
@@ -84,6 +92,9 @@ def i18n(key):
     loc = locales.get(st.session_state.Language, {})
     return loc.get("Translation", {}).get(key, key)
 
+st.session_state["page"] = 1
+st.session_state["click_image"] = False
+
 with st.sidebar:
     selected = option_menu(None, [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme"),i18n("Visit Official WebSite")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=0)
     
@@ -109,17 +120,112 @@ def change_prompt():
     # print("st.session_state.change_prompt:" + st.session_state.change_prompt)
     st.session_state['prompt_input'] = st.session_state['change_prompt']
 
+def change_desc_prompt():
+    # print("st.session_state.change_desc_prompt:" + st.session_state.change_desc_prompt)
+    st.session_state.DescPrompt = st.session_state['change_desc_prompt']
+
 placeholder = col2.empty()
 if 'disabled_state' not in st.session_state:
         st.session_state['disabled_state'] = False
 elif st.session_state['disabled_state']:
     placeholder.error(i18n("Fetch Status Progress"))
 
+if 'prompt_input' not in st.session_state:
+    st.session_state['prompt_input'] = ""
+if 'DescPrompt' not in st.session_state:
+    st.session_state.DescPrompt = ""
+
 with container.container():
     cols = container.columns(2)
 
     st.session_state.Custom = False
     Custom = cols[0].toggle(i18n("Custom"))
+    st.session_state.TuGeYue = False
+    TuGeYue = cols[1].toggle(i18n("Images TuGeYue Music"))
+
+    if TuGeYue and st.session_state.DescPrompt == "" and st.session_state['prompt_input'] == "":
+        st.session_state.TuGeYue = True
+        # print(st.session_state.TuGeYue)
+        # 设置文件上传的配置
+        # st.set_option('deprecation.showfileUploaderEncoding', False)
+        upload_folder = Path("images/upload")
+        upload_folder.mkdir(exist_ok=True)
+        file_size_limit = 1024 * 1024 * 2  # 2MB
+        uploaded_file = container.file_uploader(i18n("Images TuGeYue Upload"), type=['bmp', 'webp', 'png', 'jpg', 'jpeg'], help=i18n("Images TuGeYue Help"), accept_multiple_files=False)
+
+        if uploaded_file is not None and not st.session_state['disabled_state']:
+            if uploaded_file.size > file_size_limit:
+                placeholder.error(i18n("Upload Images Error") + f"{file_size_limit / (1024 * 1024)}MB")
+            else:
+                file_ext = uploaded_file.type.split("/")[1]
+                filename = f"{time.time()}.{file_ext}"
+                my_bar = container.progress(0)
+                bytes_data = uploaded_file.read()
+                # container.write(bytes_data)
+                with open(upload_folder / filename, "wb") as f:
+                    f.write(bytes_data)
+                my_bar.progress(100)
+                image_url = ""
+                if "s3.bitiful.net" in S3_WEB_SITE_URL:
+                    image_url = put_upload_file(S3_WEB_SITE_URL, filename, S3_ACCESSKEY_ID, S3_SECRETKEY_ID, bytes_data)
+                else:
+                    image_url = f"{S3_WEB_SITE_URL}/images/upload/{filename}"
+                if "detail" in image_url:
+                    placeholder.error(i18n("Analytics Images Error") + image_url["detail"])
+                else:
+                    placeholder.success(i18n("Upload Images Success"))
+                    my_bar.empty()
+                    try:
+                        headers = {"Authorization": f"Bearer {OPENAI_API_KEY}","Content-Type": "application/json"}
+                        requests.packages.urllib3.disable_warnings()
+                        resp = requests.post(
+                            url=f"{OPENAI_BASE_URL}/v1/chat/completions",
+                            headers=headers,
+                            verify=False,
+                            json={
+                                    "messages": [
+                                        {
+                                            "role": "user",
+                                            "content": [
+                                                {
+                                                    "type": "text",
+                                                    "text": i18n("Upload Images Analytics")
+                                                },
+                                                {
+                                                    "type": "image_url",
+                                                    "image_url": {
+                                                        "url": image_url #"https://sunoapi.net/images/upload/1714682704.4356673.jpeg" 
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "max_tokens": 1000,
+                                    "temperature": 1,
+                                    "top_p": 1,
+                                    "n": 1,
+                                    "stream": False,
+                                    "presence_penalty": 0,
+                                    "frequency_penalty": 0,
+                                    "model": "gpt-4-vision-preview"
+                                }
+                        )
+                        if resp.status_code != 200:
+                            placeholder.error(i18n("Analytics Images Error") + f"{resp.text}")
+                        else:
+                            print(local_time() + f" ***gpt-4-vision-preview image_url -> {image_url} content -> {resp.text} ***\n")
+                            content = resp.json()["choices"][0]["message"]["content"].strip()
+                            if Custom:
+                                st.session_state['prompt_input'] = content
+                            else:
+                                st.session_state.DescPrompt = content
+                            placeholder.success(i18n("Analytics Images Success"))
+                    except Exception as e:
+                        placeholder.error(i18n("Analytics Images Error") + f"{str(e)}")
+    # else:
+    #     st.session_state['clips_0'] = ""
+    #     st.session_state['clips_1'] = ""
+    
     if Custom:
         st.session_state.Custom = True
         # print(st.session_state.Custom)
@@ -154,15 +260,16 @@ with container.container():
             st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
             st.rerun()
 
-        if 'prompt_input' not in st.session_state:
-            st.session_state['prompt_input'] = ""
-
-        random_lyrics = cols[1].button(i18n("Random Lyrics"), type="secondary")
+        random_lyrics = cols[1].button(i18n("Generate Lyrics"), type="secondary")
         if random_lyrics:
             lyrics = get_random_lyrics(Title if Title != "" else st.session_state['prompt_input'], st.session_state.token)
-            st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
-            st.session_state['prompt_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['prompt_input'] if st.session_state['prompt_input'] != "" else "")
-            st.rerun()
+            status = lyrics["detail"] if "detail" in lyrics else (lyrics["status"] if "status" in lyrics else "success")
+            if status != "Unauthorized" and status != "Error" and status != "Expecting value: line 1 column 1 (char 0)":
+                st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
+                st.session_state['prompt_input'] = lyrics['text'] if lyrics['title'] != "" else (st.session_state['prompt_input'] if st.session_state['prompt_input'] != "" else "")
+                st.rerun()
+            else:
+                container.error(status)
                 
 
         Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
@@ -172,86 +279,10 @@ with container.container():
         st.session_state.Custom = False
         # print(st.session_state.Custom)
 
-        st.session_state.TuGeYue = False
-        TuGeYue = cols[1].toggle(i18n("Images TuGeYue Music"))
-
         if 'DescPrompt' not in st.session_state:
             st.session_state.DescPrompt = ""
 
-        if TuGeYue:
-            st.session_state.TuGeYue = True
-            # print(st.session_state.TuGeYue)
-            # 设置文件上传的配置
-            # st.set_option('deprecation.showfileUploaderEncoding', False)
-            upload_folder = Path("images/upload")
-            upload_folder.mkdir(exist_ok=True)
-            file_size_limit = 1024 * 1024 * 2  # 2MB
-            uploaded_file = container.file_uploader(i18n("Images TuGeYue Upload"), type=['bmp', 'webp', 'png', 'jpg', 'jpeg'], help=i18n("Images TuGeYue Help"), accept_multiple_files=False)
-
-            if uploaded_file is not None and not st.session_state['disabled_state']:
-                if uploaded_file.size > file_size_limit:
-                    placeholder.error(i18n("Upload Images Error") + f"{file_size_limit / (1024 * 1024)}MB")
-                else:
-                    file_ext = uploaded_file.type.split("/")[1]
-                    filename = f"{time.time()}.{file_ext}"
-                    my_bar = container.progress(0)
-                    bytes_data = uploaded_file.read()
-                    # container.write(bytes_data)
-                    with open(upload_folder / filename, "wb") as f:
-                        f.write(bytes_data)
-                    my_bar.progress(100)
-                    image_url = f"{WEB_SITE_URL}/images/upload/{filename}"
-                    placeholder.success(i18n("Upload Images Success"))
-                    my_bar.empty()
-                    try:
-                        headers = {"Authorization": f"Bearer {OPENAI_API_KEY}","Content-Type": "application/json"}
-                        requests.packages.urllib3.disable_warnings()
-                        resp = requests.post(
-                            url=f"{OPENAI_BASE_URL}/v1/chat/completions",
-                            headers=headers,
-                            verify=False,
-                            json={
-                                    "messages": [
-                                        {
-                                            "role": "user",
-                                            "content": [
-                                                {
-                                                    "type": "text",
-                                                    "text": i18n("Upload Images Analytics")
-                                                },
-                                                {
-                                                    "type": "image_url",
-                                                    "image_url": {
-                                                        "url": image_url #"https://sunoapi.net/images/upload/1714291652.6060529.png"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "max_tokens": 1000,
-                                    "temperature": 1,
-                                    "top_p": 1,
-                                    "n": 1,
-                                    "stream": False,
-                                    "presence_penalty": 0,
-                                    "frequency_penalty": 0,
-                                    "model": "gpt-4-vision-preview"
-                                }
-                        )
-                        if resp.status_code != 200:
-                            placeholder.error(i18n("Analytics Images Error") + f"{resp.text}")
-                        else:
-                            print(local_time() + f" ***gpt-4-vision-preview image_url -> {image_url} content -> {resp.text} ***\n")
-                            content = resp.json()["choices"][0]["message"]["content"].strip()
-                            st.session_state.DescPrompt = content
-                            placeholder.success(i18n("Analytics Images Success"))
-                    except Exception as e:
-                        placeholder.error(i18n("Analytics Images Error") + f"{str(e)}")
-        else:
-            st.session_state['clips_0'] = ""
-            st.session_state['clips_1'] = ""
-
-        DescPrompt = container.text_area(label=i18n("Desc Prompt"), value=st.session_state.DescPrompt, placeholder=i18n("Desc Value"), height=150, max_chars=500, help=i18n("Desc Reamrk"))
+        DescPrompt = container.text_area(label=i18n("Desc Prompt"), value=st.session_state.DescPrompt, placeholder=i18n("Desc Value"), height=150, max_chars=500, help=i18n("Desc Reamrk"), key="change_desc_prompt", on_change=change_desc_prompt)
         st.session_state.DescPrompt = DescPrompt
         # print(st.session_state.DescPrompt)
 
@@ -323,6 +354,8 @@ if Setting:
         elif Session == "":
             placeholder.error(i18n("SaveInfo Session Error"))
         elif Cookie == "":
+            placeholder.error(i18n("SaveInfo Cookie Error"))
+        elif len(Cookie) < 500:
             placeholder.error(i18n("SaveInfo Cookie Error"))
         else:
             result = suno_sqlite.query_one("select id,identity,[session],cookie from session where identity =?", (Identity,))
@@ -512,7 +545,6 @@ def generate_with_song_description(data: schemas.DescriptionModeGenerateParam):
         return {"detail":str(e)}
 
 
-
 def fetch_status(aid: str, twice=False):
     progress_text = i18n("Fetch Status Progress")
     my_bar = col2.progress(0, text=progress_text)
@@ -552,6 +584,7 @@ def fetch_status(aid: str, twice=False):
             my_bar.empty()
         else:
             progress_text = i18n("Fetch Status Running") + status
+            status = "exception"
             my_bar.progress(percent_complete, text=progress_text)
         
         result = suno_sqlite.query_one("select aid from music where aid =?", (aid,))
@@ -569,10 +602,12 @@ def fetch_status(aid: str, twice=False):
             break
 
         time.sleep(10)
-    
+        
+    resp[0]["audio_url"] = resp[0]["audio_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
+    resp[0]["video_url"] = resp[0]["video_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
     return resp
 
-if StartBtn or (st.session_state.TuGeYue and st.session_state.DescPrompt != ""):
+if StartBtn :
     if not st.session_state['disabled_state']: 
         if st.session_state.Custom:
             if st.session_state.Title == "":
@@ -607,7 +642,7 @@ if StartBtn or (st.session_state.TuGeYue and st.session_state.DescPrompt != ""):
                 print(resp)
                 print("\n")
                 status = resp["status"] if "status" in resp else resp["detail"]
-                if status == "running":
+                if status == "running" or status == "complete":
                     st.session_state['disabled_state'] = True
                     result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
 
@@ -655,7 +690,7 @@ if StartBtn or (st.session_state.TuGeYue and st.session_state.DescPrompt != ""):
                 print(resp)
                 print("\n")
                 status = resp["status"] if "status" in resp else resp["detail"]
-                if status == "running":
+                if status == "running" or status == "complete":
                     st.session_state['disabled_state'] = True
                     result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["clips"][0]["id"]), str(resp["clips"][0]), st.session_state.Private))
 
@@ -723,5 +758,31 @@ footer {display: none;}
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# Artalk评论初始化
+hide_streamlit_style1 = """
+<div style="font-size: 12px;font-family: inherit; color: #697182;justify-content: center; align-items: center; word-break: break-word; text-align: center;padding-right: 15px;"><a style="text-decoration: none;color: #697182;" href="https://icp.gov.moe/?keyword=20240508" target="_blank">萌ICP备20240508号</a></div>
+<div id="Comments"></div>
+<div style="display:none">
+<!-- CSS -->
+<link href="https://sunoapi.net/dist/Artalk.css" rel="stylesheet" />
+<!-- JS -->
+<script src="https://sunoapi.net/dist/Artalk.js"></script>
+<!-- Artalk -->
+<div style="font-size: 12px;font-family: inherit; color: #697182;justify-content: center; align-items: center; word-break: break-word; text-align: center;padding-right: 15px;">本页浏览量 <span id="ArtalkPV">Loading...</span> 次</div>
+<div id="Comments"></div>
+<script>
+  Artalk.init({
+  el:        '#Comments',
+  pageKey:   '/',
+  pageTitle: '音乐歌曲创作'
+  server:    'https://sunoapi.net',
+  site:      'SunoAPI AI Music Generator',
+  })
+</script>
+</div>
+"""
+with col2:
+    st.components.v1.html(hide_streamlit_style1, height=30)
 
 components.iframe("https://sunoapi.net/analytics.html", height=0)

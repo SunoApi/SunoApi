@@ -24,19 +24,20 @@ class SunoCookie:
         self.cookie.load(cookie_str)
 
     def set_cookie(self, cookie_str):
-        for cookie in cookie_str.split('; '):
-            key, value = cookie.split('=', 1)
-            try:
-                value = json.loads(value)
-            except json.JSONDecodeError:
-                pass  # 如果不是有效的JSON，则保持原始字符串
+        if len(cookie_str) > 500:
+            for cookie in cookie_str.split('; '):
+                key, value = cookie.split('=', 1)
+                try:
+                    value = json.loads(value)
+                except json.JSONDecodeError:
+                    pass  # 如果不是有效的JSON，则保持原始字符串
 
-            if key == "__client":
-                # print("__client: " + value)
-                value = urllib.parse.quote(value)
-                # print("__client: " + value)
+                if key == "__client":
+                    # print("__client: " + value)
+                    value = urllib.parse.quote(value)
+                    # print("__client: " + value)
 
-            self.cookie[key] = value
+                self.cookie[key] = value
 
     def get_cookie(self):
         # print(local_time() + f" ***get_cookie output -> {self.cookie.output()} thread_id: {threading.get_ident()} ***\n")

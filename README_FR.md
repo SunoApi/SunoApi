@@ -47,12 +47,14 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env Les variables d’environnement, Le modèle gpt-4-vision-preview requis pour la reconnaissance d'images peut utiliser l'interface d'openai ou être remplacé par une autre interface que vous utilisez habituellement.
+- .env Fichiers de variables d'environnement, les modèles nécessitant gpt-4-vision-preview pour la reconnaissance d'images peuvent utiliser l'interface d'openai ou être remplacés par d'autres que vous utilisez habituellement. Inscrivez - vous pour le compte de stockage d'objets console.bitiful.com obtenez S3_ACCESSKEY_ID, le paramètre S3_SECRETKEY_ID est utilisé pour télécharger des images dans le compartiment que vous avez créé, S3_WEB_SITE_URL remplissez votre compte de stockage d'objets pour le nom de domaine d'accès externe après la création du compartiment. Ainsi, l'environnement local peut tester la reconnaissance d'image.
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
-WEB_SITE_URL = http://localhost:8501
+S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
+S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
 
 
@@ -76,11 +78,13 @@ docker run -d \
   -v ./images/upload:/app/images/upload \
   -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e OPENAI_BASE_URL=https://api.openai.com  \
-  -e WEB_SITE_URL=http://localhost:8501  \
+  -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
+  -e S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
+  -e S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
   sunoapi/sunoapi:latest
 ```
 
-##### Remarque: il est nécessaire de mettre http://localhost:8501 Remplacez - le par une adresse à laquelle vous pouvez réellement accéder, et finalement le fichier image téléchargé peut passer http://domain.com/images/upload/xxxxxx.jpg La forme peut être accessible, sinon openai Access ne reconnaît pas le contenu de l'image sans cette image que vous téléchargez, la fonction de téléchargement d'images pour générer de la musique ne sera pas disponible.
+##### Attention: il est nécessaire de mettre https://sunoapi.s3.bitiful.net Remplacez - le par une adresse à laquelle vous pouvez réellement accéder, et finalement le fichier image téléchargé peut passer http://xxxxxx.s3.bitiful.net/images/upload/xxxxxx.jpg La forme peut être accessible, sinon openai Access ne reconnaît pas le contenu de l'image sans cette image que vous téléchargez, la fonction de téléchargement d'images pour générer de la musique ne sera pas disponible.
 
 
 #### Déploiement de la compilation locale docker
@@ -130,11 +134,13 @@ services:
       - TZ=Asia/Shanghai
       - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
-      - WEB_SITE_URL=http://localhost:8501
+      - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
+      - S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx
+      - S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx
     restart: always
 ```
 
-##### Remarque: le déploiement de l'image extractive nécessite que le téléchargement sunoapi.db du projet soit transmis à votre répertoire de fichiers docker-compose.yml, sinon le démarrage de docker vous demandera de ne pas monter le fichier.
+##### Attention: le déploiement de l'image extractive nécessite que le téléchargement sunoapi.db du projet soit transmis à votre répertoire de fichiers docker-compose.yml, sinon le démarrage de docker vous demandera de ne pas monter le fichier.
 
 
 #### Déploiement d’entrepôt distant Streamlit
@@ -149,7 +155,7 @@ services:
 
 #### Déploiement de Zeabur en un clic
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/5BLAEZ)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/ORTEGG)
 
 
 ### La configuration
@@ -215,7 +221,7 @@ services:
 
 ### La déclaration
 
-- SunoApi est un projet open source non officiel destiné uniquement à l’apprentissage et à la recherche. Les utilisateurs entrent volontairement des informations de compte gratuites pour générer de la musique. Chaque compte peut générer gratuitement cinq chansons par jour. Nous ne les utiliserons pas à d’autres fins. S’il vous plaît utiliser avec confiance! Avec 10000 utilisateurs, le système peut générer 50000 chansons par jour gratuitement. S’il vous plaît essayer d’économiser sur l’utilisation, car chaque compte ne peut générer que cinq chansons gratuitement par jour. Si chacun compose plus de cinq chansons par jour, cela ne suffit pas. Le but ultime est de pouvoir générer gratuitement à tout moment et en cas de besoin.
+- SunoAPI est un projet open source non officiel destiné uniquement à l’apprentissage et à la recherche. Les utilisateurs entrent volontairement des informations de compte gratuites pour générer de la musique. Chaque compte peut générer gratuitement cinq chansons par jour. Nous ne les utiliserons pas à d’autres fins. S’il vous plaît utiliser avec confiance! Avec 10000 utilisateurs, le système peut générer 50000 chansons par jour gratuitement. S’il vous plaît essayer d’économiser sur l’utilisation, car chaque compte ne peut générer que cinq chansons gratuitement par jour. Si chacun compose plus de cinq chansons par jour, cela ne suffit pas. Le but ultime est de pouvoir générer gratuitement à tout moment et en cas de besoin.
 
 
 ### Buy me a Coffee
@@ -223,5 +229,4 @@ services:
 <a href="https://www.buymeacoffee.com/SunoApi" target="_blank"><img src="https://sunoapi.net/images/donate.jpg" alt="Buy me a Coffee" style="max-width: 100%;"></a>
 
 
-##### ce projet provient de GitHub, est basé sur le protocole MIT et est gratuit, sans aucune forme de paiement!
-##### si vous trouvez cet article utile pour vous, s’il vous plaît commander une étoile pour moi et retweet diffusion. Merci ici!
+##### ce projet provient de GitHub, est basé sur le protocole MIT et est gratuit, sans aucune forme de paiement! si vous trouvez cet article utile pour vous, s’il vous plaît commander une étoile pour moi et retweet diffusion. Merci ici!

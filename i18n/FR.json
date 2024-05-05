@@ -23,6 +23,7 @@
 
     "Random Style": "Style aléatoire",
     "Random Lyrics": "Paroles aléatoires",
+    "Generate Lyrics": "Générer des paroles",
 
     "Title Placeholder": "Donnez un nom à votre chanson musicale pour la rendre identifiable, partageable et découvrable.",
     "Tags Placeholder": "Choisissez le style de musique que vous voulez, les modèles de suno ai comprennent le genre et l'atmosphère.",
@@ -96,6 +97,6 @@
     "Upload Images Success": "Image téléchargée avec succès, en cours d'identification intelligente s'il vous plaît attendre un peu!",
     "Upload Images Analytics": "Aidez-moi à analyser le contenu de cette image. Résumez et décrivez le message qu’elle exprime. La première phrase affiche un bref sujet de l’expression de l’image. La deuxième phrase décrit en détail le contenu de l’image. Exportez directement le sujet et le contenu. N’indiquez pas les mots tels que «cette image exprime», «dans cette image», «cette image communique». Exportez simplement le sujet et le contenu.",
     "Analytics Images Error": "La reconnaissance intelligente de l'image a échoué: ",
-    "Analytics Images Success": "La reconnaissance intelligente de l'image a réussi, génère des chansons s'il vous plaît attendre un peu!"
+    "Analytics Images Success": "La reconnaissance intelligente de l'image est réussie et peut être générée immédiatement après la modification nécessaire!"
   }
 }
