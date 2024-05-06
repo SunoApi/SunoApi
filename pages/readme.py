@@ -1,13 +1,21 @@
 
+# -*- coding:utf-8 -*-
+
 import streamlit as st
 import time,json,os,ast
 
 from streamlit_option_menu import option_menu
-from streamlit_image_select import image_select
-
 from streamlit_modal import Modal
 import streamlit.components.v1 as components
 import streamlit_antd_components as sac
+
+root_dir = os.path.dirname(os.path.realpath(__file__))
+# print(root_dir)
+import sys
+sys.path.append(root_dir)
+import site
+site.addsitedir(root_dir)
+from streamlit_image_select import image_select
 
 
 from sqlite import SqliteTool
@@ -23,9 +31,6 @@ st.set_page_config(page_title="SunoAPI AI Music Generator",
                        'About': "SunoAPI AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net\n\nDisclaimer: Users voluntarily input their account information that has not been recharged to generate music. Each account can generate five songs for free every day, and we will not use them for other purposes. Please rest assured to use them! If there are 10000 users, the system can generate 50000 songs for free every day. Please try to save usage, as each account can only generate five songs for free every day. If everyone generates more than five songs per day, it is still not enough. The ultimate goal is to keep them available for free generation at any time when needed.\n\n"
                    })
 
-
-root_dir = os.path.dirname(os.path.realpath(__file__))
-# print(root_dir)
 i18n_dir = os.path.join(root_dir, "../i18n")
 # print(i18n_dir)
 md_dir = os.path.join(root_dir, "../")
@@ -72,13 +77,16 @@ def i18n(key):
     loc = locales.get(st.session_state.Language, {})
     return loc.get("Translation", {}).get(key, key)
 
-
 hide_streamlit_style = """
 <style>#root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 2rem;}</style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+st.session_state["page"] = 1
+st.session_state["click_image"] = False
 st.session_state['disabled_state'] = False
+st.session_state['prompt_input'] = ""
+st.session_state.DescPrompt = ""
 
 with st.sidebar:
     selected = option_menu(None, [i18n("Music Song Create"), i18n("Music Share Square"), i18n("Music Project Readme"),i18n("Visit Official WebSite")],icons=['music-note', 'music-note-beamed', 'music-note-list'], menu_icon="cast", default_index=2)
@@ -116,5 +124,26 @@ footer {display: none;}
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# Artalk评论初始化
+hide_streamlit_style1 = """
+<!-- CSS -->
+<link href="https://sunoapi.net/dist/Artalk.css" rel="stylesheet" />
+<!-- JS -->
+<script src="https://sunoapi.net/dist/Artalk.js"></script>
+<!-- Artalk -->
+<div id="Comments"></div>
+<script>
+  Artalk.init({
+  el:        '#Comments',
+  pageKey:   '/readme',
+  pageTitle: '本站项目说明',
+  server:    'https://sunoapi.net',
+  site:      'SunoAPI AI Music Generator',
+  })
+</script>
+<div style="font-size: 12px;font-family: inherit; color: #697182;justify-content: center; align-items: center; word-break: break-word; text-align: center;padding-right: 15px;">本页浏览量 <span id="ArtalkPV">Loading...</span> 次</div>
+"""
+components.html(hide_streamlit_style1, height=940)
 
 components.iframe("https://sunoapi.net/analytics.html", height=0)
