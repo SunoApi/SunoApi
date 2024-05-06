@@ -75,8 +75,8 @@ docker run -d \
   -p 8501:8501 \
   -v ./sunoapi.db:/app/sunoapi.db \
   -v ./images/upload:/app/images/upload \
-  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e OPENAI_BASE_URL=https://api.openai.com  \
+  -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
   -e S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
   -e S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx  \
@@ -131,8 +131,8 @@ services:
       - ./images/upload:/app/images/upload
     environment:
       - TZ=Asia/Shanghai
-      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - OPENAI_BASE_URL=https://api.openai.com
+      - OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
       - S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net
       - S3_ACCESSKEY_ID=xxxxxxxxxxxxxxxxxxxx
       - S3_SECRETKEY_ID=xxxxxxxxxxxxxxxxxxxx
