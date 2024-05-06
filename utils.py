@@ -41,7 +41,10 @@ def fetch(url, headers=None, data=None, method="POST"):
             resp = requests.post(url=url, headers=headers, data=data, verify=False)
         if resp.status_code != 200:
             print(resp.text)
-        result = resp.text.replace('https://cdn1.suno.ai/', f'{S3_WEB_SITE_URL}/files/')
+        if S3_WEB_SITE_URL is not None:
+            result = resp.text.replace('https://cdn1.suno.ai/', f'{S3_WEB_SITE_URL}/files/')
+        else:
+            result = resp.text.replace('https://cdn1.suno.ai/', 'https://res.sunoapi.net/files/')
         result = result.replace('.png', '.png?fmt=webp&txt=SunoAPI&txt-size=0.35&txt-pos=0.5,*0.96&txt-alpha=0.30')
         return json.loads(result)
         # return resp.json()
@@ -86,7 +89,10 @@ def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 def check_url_available(url, twice=False):
-    url = url.replace(f'{S3_WEB_SITE_URL}/files/', 'https://cdn1.suno.ai/')
+    if S3_WEB_SITE_URL is not None:
+        url = url.replace(f'{S3_WEB_SITE_URL}/files/', 'https://cdn1.suno.ai/')
+    else:
+        url = url.replace(f'https://res.sunoapi.net/files/', 'https://cdn1.suno.ai/')
     i = 0
     while not twice and i < 10:
         # 每间隔一秒钟检查一次url文件大小

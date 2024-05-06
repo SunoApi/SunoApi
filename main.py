@@ -168,8 +168,10 @@ with container.container():
                 image_url = ""
                 if "s3.bitiful.net" in S3_WEB_SITE_URL:
                     image_url = put_upload_file(S3_WEB_SITE_URL, filename, S3_ACCESSKEY_ID, S3_SECRETKEY_ID, bytes_data)
-                else:
+                elif S3_WEB_SITE_URL is not None:
                     image_url = f"{S3_WEB_SITE_URL}/images/upload/{filename}"
+                else:
+                    image_url = "http://localhost:8501/images/upload/{filename}"
                 if "detail" in image_url:
                     placeholder.error(i18n("Analytics Images Error") + image_url["detail"])
                 else:

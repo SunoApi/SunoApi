@@ -70,7 +70,7 @@ async def download(url, filename):
         try:
             async with session.get(url) as response:
                 if response.status == 200:
-                    with open(filename, 'wb') as f:
+                    with open(filename, "wb") as f:
                         f.write(await response.read())
                     return str(response.status)
                 else:
@@ -79,12 +79,18 @@ async def download(url, filename):
             return {"detail":str(e)}
 
 def write_file(request, file_path, media_type):
-    if file_path.endswith(".png"):
-        return FileResponse(file_path)
-        # return StreamingResponse(open(file_path, 'rb'), media_type=media_type)
-    else:
+    # if file_path.endswith(".png"):
+    #     return FileResponse(file_path)
+    #     # return StreamingResponse(open(file_path, 'rb'), media_type=media_type)
+    # else:
+    #     start, end = get_range(request)
+    #     return partial_response(media_type, file_path, start, end)
+    if request.query_params.get("play") == "true":
         start, end = get_range(request)
         return partial_response(media_type, file_path, start, end)
+    else:
+        return FileResponse(file_path)
+        # return StreamingResponse(open(file_path, 'rb'), media_type=media_type)
 
 def get_buff_size(file_size):
     buff_size = 2097152
@@ -93,13 +99,13 @@ def get_buff_size(file_size):
     return buff_size
 
 def get_range(request):
-    range = request.headers.get('Range')
+    range = request.headers.get("Range")
     m = None
     if range:
-        m = re.match(r'bytes=(?P<start>\d+)-(?P<end>\d+)?', range)
+        m = re.match(r"bytes=(?P<start>\d+)-(?P<end>\d+)?", range)
     if m:
-        start = m.group('start')
-        end = m.group('end')
+        start = m.group("start")
+        end = m.group("end")
         start = int(start)
         if end is not None:
             end = int(end)

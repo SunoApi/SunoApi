@@ -148,8 +148,8 @@ if aid != "" and len(aid) == 36:
 
             title = data['title']
             with col1:
-                st.audio(data['audio_url'])
-                st.video(data['video_url'])
+                st.audio(data['audio_url'] + "?play=true")
+                st.video(data['video_url'] + "?play=true")
 
             # Artalk评论初始化
             hide_streamlit_style1 = f"""

@@ -199,7 +199,7 @@ data = {}
 
 if result is not None and len(result) > 0:
     data = ast.literal_eval(result[index][1])
-    video_modal = Modal(title=data['title'], key="video_modal", padding=20, max_width=520)
+    # video_modal = Modal(title=data['title'], key="video_modal", padding=20, max_width=520)
 
 # if result and open_modal:
 #     video_modal.open()
