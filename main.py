@@ -168,8 +168,10 @@ with container.container():
                 image_url = ""
                 if "s3.bitiful.net" in S3_WEB_SITE_URL:
                     image_url = put_upload_file(S3_WEB_SITE_URL, filename, S3_ACCESSKEY_ID, S3_SECRETKEY_ID, bytes_data)
-                elif S3_WEB_SITE_URL is not None:
+                elif S3_WEB_SITE_URL != "https://res.sunoapi.net":
                     image_url = f"{S3_WEB_SITE_URL}/images/upload/{filename}"
+                elif S3_WEB_SITE_URL == "https://res.sunoapi.net":
+                    image_url = f"https://sunoapi.net/images/upload/{filename}"
                 else:
                     image_url = "http://localhost:8501/images/upload/{filename}"
                 if "detail" in image_url:
@@ -402,7 +404,7 @@ def fetch_feed(aids: list):
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
-        if status != "Unauthorized" and status != "Not found." and status != "error":
+        if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
             print(result)
             print("\n")
@@ -414,8 +416,8 @@ def fetch_feed(aids: list):
             print("\n")
             if status == "complete":
                 st.balloons()
-                col1.audio(resp[0]["audio_url"])
-                col1.video(resp[0]["video_url"])
+                col1.audio(resp[0]["audio_url"] + "?play=true")
+                col1.video(resp[0]["video_url"] + "?play=true")
                 # col1.image(resp[0]["image_large_url"])
                 placeholder.empty()
                 col2.success(i18n("FetchFeed Success") + resp[0]["id"])
@@ -428,7 +430,7 @@ def fetch_feed(aids: list):
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
-        if status != "Unauthorized" and status != "Not found." and status != "error":
+        if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
             print(result)
             print("\n")
@@ -439,8 +441,8 @@ def fetch_feed(aids: list):
             print(result)
             print("\n")
             if status == "complete":
-                col1.audio(resp[0]["audio_url"])
-                col1.video(resp[0]["video_url"])
+                col1.audio(resp[0]["audio_url"] + "?play=true")
+                col1.video(resp[0]["video_url"] + "?play=true")
                 # col1.image(resp[0]["image_large_url"])
                 col2.success(i18n("FetchFeed Success") + resp[0]["id"])
             else:
@@ -452,7 +454,7 @@ def fetch_feed(aids: list):
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
-        if status != "Unauthorized" and status != "Not found." and status != "error":
+        if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[1].strip(),))
             print(result)
             print("\n")
@@ -464,8 +466,8 @@ def fetch_feed(aids: list):
             print("\n")
             if status == "complete":
                 st.balloons()
-                col3.audio(resp[0]["audio_url"])
-                col3.video(resp[0]["video_url"])
+                col3.audio(resp[0]["audio_url"] + "?play=true")
+                col3.video(resp[0]["video_url"] + "?play=true")
                 # col3.image(resp[0]["image_large_url"])
                 col2.success(i18n("FetchFeed Success") + resp[0]["id"])
             else:
@@ -473,33 +475,39 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
-        placeholder.error(i18n("FetchFeed Error") + i18n("FetchFeed FeedID Error"))
-        # resp = get_page_feed(aids, st.session_state.token)
-        # print(resp)
-        # print("\n")
-        # for row in resp:
-        #     print(row)
-        #     print("\n")
-        #     result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
-        #     print(result)
-        #     print("\n")
-        #     if result:
-        #         result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
-        #         print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
-        #     else:
-        #         result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], st.session_state.Private))
-        #         print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
-        #     print(result)
-        #     print("\n")
-        #     status = resp["detail"] if "detail" in resp else row["status"]
-        #     if status == "complete":
-        #         # st.balloons()
-        #         # col1.audio(row["audio_url"])
-        #         # col1.video(row["video_url"])
-        #         # col1.image(row["image_large_url"])
-        #         col2.success(i18n("FetchFeed Success") + row["id"])
-        #     else:
-        #         placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
+        resp = get_page_feed(aids, st.session_state.token)
+        print(resp)
+        print("\n")
+        status = resp["detail"] if "detail" in resp else resp[0]["status"]
+        if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
+            if len(resp) > 1:
+                for row in resp:
+                    print(row)
+                    print("\n")
+                    result = suno_sqlite.query_one("select aid from music where aid =?", (row["id"],))
+                    print(result)
+                    print("\n")
+                    if result:
+                        result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+                        print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
+                    else:
+                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], st.session_state.Private))
+                        print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
+                    print(result)
+                    print("\n")
+                    status = resp["detail"] if "detail" in resp else row["status"]
+                    if status == "complete":
+                        # st.balloons()
+                        # col1.audio(row["audio_url"] + "?play=true")
+                        # col1.video(row["video_url"] + "?play=true")
+                        # col1.image(row["image_large_url"])
+                        placeholder.success(i18n("FetchFeed Success") + row["id"])
+                    else:
+                        placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else row['metadata']["error_message"]))
+            else:
+                placeholder.error(i18n("FetchFeed Error") + resp["detail"][0]["msg"])
+        else:
+            placeholder.error(i18n("FetchFeed Error") + status)
 
 
 container2 = col2.container(border=True)
@@ -521,9 +529,11 @@ if FetchFeed:
         st.session_state.FeedBtn = True
         if FeedID == "":
             placeholder.error(i18n("FetchFeed FeedID Empty"))
-        else:
+        elif len(FeedID) >= 36:
            FeedIDs = FeedID.split(",")
-           # FeedIDs = FeedID*1
+           fetch_feed(FeedIDs)
+        else:
+           FeedIDs = FeedID*1
            fetch_feed(FeedIDs)
     else:
         st.session_state.FeedBtn = False
@@ -653,8 +663,8 @@ if StartBtn :
 
                     resp0 = fetch_status(resp["clips"][0]["id"], False)
                     if resp0[0]["status"] == "complete":
-                        col1.audio(resp0[0]["audio_url"])
-                        col1.video(resp0[0]["video_url"])
+                        col1.audio(resp0[0]["audio_url"] + "?play=true")
+                        col1.video(resp0[0]["video_url"] + "?play=true")
                         # col1.image(resp0[0]["image_large_url"])
                         placeholder.empty()
                         col2.success(i18n("Generate Success") + resp0[0]["id"])
@@ -666,8 +676,8 @@ if StartBtn :
                     resp1 = fetch_status(resp["clips"][1]["id"], True)
                     if resp1[0]["status"] == "complete":
                         st.balloons()
-                        col3.audio(resp1[0]["audio_url"])
-                        col3.video(resp1[0]["video_url"])
+                        col3.audio(resp1[0]["audio_url"] + "?play=true")
+                        col3.video(resp1[0]["video_url"] + "?play=true")
                         # col3.image(resp1[0]["image_large_url"])
                         placeholder.empty()
                         col2.success(i18n("Generate Success") + resp1[0]["id"])
@@ -701,8 +711,8 @@ if StartBtn :
 
                     resp0 = fetch_status(resp["clips"][0]["id"], False)
                     if resp0[0]["status"] == "complete":
-                        col1.audio(resp0[0]["audio_url"])
-                        col1.video(resp0[0]["video_url"])
+                        col1.audio(resp0[0]["audio_url"] + "?play=true")
+                        col1.video(resp0[0]["video_url"] + "?play=true")
                         # col1.image(resp0[0]["image_large_url"])
                         placeholder.empty()
                         st.session_state.DescPrompt = ""
@@ -715,8 +725,8 @@ if StartBtn :
                     resp1 = fetch_status(resp["clips"][1]["id"], True)
                     if resp1[0]["status"] == "complete":
                         st.balloons()
-                        col3.audio(resp1[0]["audio_url"])
-                        col3.video(resp1[0]["video_url"])
+                        col3.audio(resp1[0]["audio_url"] + "?play=true")
+                        col3.video(resp1[0]["video_url"] + "?play=true")
                         # col3.image(resp1[0]["image_large_url"])
                         placeholder.empty()
                         st.session_state.DescPrompt = ""
@@ -730,8 +740,8 @@ if StartBtn :
         if st.session_state['clips_0'] != "":
             resp0 = fetch_status(st.session_state['clips_0'], False)
             if resp0[0]["status"] == "complete":
-                col1.audio(resp0[0]["audio_url"])
-                col1.video(resp0[0]["video_url"])
+                col1.audio(resp0[0]["audio_url"] + "?play=true")
+                col1.video(resp0[0]["video_url"] + "?play=true")
                 # col1.image(resp0[0]["image_large_url"])
                 placeholder.empty()
                 col2.success(i18n("Generate Success") + resp0[0]["id"])
@@ -742,8 +752,8 @@ if StartBtn :
             resp1 = fetch_status(st.session_state['clips_1'], True)
             if resp1[0]["status"] == "complete":
                 st.balloons()
-                col3.audio(resp1[0]["audio_url"])
-                col3.video(resp1[0]["video_url"])
+                col3.audio(resp1[0]["audio_url"] + "?play=true")
+                col3.video(resp1[0]["video_url"] + "?play=true")
                 # col3.image(resp1[0]["image_large_url"])
                 placeholder.empty()
                 col2.success(i18n("Generate Success") + resp1[0]["id"])
