@@ -614,9 +614,9 @@ def fetch_status(aid: str, twice=False):
             break
 
         time.sleep(10)
-        
-    resp[0]["audio_url"] = resp[0]["audio_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
-    resp[0]["video_url"] = resp[0]["video_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
+    if S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
+        resp[0]["audio_url"] = resp[0]["audio_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
+        resp[0]["video_url"] = resp[0]["video_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
     return resp
 
 if StartBtn :
