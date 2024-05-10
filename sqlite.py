@@ -70,9 +70,11 @@ class SqliteTool():
                 cur.execute(sql, value)
                 conn.commit()
                 if 'INSERT' in sql.upper():
-                    print(f"[insert one record success]:{sql}")
+                    pass
+                    # print(f"[insert one record success]:{sql}")
                 if 'UPDATE' in sql.upper():
-                    print(f"[update one record success]:{sql}")
+                    pass
+                    # print(f"[update one record success]:{sql}")
                 return True
         except Exception as e:
             print(f"[insert/update one record error]:{sql}", e)
@@ -139,7 +141,7 @@ class SqliteTool():
                     cur.execute(sql)
                 # 调用fetchone()方法
                 r = cur.fetchone()
-                print(f"[select one record success]:{sql}")
+                # print(f"[select one record success]:{sql}")
                 return r
         except Exception as e:
             print(f"[select one record error]:{sql}", e)
