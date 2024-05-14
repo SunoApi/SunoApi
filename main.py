@@ -211,13 +211,13 @@ with container.container():
                                     "stream": False,
                                     "presence_penalty": 0,
                                     "frequency_penalty": 0,
-                                    "model": "gpt-4-vision-preview"
+                                    "model": "gpt-4o"
                                 }
                         )
                         if resp.status_code != 200:
                             placeholder.error(i18n("Analytics Images Error") + f"{resp.text}")
                         else:
-                            print(local_time() + f" ***gpt-4-vision-preview image_url -> {image_url} content -> {resp.text} ***\n")
+                            print(local_time() + f" ***gpt-4o image_url -> {image_url} content -> {resp.text} ***\n")
                             content = resp.json()["choices"][0]["message"]["content"].strip()
                             if Custom:
                                 st.session_state['prompt_input'] = content
