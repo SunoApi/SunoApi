@@ -134,7 +134,7 @@ if aid != "" and len(aid) == 36:
     result = suno_sqlite.query_one("select aid,data,created,updated,status,private from music where aid=?", (aid,))
     # print(result)
     # print("\n")
-    if result is not None and len(result) > 0:
+    if result is not None and len(result) > 0 and result[5] == 0:
         data = ast.literal_eval(result[1])
         # print(data)
         # print("\n")
@@ -146,7 +146,7 @@ if aid != "" and len(aid) == 36:
 
             container.markdown("" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n"), unsafe_allow_html=True)
 
-            title = data['title']
+            title = data['title'].strip().replace("\n","")
             with col1:
                 st.audio(data['audio_url'] + "?play=true")
                 st.video(data['video_url'] + "?play=true")
