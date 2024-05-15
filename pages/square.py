@@ -172,7 +172,7 @@ if 'index' not in st.session_state:
 if 'click_image' not in st.session_state:
     st.session_state["click_image"] = False
 
-if len(images)%40 == 0:
+if len(images) > 0 and len(images)%40 == 0:
     use_container_width = True
     
 index = image_select(
