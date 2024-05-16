@@ -16,7 +16,7 @@
     "Custom": "Benutzerdefiniertem Modus",
     "Title": "Titel des Liedes:",
     "Title Desc": "Geben Sie bitte den Titel des Liedes ein, maximal 100 Zeichen.",
-    "Tags": "Musikstil:",
+    "Tags": "Musikstil: ",
     "Tags Desc": "Bitte wählen Sie maximal vier Musikstile aus.",
     "Prompt": "Ihr Lyrics:",
     "Prompt Desc": "Geben Sie bitte Ihre Lyrics ein, maximal 1000 Zeichen.",
@@ -29,7 +29,7 @@
     "Tags Placeholder": "Wählen Sie den Musikstil, den Sie möchten, Suno AI Modell kann Genres und Atmosphäre verstehen.",
     "Prompt Placeholder": "Geben Sie Ihre eigenen Lyrics ein oder andere bereits existierende Lyrics ein, professionell Lyricshilfetool：https://poe.com/SuperSunoMaster。",
 
-    "Desc Prompt": "Liedbeschreibung:",
+    "Desc Prompt": "Liedbeschreibung: ",
     "Desc Value": "Geben Sie direkt den gewünschten Musikstil und Thema ein, machen Sie einfach professionelle Suno AI-Musiklieder！",
     "Desc Reamrk": "Beschreibe den gewünschten Musikstil und Thema (z. B.: Ursprüngliches Popmusik über Urlaub), Nutzen Sie Genres und Stimmung statt spezifische Künstler und Lieder.",
     "Instrumental": "Klaviermusik",

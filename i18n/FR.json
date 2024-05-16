@@ -16,7 +16,7 @@
     "Custom": "Mode personnalisé",
     "Title": "Titre de la chanson:",
     "Title Desc": "Veuillez entrer le titre de la chanson, pas plus de 100 caractères.",
-    "Tags": "Style musical:",
+    "Tags": "Style musical: ",
     "Tags Desc": "Veuillez choisir un style de musique, pas plus de quatre styles.",
     "Prompt": "Votre paroles:",
     "Prompt Desc": "Veuillez entrer vos paroles, pas plus de 1000 caractères.",
@@ -29,7 +29,7 @@
     "Tags Placeholder": "Choisissez le style de musique que vous voulez, les modèles de suno ai comprennent le genre et l'atmosphère.",
     "Prompt Placeholder": "Entrez vos propres paroles ou des paroles existantes, outil d'assistance aux paroles professionnel : https://poe.com/SuperSunoMaster.",
 
-    "Desc Prompt": "Description de la chanson:",
+    "Desc Prompt": "Description de la chanson: ",
     "Desc Value": "Entrez directement le style musical et le thème souhaité, et générez une chanson Suno AI de qualité professionnelle d'un seul coup !",
     "Desc Reamrk": "Décrivez le style musical et le thème souhaité (par exemple : musique pop acoustique sur les vacances), utilisez des genres et des ambiances plutôt que des artistes et des chansons spécifiques.",
     "Instrumental": "instrumentale",

@@ -16,7 +16,7 @@
     "Custom": "Custom mode",
     "Title": "Song Title:",
     "Title Desc": "Please enter the song name, with a maximum of 100 words.",
-    "Tags": "Style of music:",
+    "Tags": "Style of music: ",
     "Tags Desc": "Please select a maximum of four music styles.",
     "Prompt": "Your own lyrics:",
     "Prompt Desc": "Please enter your lyrics, up to a maximum of 1000 words.",
@@ -29,7 +29,7 @@
     "Tags Placeholder": "Choose the music style you want, Suno AI's model can understand genres and atmosphere.",
     "Prompt Placeholder": "Enter your own lyrics, or various existing lyrics, professional lyric assistance tools: https://poe.com/SuperSunoMaster.",
     
-    "Desc Prompt": "Song Description:",
+    "Desc Prompt": "Song Description: ",
     "Desc Value": "Directly enter your desired style of music and theme, and create professional quality Suno AI music songs with one click!",
     "Desc Reamrk": "Describe the style of music and theme you want (e.g. : Acoustic pop music about the holidays). Use genres and atmospheres rather than specific artists and songs.",
     "Instrumental": "Instrumental",
