@@ -83,6 +83,8 @@ def i18n(key):
 
 st.session_state['disabled_state'] = False
 st.session_state['prompt_input'] = ""
+st.session_state['tags_input'] = ""
+st.session_state['title_input'] = ""
 st.session_state.DescPrompt = ""
 
 with st.sidebar:
