@@ -109,14 +109,17 @@ st.sidebar.page_link("https://www.ewsyun.com/", label="E修工电子工单业务
 st.sidebar.page_link("https://h4ck.org.cn/", label="※呢喃/Msg※ &#8211; obaby@mars", icon="🌐")
 st.sidebar.page_link("https://s2.chanyoo.net/", label="云通讯增值服务平台", icon="🌐")
 
+
 def change_page():
-    st.session_state["click_image"] = False
     print("st.session_state.change_page:" + str(st.session_state.change_page))
     st.session_state.page = 1 if 'change_page' not in st.session_state else st.session_state.change_page
 
+
 if 'page' not in st.session_state:
     st.session_state.page = 1
-# print(st.session_state["page"])
+else:
+    st.session_state.page = 1 if 'change_page' not in st.session_state else st.session_state.change_page
+
 
 title = col2.text_input(" ", "", placeholder=i18n("Enter Search Keywords"))
 
@@ -149,7 +152,6 @@ def localdatetime(str):
     # print(localdt.strftime('%Y-%m-%d %H:%M:%S'))
     return localdt.strftime('%Y-%m-%d %H:%M:%S')
 
-
 titles = []
 images = []
 captions = []
@@ -173,17 +175,11 @@ if result is not None and len(result) > 0:
 
 print("\n")
 
-index = 0
 use_container_width = False
-
-if 'index' not in st.session_state:
-    st.session_state.index = -1
-if 'click_image' not in st.session_state:
-    st.session_state["click_image"] = False
 
 if len(images) > 0 and len(images)%40 == 0:
     use_container_width = True
-    
+
 index = image_select(
             label="",
             images=images if len(images) > 0 else ["https://sunoapi.net/images/sunoai.jpg"],
@@ -204,39 +200,24 @@ else:
 
 st.session_state.index = index
 
+
 data = {}
 
-if result is not None and len(result) > 0:
+if result:
     data = ast.literal_eval(result[index][1])
-    # video_modal = Modal(title=data['title'], key="video_modal", padding=20, max_width=520)
+    video_modal = Modal(title=data['title'], key="video_modal", padding=20, max_width=520)
 
-# if result and open_modal:
-#     video_modal.open()
+sac.pagination(total=total_records, index=page_number, page_size=records_per_page, align='center', jump=True, show_total=True, key='change_page', on_change=change_page)
 
-# if result and video_modal.is_open():
-#     with video_modal.container():
-#         if data['status'] == "complete":
-#             st.session_state.index = index
-#             st.video(data['video_url'])
-#         else:
-#             st.error(i18n("Generation Task Status") + data["status"])
+if result and open_modal:
+    video_modal.open()
 
-# print(index)
-# print(st.session_state["click_image"])
+if video_modal.is_open() and st.session_state.index != 0:
+   st.session_state.index = 0
+   st.session_state.aid = data['id']
+   # print(st.session_state.aid)
+   st.switch_page("pages/song.py")
 
-if st.session_state["click_image"] == False:
-    st.session_state["click_image"] = True
-    sac.pagination(total=total_records, index=page_number,  page_size=records_per_page, align='center', jump=True, show_total=True, key='change_page', on_change=change_page)
-elif 'change_page' in st.session_state and index == 0:
-    st.session_state["click_image"] = True
-    sac.pagination(total=total_records, index=page_number, page_size=records_per_page, align='center', jump=True, show_total=True, key='change_page', on_change=change_page)
-else:
-    st.session_state.aid = data['id']
-    # print(st.session_state.aid)
-    st.switch_page("pages/song.py")
-
-# print(index)
-# print(st.session_state["click_image"])
 
 # 隐藏右边的菜单以及页脚
 hide_streamlit_style = """
