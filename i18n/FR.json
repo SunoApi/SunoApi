@@ -97,6 +97,7 @@
     "Upload Images Success": "Image téléchargée avec succès, en cours d'identification intelligente s'il vous plaît attendre un peu!",
     "Upload Images Analytics": "Aidez-moi à analyser le contenu de cette image. Résumez et décrivez le message qu’elle exprime. La première phrase affiche un bref sujet de l’expression de l’image. La deuxième phrase décrit en détail le contenu de l’image. Exportez directement le sujet et le contenu. N’indiquez pas les mots tels que «cette image exprime», «dans cette image», «cette image communique». Exportez simplement le sujet et le contenu.",
     "Analytics Images Error": "La reconnaissance intelligente de l'image a échoué: ",
-    "Analytics Images Success": "La reconnaissance intelligente de l'image est réussie et peut être générée immédiatement après la modification nécessaire!"
+    "Analytics Images Success": "La reconnaissance intelligente de l'image est réussie et peut être générée immédiatement après la modification nécessaire!",
+    "Friendly Link": "Sponsors ainsi que liens amicaux："
   }
 }
