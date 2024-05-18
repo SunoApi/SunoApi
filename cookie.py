@@ -82,7 +82,7 @@ def update_token(suno_cookie: SunoCookie):
         headers=headers,
         verify=False
     )
-
+    token = ""
     if resp.status_code != 200:
         print(local_time() + f" ***update_token identity -> {identity} session -> {session_id} status_code -> {resp.status_code} thread_id: {threading.get_ident()} ***\n")
         suno_cookie.set_token("401")
@@ -95,7 +95,7 @@ def update_token(suno_cookie: SunoCookie):
         suno_cookie.set_token(token)
         # print(f"*** token -> {token} ***")    
 
-    result = suno_sqlite.operate_one("update session set updated=(datetime('now', 'localtime')), status=? where identity =?", (resp.status_code, identity))
+    result = suno_sqlite.operate_one("update session set updated=(datetime('now', 'localtime')), token=?, status=? where identity =?", (token, resp.status_code, identity))
     if result:
         print(local_time() + f" ***update_session identity -> {identity} session -> {session_id} status_code -> {resp.status_code} thread_id: {threading.get_ident()} ***\n")
 
@@ -189,12 +189,22 @@ def start_keep_alive():
             t = Thread(target=keep_alive, args=(suno_cookie,))
             t.start()
 
-            t1 = Thread(target=get_page, args=(suno_cookie,))
-            t1.start()
+            # t1 = Thread(target=get_page, args=(suno_cookie,))
+            # t1.start()
 
         print(local_time() + f" ***start_keep_alive suno_auths -> {len(suno_auths)} ***\n")
 
     t2 = Thread(target=clear_task, args=())
     t2.start()
 
-start_keep_alive()
+def get_random_token():
+    result = suno_sqlite.query_one("select token from session where token != '' and status='200' order by random() limit 1")
+    # print(result)
+    # print("\n")
+    if result:
+        print(local_time() + f" ***get_random_token -> {result[0]} ***\n")
+        return result[0]
+    else:
+        print(local_time() + f" ***get_random_token -> {result} ***\n")
+        return ""
+# start_keep_alive()

@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 
 import schemas
-from cookie import get_suno_auth,new_suno_auth
+from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token
 from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics,put_upload_file,get_new_tags
 
 root_dir = os.path.dirname(os.path.realpath(__file__))
@@ -275,7 +275,7 @@ with container.container():
 
         random_lyrics = cols[1].button(i18n("Generate Lyrics"), type="secondary")
         if random_lyrics:
-            lyrics = get_random_lyrics(Title if Title != "" else st.session_state['prompt_input'], st.session_state.token)
+            lyrics = get_random_lyrics(Title if Title != "" else st.session_state['prompt_input'], get_random_token())
             status = lyrics["detail"] if "detail" in lyrics else (lyrics["status"] if "status" in lyrics else "success")
             if status != "Unauthorized" and status != "Error" and status != "Expecting value: line 1 column 1 (char 0)":
                 st.session_state['title_input'] = lyrics['title'] if lyrics['title'] != "" else Title
@@ -375,9 +375,9 @@ if Setting:
             print(result)
             print("\n")
             if result:
-                result = suno_sqlite.operate_one("update session set identity=?, session=?, cookie=? where identity =?", (Identity, Session, Cookie, Identity))
+                result = suno_sqlite.operate_one("update session set session=?, cookie=?, token=? where identity =?", (Session, Cookie, Identity,""))
             else:
-                result = suno_sqlite.operate_one("insert into session (identity,session,cookie) values(?,?,?)", (Identity, Session, Cookie))
+                result = suno_sqlite.operate_one("insert into session (identity,session,cookie,token) values(?,?,?,?)", (Identity, Session, Cookie,""))
 
             if result:
                 st.session_state.Identity = Identity
@@ -396,20 +396,16 @@ if Setting:
 
 st.session_state.token = ""
 st.session_state.suno_auth = None
-while True:
-    st.session_state.suno_auth = get_suno_auth()
-    st.session_state.token = st.session_state.suno_auth.get_token()
-    if st.session_state.token != "" and st.session_state.token != "401":
-        # print(local_time() + f" ***generate identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
-        break
-    else:
-        placeholder.error(i18n("TokenAuth Error"))
-        break
+
+@st.cache_data
+def start_page():
+    start_keep_alive()
+start_page()
 
 # @st.cache_data
 def fetch_feed(aids: list):
     if len(aids) == 1 and len(aids[0].strip()) == 36:
-        resp = get_feed(aids[0].strip(), st.session_state.token)
+        resp = get_feed(aids[0].strip(), get_random_token())
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -435,7 +431,7 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     elif len(aids) == 2  and len(aids[0].strip()) == 36 and len(aids[1].strip()) == 36:
-        resp = get_feed(aids[0].strip(), st.session_state.token)
+        resp = get_feed(aids[0].strip(), get_random_token())
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -459,7 +455,7 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
-        resp = get_feed(aids[1].strip(), st.session_state.token)
+        resp = get_feed(aids[1].strip(), get_random_token())
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -484,7 +480,7 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
-        resp = get_page_feed(aids, st.session_state.token)
+        resp = get_page_feed(aids, get_random_token())
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -561,14 +557,14 @@ StartBtn = col2.button(i18n("Generate"), use_container_width=True, type="primary
 
 def generate(data: schemas.CustomModeGenerateParam):
     try:
-        resp = generate_music(data, st.session_state.token)
+        resp = generate_music(data, get_random_token())
         return resp
     except Exception as e:
         return {"detail":str(e)}
 
 def generate_with_song_description(data: schemas.DescriptionModeGenerateParam):
     try:
-        resp = generate_music(data, st.session_state.token)
+        resp = generate_music(data, get_random_token())
         return resp
     except Exception as e:
         return {"detail":str(e)}
@@ -580,7 +576,7 @@ def fetch_status(aid: str, twice=False):
     percent_complete = 0
     my_bar.progress(percent_complete, text=progress_text)
     while True:
-        resp = get_feed(aid, st.session_state.token)
+        resp = get_feed(aid, get_random_token())
         print(resp)
         print("\n")
         percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 5
@@ -600,12 +596,13 @@ def fetch_status(aid: str, twice=False):
             check_url_available(resp[0]["video_url"], twice)
             my_bar.empty()
         elif status == "Unauthorized":
-            while True:
-                st.session_state.suno_auth = get_suno_auth()
-                st.session_state.token = st.session_state.suno_auth.get_token()
-                if st.session_state.token != "" and st.session_state.token != "401":
-                    print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
-                    break
+            # while True:
+            #     st.session_state.suno_auth = get_suno_auth()
+            #     get_random_token() = st.session_state.suno_auth.get_token()
+            #     if get_random_token() != "" and get_random_token() != "401":
+            #         print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
+            #         break
+            st.session_state.token = get_random_token()
             continue
         elif status == "Not found.":
             continue
