@@ -108,6 +108,9 @@ st.sidebar.page_link("https://echs.top/", label="二次寒树岁月蹉跎，初�
 st.sidebar.page_link("https://www.ewsyun.com/", label="E修工电子工单业务云平台", icon="🌐")
 st.sidebar.page_link("https://h4ck.org.cn/", label="※呢喃/Msg※ &#8211; obaby@mars", icon="🌐")
 st.sidebar.page_link("https://s2.chanyoo.net/", label="云通讯增值服务平台", icon="🌐")
+st.sidebar.page_link("https://echeverra.cn/jaychou", label="周杰伦全部15张专辑178首音乐", icon="🌐")
+st.sidebar.page_link("https://dujun.io/", label="杜郎俊赏", icon="🌐")
+st.sidebar.page_link("https://nanwish.love/", label="墨点白|墨点白", icon="🌐")
 
 
 def change_page():
