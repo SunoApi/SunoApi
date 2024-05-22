@@ -189,8 +189,8 @@ def start_keep_alive():
             t = Thread(target=keep_alive, args=(suno_cookie,))
             t.start()
 
-            # t1 = Thread(target=get_page, args=(suno_cookie,))
-            # t1.start()
+            t1 = Thread(target=get_page, args=(suno_cookie,))
+            t1.start()
 
         print(local_time() + f" ***start_keep_alive suno_auths -> {len(suno_auths)} ***\n")
 
@@ -198,7 +198,7 @@ def start_keep_alive():
     t2.start()
 
 def get_random_token():
-    result = suno_sqlite.query_one("select token from session where token != '' and status='200' order by random() limit 1")
+    result = suno_sqlite.query_one("select token from session where token != '' and status='200' order by random()")
     # print(result)
     # print("\n")
     if result:
