@@ -259,10 +259,10 @@ if aid != "" and len(aid) == 36:
                 with part_modal.container():
                     if data['metadata']['history'] is not None:
                         for index, item in enumerate(data['metadata']['history']):
-                            st.write(f'''{i18n("Song Part")} {str(index+1)} /song?id={item['id']}''')
+                            st.write(f'''{i18n("Song Part")} {str(index+1)} https://sunoapi.net/song?id={item['id']}''')
                     if data['metadata']['concat_history'] is not None:
                         for index, item in enumerate(data['metadata']['concat_history']):
-                            st.write(f'''{i18n("Song Part")} {str(index+1)} /song?id={item['id']}''')
+                            st.write(f'''{i18n("Song Part")} {str(index+1)} https://sunoapi.net/song?id={item['id']}''')
 
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
