@@ -259,10 +259,14 @@ if aid != "" and len(aid) == 36:
                 with part_modal.container():
                     if data['metadata']['history'] is not None:
                         for index, item in enumerate(data['metadata']['history']):
-                            st.write(f'''{i18n("Song Part")} {str(index+1)} https://sunoapi.net/song?id={item['id']}''')
+                            st.markdown(f'''{i18n("Song Part")} {str(index+1)} 
+                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a>
+                            ''', unsafe_allow_html=True)
                     if data['metadata']['concat_history'] is not None:
                         for index, item in enumerate(data['metadata']['concat_history']):
-                            st.write(f'''{i18n("Song Part")} {str(index+1)} https://sunoapi.net/song?id={item['id']}''')
+                            st.markdown(f'''{i18n("Song Part")} {str(index+1)} 
+                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a>
+                            ''', unsafe_allow_html=True)
 
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
@@ -307,7 +311,11 @@ if aid != "" and len(aid) == 36:
                     else:
                         col2.error(i18n("Generate Submit Error") + status)
             
-            container.write("https://sunoapi.net/song?id=" + aid + "\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "\n\n" + i18n("Music Prompt"))
+            container.markdown(f'''{i18n("FeedID")}
+                            <a href="/song?id={aid}" target="_blank">{aid}</a>
+                            ''', unsafe_allow_html=True)
+
+            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "\n\n" + i18n("Music Prompt"))
 
             container.markdown("" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n"), unsafe_allow_html=True)
 
