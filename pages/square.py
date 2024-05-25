@@ -85,6 +85,8 @@ st.session_state['disabled_state'] = False
 st.session_state['prompt_input'] = ""
 st.session_state['tags_input'] = ""
 st.session_state['title_input'] = ""
+st.session_state["continue_at"] = ""
+st.session_state["continue_clip_id"] = ""
 st.session_state.DescPrompt = ""
 
 with st.sidebar:
@@ -114,7 +116,7 @@ st.sidebar.page_link("https://nanwish.love/", label="墨点白|墨点白", icon=
 
 
 def change_page():
-    print("st.session_state.change_page:" + str(st.session_state.change_page))
+    # print("st.session_state.change_page:" + str(st.session_state.change_page))
     st.session_state.page = 1 if 'change_page' not in st.session_state else st.session_state.change_page
 
 

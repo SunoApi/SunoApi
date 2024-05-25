@@ -5,6 +5,8 @@ import streamlit as st
 import time,json,os,ast
 from datetime import timezone
 import dateutil.parser
+from utils import generate_concat,get_feed,local_time,check_url_available
+from cookie import get_random_token
 
 from streamlit_option_menu import option_menu
 from streamlit_modal import Modal
@@ -19,6 +21,13 @@ import site
 site.addsitedir(root_dir)
 from streamlit_image_select import image_select
 
+from dotenv import load_dotenv
+load_dotenv()
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+S3_WEB_SITE_URL = os.getenv("S3_WEB_SITE_URL")
+S3_ACCESSKEY_ID = os.getenv("S3_ACCESSKEY_ID")
+S3_SECRETKEY_ID = os.getenv("S3_SECRETKEY_ID")
 
 from sqlite import SqliteTool
 
@@ -116,6 +125,70 @@ st.sidebar.page_link("https://echeverra.cn/jaychou", label="周杰伦全部15张
 st.sidebar.page_link("https://dujun.io/", label="杜郎俊赏", icon="🌐")
 st.sidebar.page_link("https://nanwish.love/", label="墨点白|墨点白", icon="🌐")
 
+def get_whole_song(data):
+    try:
+        resp = generate_concat(data, get_random_token())
+        return resp
+    except Exception as e:
+        return {"detail":str(e)}
+
+def fetch_status(aid: str, col2):
+    progress_text = i18n("Fetch Status Progress")
+    my_bar = col2.progress(0, text=progress_text)
+    percent_complete = 0
+    my_bar.progress(percent_complete, text=progress_text)
+    while True:
+        resp = get_feed(aid, get_random_token())
+        print(resp)
+        print("\n")
+        percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 5
+        if percent_complete >= 100:
+            percent_complete = 100
+        status = resp["detail"] if "detail" in resp else resp[0]["status"]
+        if status == "running":
+            progress_text = i18n("Fetch Status Running") + status
+            my_bar.progress(percent_complete, text=progress_text)
+        elif status == "submitted":
+            progress_text = i18n("Fetch Status Running") + status
+            my_bar.progress(percent_complete, text=progress_text)
+        elif status == "complete":
+            progress_text = i18n("Fetch Status Success") + status
+            my_bar.progress(100, text=progress_text)
+            # time.sleep(15) #等待图片音频视频生成完成再返回
+            check_url_available(resp[0]["video_url"], False)
+            my_bar.empty()
+        elif status == "Unauthorized":
+            st.session_state.token = get_random_token()
+            continue
+        elif status == "Not found.":
+            continue
+        elif status == "error":
+            my_bar.empty()
+        else:
+            progress_text = i18n("Fetch Status Running") + status
+            status = "queued"
+            my_bar.progress(percent_complete, text=progress_text)
+        
+        result = suno_sqlite.query_one("select aid from music where aid =?", (aid,))
+        print(result)
+        print("\n")
+        if result:
+            result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, aid))
+            print(local_time() + f" ***fetch_status_update aid -> {aid} status -> {status} data -> {str(resp[0])} ***\n")
+        else:
+            result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, 0))
+        print(result)
+        print("\n")
+
+        if status == "complete" or status == "error":
+            break
+
+        time.sleep(10)
+    if S3_WEB_SITE_URL is not None and (S3_WEB_SITE_URL != "http://localhost:8501" or S3_WEB_SITE_URL != "https://cdn1.suno.ai"):
+        resp[0]["audio_url"] = resp[0]["audio_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
+        resp[0]["video_url"] = resp[0]["video_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
+    return resp
+
 def localdatetime(str):
     # 将字符串时间 转化为 datetime 对象
     dateObject = dateutil.parser.isoparse(str)
@@ -148,11 +221,91 @@ if aid != "" and len(aid) == 36:
     # print("\n")
     if result is not None and len(result) > 0 and result[5] == 0:
         data = ast.literal_eval(result[1])
-        # print(data)
-        # print("\n")
+        print(data)
+        print("\n")
         if data['status'] == "complete":
             container = col2.container(border=True)
-            container.title("None\n" if data['title'] is None or "" else data['title'])
+            title = "None\n" if data['title'] is None or "" else data['title'].strip()
+            container.markdown(f'''
+                <h3>{title}</h3> 
+                ''', unsafe_allow_html=True)
+            cols = None
+            if data['metadata']['audio_prompt_id'] is not None:
+                cols = container.columns(4)
+            else:
+                cols = container.columns(3)
+
+            # part_button = None
+            if data['metadata']['history'] is not None:
+                # cols[0].markdown(f'''
+                # <h3>{i18n("Song Part")} {len(data['metadata']['history'])+1}</h3> 
+                # ''', unsafe_allow_html=True)
+                part_button = cols[0].button(f'''{i18n("Song Part")} {len(data['metadata']['history'])+1}''', type="secondary")
+            elif data['metadata']['concat_history'] is not None:
+                # cols[0].markdown(f'''
+                # <h3>{i18n("Full Song")}</h3> 
+                # ''', unsafe_allow_html=True)
+                part_button = cols[0].button(f'''{i18n("Full Song")}''', type="secondary")
+            else:
+                # cols[0].markdown(f'''
+                # <h3>{i18n("Song Part")} 1</h3> 
+                # ''', unsafe_allow_html=True)
+                part_button = cols[0].button(f'''{i18n("Song Part")} 1''', type="secondary")
+
+            part_modal = Modal(title=title, key="part_modal", padding=20, max_width=550)
+            if part_button and (data['metadata']['history'] is not None or data['metadata']['concat_history'] is not None):
+                part_modal.open()
+            if part_modal.is_open():
+                with part_modal.container():
+                    if data['metadata']['history'] is not None:
+                        for index, item in enumerate(data['metadata']['history']):
+                            st.write(f'''{i18n("Song Part")} {str(index+1)} /song?id={item['id']}''')
+                    if data['metadata']['concat_history'] is not None:
+                        for index, item in enumerate(data['metadata']['concat_history']):
+                            st.write(f'''{i18n("Song Part")} {str(index+1)} /song?id={item['id']}''')
+
+            reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
+            if reuse_button:
+                st.session_state['title_input'] = title
+                st.session_state['tags_input'] = ""
+                st.session_state['prompt_input'] = "" if data['metadata']['prompt'] == "[Instrumental]" else data['metadata']['prompt']
+                st.session_state["continue_at"] = ""
+                st.session_state["continue_clip_id"] = ""
+                st.switch_page("main.py")
+
+            continue_button = cols[2].button(i18n("Continue Extend"), type="secondary")
+            if continue_button:
+                st.session_state['title_input'] = title
+                st.session_state['tags_input'] = ""
+                st.session_state['prompt_input'] = ""
+                st.session_state["continue_at"] = str(data['metadata']['duration'])[0:6]
+                st.session_state["continue_clip_id"] = aid
+                st.switch_page("main.py")
+
+            if data['metadata']['audio_prompt_id'] is not None:
+                whole_button = cols[3].button(i18n("Get Whole Song"), type="secondary")
+                if whole_button:
+                    data1 = {
+                        "clip_id": aid
+                    }
+                    # print(data1)
+                    # print("\n")
+                    resp = get_whole_song(data1)
+                    print(resp)
+                    print("\n")
+                    status = resp["status"] if "status" in resp else resp["detail"]
+                    if status == "queued" or status == "complete":
+                        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["id"]), str(resp), 0))
+                        resp0 = fetch_status(resp["id"], col2)
+                        if resp0[0]["status"] == "complete":
+                            col2.success(i18n("Generate Success") + resp0[0]["id"])
+                            st.session_state.aid = resp0[0]["id"]
+                            # print(st.session_state.aid)
+                            st.switch_page("pages/song.py")
+                        else:
+                            col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
+                    else:
+                        col2.error(i18n("Generate Submit Error") + status)
             
             container.write("https://sunoapi.net/song?id=" + aid + "\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "\n\n" + i18n("Music Prompt"))
 
