@@ -41,7 +41,9 @@ def fetch(url, headers=None, data=None, method="POST"):
             resp = requests.post(url=url, headers=headers, data=data, verify=False)
         if resp.status_code != 200:
             print(resp.text)
-        if S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
+        if S3_WEB_SITE_URL is None or S3_WEB_SITE_URL == "https://cdn1.suno.ai":
+            result = resp.text
+        elif S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
             result = resp.text.replace('https://cdn1.suno.ai/', f'{S3_WEB_SITE_URL}/files/')
         else:
             result = resp.text.replace('https://cdn1.suno.ai/', 'https://res.sunoapi.net/files/')
@@ -72,6 +74,11 @@ def generate_music(data, token):
     response = fetch(api_url, headers, data)
     return response
 
+def generate_concat(data, token):
+    headers = {"Authorization": f"Bearer {token}"}
+    api_url = f"{BASE_URL}/api/generate/concat/v2/"
+    response = fetch(api_url, headers, data)
+    return response
 
 def generate_lyrics(prompt, token):
     headers = {"Authorization": f"Bearer {token}"}
@@ -89,7 +96,9 @@ def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 def check_url_available(url, twice=False):
-    if S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
+    if S3_WEB_SITE_URL is None or S3_WEB_SITE_URL == "https://cdn1.suno.ai":
+        pass
+    elif S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
         url = url.replace(f'{S3_WEB_SITE_URL}/files/', 'https://cdn1.suno.ai/')
     else:
         url = url.replace(f'https://res.sunoapi.net/files/', 'https://cdn1.suno.ai/')

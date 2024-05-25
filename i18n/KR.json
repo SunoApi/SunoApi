@@ -1,8 +1,8 @@
 {
   "Language": "한국어",
   "Translation": {
-    "Page Title": "SunoAPI AI 음악 노래 생성기",
-    "Page About": "SunoAPI AI 음악 생성기는 무료 AI 음악 생성 소프트웨어로, 기존 API 인터페이스를 호출하면 AI 음악 생성을 실현할 수 있습니다.\n\n질문이 있으면 웹 사이트를 방문하십시오.https://sunoapi.net",
+    "Page Title": "Suno API AI 음악 노래 생성기",
+    "Page About": "Suno API AI 음악 생성기는 무료 AI 음악 생성 소프트웨어로, 기존 API 인터페이스를 호출하면 AI 음악 생성을 실현할 수 있습니다.\n\n질문이 있으면 웹 사이트를 방문하십시오.https://sunoapi.net",
     "Page Header": "당신만의 독특한 Suno AI 음악 노래를 즉시 창작하여 혁신적인 AI 음악 생성의 즐거움을 무료로 사용하고 즐길 수 있습니다! ",
 
     "Music Song Create": "음악 가곡 창작",
@@ -98,6 +98,17 @@
     "Upload Images Analytics": "이 그림의 내용을 분석하고 그림이 표현한 정보를 총결하여 묘사해 주세요.첫 번째 문장은 그림 표현의 간략한 주제를 출력하고, 두 번째 문장은 그림의 내용을 상세하게 묘사하며, 주제와 내용을 직접 출력하며,'이 그림이 표현했다','이 그림에서','이 그림이 전달했다'등의 문구가 나타나지 않도록 하고 주제와 내용을 직접 출력하면 된다.",
     "Analytics Images Error": "이미지 인텔리전스 인식 실패: ",
     "Analytics Images Success": "그림 지능인식 성공, 필요에 따라 수정 후 클릭하면 즉시 생성!",
-    "Friendly Link": "스폰서 및 우정 링크："
+    "Friendly Link": "스폰서 및 우정 링크：",
+
+    "Song Part": "부분",
+    "Full Song": "완전",
+    "Reuse Prompt": "가사를중용하다",
+    "Continue Extend": "연장 확장",
+    "Get Whole Song": "전체 노래",
+    "Extend Button": "연장 확장🎵",
+    "Extend Placeholder": "추가 가사를 입력하십시오. 이전 곡 단락에 따라 노래를 확장합니다. 확장곡을 만든 후 재생 페이지에서 전체 버튼을 가져와서 전체 곡을 가져옵니다.",
+    "Extend From": "시점으로부터 연장",
+    "Extend From Help": "확장된 노래 번호의 시점으로부터 새로운 노래 세그먼트 (예: 120) 를 확장하고, 이해하지 못하면 수정하지 않으면 기본적으로 노래의 끝부터 연장됩니다.",
+    "Extend From Clip": "확장된 노래 번호"
   }
 }

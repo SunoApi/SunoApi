@@ -11,8 +11,6 @@
 
 </div>
 
-- 谁在本地搭建项目生成歌曲用我测试的token，而且一直生成一首歌曲的主题叫黄总，每次五首歌曲都用完了搞的我都不能调试程序了。你能用自己的token生成歌曲吗？？？每天就五次好麻烦！！！大家如果有多的闲置不用的账号，可以添加进来这样就可以足够测试使用了。
-
 
 ### 介绍
 
@@ -204,7 +202,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240517" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240525" style="max-width: 100%;"/></a>
 
 
 ### 参与

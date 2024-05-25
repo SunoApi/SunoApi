@@ -1,8 +1,8 @@
 {
   "Language": "繁體中文",
   "Translation": {
-    "Page Title": "SunoAPI AI 音樂歌曲生成器",
-    "Page About": "SunoAPI AI 音樂生成器是一款免費的AI音樂生成軟件，調用現有的API介面即可實現AI音樂生成。\n\n如果您有任何問題，請訪問我們的網站：https://sunoapi.net",
+    "Page Title": "Suno API AI 音樂歌曲生成器",
+    "Page About": "Suno API AI 音樂生成器是一款免費的AI音樂生成軟件，調用現有的API介面即可實現AI音樂生成。\n\n如果您有任何問題，請訪問我們的網站：https://sunoapi.net",
     "Page Header": "立即創作屬於您獨特的Suno AI音樂歌曲，免費使用並享受創新AI音樂生成的樂趣! ",
 
     "Music Song Create": "音樂歌曲創作",
@@ -98,6 +98,17 @@
     "Upload Images Analytics": "幫我分析一下這張圖片的內容，總結並描述圖片所表達的資訊。 第一句輸出圖片表達的簡要主題，第二句詳細描述圖片的內容，直接輸出主題和內容，不要出現'這張圖片表達了'，'在這幅圖畫中'，'這張圖片傳達了'等字眼，直接輸出主題和內容即可。",
     "Analytics Images Error": "圖片智慧識別失敗：",
     "Analytics Images Success": "圖片智慧識別成功，可以根據需要修改之後再點立即生成！",
-    "Friendly Link": "贊助商以及友情連結："
+    "Friendly Link": "贊助商以及友情連結：",
+
+    "Song Part": "部分",
+    "Full Song": "完整",
+    "Reuse Prompt": "重用歌詞",
+    "Continue Extend": "延長擴展",
+    "Get Whole Song": "獲取整首",
+    "Extend Button": "延長擴展🎵",
+    "Extend Placeholder": "輸入額外的歌詞根據您之前的歌曲段落擴展歌曲，擴展歌曲創建完成後，在播放頁面通過獲取整首按鈕以獲得完整的歌曲。",
+    "Extend From": "從時間點延長",
+    "Extend From Help": "從擴展歌曲編號的時間點延長一段新的歌曲片段（例如：120），如果不明白不用修改，默認從該歌曲的末尾開始延長。",
+    "Extend From Clip": "擴展歌曲編號"
   }
 }

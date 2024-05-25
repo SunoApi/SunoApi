@@ -1,8 +1,8 @@
 {
   "Language": "English",
   "Translation": {
-    "Page Title": "SunoAPI AI Music Generator",
-    "Page About": "SunoAPI AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net",
+    "Page Title": "Suno API AI Music Generator",
+    "Page About": "Suno API AI Music Generator is a free AI music generation software, calling the existing API interface to achieve AI music generation. If you have any questions, please visit our website url address: https://sunoapi.net",
     "Page Header": "Create your own unique Suno AI music song now, use it for free and enjoy the fun of innovative AI music generation! ",
 
     "Music Song Create": "Music Song Creation",
@@ -98,6 +98,17 @@
     "Upload Images Analytics": "Please help me analyze the content of this picture, summarize and describe the information expressed in the picture. The first sentence provides a brief description of the theme conveyed by the image, while the second sentence provides a detailed description of the content of the image. Directly output the theme and content, without using words such as' this image expresses', 'in this image', or 'this image conveys'. Simply output the theme and content.",
     "Analytics Images Error": "Image intelligent recognition failed: ",
     "Analytics Images Success": "Image intelligent recognition successful, can be modified as needed and then click generate immediately!",
-    "Friendly Link": "Sponsors and friendly links："
+    "Friendly Link": "Sponsors and friendly links：",
+
+    "Song Part": "Part",
+    "Full Song": "Whole",
+    "Reuse Prompt": "Reuse prompt",
+    "Continue Extend": "Extend",
+    "Get Whole Song": "Get whole song",
+    "Extend Button": "Extend🎵",
+    "Extend Placeholder": "Enter additional lyrics to expand the song based on your previous song paragraphs. After creating the expanded song, click the Get Whole Song button on the playback page to obtain the complete song.",
+    "Extend From": "Lengthening from the point in time",
+    "Extend From Help": "Extend a new song segment (e.g. 120) from the time point of extending the song number. If you don't understand, there is no need to modify it. The extension will start from the end of the song by default.",
+    "Extend From Clip": "Extended song number"
   }
 }

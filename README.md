@@ -31,7 +31,7 @@
 
 ### Debug
 
-#### Python local debug running
+#### Python locally debug running
 
 - Clone source code
 

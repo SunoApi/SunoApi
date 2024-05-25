@@ -1,8 +1,8 @@
 {
   "Language": "Français",
   "Translation": {
-    "Page Title": "Générateur de chansons musicales SunoAPI AI",
-    "Page About": "Le générateur de musique SunoAPI AI est un logiciel de génération de musique AI gratuit qui permet de générer de la musique avec l'API existante.\n\nSi vous avez des questions, veuillez visiter notre site Web : https://sunoapi.net",
+    "Page Title": "Générateur de chansons musicales Suno API AI",
+    "Page About": "Le générateur de musique Suno API AI est un logiciel de génération de musique AI gratuit qui permet de générer de la musique avec l'API existante.\n\nSi vous avez des questions, veuillez visiter notre site Web : https://sunoapi.net",
     "Page Header": "Créez maintenant votre propre chanson Suno AI, utilisez-la gratuitement et profitez du plaisir de la génération de musique AI innovante !",
 
     "Music Song Create": "Création de chansons musicales",
@@ -98,6 +98,17 @@
     "Upload Images Analytics": "Aidez-moi à analyser le contenu de cette image. Résumez et décrivez le message qu’elle exprime. La première phrase affiche un bref sujet de l’expression de l’image. La deuxième phrase décrit en détail le contenu de l’image. Exportez directement le sujet et le contenu. N’indiquez pas les mots tels que «cette image exprime», «dans cette image», «cette image communique». Exportez simplement le sujet et le contenu.",
     "Analytics Images Error": "La reconnaissance intelligente de l'image a échoué: ",
     "Analytics Images Success": "La reconnaissance intelligente de l'image est réussie et peut être générée immédiatement après la modification nécessaire!",
-    "Friendly Link": "Sponsors ainsi que liens amicaux："
+    "Friendly Link": "Sponsors ainsi que liens amicaux：",
+
+    "Song Part": "Parties",
+    "Full Song": "Complète",
+    "Reuse Prompt": "Réutiliser",
+    "Continue Extend": "Extension",
+    "Get Whole Song": "Entière",
+    "Extend Button": "Extension🎵",
+    "Extend Placeholder": "Entrez des paroles supplémentaires pour étendre la chanson en fonction du paragraphe de votre chanson précédente. Une fois la chanson étendue créée, obtenez la chanson complète sur la page de lecture en utilisant le bouton obtenir la chanson entière.",
+    "Extend From": "Prolonger à partir d’un point de temps",
+    "Extend From Help": "Prolongez un nouveau fragment de chanson (ex :120) à partir du moment où le numéro de la chanson a été étendu. Si vous ne comprenez pas sans modifier, l’extension commence par défaut à la fin de cette chanson.",
+    "Extend From Clip": "Numéro de chanson étendu"
   }
 }

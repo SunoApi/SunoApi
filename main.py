@@ -145,11 +145,19 @@ if 'prompt_input' not in st.session_state:
 if 'DescPrompt' not in st.session_state:
     st.session_state.DescPrompt = ""
 
+if 'continue_at' not in st.session_state:
+    st.session_state['continue_at'] = ""
+if 'continue_clip_id' not in st.session_state:
+    st.session_state['continue_clip_id'] = ""
+
 with container.container():
     cols = container.columns(2)
 
     st.session_state.Custom = False
-    Custom = cols[0].toggle(i18n("Custom"))
+    if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['prompt_input']:
+        Custom = cols[0].toggle(i18n("Custom"), True)
+    else:
+        Custom = cols[0].toggle(i18n("Custom"))
     st.session_state.TuGeYue = False
     TuGeYue = cols[1].toggle(i18n("Images TuGeYue Music"))
 
@@ -287,8 +295,10 @@ with container.container():
             else:
                 container.error(status)
                 
-
-        Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+        if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
+            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Extend Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+        else:
+            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
         st.session_state.Prompt = Prompt
         # print(st.session_state.Prompt)
     else:
@@ -323,6 +333,15 @@ with container.container():
     else:
         st.session_state.Private = False
         # print(st.session_state.Private)
+
+def continue_at_change():
+    st.session_state['continue_at'] = st.session_state['continue_at_change']
+    print(st.session_state['continue_at'])
+
+if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
+    container2 = col2.container(border=True)
+    container2.text_input(label=i18n("Extend From"), value=st.session_state['continue_at'], placeholder="", max_chars=6, help=i18n("Extend From Help"), key="continue_at_change", on_change=continue_at_change)
+    container2.text_input(label=i18n("Extend From Clip"), value=st.session_state['continue_clip_id'], placeholder="", max_chars=36, help="")
 
 
 container1 = col2.container(border=True)
@@ -555,8 +574,10 @@ if FetchFeed:
         st.session_state.FeedBtn = False
         # print(st.session_state.FeedBtn)
 
-
-StartBtn = col2.button(i18n("Generate"), use_container_width=True, type="primary", disabled=False)
+if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
+    StartBtn = col2.button(i18n("Extend Button"), use_container_width=True, type="primary", disabled=False)
+else:
+    StartBtn = col2.button(i18n("Generate"), use_container_width=True, type="primary", disabled=False)
 
 def generate(data: schemas.CustomModeGenerateParam):
     try:
@@ -613,7 +634,7 @@ def fetch_status(aid: str, twice=False):
             my_bar.empty()
         else:
             progress_text = i18n("Fetch Status Running") + status
-            status = "exception"
+            status = "queued"
             my_bar.progress(percent_complete, text=progress_text)
         
         result = suno_sqlite.query_one("select aid from music where aid =?", (aid,))
@@ -631,7 +652,7 @@ def fetch_status(aid: str, twice=False):
             break
 
         time.sleep(10)
-    if S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
+    if S3_WEB_SITE_URL is not None and (S3_WEB_SITE_URL != "http://localhost:8501" or S3_WEB_SITE_URL != "https://cdn1.suno.ai"):
         resp[0]["audio_url"] = resp[0]["audio_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
         resp[0]["video_url"] = resp[0]["video_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
     return resp
@@ -653,8 +674,8 @@ if StartBtn :
                         "tags": get_new_tags(st.session_state.Tags),
                         "prompt": "",
                         "mv": "chirp-v3-0",
-                        "continue_at": None,
-                        "continue_clip_id": None
+                        "continue_at": st.session_state["continue_at"] if "continue_at" in st.session_state else None,
+                        "continue_clip_id": st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
                     }
                 else:
                     data = {
@@ -662,8 +683,8 @@ if StartBtn :
                         "tags": get_new_tags(st.session_state.Tags),
                         "prompt": st.session_state.Prompt,
                         "mv": "chirp-v3-0",
-                        "continue_at": None,
-                        "continue_clip_id": None
+                        "continue_at": st.session_state["continue_at"] if "continue_at" in st.session_state else None,
+                        "continue_clip_id": st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
                     }
                 print(data)
                 print("\n")
