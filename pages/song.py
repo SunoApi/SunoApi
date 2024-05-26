@@ -221,8 +221,8 @@ if aid != "" and len(aid) == 36:
     # print("\n")
     if result is not None and len(result) > 0 and result[5] == 0:
         data = ast.literal_eval(result[1])
-        print(data)
-        print("\n")
+        # print(data)
+        # print("\n")
         if data['status'] == "complete":
             container = col2.container(border=True)
             title = "None\n" if data['title'] is None or "" else data['title'].strip()
@@ -252,21 +252,33 @@ if aid != "" and len(aid) == 36:
                 # ''', unsafe_allow_html=True)
                 part_button = cols[0].button(f'''{i18n("Song Part")} 1''', type="secondary")
 
-            part_modal = Modal(title=title, key="part_modal", padding=20, max_width=550)
+            max_width = 540
+            if data['metadata']['history'] is not None:
+                max_width = max_width * len(data['metadata']['history'])
+            if data['metadata']['concat_history'] is not None:
+                max_width = max_width * len(data['metadata']['concat_history'])
+
+            part_modal = Modal(title=title, key="part_modal", padding=15, max_width=max_width)
             if part_button and (data['metadata']['history'] is not None or data['metadata']['concat_history'] is not None):
                 part_modal.open()
             if part_modal.is_open():
                 with part_modal.container():
                     if data['metadata']['history'] is not None:
+                        part_modal_cols = st.columns(len(data['metadata']['history']))
                         for index, item in enumerate(data['metadata']['history']):
-                            st.markdown(f'''{i18n("Song Part")} {str(index+1)} 
-                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a>
+                            part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
+                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
                             ''', unsafe_allow_html=True)
+                            resp = get_feed(item['id'], get_random_token())
+                            part_modal_cols[index].video(resp[0]['video_url'])
                     if data['metadata']['concat_history'] is not None:
+                        part_modal_cols = st.columns(len(data['metadata']['concat_history']))
                         for index, item in enumerate(data['metadata']['concat_history']):
-                            st.markdown(f'''{i18n("Song Part")} {str(index+1)} 
-                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a>
+                            part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
+                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
                             ''', unsafe_allow_html=True)
+                            resp = get_feed(item['id'], get_random_token())
+                            part_modal_cols[index].video(resp[0]['video_url'])
 
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
