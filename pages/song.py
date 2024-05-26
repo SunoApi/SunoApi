@@ -118,8 +118,9 @@ st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-
 st.sidebar.page_link("http://www.ruanyifeng.com/blog/", label="阮一峰的网络日志-科技爱好者周刊", icon="🌐")
 st.sidebar.page_link("https://chatplusapi.cn/", label="ChatPlus API 大模型集合服务平台", icon="🌐")
 st.sidebar.page_link("https://echs.top/", label="二次寒树岁月蹉跎，初心依旧", icon="🌐")
+st.sidebar.page_link("https://dusays.com/", label="杜老师说", icon="🌐")
 st.sidebar.page_link("https://www.ewsyun.com/", label="E修工电子工单业务云平台", icon="🌐")
-st.sidebar.page_link("https://h4ck.org.cn/", label="※呢喃/Msg※ &#8211; obaby@mars", icon="🌐")
+st.sidebar.page_link("https://h4ck.org.cn/", label="钟小姐baby@mars", icon="🌐")
 st.sidebar.page_link("https://s2.chanyoo.net/", label="云通讯增值服务平台", icon="🌐")
 st.sidebar.page_link("https://echeverra.cn/jaychou", label="周杰伦全部15张专辑178首音乐", icon="🌐")
 st.sidebar.page_link("https://dujun.io/", label="杜郎俊赏", icon="🌐")
@@ -263,22 +264,31 @@ if aid != "" and len(aid) == 36:
                 part_modal.open()
             if part_modal.is_open():
                 with part_modal.container():
+                    token = get_random_token()
                     if data['metadata']['history'] is not None:
                         part_modal_cols = st.columns(len(data['metadata']['history']))
                         for index, item in enumerate(data['metadata']['history']):
                             part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
                             <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
                             ''', unsafe_allow_html=True)
-                            resp = get_feed(item['id'], get_random_token())
-                            part_modal_cols[index].video(resp[0]['video_url'])
+                            resp = get_feed(item['id'], token)
+                            status = resp["detail"] if "detail" in resp else resp[0]["status"]
+                            if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
+                                part_modal_cols[index].video(resp[0]['video_url'])
+                            else:
+                                part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
                     if data['metadata']['concat_history'] is not None:
                         part_modal_cols = st.columns(len(data['metadata']['concat_history']))
                         for index, item in enumerate(data['metadata']['concat_history']):
                             part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
                             <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
                             ''', unsafe_allow_html=True)
-                            resp = get_feed(item['id'], get_random_token())
-                            part_modal_cols[index].video(resp[0]['video_url'])
+                            resp = get_feed(item['id'], token)
+                            status = resp["detail"] if "detail" in resp else resp[0]["status"]
+                            if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
+                                part_modal_cols[index].video(resp[0]['video_url'])
+                            else:
+                                part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
