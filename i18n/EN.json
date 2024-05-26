@@ -71,15 +71,15 @@
 
     "TokenAuth Error": "Please save the information first, and then refresh the page to use it normally!",
 
-    "FetchFeed": "Get music feed",
-    "FeedID": "Music feed ID:",
-    "FeedID Placeholder": "Please enter the generated music feed ID, click get to display.",
-    "FeedID Help": "Please enter the generated music feed ID, click get to display.",
+    "FetchFeed": "Get music clip",
+    "FeedID": "Music Clip ID:",
+    "FeedID Placeholder": "Please enter the generated music clip id, click get to display.",
+    "FeedID Help": "Please enter the generated music clip id, click get to display.",
     "FeedBtn": "Get information",
-    "FetchFeed FeedID Empty": "Please enter the generated music feed ID.",
-    "FetchFeed FeedID Error": "The music feed ID format is incorrect.",
-    "FetchFeed Error": "Suno AI music feed information obtained failed: ",
-    "FetchFeed Success": "Suno AI music feed information obtained success! ",
+    "FetchFeed FeedID Empty": "Please enter the generated music clip id.",
+    "FetchFeed FeedID Error": "The music clip id format is incorrect.",
+    "FetchFeed Error": "Suno AI music clip information obtained failed: ",
+    "FetchFeed Success": "Suno AI music clip information obtained success! ",
 
     "Generation Task Status": "The task of music generation has not been completed yet, and the current status is: ",
 
@@ -107,8 +107,8 @@
     "Get Whole Song": "Get whole song",
     "Extend Button": "Extend🎵",
     "Extend Placeholder": "Enter additional lyrics to expand the song based on your previous song paragraphs. After creating the expanded song, click the Get Whole Song button on the playback page to obtain the complete song.",
-    "Extend From": "Lengthening from the point in time",
-    "Extend From Help": "Extend a new song segment (e.g. 120) from the time point of extending the song number. If you don't understand, there is no need to modify it. The extension will start from the end of the song by default.",
-    "Extend From Clip": "Extended song number"
+    "Extend From": "Extend from time point",
+    "Extend From Help": "Extend a new song segment (e.g. 120) from the time point of extending the song clip id. If you don't understand, there is no need to modify it. The extension will start from the end of the song by default.",
+    "Extend From Clip": "Extend song clip id"
   }
 }
