@@ -104,16 +104,12 @@ with st.sidebar:
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
 st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
-st.sidebar.page_link("http://www.ruanyifeng.com/blog/", label="阮一峰的网络日志-科技爱好者周刊", icon="🌐")
-st.sidebar.page_link("https://chatplusapi.cn/", label="ChatPlus API 大模型集合服务平台", icon="🌐")
-st.sidebar.page_link("https://echs.top/", label="二次寒树岁月蹉跎，初心依旧", icon="🌐")
-st.sidebar.page_link("https://dusays.com/", label="杜老师说", icon="🌐")
-st.sidebar.page_link("https://www.ewsyun.com/", label="E修工电子工单业务云平台", icon="🌐")
-st.sidebar.page_link("https://h4ck.org.cn/", label="钟小姐baby@mars", icon="🌐")
-st.sidebar.page_link("https://s2.chanyoo.net/", label="云通讯增值服务平台", icon="🌐")
-st.sidebar.page_link("https://echeverra.cn/jaychou", label="周杰伦全部15张专辑178首音乐", icon="🌐")
-st.sidebar.page_link("https://dujun.io/", label="杜郎俊赏", icon="🌐")
-st.sidebar.page_link("https://nanwish.love/", label="墨点白|墨点白", icon="🌐")
+result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
+# print(result)
+# print("\n")
+if result is not None and len(result) > 0:
+    for row in result:
+        st.sidebar.page_link(row[0], label=row[1], icon="🌐")
 
 
 def change_page():
@@ -172,7 +168,7 @@ if result is not None and len(result) > 0:
         title += i18n("Title") + ("None\n" if data['title'] is None or "" else data['title'] + "\n")
         title += i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt'] + "\n")
         title += i18n("Tags") + ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "  " + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n"))
-        title += i18n("Music Created At")  + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at']) + "\n\n")
+        title += i18n("Music Created At")  + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "  " +  i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else data['model_name'] + "\n\n")
         title += i18n("Music Prompt")  + ("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
         
         titles.append(title)

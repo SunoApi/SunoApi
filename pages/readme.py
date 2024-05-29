@@ -105,17 +105,12 @@ with st.sidebar:
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
 st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
-st.sidebar.page_link("http://www.ruanyifeng.com/blog/", label="阮一峰的网络日志-科技爱好者周刊", icon="🌐")
-st.sidebar.page_link("https://chatplusapi.cn/", label="ChatPlus API 大模型集合服务平台", icon="🌐")
-st.sidebar.page_link("https://echs.top/", label="二次寒树岁月蹉跎，初心依旧", icon="🌐")
-st.sidebar.page_link("https://dusays.com/", label="杜老师说", icon="🌐")
-st.sidebar.page_link("https://www.ewsyun.com/", label="E修工电子工单业务云平台", icon="🌐")
-st.sidebar.page_link("https://h4ck.org.cn/", label="钟小姐baby@mars", icon="🌐")
-st.sidebar.page_link("https://s2.chanyoo.net/", label="云通讯增值服务平台", icon="🌐")
-st.sidebar.page_link("https://echeverra.cn/jaychou", label="周杰伦全部15张专辑178首音乐", icon="🌐")
-st.sidebar.page_link("https://dujun.io/", label="杜郎俊赏", icon="🌐")
-st.sidebar.page_link("https://nanwish.love/", label="墨点白|墨点白", icon="🌐")
-
+result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
+# print(result)
+# print("\n")
+if result is not None and len(result) > 0:
+    for row in result:
+        st.sidebar.page_link(row[0], label=row[1], icon="🌐")
 
 md = ""
 language = "ZH"
