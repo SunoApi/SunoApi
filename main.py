@@ -677,7 +677,7 @@ if StartBtn :
                 placeholder.error(i18n("Custom Tags Error"))
             elif st.session_state.Prompt == "":
                 placeholder.error(i18n("Custom Prompt Error"))
-            elif st.session_state['model'] == "":
+            elif st.session_state['model_name'] == "":
                 placeholder.error(i18n("Select Model Error"))
             else:
                 data = {}
@@ -740,7 +740,7 @@ if StartBtn :
         else:
             if st.session_state.DescPrompt == "":
                 placeholder.error(i18n("DescPrompt Error"))
-            elif st.session_state['model'] == "":
+            elif st.session_state['model_name'] == "":
                 placeholder.error(i18n("Select Model Error"))
             else:
                 data = {
