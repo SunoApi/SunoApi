@@ -42,7 +42,7 @@
     "DescPrompt Error": "請輸入歌曲描述例如：寫一首類似於《夜曲》風格的《夜曲一響上臺領獎》。",
 
     "Custom Title Error": "請輸入歌曲標題，例如：夜曲一響上臺領獎。",
-    "Custom Tags Error": "請輸入音樂風格，例如：中國流行音樂。",
+    "Custom Tags Error": "請选择音樂風格，例如：Chinese pop（中國流行音樂）。",
     "Custom Prompt Error": "請輸入您的歌詞，如果不會可以輸入關鍵字詞，然後點生成歌詞。",
 
     "Generate Submit Error": "Suno AI 音樂歌曲生成提交失敗：",
@@ -107,8 +107,13 @@
     "Get Whole Song": "獲取整首",
     "Extend Button": "延長擴展🎵",
     "Extend Placeholder": "輸入額外的歌詞根據您之前的歌曲段落擴展歌曲，擴展歌曲創建完成後，在播放頁面通過獲取整首按鈕以獲得完整的歌曲。",
-    "Extend From": "從時間點延長",
+    "Extend From": "從時間點延長：",
     "Extend From Help": "從擴展歌曲編號的時間點延長一段新的歌曲片段（例如：120），如果不明白不用修改，默認從該歌曲的末尾開始延長。",
-    "Extend From Clip": "擴展歌曲編號"
+    "Extend From Clip": "擴展歌曲編號：",
+
+    "Select Model": "音樂模型：",
+    "Select Model Placeholder": "請選擇一個用於生成音樂歌曲的模型，默認模型：chirp-v3-0 。",
+    "Select Model Help": "chirp-v3-0模型可生成最長2分鐘的歌曲片段，chirp-v3-5模型可生成最長4分鐘的歌曲片段。",
+    "Select Model Error": "請選擇音樂模型，例如：chirp-v3-0 。"
   }
 }

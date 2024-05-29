@@ -42,15 +42,15 @@
     "DescPrompt Error": "Please enter the song description, for example: write a song similar to the style of 'Nocturne' called 'Nocturne: Take the Stage to Receive Awards'.",
 
     "Custom Title Error": "Please enter the title of the song, for example: Nocturne on stage to accept the award.",
-    "Custom Tags Error": "Please enter the style of music, for example, Chinese pop.",
+    "Custom Tags Error": "Please select a music style, for example: Chinese pop (中国流行音乐).",
     "Custom Prompt Error": "Please enter your own lyrics, if not you can enter a keyword word, then click Generate Lyrics.",
 
-    "Generate Submit Error": "Suno AI Music song generation failed to submit：",
-    "Generate Status Error": "Suno AI Music song generation failed to status：",
+    "Generate Submit Error": "Suno AI Music song generation failed to submit: ",
+    "Generate Status Error": "Suno AI Music song generation failed to status: ",
 
     "Fetch Status Progress": "Suno AI Music song generation Please wait...",
-    "Fetch Status Running": "Suno AI Music song is being generated：",
-    "Fetch Status Success": "Suno AI Music song generation success：",
+    "Fetch Status Running": "Suno AI Music song is being generated: ",
+    "Fetch Status Success": "Suno AI Music song generation success: ",
 
     "Generate Success": "Suno AI Music song generation success! ",
 
@@ -98,7 +98,7 @@
     "Upload Images Analytics": "Please help me analyze the content of this picture, summarize and describe the information expressed in the picture. The first sentence provides a brief description of the theme conveyed by the image, while the second sentence provides a detailed description of the content of the image. Directly output the theme and content, without using words such as' this image expresses', 'in this image', or 'this image conveys'. Simply output the theme and content.",
     "Analytics Images Error": "Image intelligent recognition failed: ",
     "Analytics Images Success": "Image intelligent recognition successful, can be modified as needed and then click generate immediately!",
-    "Friendly Link": "Sponsors and friendly links：",
+    "Friendly Link": "Sponsors and friendly links:",
 
     "Song Part": "Part",
     "Full Song": "Whole",
@@ -107,8 +107,13 @@
     "Get Whole Song": "Get whole song",
     "Extend Button": "Extend🎵",
     "Extend Placeholder": "Enter additional lyrics to expand the song based on your previous song paragraphs. After creating the expanded song, click the Get Whole Song button on the playback page to obtain the complete song.",
-    "Extend From": "Extend from time point",
+    "Extend From": "Extend from time point:",
     "Extend From Help": "Extend a new song segment (e.g. 120) from the time point of extending the song clip id. If you don't understand, there is no need to modify it. The extension will start from the end of the song by default.",
-    "Extend From Clip": "Extend song clip id"
+    "Extend From Clip": "Extend song clip id:",
+
+    "Select Model": "Music model:",
+    "Select Model Placeholder": "Please select a model for generating music songs. The default model is chirp-v3-0.",
+    "Select Model Help": "chirp-v3-0 model can generate up to 2 minutes of song fragments, chirp-v3-5 model can generate up to 4 minutes of song fragments.",
+    "Select Model Error": "Please select a music model, for example: chirp-v3-0."
   }
 }

@@ -43,7 +43,7 @@
     "DescPrompt Error": "「夜曲」のようなスタイルの「夜曲が鳴ったらステージに上がって賞をもらう」という曲の説明を入力してください。",
 
     "Custom Title Error": "夜曲が鳴ったらステージに上がって賞をもらうなど、曲のタイトルを入力してください。",
-    "Custom Tags Error": "中国のポピュラー音楽などの音楽スタイルを入力してください。",
+    "Custom Tags Error": "音楽ジャンルを選んでください。例えば、Chinese pop (中国流行音乐)です。",
     "Custom Prompt Error": "歌詞を入力してください。キーワードを入力できない場合は、歌詞をポイント生成します。",
 
     "Generate Submit Error": "Suno AI音歌ですの生成コミットに失敗しました：",
@@ -108,8 +108,13 @@
     "Get Whole Song": "全体を取得",
     "Extend Button": "延長拡張🎵",
     "Extend Placeholder": "追加の歌詞を入力して、前の曲の段落に基づいて曲を拡張し、拡張曲の作成が完了したら、再生ページでボタン全体を取得して完全な曲を取得します。",
-    "Extend From": "時点からの延長",
+    "Extend From": "時点からの延長：",
     "Extend From Help": "曲番号が拡張された時点から、新しい曲のセグメント(例:120)が延長されます。わからない場合は変更せずに、デフォルトでは曲の末尾から延長されます。(例如:120)，如果不明白不用修改，默认从该歌曲的末尾开始延长。",
-    "Extend From Clip": "拡張曲番号"
+    "Extend From Clip": "拡張曲番号：",
+
+    "Select Model": "音楽モデルです：",
+    "Select Model Placeholder": "曲を生成するためのモデルを選択してください。デフォルトのモデル:chirp-v3-0です。",
+    "Select Model Help": "chirp-v3-0モデルでは最大2分,chirp-v3-5モデルでは最大4分の曲を生成できます。",
+    "Select Model Error": "音楽モデルを選んでください。例えば、chirp-v3-0です。"
   }
 }

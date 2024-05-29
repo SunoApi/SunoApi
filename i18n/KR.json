@@ -42,15 +42,15 @@
     "DescPrompt Error": "노래 설명을 입력하십시오. 예를 들어'야곡'과 비슷한 스타일의'야곡이 울리면 무대에 올라 상을 받습니다'를 쓰십시오.",
 
     "Custom Title Error": "밤 노래가 울리면 무대에 올라 상을 받는 것과 같은 노래 제목을 입력하십시오.",
-    "Custom Tags Error": "음악 스타일을 입력하십시오. 예를 들면 중국 유행음악입니다.",
+    "Custom Tags Error": "음악 스타일을 선택하세요. 예를 들면:Chinese pop (中国流行音乐).",
     "Custom Prompt Error": "가사를 입력하십시오. 키워드를 입력하지 못할 경우 가사 생성을 클릭하십시오.",
 
-    "Generate Submit Error": "Suno AI 음악 노래 생성 커밋 실패： ",
-    "Generate Status Error": "Suno AI 음악 노래 생성 상태 실패： ",
+    "Generate Submit Error": "Suno AI 음악 노래 생성 커밋 실패: ",
+    "Generate Status Error": "Suno AI 음악 노래 생성 상태 실패: ",
 
     "Fetch Status Progress": "Suno AI 음악 노래가 생성되고 있습니다. 잠시만요...",
-    "Fetch Status Running": "Suno AI 음악 노래가 생성 중：",
-    "Fetch Status Success": "Suno AI 음악 노래가 성공적으로 생성되었습니다： ",
+    "Fetch Status Running": "Suno AI 음악 노래가 생성 중: ",
+    "Fetch Status Success": "Suno AI 음악 노래가 성공적으로 생성되었습니다: ",
 
     "Generate Success": "Suno AI 음악 노래 생성 성공! ",
 
@@ -98,7 +98,7 @@
     "Upload Images Analytics": "이 그림의 내용을 분석하고 그림이 표현한 정보를 총결하여 묘사해 주세요.첫 번째 문장은 그림 표현의 간략한 주제를 출력하고, 두 번째 문장은 그림의 내용을 상세하게 묘사하며, 주제와 내용을 직접 출력하며,'이 그림이 표현했다','이 그림에서','이 그림이 전달했다'등의 문구가 나타나지 않도록 하고 주제와 내용을 직접 출력하면 된다.",
     "Analytics Images Error": "이미지 인텔리전스 인식 실패: ",
     "Analytics Images Success": "그림 지능인식 성공, 필요에 따라 수정 후 클릭하면 즉시 생성!",
-    "Friendly Link": "스폰서 및 우정 링크：",
+    "Friendly Link": "스폰서 및 우정 링크:",
 
     "Song Part": "부분",
     "Full Song": "완전",
@@ -107,8 +107,13 @@
     "Get Whole Song": "전체 노래",
     "Extend Button": "연장 확장🎵",
     "Extend Placeholder": "추가 가사를 입력하십시오. 이전 곡 단락에 따라 노래를 확장합니다. 확장곡을 만든 후 재생 페이지에서 전체 버튼을 가져와서 전체 곡을 가져옵니다.",
-    "Extend From": "시점으로부터 연장",
+    "Extend From": "시점으로부터 연장:",
     "Extend From Help": "확장된 노래 번호의 시점으로부터 새로운 노래 세그먼트 (예: 120) 를 확장하고, 이해하지 못하면 수정하지 않으면 기본적으로 노래의 끝부터 연장됩니다.",
-    "Extend From Clip": "확장된 노래 번호"
+    "Extend From Clip": "확장된 노래 번호:",
+
+    "Select Model": "음악 모델:",
+    "Select Model Placeholder": "음악 음악을 만들기 위한 모델을 선택하십시오. 기본 모델:chirp-v3-0.",
+    "Select Model Help": "chirp-v3-0 모델은 최대 2분의 노래 세션을, chirp-v3-5 모델은 최대 4분의 노래 세션을 생성할 수 있다.",
+    "Select Model Error": "음악 모델(예: chirp-v3-0)을 선택하십시오."
   }
 }

@@ -42,7 +42,7 @@
     "DescPrompt Error": "Veuillez entrer la description de la chanson par exemple : écrivez une chanson similaire à la chanson 'Nocturne'.",
     
     "Custom Title Error": "Veuillez entrer le titre de la chanson, par exemple : Nocturne.",
-    "Custom Tags Error": "Veuillez entrer le style musical, par exemple : musique pop chinoise.",
+    "Custom Tags Error": "Veuillez sélectionner un style de musique. Exemple: Chinese pop (中国流行音乐).",
     "Custom Prompt Error": "Veuillez entrer vos paroles, si vous ne savez pas, entrez des mots-clés, puis générez des paroles.",
 
     "Generate Submit Error": "Échec de la génération de la chanson Suno AI: ",
@@ -98,7 +98,7 @@
     "Upload Images Analytics": "Aidez-moi à analyser le contenu de cette image. Résumez et décrivez le message qu’elle exprime. La première phrase affiche un bref sujet de l’expression de l’image. La deuxième phrase décrit en détail le contenu de l’image. Exportez directement le sujet et le contenu. N’indiquez pas les mots tels que «cette image exprime», «dans cette image», «cette image communique». Exportez simplement le sujet et le contenu.",
     "Analytics Images Error": "La reconnaissance intelligente de l'image a échoué: ",
     "Analytics Images Success": "La reconnaissance intelligente de l'image est réussie et peut être générée immédiatement après la modification nécessaire!",
-    "Friendly Link": "Sponsors ainsi que liens amicaux：",
+    "Friendly Link": "Sponsors ainsi que liens amicaux:",
 
     "Song Part": "Parties",
     "Full Song": "Complète",
@@ -107,8 +107,13 @@
     "Get Whole Song": "Entière",
     "Extend Button": "Extension🎵",
     "Extend Placeholder": "Entrez des paroles supplémentaires pour étendre la chanson en fonction du paragraphe de votre chanson précédente. Une fois la chanson étendue créée, obtenez la chanson complète sur la page de lecture en utilisant le bouton obtenir la chanson entière.",
-    "Extend From": "Prolonger à partir d’un point de temps",
+    "Extend From": "Prolonger à partir d’un point de temps:",
     "Extend From Help": "Prolongez un nouveau fragment de chanson (ex :120) à partir du moment où le numéro de la chanson a été étendu. Si vous ne comprenez pas sans modifier, l’extension commence par défaut à la fin de cette chanson.",
-    "Extend From Clip": "Numéro de chanson étendu"
+    "Extend From Clip": "Numéro de chanson étendu:",
+
+    "Select Model": "Modèles musicaux:",
+    "Select Model Placeholder": "Veuillez sélectionner un modèle pour générer des chansons musicales. Modèle par défaut: chirp-v3-0.",
+    "Select Model Help": "Le modèle chirp-v3-0 peut générer des fragments de chansons d’une durée maximale de 2 minutes et le modèle chirp-v3-5 peut générer des fragments de chansons d’une durée maximale de 4 minutes.",
+    "Select Model Error": "Veuillez sélectionner le modèle de musique. Exemple: chirp-v3-0."
   }
 }

@@ -110,16 +110,12 @@ with st.sidebar:
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
 st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
-st.sidebar.page_link("http://www.ruanyifeng.com/blog/", label="阮一峰的网络日志-科技爱好者周刊", icon="🌐")
-st.sidebar.page_link("https://chatplusapi.cn/", label="ChatPlus API 大模型集合服务平台", icon="🌐")
-st.sidebar.page_link("https://echs.top/", label="二次寒树岁月蹉跎，初心依旧", icon="🌐")
-st.sidebar.page_link("https://dusays.com/", label="杜老师说", icon="🌐")
-st.sidebar.page_link("https://www.ewsyun.com/", label="E修工电子工单业务云平台", icon="🌐")
-st.sidebar.page_link("https://h4ck.org.cn/", label="钟小姐baby@mars", icon="🌐")
-st.sidebar.page_link("https://s2.chanyoo.net/", label="云通讯增值服务平台", icon="🌐")
-st.sidebar.page_link("https://echeverra.cn/jaychou", label="周杰伦全部15张专辑178首音乐", icon="🌐")
-st.sidebar.page_link("https://dujun.io/", label="杜郎俊赏", icon="🌐")
-st.sidebar.page_link("https://nanwish.love/", label="墨点白|墨点白", icon="🌐")
+result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
+# print(result)
+# print("\n")
+if result is not None and len(result) > 0:
+    for row in result:
+        st.sidebar.page_link(row[0], label=row[1], icon="🌐")
 
 col2.title(i18n("Page Title"))
 
@@ -150,6 +146,9 @@ if 'continue_at' not in st.session_state:
     st.session_state['continue_at'] = ""
 if 'continue_clip_id' not in st.session_state:
     st.session_state['continue_clip_id'] = ""
+
+if 'model_name' not in st.session_state:
+    st.session_state['model_name'] = "chirp-v3-0"
 
 with container.container():
     cols = container.columns(2)
@@ -263,17 +262,19 @@ with container.container():
         if 'tags_input' not in st.session_state:
             st.session_state['tags_input'] = ""
 
-        # Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'].replace(",", " "), placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
+        if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['prompt_input']:
+            Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'], placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
+            st.session_state.Tags = st.session_state['tags_input']
+        else:
+            options = container.multiselect(
+            i18n("Tags"),
+            ["  Country（乡村）","• Bluegrass（草莓乐）","• Country（乡村音乐）","• Folk（民谣）","  Dance（舞曲）","• Afro-Cuban（阿弗罗-古巴）","• Dance Pop（流行舞曲）","• Disco（迪斯科）","• Dubstep（配音步）","• Disco Funk（迪斯科放克）","• EDM（电子舞曲）","• Electro（电子）","• High-NRG（高能量）","• House（浩室音乐）","• Trance（迷幻舞曲）","  Downtempo（缓拍）","• Ambient（环境音）","• Drum'n'bass（鼓与贝斯）","• Dubstep（配音步）","• Electronic（电子音乐）","• IDM（智能舞曲）","• Synthpop（合成流行）","• Synthwave（合成波）","• Techno（技术音乐）","• Trap（陷阱音乐）","  Jazz/Soul（爵士/灵魂）","• Bebop（比博普）","• Gospel（福音）","• Jazz（爵士）","• Latin Jazz（拉丁爵士）","• RnB（节奏蓝调）","• Soul（灵魂乐）","  Latin（拉丁）","• Bossa Nova（波萨诺瓦）","• Latin Jazz（拉丁爵士）","• Forró（弗约罗）","• Salsa（萨尔萨舞）","• Tango（探戈）","  Reggae（雷鬼）","• Dancehall（舞厅）","• Dub（配音）","• Reggae（雷鬼）","• Reggaeton（雷盖顿）","• Afrobeat（非洲节奏）","  Metal（金属）","• Black Metal（黑金属）","• Deathcore（死亡核）","• Death Metal（死亡金属）","• Festive Heavy Metal（节日重金属）","• Heavy Metal（重金属）","• Nu Metal（新金属）","• Power Metal（力量金属）","• Metalcore（金属核）","  Popular（流行）","• Pop（流行音乐）","• Chinese pop（中国流行音乐）","• Dance Pop（流行舞曲）","• Pop Rock（流行摇滚）","• Kpop（韩流音乐）","• Jpop（日流音乐）","• RnB（节奏蓝调）","• Synthpop（合成流行）","  Rock（摇滚）","• Classic Rock（经典摇滚）","• Blues Rock（布鲁斯摇滚）","• Emo（情绪）","• Glam Rock（华丽摇滚）","• Indie（独立音乐）","• Industrial Rock（工业摇滚）","• Punk（朋克摇滚）","• Rock（摇滚）","• Skate Rock（滑板摇滚）","• Skatecore（滑板核）","  Urban（城市音乐）","• Funk（放克）","• HipHop（嘻哈）","• RnB（节奏蓝调）","• Phonk（酸音乐）","• Rap（说唱）","• Trap（陷阱音乐）","  Danceable（可跳舞的）","• Disco（迪斯科）","• Syncopated（切分节奏）","• Groovy（悠扬）","• Tipsy（微醺）","  Dark（黑暗）","• Dark（黑暗）","• Doom（末日）","• Dramatic（戏剧性）","• Sinister（阴险）","  Electric（电子）","• Art（艺术）","• Nu（新流行）","• Progressive（进步）","  Hard（强硬）","• Aggressive（激进）","• Banger（热门曲目）","• Power（力量）","• Stadium（体育场）","• Stomp（重踏）","  Lyrical（抒情的）","• Broadway（百老汇）","• Cabaret（歌舞表演）","• Lounge（酒吧歌手）","• Operatic（歌剧式的）","• Storytelling（讲故事）","• Torch-Lounge（酒吧歌曲）","• Theatrical（戏剧性的）","• Troubadour（吟游诗人）","• Vegas（拉斯维加斯风格）","  Magical（神奇）","• Ethereal（虚幻）","• Majestic（雄伟）","• Mysterious（神秘）","  Minimal（简约）","• Ambient（环境音乐）","• Cinematic（电影）","• Slow（缓慢）","• Sparse（稀疏）","  Party（派对）","• Glam（华丽）","• Glitter（闪耀）","• Groovy（悠扬）","• Grooveout（活力爆发）","  Soft（柔和）","• Ambient（环境音乐）","• Bedroom（卧室）","• Chillwave（轻松浪潮）","• Ethereal（虚幻）","• Intimate（亲密）","  Weird（奇怪）","• Carnival（嘉年华）","• Haunted（鬼屋）","• Random（随机）","• Musicbox（音乐盒）","• Hollow（空洞）","  World/Ethnic（世界/民族）","• Arabian（阿拉伯）","• Bangra（班格拉舞）","• Calypso（卡利普索）","• Egyptian（埃及）","• Adhan（安讫）","• Jewish Music（犹太音乐）","• Klezmer（克莱兹默音乐）","• Middle East（中东）","• Polka（波尔卡）","• Russian Navy Song（俄罗斯海军歌曲）","• Suomipop（芬兰流行音乐）","• Tribal（部落）","  BackGround（背景乐）","• Elevator（电梯音乐）","• Jingle（广告歌曲）","• Muzak（环境音乐）","  Call to Prayer（祈祷呼唤）","• Call to Prayer（祈祷呼唤）","• Gregorian Chant（格里高利圣歌）","  Character（角色）","• Strut（趾高气昂地走）","• March（进行曲）","• I Want Song（渴望之歌）","  Children（儿童）","• Children's（儿童的）","• Lullaby（摇篮曲）","• Sing-along（合唱歌曲）","  Retro（复古）","• 1960s（1960年代）","• Barbershop（理发店四重唱）","• Big Band（大乐队）","• Classic（经典的）","• Doo Wop（一种节奏蓝调风格的音乐）","• Girl Group（女子组合）","• Swing（摇摆乐）","• Traditional（传统的）","  Traditional（传统的）","• Barbershop（理发店四重唱）","• Christmas Carol（圣诞颂歌）","• Traditional（传统的）"],
+            [] if st.session_state['tags_input']=="" else st.session_state['tags_input'].split(","),
+            placeholder=i18n("Tags Placeholder"),
+            help=i18n("Tags Desc"),
+            max_selections=4)
+            st.session_state.Tags = ','.join(str(opts) for opts in options)
 
-        options = container.multiselect(
-        i18n("Tags"),
-        ["  Country（乡村）","• Bluegrass（草莓乐）","• Country（乡村音乐）","• Folk（民谣）","  Dance（舞曲）","• Afro-Cuban（阿弗罗-古巴）","• Dance Pop（流行舞曲）","• Disco（迪斯科）","• Dubstep（配音步）","• Disco Funk（迪斯科放克）","• EDM（电子舞曲）","• Electro（电子）","• High-NRG（高能量）","• House（浩室音乐）","• Trance（迷幻舞曲）","  Downtempo（缓拍）","• Ambient（环境音）","• Drum'n'bass（鼓与贝斯）","• Dubstep（配音步）","• Electronic（电子音乐）","• IDM（智能舞曲）","• Synthpop（合成流行）","• Synthwave（合成波）","• Techno（技术音乐）","• Trap（陷阱音乐）","  Jazz/Soul（爵士/灵魂）","• Bebop（比博普）","• Gospel（福音）","• Jazz（爵士）","• Latin Jazz（拉丁爵士）","• RnB（节奏蓝调）","• Soul（灵魂乐）","  Latin（拉丁）","• Bossa Nova（波萨诺瓦）","• Latin Jazz（拉丁爵士）","• Forró（弗约罗）","• Salsa（萨尔萨舞）","• Tango（探戈）","  Reggae（雷鬼）","• Dancehall（舞厅）","• Dub（配音）","• Reggae（雷鬼）","• Reggaeton（雷盖顿）","• Afrobeat（非洲节奏）","  Metal（金属）","• Black Metal（黑金属）","• Deathcore（死亡核）","• Death Metal（死亡金属）","• Festive Heavy Metal（节日重金属）","• Heavy Metal（重金属）","• Nu Metal（新金属）","• Power Metal（力量金属）","• Metalcore（金属核）","  Popular（流行）","• Pop（流行音乐）","• Chinese pop（中国流行音乐）","• Dance Pop（流行舞曲）","• Pop Rock（流行摇滚）","• Kpop（韩流音乐）","• Jpop（日流音乐）","• RnB（节奏蓝调）","• Synthpop（合成流行）","  Rock（摇滚）","• Classic Rock（经典摇滚）","• Blues Rock（布鲁斯摇滚）","• Emo（情绪）","• Glam Rock（华丽摇滚）","• Indie（独立音乐）","• Industrial Rock（工业摇滚）","• Punk（朋克摇滚）","• Rock（摇滚）","• Skate Rock（滑板摇滚）","• Skatecore（滑板核）","  Urban（城市音乐）","• Funk（放克）","• HipHop（嘻哈）","• RnB（节奏蓝调）","• Phonk（酸音乐）","• Rap（说唱）","• Trap（陷阱音乐）","  Danceable（可跳舞的）","• Disco（迪斯科）","• Syncopated（切分节奏）","• Groovy（悠扬）","• Tipsy（微醺）","  Dark（黑暗）","• Dark（黑暗）","• Doom（末日）","• Dramatic（戏剧性）","• Sinister（阴险）","  Electric（电子）","• Art（艺术）","• Nu（新流行）","• Progressive（进步）","  Hard（强硬）","• Aggressive（激进）","• Banger（热门曲目）","• Power（力量）","• Stadium（体育场）","• Stomp（重踏）","  Lyrical（抒情的）","• Broadway（百老汇）","• Cabaret（歌舞表演）","• Lounge（酒吧歌手）","• Operatic（歌剧式的）","• Storytelling（讲故事）","• Torch-Lounge（酒吧歌曲）","• Theatrical（戏剧性的）","• Troubadour（吟游诗人）","• Vegas（拉斯维加斯风格）","  Magical（神奇）","• Ethereal（虚幻）","• Majestic（雄伟）","• Mysterious（神秘）","  Minimal（简约）","• Ambient（环境音乐）","• Cinematic（电影）","• Slow（缓慢）","• Sparse（稀疏）","  Party（派对）","• Glam（华丽）","• Glitter（闪耀）","• Groovy（悠扬）","• Grooveout（活力爆发）","  Soft（柔和）","• Ambient（环境音乐）","• Bedroom（卧室）","• Chillwave（轻松浪潮）","• Ethereal（虚幻）","• Intimate（亲密）","  Weird（奇怪）","• Carnival（嘉年华）","• Haunted（鬼屋）","• Random（随机）","• Musicbox（音乐盒）","• Hollow（空洞）","  World/Ethnic（世界/民族）","• Arabian（阿拉伯）","• Bangra（班格拉舞）","• Calypso（卡利普索）","• Egyptian（埃及）","• Adhan（安讫）","• Jewish Music（犹太音乐）","• Klezmer（克莱兹默音乐）","• Middle East（中东）","• Polka（波尔卡）","• Russian Navy Song（俄罗斯海军歌曲）","• Suomipop（芬兰流行音乐）","• Tribal（部落）","  BackGround（背景乐）","• Elevator（电梯音乐）","• Jingle（广告歌曲）","• Muzak（环境音乐）","  Call to Prayer（祈祷呼唤）","• Call to Prayer（祈祷呼唤）","• Gregorian Chant（格里高利圣歌）","  Character（角色）","• Strut（趾高气昂地走）","• March（进行曲）","• I Want Song（渴望之歌）","  Children（儿童）","• Children's（儿童的）","• Lullaby（摇篮曲）","• Sing-along（合唱歌曲）","  Retro（复古）","• 1960s（1960年代）","• Barbershop（理发店四重唱）","• Big Band（大乐队）","• Classic（经典的）","• Doo Wop（一种节奏蓝调风格的音乐）","• Girl Group（女子组合）","• Swing（摇摆乐）","• Traditional（传统的）","  Traditional（传统的）","• Barbershop（理发店四重唱）","• Christmas Carol（圣诞颂歌）","• Traditional（传统的）"],
-        [] if st.session_state['tags_input']=="" else st.session_state['tags_input'].split(","),
-        placeholder=i18n("Tags Placeholder"),
-        help=i18n("Tags Desc"),
-        max_selections=4)
-
-        st.session_state.Tags = ','.join(str(opts) for opts in options)
         # print(st.session_state.Tags)
 
         container.container()
@@ -281,7 +282,12 @@ with container.container():
         random_style = cols[0].button(i18n("Random Style"), type="secondary")
         if random_style:
             # print(st.session_state.Tags)
-            st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
+            if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['prompt_input']:
+                tags_input = get_random_style()
+                tags_input = get_new_tags(tags_input)
+                st.session_state['tags_input'] = tags_input
+            else:
+                st.session_state['tags_input'] = get_random_style()#st.session_state['tags_input']
             # print(st.session_state['tags_input'])
             st.rerun()
 
@@ -344,6 +350,10 @@ if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
     container2.text_input(label=i18n("Extend From"), value=st.session_state['continue_at'], placeholder="", max_chars=6, help=i18n("Extend From Help"), key="continue_at_change", on_change=continue_at_change)
     container2.text_input(label=i18n("Extend From Clip"), value=st.session_state['continue_clip_id'], placeholder="", max_chars=36, help="")
 
+container2 = col2.container(border=True)
+options1 = container2.multiselect(i18n("Select Model"), ["chirp-v3-0", "chirp-v3-5"], [st.session_state['model_name']], placeholder=i18n("Select Model Placeholder"), help=i18n("Select Model Help"), max_selections=1)
+st.session_state['model_name'] = ''.join(str(opts) for opts in options1)
+# print(st.session_state['model_name'])
 
 container1 = col2.container(border=True)
 
@@ -371,13 +381,13 @@ if Setting:
         Session = result[2]
         Cookie = result[3]
         
-    Identity = container1.text_input(label="Identity：", value=identity, placeholder=i18n("Identity Placeholder"), max_chars=50, help=i18n("Identity Help"))
+    Identity = container1.text_input(label="Identity:", value=identity, placeholder=i18n("Identity Placeholder"), max_chars=50, help=i18n("Identity Help"))
     st.session_state.Identity = Identity
     # print(st.session_state.Identity)
-    Session = container1.text_input(label="Session：", value=Session, placeholder=i18n("Session Placeholder"),max_chars=50, help=i18n("Session Help"))
+    Session = container1.text_input(label="Session:", value=Session, placeholder=i18n("Session Placeholder"),max_chars=50, help=i18n("Session Help"))
     st.session_state.Session = Session
     # print(st.session_state.Session)
-    Cookie = container1.text_area(label="Cookie：", value=Cookie, placeholder=i18n("Cookie Placeholder"), height=150, max_chars=1500, help=i18n("Cookie Help"))
+    Cookie = container1.text_area(label="Cookie:", value=Cookie, placeholder=i18n("Cookie Placeholder"), height=150, max_chars=1500, help=i18n("Cookie Help"))
     st.session_state.Cookie = Cookie
     # print(st.session_state.Cookie)
 
@@ -667,23 +677,25 @@ if StartBtn :
                 placeholder.error(i18n("Custom Tags Error"))
             elif st.session_state.Prompt == "":
                 placeholder.error(i18n("Custom Prompt Error"))
+            elif st.session_state['model'] == "":
+                placeholder.error(i18n("Select Model Error"))
             else:
                 data = {}
                 if st.session_state.Instrumental:
                     data = {
                         "title": st.session_state.Title,
-                        "tags": get_new_tags(st.session_state.Tags),
+                        "tags": st.session_state.Tags if "," not in st.session_state.Tags else get_new_tags(st.session_state.Tags),
                         "prompt": "",
-                        "mv": "chirp-v3-0",
+                        "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
                         "continue_at": st.session_state["continue_at"] if "continue_at" in st.session_state else None,
                         "continue_clip_id": st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
                     }
                 else:
                     data = {
                         "title": st.session_state.Title,
-                        "tags": get_new_tags(st.session_state.Tags),
+                        "tags": st.session_state.Tags if "," not in st.session_state.Tags else get_new_tags(st.session_state.Tags),
                         "prompt": st.session_state.Prompt,
-                        "mv": "chirp-v3-0",
+                        "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
                         "continue_at": st.session_state["continue_at"] if "continue_at" in st.session_state else None,
                         "continue_clip_id": st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
                     }
@@ -728,11 +740,13 @@ if StartBtn :
         else:
             if st.session_state.DescPrompt == "":
                 placeholder.error(i18n("DescPrompt Error"))
+            elif st.session_state['model'] == "":
+                placeholder.error(i18n("Select Model Error"))
             else:
                 data = {
                     "gpt_description_prompt": st.session_state.DescPrompt,
                     "make_instrumental": st.session_state.Instrumental,
-                    "mv": "chirp-v3-0",
+                    "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
                     "prompt": ""
                 }
                 print(data)

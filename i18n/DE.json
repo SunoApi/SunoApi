@@ -27,7 +27,7 @@
 
     "Title Placeholder": "Nennen Sie Ihrem Musiklied einen Namen, um ihn zu identifizieren, teilen und finden.",
     "Tags Placeholder": "Wählen Sie den Musikstil, den Sie möchten, Suno AI Modell kann Genres und Atmosphäre verstehen.",
-    "Prompt Placeholder": "Geben Sie Ihre eigenen Lyrics ein oder andere bereits existierende Lyrics ein, professionell Lyricshilfetool：https://poe.com/SuperSunoMaster。",
+    "Prompt Placeholder": "Geben Sie Ihre eigenen Lyrics ein oder andere bereits existierende Lyrics ein, professionell Lyricshilfetool: https://poe.com/SuperSunoMaster。",
 
     "Desc Prompt": "Liedbeschreibung: ",
     "Desc Value": "Geben Sie direkt den gewünschten Musikstil und Thema ein, machen Sie einfach professionelle Suno AI-Musiklieder！",
@@ -39,10 +39,10 @@
 
     "Generate": "Sofort erschaffen🎵",
 
-    "DescPrompt Error": "Geben Sie zum Beispiel eine Beschreibung wie：Schreiben Sie ein Lied im Stil von《Nachtstick》.",
+    "DescPrompt Error": "Geben Sie zum Beispiel eine Beschreibung wie: Schreiben Sie ein Lied im Stil von《Nachtstick》.",
 
     "Custom Title Error": "Geben Sie bitte einen Titel für das Lied ein, zum Beispiel: Nachtstick - Eintritt auf die Preisträne.",
-    "Custom Tags Error": "Geben Sie bitte den Musikstil an, zum Beispiel: chinesische Popmusik.",
+    "Custom Tags Error": "Bitte wählen Sie einen Musikstil, zum Beispiel: Chinese pop (中国流行音乐).",
     "Custom Prompt Error": "Geben Sie bitte Ihre Lyrics ein, wenn Sie nicht weiß， können Sie einfach Stichworte eingeben und dann Generierungslyrics wählen.",
 
     "Generate Submit Error": "Fehler beim Erstellen des Suno AI-Musikliedes: ",
@@ -98,7 +98,7 @@
     "Upload Images Analytics": "Bitte helfen Sie mir, den Inhalt dieses Bildes zu analysieren, zusammenzufassen und die im Bild ausgedrückten Informationen zu beschreiben. Der erste Satz enthält eine kurze Beschreibung des Themas, das durch das Bild vermittelt wird, während der zweite Satz eine detaillierte Beschreibung des Inhalts des Bildes bietet. Geben Sie das Thema und den Inhalt direkt aus, ohne Wörter wie 'dieses Bild ausdrückt', 'in diesem Bild' oder 'dieses Bild vermittelt'. Geben Sie einfach das Thema und den Inhalt aus.",
     "Analytics Images Error": "Intelligente Bilderkennung fehlgeschlagen: ",
     "Analytics Images Success": "Bildintelligente Erkennung erfolgreich, kann bei Bedarf geändert werden und dann sofort generieren klicken!",
-    "Friendly Link": "Sponsoren und Freundschaftslinks：",
+    "Friendly Link": "Sponsoren und Freundschaftslinks:",
 
     "Song Part": "Teile",
     "Full Song": "komplettes",
@@ -107,8 +107,13 @@
     "Get Whole Song": "Das ganze.",
     "Extend Button": "verlängern🎵",
     "Extend Placeholder": "Geben Sie zusätzliche Songtexte ein, um den Song basierend auf Ihren vorherigen Songparagraphen zu erweitern. Klicken Sie nach dem Erstellen des erweiterten Songs auf die Schaltfläche Ganzes Lied abrufen auf der Wiedergabeseite, um den vollständigen Song zu erhalten.",
-    "Extend From": "Verlängerung des Zeitpunkts",
+    "Extend From": "Verlängerung des Zeitpunkts:",
     "Extend From Help": "Erweitern Sie ein neues Songsegment (z.B. 120) ab dem Zeitpunkt, an dem Sie die Songnummer erweitern. Wenn Sie es nicht verstehen, müssen Sie es nicht ändern. Die Erweiterung beginnt standardmäßig am Ende des Songs.",
-    "Extend From Clip": "Erweiterte Song-Nummer"
+    "Extend From Clip": "Erweiterte Song-Nummer:",
+
+    "Select Model": "Musik modell:",
+    "Select Model Placeholder": "Bitte wählen Sie ein Modell für die Generierung von Musikliedern, Standardmodell: chirp-v3-0.",
+    "Select Model Help": "Das chirp-v3-0 Modell kann Songsegmente bis zu 2-Minuten Länge erzeugen, Das chirp-v3-5 Modell kann bis zu vier Minuten Song Clips erzeugen.",
+    "Select Model Error": "Bitte wählen Sie ein Musikmodell aus, z.B.: chirp-v3-0."
   }
 }
