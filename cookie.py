@@ -78,7 +78,8 @@ def update_token(suno_cookie: SunoCookie):
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.70.5",
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.71.4",
         # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.72.0-snapshot.vc141245",
-        url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.72.3",
+        # url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.72.3",
+        url=f"https://clerk.suno.com/v1/client/sessions/{session_id}/tokens?_clerk_js_version=4.73.2",
         headers=headers,
         verify=False
     )
@@ -206,5 +207,16 @@ def get_random_token():
         return result[0]
     else:
         print(local_time() + f" ***get_random_token -> {result} ***\n")
+        return ""
+
+def get_page_token():
+    result = suno_sqlite.query_one("select token from session where token != '' and status='200' and page=0 order by random()")
+    # print(result)
+    # print("\n")
+    if result:
+        print(local_time() + f" ***get_page_token -> {result[0]} ***\n")
+        return result[0]
+    else:
+        print(local_time() + f" ***get_page_token -> {result} ***\n")
         return ""
 # start_keep_alive()

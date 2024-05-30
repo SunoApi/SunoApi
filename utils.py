@@ -16,8 +16,8 @@ S3_SECRETKEY_ID = os.getenv("S3_SECRETKEY_ID")
 
 COMMON_HEADERS = {
     "Content-Type": "application/x-www-form-urlencoded",
-    # "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    # "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
     # "User-Agent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0",
     "Referer": "https://suno.com/",
     "Origin": "https://suno.com",
@@ -43,7 +43,7 @@ def fetch(url, headers=None, data=None, method="POST"):
             print(resp.text)
         if S3_WEB_SITE_URL is None or S3_WEB_SITE_URL == "https://cdn1.suno.ai":
             result = resp.text
-        elif S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
+        elif S3_WEB_SITE_URL is not None and "s3.bitiful.net" in S3_WEB_SITE_URL:
             result = resp.text.replace('https://cdn1.suno.ai/', f'{S3_WEB_SITE_URL}/files/')
         else:
             result = resp.text.replace('https://cdn1.suno.ai/', 'https://res.sunoapi.net/files/')
@@ -98,7 +98,7 @@ def local_time():
 def check_url_available(url, twice=False):
     if S3_WEB_SITE_URL is None or S3_WEB_SITE_URL == "https://cdn1.suno.ai":
         pass
-    elif S3_WEB_SITE_URL is not None and S3_WEB_SITE_URL != "http://localhost:8501":
+    elif S3_WEB_SITE_URL is not None and "s3.bitiful.net" in S3_WEB_SITE_URL:
         url = url.replace(f'{S3_WEB_SITE_URL}/files/', 'https://cdn1.suno.ai/')
     else:
         url = url.replace(f'https://res.sunoapi.net/files/', 'https://cdn1.suno.ai/')

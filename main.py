@@ -4,12 +4,13 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
 import time,json,os,requests
-
+from datetime import timezone
+import dateutil.parser
 from datetime import datetime
 from pathlib import Path
 
 import schemas
-from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token
+from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token,get_page_token
 from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics,put_upload_file,get_new_tags
 
 root_dir = os.path.dirname(os.path.realpath(__file__))
@@ -149,6 +150,7 @@ if 'continue_clip_id' not in st.session_state:
 
 if 'model_name' not in st.session_state:
     st.session_state['model_name'] = "chirp-v3-0"
+print(st.session_state['model_name'])
 
 with container.container():
     cols = container.columns(2)
@@ -351,7 +353,7 @@ if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
     container2.text_input(label=i18n("Extend From Clip"), value=st.session_state['continue_clip_id'], placeholder="", max_chars=36, help="")
 
 container2 = col2.container(border=True)
-options1 = container2.multiselect(i18n("Select Model"), ["chirp-v3-0", "chirp-v3-5"], [st.session_state['model_name']], placeholder=i18n("Select Model Placeholder"), help=i18n("Select Model Help"), max_selections=1)
+options1 = container2.multiselect(i18n("Select Model"), ["chirp-v3-0", "chirp-v3-5"], "chirp-v3-0", placeholder=i18n("Select Model Placeholder"), help=i18n("Select Model Help"), max_selections=1)
 st.session_state['model_name'] = ''.join(str(opts) for opts in options1)
 # print(st.session_state['model_name'])
 
@@ -435,10 +437,23 @@ def start_page():
     start_keep_alive()
 start_page()
 
+def localdatetime(str):
+    # 将字符串时间 转化为 datetime 对象
+    dateObject = dateutil.parser.isoparse(str)
+    # print(dateObject)  2021-09-03 20:56:35.450686+00:00
+    # from zoneinfo import ZoneInfo
+    # 根据时区 转化为 datetime 数据
+    # localdt = dateObject.replace(tzinfo = timezone.utc).astimezone(ZoneInfo("Asia/Shanghai"))
+    localdt = dateObject.replace(tzinfo = timezone.utc).astimezone(tz=None)
+    # print(localdt)  # 2021-09-04 04:56:35.450686+08:00
+    # 产生本地格式 字符串
+    # print(localdt.strftime('%Y-%m-%d %H:%M:%S'))
+    return localdt.strftime('%Y-%m-%d %H:%M:%S')
+
 # @st.cache_data
-def fetch_feed(aids: list):
+def fetch_feed(aids: list, token: str):
     if len(aids) == 1 and len(aids[0].strip()) == 36:
-        resp = get_feed(aids[0].strip(), get_random_token())
+        resp = get_feed(aids[0].strip(), token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -464,7 +479,7 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     elif len(aids) == 2  and len(aids[0].strip()) == 36 and len(aids[1].strip()) == 36:
-        resp = get_feed(aids[0].strip(), get_random_token())
+        resp = get_feed(aids[0].strip(), token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -488,7 +503,7 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
-        resp = get_feed(aids[1].strip(), get_random_token())
+        resp = get_feed(aids[1].strip(), token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -513,7 +528,7 @@ def fetch_feed(aids: list):
         else:
             placeholder.error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
     else:
-        resp = get_page_feed(aids, get_random_token())
+        resp = get_page_feed(aids, token)
         print(resp)
         print("\n")
         status = resp["detail"] if "detail" in resp else resp[0]["status"]
@@ -529,7 +544,7 @@ def fetch_feed(aids: list):
                         result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
                         print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
                     else:
-                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], st.session_state.Private))
+                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, created, updated, status, private) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"],localdatetime(row['created_at']),localdatetime(row['created_at']), row["status"], st.session_state.Private))
                         print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
                     print(result)
                     print("\n")
@@ -577,10 +592,20 @@ if FetchFeed:
                 placeholder.success(i18n("FetchFeed Success") + item)
         elif len(FeedID) >= 36:
            FeedIDs = FeedID.split(",")
-           fetch_feed(FeedIDs)
+           token = get_random_token()
+           fetch_feed(FeedIDs, token)
         else:
            FeedIDs = FeedID*1
-           fetch_feed(FeedIDs)
+           count = 0
+           token = get_page_token()
+           for i in range(int(FeedIDs), -1, -1):
+               print(i, end=" ")
+               fetch_feed(str(i), token)
+               #time.sleep(3)
+               count += 1
+               if count % 5 == 0:
+                   print(end="\n")
+                   #time.sleep(5)
     else:
         st.session_state.FeedBtn = False
         # print(st.session_state.FeedBtn)
@@ -663,7 +688,7 @@ def fetch_status(aid: str, twice=False):
             break
 
         time.sleep(10)
-    if S3_WEB_SITE_URL is not None and (S3_WEB_SITE_URL != "http://localhost:8501" or S3_WEB_SITE_URL != "https://cdn1.suno.ai"):
+    if S3_WEB_SITE_URL is not None and ("s3.bitiful.net" in S3_WEB_SITE_URL or S3_WEB_SITE_URL != "https://cdn1.suno.ai"):
         resp[0]["audio_url"] = resp[0]["audio_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
         resp[0]["video_url"] = resp[0]["video_url"].replace(S3_WEB_SITE_URL, 'https://res.sunoapi.net')
     return resp
