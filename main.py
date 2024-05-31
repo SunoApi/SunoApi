@@ -264,7 +264,7 @@ with container.container():
         if 'tags_input' not in st.session_state:
             st.session_state['tags_input'] = ""
 
-        if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['prompt_input']:
+        if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['tags_input']:
             Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'], placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
             st.session_state.Tags = st.session_state['tags_input']
         else:
