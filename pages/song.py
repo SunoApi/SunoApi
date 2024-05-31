@@ -291,9 +291,9 @@ if aid != "" and len(aid) == 36:
                 st.session_state['title_input'] = title
                 st.session_state['tags_input'] = data['metadata']['tags'].strip()
                 st.session_state['prompt_input'] = "" if data['metadata']['prompt'] == "[Instrumental]" else data['metadata']['prompt']
-                st.session_state["continue_at"] = ""
-                st.session_state["continue_clip_id"] = ""
-                st.session_state["model_name"] = "chirp-v3-0" if data['model_name'] == "chirp-v3" else "chirp-v3-5"
+                st.session_state['continue_at'] = ""
+                st.session_state['continue_clip_id'] = ""
+                st.session_state['model_name'] = "chirp-v3-0" if data['model_name'] == "chirp-v3" else "chirp-v3-5"
                 st.switch_page("main.py")
 
             continue_button = cols[2].button(i18n("Continue Extend"), type="secondary")
@@ -301,9 +301,9 @@ if aid != "" and len(aid) == 36:
                 st.session_state['title_input'] = title
                 st.session_state['tags_input'] = data['metadata']['tags'].strip()
                 st.session_state['prompt_input'] = ""
-                st.session_state["continue_at"] = str(data['metadata']['duration'])[0:6]
-                st.session_state["continue_clip_id"] = aid
-                st.session_state["model_name"] = "chirp-v3-0" if data['model_name'] == "chirp-v3" else "chirp-v3-5"
+                st.session_state['continue_at'] = str(data['metadata']['duration'])[0:6]
+                st.session_state['continue_clip_id'] = aid
+                st.session_state['model_name'] = "chirp-v3-0" if data['model_name'] == "chirp-v3" else "chirp-v3-5"
                 st.switch_page("main.py")
 
             if data['metadata']['audio_prompt_id'] is not None:
