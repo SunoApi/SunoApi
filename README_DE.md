@@ -52,6 +52,9 @@ pip3 install -r requirements.txt
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
+#S3_WEB_SITE_URL = https://cdn1.suno.ai
+#S3_WEB_SITE_URL = http://localhost:8501
+#S3_WEB_SITE_URL = http://123.56.78.456:8501
 S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
 S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
 S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
@@ -203,7 +206,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240525" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240531" style="max-width: 100%;"/></a>
 
 
 ### Teilnahme an
