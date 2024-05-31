@@ -150,7 +150,7 @@ if 'continue_clip_id' not in st.session_state:
 
 if 'model_name' not in st.session_state:
     st.session_state['model_name'] = "chirp-v3-0"
-print(st.session_state['model_name'])
+# print(st.session_state['model_name'])
 
 with container.container():
     cols = container.columns(2)
@@ -353,7 +353,7 @@ if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
     container2.text_input(label=i18n("Extend From Clip"), value=st.session_state['continue_clip_id'], placeholder="", max_chars=36, help="")
 
 container2 = col2.container(border=True)
-options1 = container2.multiselect(i18n("Select Model"), ["chirp-v3-0", "chirp-v3-5"], "chirp-v3-0", placeholder=i18n("Select Model Placeholder"), help=i18n("Select Model Help"), max_selections=1)
+options1 = container2.multiselect(i18n("Select Model"), ["chirp-v3-0", "chirp-v3-5"], ["chirp-v3-0"] if not st.session_state['model_name'] else st.session_state['model_name'].split(","), placeholder=i18n("Select Model Placeholder"), help=i18n("Select Model Help"), max_selections=1)
 st.session_state['model_name'] = ''.join(str(opts) for opts in options1)
 # print(st.session_state['model_name'])
 
@@ -597,7 +597,7 @@ if FetchFeed:
         else:
            FeedIDs = FeedID*1
            count = 0
-           token = get_page_token()
+           token = get_random_token()
            for i in range(int(FeedIDs), -1, -1):
                print(i, end=" ")
                fetch_feed(str(i), token)
