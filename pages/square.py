@@ -135,10 +135,10 @@ if result is not None:
     page_number = st.session_state.page
     offset = (page_number - 1) * records_per_page
 
-result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where private=0 order by id desc LIMIT ? OFFSET ? ", (records_per_page, offset,))
+result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where private=0 order by created desc LIMIT ? OFFSET ? ", (records_per_page, offset,))
 
 if title != "":
-    result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where (LOWER(title) like ? or aid=?) and private=0 order by id desc LIMIT ? OFFSET ? ", ("%"+ title +"%", title, records_per_page, offset,))
+    result = suno_sqlite.query_many("select aid,data,created,updated,status,private from music where (LOWER(title) like ? or aid=?) and private=0 order by created desc LIMIT ? OFFSET ? ", ("%"+ title +"%", title, records_per_page, offset,))
 
 
 def localdatetime(str):
@@ -172,7 +172,7 @@ if result is not None and len(result) > 0:
         title += i18n("Music Prompt")  + ("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
         
         titles.append(title)
-        captions.append("sunoai" if data['title'] is None or "" else data['title'])
+        captions.append("sunoai" if data['title'] is None or "" else f'<a style="background: #fafafa; color: #666; text-decoration: none;" href="/song?id={data["id"]}" target="_blank">{data["title"]}</a>')
         images.append("https://sunoapi.net/images/sunoai.jpg" if data['image_url'] is None or "" else data['image_url'])
 
 print("\n")
