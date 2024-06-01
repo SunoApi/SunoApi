@@ -144,9 +144,9 @@ if 'DescPrompt' not in st.session_state:
     st.session_state.DescPrompt = ""
 
 if 'continue_at' not in st.session_state:
-    st.session_state['continue_at'] = ""
+    st.session_state['continue_at'] = None
 if 'continue_clip_id' not in st.session_state:
-    st.session_state['continue_clip_id'] = ""
+    st.session_state['continue_clip_id'] = None
 
 if 'model_name' not in st.session_state:
     st.session_state['model_name'] = "chirp-v3-0"
