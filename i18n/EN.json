@@ -111,7 +111,7 @@
     "Extend From Help": "Extend a new song segment (e.g. 120) from the time point of extending the song clip id. If you don't understand, there is no need to modify it. The extension will start from the end of the song by default.",
     "Extend From Clip": "Extend song clip id:",
 
-    "Select Model": "Music model:",
+    "Select Model": "Music model: ",
     "Select Model Placeholder": "Please select a model for generating music songs. The default model is chirp-v3-0.",
     "Select Model Help": "chirp-v3-0 model can generate up to 2 minutes of song fragments, chirp-v3-5 model can generate up to 4 minutes of song fragments.",
     "Select Model Error": "Please select a music model, for example: chirp-v3-0."

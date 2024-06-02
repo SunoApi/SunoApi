@@ -111,7 +111,7 @@
     "Extend From Help": "확장된 노래 번호의 시점으로부터 새로운 노래 세그먼트 (예: 120) 를 확장하고, 이해하지 못하면 수정하지 않으면 기본적으로 노래의 끝부터 연장됩니다.",
     "Extend From Clip": "확장된 노래 번호:",
 
-    "Select Model": "음악 모델:",
+    "Select Model": "음악 모델: ",
     "Select Model Placeholder": "음악 음악을 만들기 위한 모델을 선택하십시오. 기본 모델:chirp-v3-0.",
     "Select Model Help": "chirp-v3-0 모델은 최대 2분의 노래 세션을, chirp-v3-5 모델은 최대 4분의 노래 세션을 생성할 수 있다.",
     "Select Model Error": "음악 모델(예: chirp-v3-0)을 선택하십시오."

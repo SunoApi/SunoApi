@@ -111,7 +111,7 @@
     "Extend From Help": "Erweitern Sie ein neues Songsegment (z.B. 120) ab dem Zeitpunkt, an dem Sie die Songnummer erweitern. Wenn Sie es nicht verstehen, müssen Sie es nicht ändern. Die Erweiterung beginnt standardmäßig am Ende des Songs.",
     "Extend From Clip": "Erweiterte Song-Nummer:",
 
-    "Select Model": "Musik modell:",
+    "Select Model": "Musik modell: ",
     "Select Model Placeholder": "Bitte wählen Sie ein Modell für die Generierung von Musikliedern, Standardmodell: chirp-v3-0.",
     "Select Model Help": "Das chirp-v3-0 Modell kann Songsegmente bis zu 2-Minuten Länge erzeugen, Das chirp-v3-5 Modell kann bis zu vier Minuten Song Clips erzeugen.",
     "Select Model Error": "Bitte wählen Sie ein Musikmodell aus, z.B.: chirp-v3-0."

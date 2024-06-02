@@ -111,7 +111,7 @@
     "Extend From Help": "Prolongez un nouveau fragment de chanson (ex :120) à partir du moment où le numéro de la chanson a été étendu. Si vous ne comprenez pas sans modifier, l’extension commence par défaut à la fin de cette chanson.",
     "Extend From Clip": "Numéro de chanson étendu:",
 
-    "Select Model": "Modèles musicaux:",
+    "Select Model": "Modèles musicaux: ",
     "Select Model Placeholder": "Veuillez sélectionner un modèle pour générer des chansons musicales. Modèle par défaut: chirp-v3-0.",
     "Select Model Help": "Le modèle chirp-v3-0 peut générer des fragments de chansons d’une durée maximale de 2 minutes et le modèle chirp-v3-5 peut générer des fragments de chansons d’une durée maximale de 4 minutes.",
     "Select Model Error": "Veuillez sélectionner le modèle de musique. Exemple: chirp-v3-0."
