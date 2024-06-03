@@ -98,7 +98,7 @@
     "Upload Images Analytics": "幫我分析一下這張圖片的內容，總結並描述圖片所表達的資訊。 第一句輸出圖片表達的簡要主題，第二句詳細描述圖片的內容，直接輸出主題和內容，不要出現'這張圖片表達了'，'在這幅圖畫中'，'這張圖片傳達了'等字眼，直接輸出主題和內容即可。",
     "Analytics Images Error": "圖片智慧識別失敗：",
     "Analytics Images Success": "圖片智慧識別成功，可以根據需要修改之後再點立即生成！",
-    "Friendly Link": "贊助商以及友情連結：",
+    "Friendly Link": "贊助商以及友情連結",
 
     "Song Part": "部分",
     "Full Song": "完整",

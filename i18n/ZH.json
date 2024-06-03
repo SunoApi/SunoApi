@@ -98,7 +98,7 @@
     "Upload Images Analytics": "帮我分析一下这张图片的内容，总结并描述图片所表达的信息。第一句输出图片表达的简要主题，第二句详细描述图片的内容，直接输出主题和内容，不要出现'这张图片表达了','在这幅图画中','这张图片传达了'等字眼，直接输出主题和内容即可。",
     "Analytics Images Error": "图片智能识别失败：",
     "Analytics Images Success": "图片智能识别成功，可以根据需要修改之后再点立即生成！",
-    "Friendly Link": "赞助商以及友情链接：",
+    "Friendly Link": "赞助商以及友情链接",
 
     "Song Part": "部分",
     "Full Song": "完整",
