@@ -218,8 +218,8 @@ if aid != "" and len(aid) == 36:
     # print("\n")
     if result is not None and len(result) > 0 and result[5] == 0:
         data = ast.literal_eval(result[1])
-        # print(data)
-        # print("\n")
+        print(data)
+        print("\n")
         if data['status'] == "complete":
             container = col2.container(border=True)
             title = "None\n" if data['title'] is None or "" else data['title'].strip()
@@ -233,16 +233,16 @@ if aid != "" and len(aid) == 36:
                 cols = container.columns(3)
 
             # part_button = None
-            if data['metadata']['history'] is not None:
-                # cols[0].markdown(f'''
-                # <h3>{i18n("Song Part")} {len(data['metadata']['history'])+1}</h3> 
-                # ''', unsafe_allow_html=True)
-                part_button = cols[0].button(f'''{i18n("Song Part")} {len(data['metadata']['history'])+1}''', type="secondary")
-            elif data['metadata']['concat_history'] is not None:
+            if data['metadata']['concat_history'] is not None:
                 # cols[0].markdown(f'''
                 # <h3>{i18n("Full Song")}</h3> 
                 # ''', unsafe_allow_html=True)
                 part_button = cols[0].button(f'''{i18n("Full Song")}''', type="secondary")
+            elif data['metadata']['history'] is not None:
+                # cols[0].markdown(f'''
+                # <h3>{i18n("Song Part")} {len(data['metadata']['history'])+1}</h3> 
+                # ''', unsafe_allow_html=True)
+                part_button = cols[0].button(f'''{i18n("Song Part")} {len(data['metadata']['history'])+1}''', type="secondary")
             else:
                 # cols[0].markdown(f'''
                 # <h3>{i18n("Song Part")} 1</h3> 
@@ -250,10 +250,11 @@ if aid != "" and len(aid) == 36:
                 part_button = cols[0].button(f'''{i18n("Song Part")} 1''', type="secondary")
 
             max_width = 540
-            if data['metadata']['history'] is not None:
-                max_width = max_width * len(data['metadata']['history'])
             if data['metadata']['concat_history'] is not None:
                 max_width = max_width * len(data['metadata']['concat_history'])
+            elif data['metadata']['history'] is not None:
+                max_width = max_width * len(data['metadata']['history'])
+            
 
             part_modal = Modal(title=title, key="part_modal", padding=15, max_width=max_width)
             if part_button and (data['metadata']['history'] is not None or data['metadata']['concat_history'] is not None):
@@ -261,9 +262,9 @@ if aid != "" and len(aid) == 36:
             if part_modal.is_open():
                 with part_modal.container():
                     token = get_random_token()
-                    if data['metadata']['history'] is not None:
-                        part_modal_cols = st.columns(len(data['metadata']['history']))
-                        for index, item in enumerate(data['metadata']['history']):
+                    if data['metadata']['concat_history'] is not None:
+                        part_modal_cols = st.columns(len(data['metadata']['concat_history']))
+                        for index, item in enumerate(data['metadata']['concat_history']):
                             part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
                             <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
                             ''', unsafe_allow_html=True)
@@ -273,9 +274,9 @@ if aid != "" and len(aid) == 36:
                                 part_modal_cols[index].video(resp[0]['video_url'])
                             else:
                                 part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
-                    if data['metadata']['concat_history'] is not None:
-                        part_modal_cols = st.columns(len(data['metadata']['concat_history']))
-                        for index, item in enumerate(data['metadata']['concat_history']):
+                    elif data['metadata']['history'] is not None:
+                        part_modal_cols = st.columns(len(data['metadata']['history']))
+                        for index, item in enumerate(data['metadata']['history']):
                             part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
                             <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
                             ''', unsafe_allow_html=True)
