@@ -114,7 +114,7 @@ with st.sidebar:
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
-st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"><a href="/rss.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Rss"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/020-rss.svg"></a>&nbsp;&nbsp;{i18n("Friendly Link")}&nbsp;&nbsp;<a href="/sitemap.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Sitemap"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/033-spotify.svg"></a></div>', unsafe_allow_html=True)
 result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
 # print(result)
 # print("\n")
@@ -335,7 +335,7 @@ if aid != "" and len(aid) == 36:
                             <a href="/song?id={aid}" target="_blank">{aid}</a>
                             ''', unsafe_allow_html=True)
 
-            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'].strip()j + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
+            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'].strip() + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
 
             container.markdown("" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n"), unsafe_allow_html=True)
 
