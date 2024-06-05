@@ -309,9 +309,9 @@ with container.container():
                 container.error(status)
                 
         if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
-            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Extend Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Extend Placeholder"), height=150, max_chars=1500, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
         else:
-            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1500, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
         st.session_state.Prompt = Prompt
         # print(st.session_state.Prompt)
     else:
