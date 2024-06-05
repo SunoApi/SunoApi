@@ -110,7 +110,7 @@ with st.sidebar:
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
-st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"><a href="/rss.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Rss"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/020-rss.svg"></a>&nbsp;&nbsp;{i18n("Friendly Link")}&nbsp;&nbsp;<a href="/sitemap.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Sitemap"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/033-spotify.svg"></a></div>', unsafe_allow_html=True)
 result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
 # print(result)
 # print("\n")
@@ -597,9 +597,9 @@ if FetchFeed:
         else:
            FeedIDs = FeedID*1
            count = 0
-           token = get_random_token()
            for i in range(int(FeedIDs), -1, -1):
                print(i, end=" ")
+               token = get_random_token()
                fetch_feed(str(i), token)
                #time.sleep(3)
                count += 1
@@ -712,8 +712,8 @@ if StartBtn :
                         "tags": st.session_state.Tags if "," not in st.session_state.Tags else get_new_tags(st.session_state.Tags),
                         "prompt": "",
                         "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
-                        "continue_at": st.session_state["continue_at"] if "continue_at" in st.session_state else None,
-                        "continue_clip_id": st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
+                        "continue_at": None if st.session_state["continue_at"]=="" else st.session_state["continue_at"] if "continue_at" in st.session_state else None,
+                        "continue_clip_id": None if st.session_state["continue_clip_id"]=="" else st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
                     }
                 else:
                     data = {
@@ -721,8 +721,8 @@ if StartBtn :
                         "tags": st.session_state.Tags if "," not in st.session_state.Tags else get_new_tags(st.session_state.Tags),
                         "prompt": st.session_state.Prompt,
                         "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
-                        "continue_at": st.session_state["continue_at"] if "continue_at" in st.session_state else None,
-                        "continue_clip_id": st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
+                        "continue_at": None if st.session_state["continue_at"]=="" else st.session_state["continue_at"] if "continue_at" in st.session_state else None,
+                        "continue_clip_id": None if st.session_state["continue_clip_id"]=="" else st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
                     }
                 print(data)
                 print("\n")
@@ -761,7 +761,7 @@ if StartBtn :
                         placeholder.error(i18n("Generate Status Error")  + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
                     st.session_state['disabled_state'] = False
                 else:
-                    placeholder.error(i18n("Generate Submit Error") + status)
+                    placeholder.error(i18n("Generate Submit Error") + str(resp))
         else:
             if st.session_state.DescPrompt == "":
                 placeholder.error(i18n("DescPrompt Error"))
@@ -813,7 +813,7 @@ if StartBtn :
                         placeholder.error(i18n("Generate Status Error") + (resp1[0]['status'] if resp1[0]['metadata']["error_message"] is None else resp1[0]['metadata']["error_message"]))
                     st.session_state['disabled_state'] = False
                 else:
-                    placeholder.error(i18n("Generate Submit Error") + status)
+                    placeholder.error(i18n("Generate Submit Error") + str(resp))
     else:
         if st.session_state['clips_0'] != "":
             resp0 = fetch_status(st.session_state['clips_0'], False)
