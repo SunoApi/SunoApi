@@ -151,7 +151,7 @@ def remove_chinese(tags):
     try:
         result = result.group(1).lower()
     except:
-        result = ""
+        result = tags
     # print(result)
     return result
 

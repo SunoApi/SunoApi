@@ -124,6 +124,10 @@ col2.markdown(i18n("Page Header"))
 
 container = col2.container(border=True)
 
+def change_tags():
+    # print("st.session_state.change_tags:" + st.session_state.change_tags)
+    st.session_state['tags_input'] = st.session_state['change_tags']
+
 def change_prompt():
     # print("st.session_state.change_prompt:" + st.session_state.change_prompt)
     st.session_state['prompt_input'] = st.session_state['change_prompt']
@@ -265,7 +269,7 @@ with container.container():
             st.session_state['tags_input'] = ""
 
         if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['tags_input']:
-            Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'], placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"))
+            Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'], placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"), key="change_tags", on_change=change_tags)
             st.session_state.Tags = st.session_state['tags_input']
         else:
             options = container.multiselect(
@@ -705,6 +709,7 @@ if StartBtn :
             elif st.session_state['model_name'] == "":
                 placeholder.error(i18n("Select Model Error"))
             else:
+                # print(st.session_state.Tags if "," not in st.session_state.Tags else get_new_tags(st.session_state.Tags))
                 data = {}
                 if st.session_state.Instrumental:
                     data = {
