@@ -47,7 +47,7 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- . env environment variable file requires the use of thegpt-4-vision-preview model for image recognition. The OpenAI interface can be used, or other commonly used interfaces can be used to replace it. Register a console.bitiful.com object storage account to obtain the S3_ACCESSKEY_ID，S3_SECRETKEY_ID parameter, which is used to upload images to the storage bucket you created. Fill in the external access domain name of your object storage account after creating the storage bucket in S3_WEB_SITE_URL. This way, the local environment can test image recognition.
+- . env environment variable file requires the use of the gpt-4-vision-preview model for image recognition. The OpenAI interface can be used, or other commonly used interfaces can be used to replace it. Register a console.bitiful.com object storage account to obtain the S3_ACCESSKEY_ID，S3_SECRETKEY_ID parameter, which is used to upload images to the storage bucket you created. Fill in the external access domain name of your object storage account after creating the storage bucket in S3_WEB_SITE_URL. This way, the local environment can test image recognition.
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
