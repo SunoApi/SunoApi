@@ -172,7 +172,7 @@ if result is not None and len(result) > 0:
         title += i18n("Music Prompt")  + ("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
         
         titles.append(title)
-        captions.append("sunoai" if data['title'] is None or "" else f'<a style="background: #fafafa; color: #666; text-decoration: none;" href="/song?id={data["id"]}" target="_blank">{data["title"]}</a>')
+        captions.append("sunoai" if data['title'] is None or "" else f'<div style="justify-content: center; align-items: center; word-break: break-word; text-align: center;padding-right: 15px;"><a style="background: #fafafa; color: #666; text-decoration: none;" href="/song?id={data["id"]}" target="_blank">{data["title"]}</a></div>')
         images.append("https://sunoapi.net/images/sunoai.jpg" if data['image_url'] is None or "" else data['image_url'])
 
 print("\n")
