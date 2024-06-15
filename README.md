@@ -47,15 +47,16 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- . env environment variable file requires the use of the gpt-4-vision-preview model for image recognition. The OpenAI interface can be used, or other commonly used interfaces can be used to replace it. Register a console.bitiful.com object storage account to obtain the S3_ACCESSKEY_ID，S3_SECRETKEY_ID parameter, which is used to upload images to the storage bucket you created. Fill in the external access domain name of your object storage account after creating the storage bucket in S3_WEB_SITE_URL. This way, the local environment can test image recognition.
+- . env environment variable file requires the use of the gpt-4o model for image recognition. The OpenAI interface can be used, or other commonly used interfaces can be used to replace it. Register a console.bitiful.com object storage account to obtain the S3_ACCESSKEY_ID，S3_SECRETKEY_ID parameter, which is used to upload images to the storage bucket you created. Fill in the external access domain name of your object storage account after creating the storage bucket in S3_WEB_SITE_URL. This way, the local environment can test image recognition.
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
 #S3_WEB_SITE_URL = https://cdn1.suno.ai
 #S3_WEB_SITE_URL = http://localhost:8501
-#S3_WEB_SITE_URL = http://123.56.78.456:8501
-S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+#S3_WEB_SITE_URL = http://123.45.67.8:8501
+#S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_WEB_SITE_URL = https://res.sunoapi.net
 S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
 S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
@@ -206,7 +207,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240531" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240615" style="max-width: 100%;"/></a>
 
 
 ### Participate

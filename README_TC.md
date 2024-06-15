@@ -46,15 +46,16 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env環境變數檔案，圖片識別需要用到gpt-4-vision-preview的模型可以使用OpenAI的介面，也可以用其他的你自己常用的介面替換。 注册console.bitiful.com對象存儲帳號獲取S3_ACCESSKEY_ID，S3_SECRETKEY_ID參數用於圖片上傳到你創建的存儲桶，S3_WEB_SITE_URL填寫你的對象存儲帳號創建存儲桶後的外部訪問功能變數名稱。 這樣本地環境就可以測試圖片識別了。
+- .env環境變數檔案，圖片識別需要用到gpt-4o的模型可以使用OpenAI的介面，也可以用其他的你自己常用的介面替換。 注册console.bitiful.com對象存儲帳號獲取S3_ACCESSKEY_ID，S3_SECRETKEY_ID參數用於圖片上傳到你創建的存儲桶，S3_WEB_SITE_URL填寫你的對象存儲帳號創建存儲桶後的外部訪問功能變數名稱。 這樣本地環境就可以測試圖片識別了。
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
 #S3_WEB_SITE_URL = https://cdn1.suno.ai
 #S3_WEB_SITE_URL = http://localhost:8501
-#S3_WEB_SITE_URL = http://123.56.78.456:8501
-S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+#S3_WEB_SITE_URL = http://123.45.67.8:8501
+#S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_WEB_SITE_URL = https://res.sunoapi.net
 S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
 S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
@@ -203,7 +204,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240531" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240615" style="max-width: 100%;"/></a>
 
 
 ### 參與

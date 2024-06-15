@@ -47,15 +47,16 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- env 환경 변수 파일, 그림 인식은 gpt-4-비전-프리뷰 모델을 필요로 하며 OpenAI 인터페이스를 사용하거나 자신이 사용하는 다른 인터페이스로 바꿀 수 있다. console.bitiful.com 객체 저장소 계정 등록하기 S3_ACCESSKEY_ID, S3_SECRETKEY_ID는 자신이 만든 버킷에 그림을 업로드하는 데 사용되며, S3_WEB_SITE_URL은 객체 저장소 계정을 입력하여 버킷을 생성한 후 외부에서 접근할 수 있는 도메인 이름입니다.지역 환경이 사진 인식 테스트를 할 수 있습니다.
+- env 환경 변수 파일, 그림 인식은 gpt-4o 모델을 필요로 하며 OpenAI 인터페이스를 사용하거나 자신이 사용하는 다른 인터페이스로 바꿀 수 있다. console.bitiful.com 객체 저장소 계정 등록하기 S3_ACCESSKEY_ID, S3_SECRETKEY_ID는 자신이 만든 버킷에 그림을 업로드하는 데 사용되며, S3_WEB_SITE_URL은 객체 저장소 계정을 입력하여 버킷을 생성한 후 외부에서 접근할 수 있는 도메인 이름입니다.지역 환경이 사진 인식 테스트를 할 수 있습니다.
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
 #S3_WEB_SITE_URL = https://cdn1.suno.ai
 #S3_WEB_SITE_URL = http://localhost:8501
-#S3_WEB_SITE_URL = http://123.56.78.456:8501
-S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+#S3_WEB_SITE_URL = http://123.45.67.8:8501
+#S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_WEB_SITE_URL = https://res.sunoapi.net
 S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
 S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
@@ -208,7 +209,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240531" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240615" style="max-width: 100%;"/></a>
 
 
 ### 참여

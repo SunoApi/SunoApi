@@ -47,15 +47,16 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env Umgebungsvariablen-Datei erfordert die Verwendung des gpt-4-vision-preview Modells für die Bilderkennung. Die OpenAI Schnittstelle kann verwendet werden, oder andere häufig verwendete Schnittstellen können verwendet werden, um sie zu ersetzen. Registrieren Sie ein console.bitiful.com Objektspeicherkonto, um den S3_ACCESSKEY_ID，S3_SECRETKEY_ID Parameter zu erhalten, der zum Hochladen von Bildern in den von Ihnen erstellten Speicher-Bucket verwendet wird. Geben Sie den Domänennamen für den externen Zugriff Ihres Objektspeicherkontos ein, nachdem Sie den Speicher-Bucket in S3_WEB_SITE_URL erstellt haben. Auf diese Weise kann die lokale Umgebung die Bilderkennung testen.
+- .env Umgebungsvariablen-Datei erfordert die Verwendung des gpt-4o Modells für die Bilderkennung. Die OpenAI Schnittstelle kann verwendet werden, oder andere häufig verwendete Schnittstellen können verwendet werden, um sie zu ersetzen. Registrieren Sie ein console.bitiful.com Objektspeicherkonto, um den S3_ACCESSKEY_ID，S3_SECRETKEY_ID Parameter zu erhalten, der zum Hochladen von Bildern in den von Ihnen erstellten Speicher-Bucket verwendet wird. Geben Sie den Domänennamen für den externen Zugriff Ihres Objektspeicherkontos ein, nachdem Sie den Speicher-Bucket in S3_WEB_SITE_URL erstellt haben. Auf diese Weise kann die lokale Umgebung die Bilderkennung testen.
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
 #S3_WEB_SITE_URL = https://cdn1.suno.ai
 #S3_WEB_SITE_URL = http://localhost:8501
-#S3_WEB_SITE_URL = http://123.56.78.456:8501
-S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+#S3_WEB_SITE_URL = http://123.45.67.8:8501
+#S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_WEB_SITE_URL = https://res.sunoapi.net
 S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
 S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
@@ -206,7 +207,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240531" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240615" style="max-width: 100%;"/></a>
 
 
 ### Teilnahme an

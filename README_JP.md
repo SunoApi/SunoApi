@@ -47,15 +47,16 @@ cd SunoApi
 pip3 install -r requirements.txt
 ```
 
-- .env環境変数ファイル、画像認識にgpt-4-vision-previewを使用する必要があるモデルは、OpenAIのインタフェースを使用することも、他の自分がよく使うインタフェースに置き換えることもできます。console.bitiful.comオブジェクトストレージアカウントを登録してS3_ACCESSKEY_IDを取得し、S3_SECRETKEY_IDパラメータは画像を作成したストレージバケットにアップロードするために使用され、S3_WEB_SITE_URLはオブジェクトストレージアカウントを記入してストレージバケットを作成した後の外部アクセスドメイン名を記入します。これにより、ローカル環境で画像認識をテストすることができます。
+- .env環境変数ファイル、画像認識にgpt-4oを使用する必要があるモデルは、OpenAIのインタフェースを使用することも、他の自分がよく使うインタフェースに置き換えることもできます。console.bitiful.comオブジェクトストレージアカウントを登録してS3_ACCESSKEY_IDを取得し、S3_SECRETKEY_IDパラメータは画像を作成したストレージバケットにアップロードするために使用され、S3_WEB_SITE_URLはオブジェクトストレージアカウントを記入してストレージバケットを作成した後の外部アクセスドメイン名を記入します。これにより、ローカル環境で画像認識をテストすることができます。
 
 ```bash
 OPENAI_BASE_URL = https://chatplusapi.cn
 OPENAI_API_KEY = sk-xxxxxxxxxxxxxxxxxxxx
 #S3_WEB_SITE_URL = https://cdn1.suno.ai
 #S3_WEB_SITE_URL = http://localhost:8501
-#S3_WEB_SITE_URL = http://123.56.78.456:8501
-S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+#S3_WEB_SITE_URL = http://123.45.67.8:8501
+#S3_WEB_SITE_URL = https://sunoapi.s3.bitiful.net
+S3_WEB_SITE_URL = https://res.sunoapi.net
 S3_ACCESSKEY_ID = xxxxxxxxxxxxxxxxxxxx
 S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 ```
@@ -206,7 +207,7 @@ services:
 
 - Github Issues： https://github.com/SunoApi/SunoApi/issues
 
-<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240531" style="max-width: 100%;"/></a>
+<a href="https://sunoapi.net" target="_blank"><img src="https://sunoapi.net/images/wechat.jpg?20240615" style="max-width: 100%;"/></a>
 
 
 ### 参加する
