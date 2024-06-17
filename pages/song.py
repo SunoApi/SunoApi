@@ -266,9 +266,9 @@ if aid != "" and len(aid) == 36:
                         part_modal_cols = st.columns(len(data['metadata']['concat_history']))
                         for index, item in enumerate(data['metadata']['concat_history']):
                             part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
-                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
+                            <a href="/song?id={item['id'].replace("m_", "")}" target="_blank">{item['id'].replace("m_", "")}</a></div>
                             ''', unsafe_allow_html=True)
-                            resp = get_feed(item['id'], token)
+                            resp = get_feed(item['id'].replace("m_", ""), token)
                             status = resp["detail"] if "detail" in resp else resp[0]["status"]
                             if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
                                 part_modal_cols[index].video(resp[0]['video_url'])
@@ -278,9 +278,9 @@ if aid != "" and len(aid) == 36:
                         part_modal_cols = st.columns(len(data['metadata']['history']))
                         for index, item in enumerate(data['metadata']['history']):
                             part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
-                            <a href="/song?id={item['id']}" target="_blank">{item['id']}</a></div>
+                            <a href="/song?id={item['id'].replace("m_", "")}" target="_blank">{item['id'].replace("m_", "")}</a></div>
                             ''', unsafe_allow_html=True)
-                            resp = get_feed(item['id'], token)
+                            resp = get_feed(item['id'].replace("m_", ""), token)
                             status = resp["detail"] if "detail" in resp else resp[0]["status"]
                             if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
                                 part_modal_cols[index].video(resp[0]['video_url'])
@@ -290,7 +290,7 @@ if aid != "" and len(aid) == 36:
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
                 st.session_state['title_input'] = title
-                st.session_state['tags_input'] = data['metadata']['tags'].strip()
+                st.session_state['tags_input'] = "pop" if data['metadata']['tags'] is None or "" else data['metadata']['tags']
                 st.session_state['prompt_input'] = "" if data['metadata']['prompt'] == "[Instrumental]" else data['metadata']['prompt']
                 st.session_state['continue_at'] = ""
                 st.session_state['continue_clip_id'] = ""
@@ -300,7 +300,7 @@ if aid != "" and len(aid) == 36:
             continue_button = cols[2].button(i18n("Continue Extend"), type="secondary")
             if continue_button:
                 st.session_state['title_input'] = title
-                st.session_state['tags_input'] = data['metadata']['tags'].strip()
+                st.session_state['tags_input'] = "pop" if data['metadata']['tags'] is None or "" else data['metadata']['tags']
                 st.session_state['prompt_input'] = ""
                 st.session_state['continue_at'] = str(data['metadata']['duration'])[0:6]
                 st.session_state['continue_clip_id'] = aid
@@ -336,7 +336,7 @@ if aid != "" and len(aid) == 36:
                             <a href="/song?id={aid}" target="_blank">{aid}</a>
                             ''', unsafe_allow_html=True)
 
-            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'].strip() + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
+            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'].strip() + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else i18n("Upload Audio Type") if data['metadata']['type'] == "upload" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
 
             container.markdown("" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n"), unsafe_allow_html=True)
 
