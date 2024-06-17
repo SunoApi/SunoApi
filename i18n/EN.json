@@ -114,6 +114,14 @@
     "Select Model": "Music model: ",
     "Select Model Placeholder": "Please select a model for generating music songs. The default model is chirp-v3-0.",
     "Select Model Help": "chirp-v3-0 model can generate up to 2 minutes of song fragments, chirp-v3-5 model can generate up to 4 minutes of song fragments.",
-    "Select Model Error": "Please select a music model, for example: chirp-v3-0."
+    "Select Model Error": "Please select a music model, for example: chirp-v3-0.",
+
+    "Upload Audio Music": "Upload audios",
+    "Upload Audio Files": "Select audio:",
+    "Upload Audio Help": "Upload audio to generate corresponding songs based on the audio content (upload audio file size limit: 2MB, must be original audio between 6 and 60 seconds long.)",
+    "Upload Audio Error": "The audio file size exceeds the limit. The upload audio file size limit is: ",
+    "Upload Audio Success": "The audio file has been successfully uploaded, stored, and recognized. Please go to the music sharing square playback page to operate the extension! ",
+    "Analytics Audio Error": "Audio file upload storage recognition failed: ",
+    "Upload Audio Type": "Uploaded"
   }
 }

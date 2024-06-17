@@ -114,6 +114,14 @@
     "Select Model": "音樂模型：",
     "Select Model Placeholder": "請選擇一個用於生成音樂歌曲的模型，默認模型：chirp-v3-0 。",
     "Select Model Help": "chirp-v3-0模型可生成最長2分鐘的歌曲片段，chirp-v3-5模型可生成最長4分鐘的歌曲片段。",
-    "Select Model Error": "請選擇音樂模型，例如：chirp-v3-0 。"
+    "Select Model Error": "請選擇音樂模型，例如：chirp-v3-0 。",
+
+    "Upload Audio Music": "上傳樂生曲",
+    "Upload Audio Files": "選擇音訊：",
+    "Upload Audio Help": "上傳音訊根據音訊內容生成對應歌曲（上傳音訊文件大小限制為：2MB，必須是6到60秒長的原始音訊）",
+    "Upload Audio Error": "音訊文件大小超過限制，上傳音訊文件大小限制為：",
+    "Upload Audio Success": "音訊文件上傳存儲識別成功，請到音樂分享廣場播放頁面操作延長擴展！",
+    "Analytics Audio Error": "音訊文件上傳存儲識別失敗：",
+    "Upload Audio Type": "上傳的"
   }
 }

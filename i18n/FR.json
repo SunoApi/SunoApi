@@ -114,6 +114,14 @@
     "Select Model": "Modèles musicaux: ",
     "Select Model Placeholder": "Veuillez sélectionner un modèle pour générer des chansons musicales. Modèle par défaut: chirp-v3-0.",
     "Select Model Help": "Le modèle chirp-v3-0 peut générer des fragments de chansons d’une durée maximale de 2 minutes et le modèle chirp-v3-5 peut générer des fragments de chansons d’une durée maximale de 4 minutes.",
-    "Select Model Error": "Veuillez sélectionner le modèle de musique. Exemple: chirp-v3-0."
+    "Select Model Error": "Veuillez sélectionner le modèle de musique. Exemple: chirp-v3-0.",
+
+    "Upload Audio Music": "Télécharger une audio",
+    "Upload Audio Files": "Sélectionnez une audio: ",
+    "Upload Audio Help": "Upload audio génère la chanson correspondante en fonction du contenu audio (la taille du fichier audio upload est limitée à: 2 Mo, il doit s'agir d'un fichier audio original de 6 à 60 secondes)",
+    "Upload Audio Error": "La taille du fichier audio dépasse la limite et la limite de taille du fichier audio téléchargé est: ",
+    "Upload Audio Success": "Enregistrement de téléchargement de fichiers audio reconnu avec succès, s'il vous plaît demander à la place de partage de musique playpage action extension!",
+    "Analytics Audio Error": "La reconnaissance du stockage de téléchargement du fichier audio a échoué: ",
+    "Upload Audio Type": "Téléchargé"
   }
 }

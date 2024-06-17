@@ -114,6 +114,14 @@
     "Select Model": "Musik modell: ",
     "Select Model Placeholder": "Bitte wählen Sie ein Modell für die Generierung von Musikliedern, Standardmodell: chirp-v3-0.",
     "Select Model Help": "Das chirp-v3-0 Modell kann Songsegmente bis zu 2-Minuten Länge erzeugen, Das chirp-v3-5 Modell kann bis zu vier Minuten Song Clips erzeugen.",
-    "Select Model Error": "Bitte wählen Sie ein Musikmodell aus, z.B.: chirp-v3-0."
+    "Select Model Error": "Bitte wählen Sie ein Musikmodell aus, z.B.: chirp-v3-0.",
+
+    "Upload Audio Music": "Audio hochladen",
+    "Upload Audio Files": "Audio auswählen: ",
+    "Upload Audio Help": "Audio hochladen, um entsprechende Songs basierend auf dem Audioinhalt zu generieren (Limit für die Größe der Audiodatei: 2MB, muss 6 bis 60 Sekunden lang sein)",
+    "Upload Audio Error": "Die Größe der Audiodatei überschreitet das Limit. Das Limit der Upload-Audiodatei beträgt: ",
+    "Upload Audio Success": "Die Audiodatei wurde erfolgreich hochgeladen, gespeichert und erkannt. Bitte gehen Sie zur Music Sharing Square Playback Seite, um die Erweiterungserweiterung zu bedienen!",
+    "Analytics Audio Error": "Erkennung des Uploadspeichers von Audiodateien fehlgeschlagen: ",
+    "Upload Audio Type": "Hochladen"
   }
 }

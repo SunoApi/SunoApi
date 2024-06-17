@@ -78,6 +78,7 @@ docker run -d \
   -p 8501:8501 \
   -v ./sunoapi.db:/app/sunoapi.db \
   -v ./images/upload:/app/images/upload \
+  -v ./audios/upload:/app/audios/upload \
   -e OPENAI_BASE_URL=https://api.openai.com  \
   -e OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx \
   -e S3_WEB_SITE_URL=https://sunoapi.s3.bitiful.net  \
@@ -132,6 +133,7 @@ services:
     volumes:
       - ./sunoapi.db:/app/sunoapi.db
       - ./images/upload:/app/images/upload
+      - ./audios/upload:/app/audios/upload
     environment:
       - TZ=Asia/Shanghai
       - OPENAI_BASE_URL=https://api.openai.com

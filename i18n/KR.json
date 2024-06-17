@@ -114,6 +114,14 @@
     "Select Model": "음악 모델: ",
     "Select Model Placeholder": "음악 음악을 만들기 위한 모델을 선택하십시오. 기본 모델:chirp-v3-0.",
     "Select Model Help": "chirp-v3-0 모델은 최대 2분의 노래 세션을, chirp-v3-5 모델은 최대 4분의 노래 세션을 생성할 수 있다.",
-    "Select Model Error": "음악 모델(예: chirp-v3-0)을 선택하십시오."
+    "Select Model Error": "음악 모델(예: chirp-v3-0)을 선택하십시오.",
+
+    "Upload Audio Music": "악생곡을 올리다",
+    "Upload Audio Files": "오디오 선택:",
+    "Upload Audio Help": "업로드 오디오는 오디오 내용에 따라 해당 노래를 생성합니다 (업로드 오디오 파일 크기: 2MB, 6~60초 길이의 원본 오디오여야 함).",
+    "Upload Audio Error": "오디오 파일 크기 제한 초과, 업로드 오디오 파일 크기 제한: ",
+    "Upload Audio Success": "오디오 파일 업로드 스토리지 인식 성공, 음악 공유 광장에 가서 재생 페이지 작업 연장 확장!",
+    "Analytics Audio Error": "오디오 파일 업로드 스토리지 인식 실패: ",
+    "Upload Audio Type": "업로드"
   }
 }

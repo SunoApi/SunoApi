@@ -220,3 +220,49 @@ def put_upload_file(siteurl, filename, s3accessKeyId, s3SecretKeyId, data):
     except Exception as e:
         print(local_time() + f" ***put_upload_file -> {upload_url} exception -> {str(e)} ***\n")
         return {"detail":str(e)}
+
+def suno_upload_audio(filename, bytes_data, token, my_bar):
+    try:
+        upload_url = f"{BASE_URL}/api/uploads/audio/"
+        data = {"extension": "mp3"}
+        resp = requests.post(upload_url, headers={"Authorization": f"Bearer {token}"}, data=json.dumps(data))
+        result = resp.json()
+        print(local_time() + f" ***suno_upload_audio -> {upload_url} upload request -> {result} ***\n")
+        my_bar.progress(20)
+        audio_id = result['id']
+        upload_url = result['url']
+        resp = requests.post(url=result['url'], data=result['fields'], files={"file": bytes_data}) 
+        if resp.status_code == 204:
+            print(local_time() + f" ***suno_upload_audio -> {upload_url} upload result -> {resp.status_code} ***\n")
+            data = {
+                "upload_type": "file_upload",
+                "upload_filename": filename
+            }
+            upload_url = f"{BASE_URL}/api/uploads/audio/{audio_id}/upload-finish/"
+            resp = requests.post(upload_url, headers={"Authorization": f"Bearer {token}"}, data=json.dumps(data))
+            result = resp.json()
+            print(local_time() + f" ***suno_upload_audio -> {upload_url} upload finish -> {result} ***\n")
+            my_bar.progress(40)
+            upload_url = f"{BASE_URL}/api/uploads/audio/{audio_id}/"
+            while True:
+                resp = requests.get(upload_url, headers={"Authorization": f"Bearer {token}"})
+                result = resp.json()
+                print(local_time() + f" ***suno_upload_audio -> {upload_url} upload status -> {result} ***\n")
+                if 'detail' in result and result['detail'] == "Unauthorized":
+                    pass
+                elif 'status' in result and result['status'] == "complete":
+                    break
+                else:
+                    time.sleep(5)
+            my_bar.progress(60)
+            upload_url = f"{BASE_URL}/api/uploads/audio/{audio_id}/initialize-clip/"
+            resp = requests.post(upload_url, headers={"Authorization": f"Bearer {token}"})
+            result = resp.json()
+            print(local_time() + f" ***suno_upload_audio -> {upload_url} initializa-clip -> {result} ***\n")
+            my_bar.progress(80)
+            return result['clip_id']
+        else:
+            print(local_time() + f" ***suno_upload_audio -> {upload_url} upload status_code -> {str(resp.status_code)} ***\n")
+    except Exception as e:
+        print(local_time() + f" ***suno_upload_audio -> {upload_url} exception -> {str(e)} ***\n")
+        return {"detail": 'Unauthorized'}
