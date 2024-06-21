@@ -65,7 +65,7 @@ S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 - 프로젝트를 시작하고 Streamlit에 대해서는 Streamlit 설명서를 참조하십시오.
 
 ```bash
-streamlit run main.py --server.maxUploadSize=2
+streamlit run main.py --server.maxUploadSize=3
 ```
 
 ### 배치
@@ -111,7 +111,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=3" ]
 ```
 
 #### Docker 미러 배포 끌어오기

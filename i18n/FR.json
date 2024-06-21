@@ -122,6 +122,8 @@
     "Upload Audio Error": "La taille du fichier audio dépasse la limite et la limite de taille du fichier audio téléchargé est: ",
     "Upload Audio Success": "Enregistrement de téléchargement de fichiers audio reconnu avec succès, s'il vous plaît demander à la place de partage de musique playpage action extension!",
     "Analytics Audio Error": "La reconnaissance du stockage de téléchargement du fichier audio a échoué: ",
-    "Upload Audio Type": "Téléchargé"
+    "Upload Audio Type": "Téléchargé",
+
+    "Get Similar Song": "Similaire"
   }
 }

@@ -122,6 +122,8 @@
     "Upload Audio Error": "The audio file size exceeds the limit. The upload audio file size limit is: ",
     "Upload Audio Success": "The audio file has been successfully uploaded, stored, and recognized. Please go to the music sharing square playback page to operate the extension! ",
     "Analytics Audio Error": "Audio file upload storage recognition failed: ",
-    "Upload Audio Type": "Uploaded"
+    "Upload Audio Type": "Uploaded",
+
+    "Get Similar Song": "Similar"
   }
 }

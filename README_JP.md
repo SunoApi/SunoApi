@@ -65,7 +65,7 @@ S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 - プロジェクトを開始し、StreamlitについてはStreamlitドキュメントを参照してください
 
 ```bash
-streamlit run main.py --server.maxUploadSize=2
+streamlit run main.py --server.maxUploadSize=3
 ```
 
 ### 配備します
@@ -111,7 +111,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=3" ]
 ```
 
 #### Docker ミラーリング部署を引っ張ります

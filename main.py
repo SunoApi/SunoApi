@@ -110,7 +110,7 @@ with st.sidebar:
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
-st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"><a href="/rss.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Rss"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/020-rss.svg"></a>&nbsp;&nbsp;{i18n("Friendly Link")}&nbsp;&nbsp;<a href="/sitemap.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Sitemap"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/033-spotify.svg"></a></div>', unsafe_allow_html=True)
 result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
 # print(result)
 # print("\n")
@@ -288,7 +288,7 @@ with container.container():
         # st.set_option('deprecation.showfileUploaderEncoding', False)
         upload_folder = Path("images/upload")
         upload_folder.mkdir(exist_ok=True)
-        file_size_limit = 1024 * 1024 * 2  # 2MB
+        file_size_limit = 1024 * 1024 * 3  # 3MB
         uploaded_file = container.file_uploader(i18n("Images TuGeYue Upload"), type=['bmp', 'webp', 'png', 'jpg', 'jpeg'], help=i18n("Images TuGeYue Help"), accept_multiple_files=False)
 
         if uploaded_file is not None and not st.session_state['disabled_state']:
@@ -375,8 +375,8 @@ with container.container():
         # st.set_option('deprecation.showfileUploaderEncoding', False)
         upload_folder = Path("audios/upload")
         upload_folder.mkdir(exist_ok=True)
-        file_size_limit = 1024 * 1024 * 2  # 2MB
-        uploaded_audio = container.file_uploader(i18n("Upload Audio Files"), type=['mp3'], help=i18n("Upload Audio Help"), accept_multiple_files=False)
+        file_size_limit = 1024 * 1024 * 3  # 3MB
+        uploaded_audio = container.file_uploader(i18n("Upload Audio Files"), type=['mp3', 'wav'], help=i18n("Upload Audio Help"), accept_multiple_files=False)
 
         if uploaded_audio is not None and not st.session_state['disabled_state']:
             if uploaded_audio.size > file_size_limit:
@@ -417,7 +417,7 @@ with container.container():
             st.session_state['tags_input'] = ""
 
         if (st.session_state['continue_at'] and st.session_state['continue_clip_id']) or st.session_state['tags_input']:
-            Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'], placeholder=i18n("Tags Placeholder"), max_chars=200, help=i18n("Tags Desc"), key="change_tags", on_change=change_tags)
+            Tags = container.text_input(label=i18n("Tags"), value=st.session_state['tags_input'], placeholder=i18n("Tags Placeholder"), max_chars=120, help=i18n("Tags Desc"), key="change_tags", on_change=change_tags)
             st.session_state.Tags = st.session_state['tags_input']
         else:
             options = container.multiselect(
@@ -457,9 +457,9 @@ with container.container():
                 container.error(status)
                 
         if st.session_state['continue_at'] and st.session_state['continue_clip_id']:
-            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Extend Placeholder"), height=150, max_chars=1500, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Extend Placeholder"), height=150, max_chars=3000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
         else:
-            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=1500, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
+            Prompt = container.text_area(label=i18n("Prompt"), value=st.session_state['prompt_input'], placeholder=i18n("Prompt Placeholder"), height=150, max_chars=3000, help=i18n("Prompt Desc"), key="change_prompt", on_change=change_prompt)
         st.session_state.Prompt = Prompt
         # print(st.session_state.Prompt)
     else:
@@ -469,7 +469,7 @@ with container.container():
         if 'DescPrompt' not in st.session_state:
             st.session_state.DescPrompt = ""
 
-        DescPrompt = container.text_area(label=i18n("Desc Prompt"), value=st.session_state.DescPrompt, placeholder=i18n("Desc Value"), height=150, max_chars=500, help=i18n("Desc Reamrk"), key="change_desc_prompt", on_change=change_desc_prompt)
+        DescPrompt = container.text_area(label=i18n("Desc Prompt"), value=st.session_state.DescPrompt, placeholder=i18n("Desc Value"), height=150, max_chars=200, help=i18n("Desc Reamrk"), key="change_desc_prompt", on_change=change_desc_prompt)
         st.session_state.DescPrompt = DescPrompt
         # print(st.session_state.DescPrompt)
 

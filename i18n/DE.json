@@ -122,6 +122,8 @@
     "Upload Audio Error": "Die Größe der Audiodatei überschreitet das Limit. Das Limit der Upload-Audiodatei beträgt: ",
     "Upload Audio Success": "Die Audiodatei wurde erfolgreich hochgeladen, gespeichert und erkannt. Bitte gehen Sie zur Music Sharing Square Playback Seite, um die Erweiterungserweiterung zu bedienen!",
     "Analytics Audio Error": "Erkennung des Uploadspeichers von Audiodateien fehlgeschlagen: ",
-    "Upload Audio Type": "Hochladen"
+    "Upload Audio Type": "Hochladen",
+
+    "Get Similar Song": "ähnlich"
   }
 }

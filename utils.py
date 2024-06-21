@@ -86,11 +86,16 @@ def generate_lyrics(prompt, token):
     data = {"prompt": prompt}
     return fetch(api_url, headers, data)
 
-
 def get_lyrics(lid, token):
     headers = {"Authorization": f"Bearer {token}"}
     api_url = f"{BASE_URL}/api/generate/lyrics/{lid}"
     return fetch(api_url, headers, method="GET")
+
+def get_similar(ids, count, token):
+    headers = {"Authorization": f"Bearer {token}"}
+    api_url = f"{BASE_URL}/api/clips/get_similar/?id={ids}&count={count}"
+    return fetch(api_url, headers, method="GET")
+
 
 def local_time():
     return  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -252,6 +257,8 @@ def suno_upload_audio(filename, bytes_data, token, my_bar):
                     pass
                 elif 'status' in result and result['status'] == "complete":
                     break
+                elif 'status' in result and result['status'] == "error":
+                    return {"detail": result['error_message']}
                 else:
                     time.sleep(5)
             my_bar.progress(60)
@@ -263,6 +270,7 @@ def suno_upload_audio(filename, bytes_data, token, my_bar):
             return result['clip_id']
         else:
             print(local_time() + f" ***suno_upload_audio -> {upload_url} upload status_code -> {str(resp.status_code)} ***\n")
+            return {"detail": str(resp.status_code)}
     except Exception as e:
         print(local_time() + f" ***suno_upload_audio -> {upload_url} exception -> {str(e)} ***\n")
         return {"detail": 'Unauthorized'}

@@ -65,7 +65,7 @@ S3_SECRETKEY_ID = xxxxxxxxxxxxxxxxxxxx
 - Start the project, please refer to the Streamlit documentation for details on Streamlit
 
 ```bash
-streamlit run main.py --server.maxUploadSize=2
+streamlit run main.py --server.maxUploadSize=3
 ```
 
 ### Deploy
@@ -111,7 +111,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY . .
 
 EXPOSE 8501
-CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=2" ]
+CMD [ "nohup", "streamlit", "run", "main.py", "--server.maxUploadSize=3" ]
 ```
 
 #### Docker pull image deployment

@@ -122,6 +122,8 @@
     "Upload Audio Error": "音訊文件大小超過限制，上傳音訊文件大小限制為：",
     "Upload Audio Success": "音訊文件上傳存儲識別成功，請到音樂分享廣場播放頁面操作延長擴展！",
     "Analytics Audio Error": "音訊文件上傳存儲識別失敗：",
-    "Upload Audio Type": "上傳的"
+    "Upload Audio Type": "上傳的",
+
+    "Get Similar Song": "類似歌曲"
   }
 }

@@ -122,6 +122,8 @@
     "Upload Audio Error": "오디오 파일 크기 제한 초과, 업로드 오디오 파일 크기 제한: ",
     "Upload Audio Success": "오디오 파일 업로드 스토리지 인식 성공, 음악 공유 광장에 가서 재생 페이지 작업 연장 확장!",
     "Analytics Audio Error": "오디오 파일 업로드 스토리지 인식 실패: ",
-    "Upload Audio Type": "업로드"
+    "Upload Audio Type": "업로드",
+
+    "Get Similar Song": "비슷한"
   }
 }

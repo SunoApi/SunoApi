@@ -135,7 +135,7 @@ def page_feed(suno_cookie: SunoCookie):
 def keep_alive(suno_cookie: SunoCookie):
     while True:
         update_token(suno_cookie)
-        time.sleep(50)
+        time.sleep(10)
 
 def get_page(suno_cookie: SunoCookie):
     while True:

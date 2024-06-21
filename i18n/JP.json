@@ -123,6 +123,8 @@
     "Upload Audio Error": "オーディオファイルのサイズが制限を超え、アップロードされたオーディオファイルのサイズが以下のように制限されています：",
     "Upload Audio Success": "オーディオファイルのアップロードストレージの識別に成功しました。音楽共有広場でページを再生する操作を延長拡張！",
     "Analytics Audio Error": "オーディオファイルアップロードストレージの認識に失敗します：",
-    "Upload Audio Type": "アップロードされた"
+    "Upload Audio Type": "アップロードされた",
+
+    "Get Similar Song": "類似"
   }
 }
