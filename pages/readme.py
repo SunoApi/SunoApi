@@ -153,6 +153,6 @@ hide_streamlit_style1 = """
 </script>
 <div style="font-size: 12px;font-family: inherit; color: #697182;justify-content: center; align-items: center; word-break: break-word; text-align: center;padding-right: 15px;">本页浏览量 <span id="ArtalkPV">Loading...</span> 次</div>
 """
-components.html(hide_streamlit_style1, height=940)
+components.html(hide_streamlit_style1, height=1340)
 
 components.iframe("https://sunoapi.net/analytics.html", height=0)

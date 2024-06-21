@@ -136,8 +136,8 @@ def fetch_status(aid: str, col2):
     my_bar.progress(percent_complete, text=progress_text)
     while True:
         resp = get_feed(aid, get_random_token())
-        print(resp)
-        print("\n")
+        # print(resp)
+        # print("\n")
         percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 5
         if percent_complete >= 100:
             percent_complete = 100
@@ -167,15 +167,15 @@ def fetch_status(aid: str, col2):
             my_bar.progress(percent_complete, text=progress_text)
         
         result = suno_sqlite.query_one("select aid from music where aid =?", (aid,))
-        print(result)
-        print("\n")
+        # print(result)
+        # print("\n")
         if result:
             result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, aid))
             print(local_time() + f" ***fetch_status_update aid -> {aid} status -> {status} data -> {str(resp[0])} ***\n")
         else:
             result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, 0))
-        print(result)
-        print("\n")
+        # print(result)
+        # print("\n")
 
         if status == "complete" or status == "error":
             break
@@ -290,7 +290,7 @@ if aid != "" and len(aid) == 36:
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
                 st.session_state['title_input'] = title
-                st.session_state['tags_input'] = "pop" if data['metadata']['tags'] is None or "" else data['metadata']['tags']
+                st.session_state['tags_input'] = "(no style)" if data['metadata']['tags'] is None or "" else data['metadata']['tags']
                 st.session_state['prompt_input'] = "" if data['metadata']['prompt'] == "[Instrumental]" else data['metadata']['prompt']
                 st.session_state['continue_at'] = ""
                 st.session_state['continue_clip_id'] = ""
@@ -300,7 +300,7 @@ if aid != "" and len(aid) == 36:
             continue_button = cols[2].button(i18n("Continue Extend"), type="secondary")
             if continue_button:
                 st.session_state['title_input'] = title
-                st.session_state['tags_input'] = "pop" if data['metadata']['tags'] is None or "" else data['metadata']['tags']
+                st.session_state['tags_input'] = "(no style)" if data['metadata']['tags'] is None or "" else data['metadata']['tags']
                 st.session_state['prompt_input'] = ""
                 st.session_state['continue_at'] = str(data['metadata']['duration'])[0:6]
                 st.session_state['continue_clip_id'] = aid
@@ -316,8 +316,8 @@ if aid != "" and len(aid) == 36:
                     # print(data1)
                     # print("\n")
                     resp = get_whole_song(data1)
-                    print(resp)
-                    print("\n")
+                    # print(resp)
+                    # print("\n")
                     status = resp["status"] if "status" in resp else resp["detail"]
                     if status == "queued" or status == "complete":
                         result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["id"]), str(resp), 0))
@@ -331,6 +331,17 @@ if aid != "" and len(aid) == 36:
                             col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
                     else:
                         col2.error(i18n("Generate Submit Error") + status)
+
+            # similar_button = None
+            # if data['metadata']['audio_prompt_id'] is not None:
+            #     similar_button = cols[4].button(i18n("Get Similar Song"), type="secondary")
+            # else:
+            #     similar_button = cols[3].button(i18n("Get Similar Song"), type="secondary")
+
+            # if similar_button:
+            #     st.session_state.aid = aid
+            #     # print(st.session_state.aid)
+            #     st.switch_page("pages/radio.py")
             
             container.markdown(f'''{i18n("FeedID")}
                             <a href="/song?id={aid}" target="_blank">{aid}</a>
@@ -338,7 +349,7 @@ if aid != "" and len(aid) == 36:
 
             container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if data['metadata']['gpt_description_prompt'] is None or "" else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'].strip() + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else i18n("Upload Audio Type") if data['metadata']['type'] == "upload" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
 
-            container.markdown("" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n"), unsafe_allow_html=True)
+            container.markdown("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n").replace("        ", ""), unsafe_allow_html=True)
 
             title = data['title'].strip().replace("\n","")
             with col1:
