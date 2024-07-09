@@ -541,7 +541,7 @@ if Setting:
     Session = container1.text_input(label="Session:", value=Session, placeholder=i18n("Session Placeholder"),max_chars=50, help=i18n("Session Help"))
     st.session_state.Session = Session
     # print(st.session_state.Session)
-    Cookie = container1.text_area(label="Cookie:", value=Cookie, placeholder=i18n("Cookie Placeholder"), height=150, max_chars=1500, help=i18n("Cookie Help"))
+    Cookie = container1.text_area(label="Cookie:", value=Cookie, placeholder=i18n("Cookie Placeholder"), height=150, max_chars=2000, help=i18n("Cookie Help"))
     st.session_state.Cookie = Cookie
     # print(st.session_state.Cookie)
 
