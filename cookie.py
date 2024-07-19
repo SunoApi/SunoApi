@@ -135,7 +135,7 @@ def page_feed(suno_cookie: SunoCookie):
 def keep_alive(suno_cookie: SunoCookie):
     while True:
         update_token(suno_cookie)
-        time.sleep(10)
+        time.sleep(30)
 
 def get_page(suno_cookie: SunoCookie):
     while True:
@@ -200,6 +200,17 @@ def start_keep_alive():
     t2.start()
 
 def get_random_token():
+    result = suno_sqlite.query_one("select token from session where token != '' and status='200' order by random()")
+    # print(result)
+    # print("\n")
+    if result:
+        print(local_time() + f" ***get_random_token -> {result[0]} ***\n")
+        return result[0]
+    else:
+        print(local_time() + f" ***get_random_token -> {result} ***\n")
+        return ""
+
+def get_clip_token(clip_id):
     result = suno_sqlite.query_one("select token from session where token != '' and status='200' order by random()")
     # print(result)
     # print("\n")

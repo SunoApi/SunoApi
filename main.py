@@ -110,7 +110,7 @@ with st.sidebar:
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
-st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"><a href="/rss.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Rss"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/020-rss.svg"></a>&nbsp;&nbsp;{i18n("Friendly Link")}&nbsp;&nbsp;<a href="/sitemap.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Sitemap"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/033-spotify.svg"></a></div>', unsafe_allow_html=True)
 result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
 # print(result)
 # print("\n")
@@ -349,13 +349,13 @@ with container.container():
                                     "stream": False,
                                     "presence_penalty": 0,
                                     "frequency_penalty": 0,
-                                    "model": "gpt-4o"
+                                    "model": "gpt-4o-mini"
                                 }
                         )
                         if resp.status_code != 200:
                             placeholder.error(i18n("Analytics Images Error") + f"{resp.text}")
                         else:
-                            print(local_time() + f" ***gpt-4o image_url -> {image_url} content -> {resp.text} ***\n")
+                            print(local_time() + f" ***gpt-4o-mini image_url -> {image_url} content -> {resp.text} ***\n")
                             content = resp.json()["choices"][0]["message"]["content"].strip()
                             if Custom:
                                 st.session_state['prompt_input'] = content
