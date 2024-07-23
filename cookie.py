@@ -97,7 +97,7 @@ def update_token(suno_cookie: SunoCookie):
         suno_cookie.set_token(token)
         # print(f"*** token -> {token} ***")    
 
-    result = suno_sqlite.operate_one("update session set updated=(datetime('now', 'localtime')), token=?, status=? where identity =?", (token, resp.status_code, identity))
+    result = suno_sqlite.operate_one("update session set updated=(datetime('now', 'localtime')), token=? where identity =?", (token, identity))
     if result:
         print(local_time() + f" ***update_session identity -> {identity} session -> {session_id} status_code -> {resp.status_code} thread_id: {threading.get_ident()} ***\n")
 
@@ -210,16 +210,20 @@ def get_random_token():
         print(local_time() + f" ***get_random_token -> {result} ***\n")
         return ""
 
-def get_clip_token(clip_id):
-    result = suno_sqlite.query_one("select token from session where token != '' and status='200' order by random()")
+def get_clip_token(token_id=None):
+    result = None
+    if token_id is None:
+        result = suno_sqlite.query_one("select id,token from session where token != '' and status='200' order by random()")
+    else:
+        result = suno_sqlite.query_one("select id,token from session where token != '' and status='200' and id =?", (token_id,))
     # print(result)
     # print("\n")
     if result:
-        print(local_time() + f" ***get_random_token -> {result[0]} ***\n")
-        return result[0]
+        print(local_time() + f" ***get_clip_token -> {result[0]} {result[1]} ***\n")
+        return result[0],result[1]
     else:
-        print(local_time() + f" ***get_random_token -> {result} ***\n")
-        return ""
+        print(local_time() + f" ***get_clip_token -> {result} ***\n")
+        return 0,""
 
 def get_page_token():
     result = suno_sqlite.query_one("select token from session where token != '' and status='200' and page=0 order by random()")

@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 import schemas
-from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token,get_page_token
+from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token,get_page_token,get_clip_token
 from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics,put_upload_file,get_new_tags,suno_upload_audio
 
 root_dir = os.path.dirname(os.path.realpath(__file__))
@@ -155,6 +155,9 @@ if 'continue_clip_id' not in st.session_state:
 if 'model_name' not in st.session_state:
     st.session_state['model_name'] = "chirp-v3-5"
 # print(st.session_state['model_name'])
+
+if 'token_id' not in st.session_state:
+    st.session_state['token_id'] = 0
 
 # @st.cache_data
 def fetch_feed(aids: list, token: str):
@@ -390,12 +393,15 @@ with container.container():
                 with open(upload_folder / filename, "wb") as f:
                     f.write(bytes_data)
                 my_bar.progress(10)
-                token = get_random_token()
+                token_id, token = get_clip_token()
+                st.session_state['token_id'] = token_id
                 audio_id = suno_upload_audio(uploaded_audio.name, bytes_data, token, my_bar)
                 if "detail" in audio_id:
                     placeholder.error(i18n("Analytics Audio Error") + audio_id["detail"])
                     my_bar.empty()
                 else:
+                    token_id,token = get_clip_token(st.session_state['token_id'])
+                    st.session_state['token_id'] = token_id
                     fetch_feed(audio_id.split(","), token)
                     my_bar.progress(100)
                     placeholder.success(i18n("Upload Audio Success"))
@@ -657,14 +663,23 @@ else:
 
 def generate(data: schemas.CustomModeGenerateParam):
     try:
-        resp = generate_music(data, get_random_token())
+        token_id = 0
+        token = ""
+        if st.session_state['token_id'] == 0:
+            token_id, token = get_clip_token()
+        else:
+            token_id, token = get_clip_token(st.session_state['token_id'])
+        resp = generate_music(data, token)
+        st.session_state['token_id'] = token_id
         return resp
     except Exception as e:
         return {"detail":str(e)}
 
 def generate_with_song_description(data: schemas.DescriptionModeGenerateParam):
     try:
-        resp = generate_music(data, get_random_token())
+        token_id, token = get_clip_token()
+        resp = generate_music(data, token)
+        st.session_state['token_id'] = token_id
         return resp
     except Exception as e:
         return {"detail":str(e)}
@@ -676,7 +691,8 @@ def fetch_status(aid: str, twice=False):
     percent_complete = 0
     my_bar.progress(percent_complete, text=progress_text)
     while True:
-        resp = get_feed(aid, get_random_token())
+        token_id,token = get_clip_token(st.session_state['token_id'])
+        resp = get_feed(aid, token)
         print(resp)
         print("\n")
         percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 5
@@ -702,7 +718,7 @@ def fetch_status(aid: str, twice=False):
             #     if get_random_token() != "" and get_random_token() != "401":
             #         print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
             #         break
-            st.session_state.token = get_random_token()
+            token_id,st.session_state.token = get_clip_token(token_id)
             continue
         elif status == "Not found.":
             continue
