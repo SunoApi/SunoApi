@@ -110,7 +110,7 @@ with st.sidebar:
 
 st.sidebar.image('https://sunoapi.net/images/wechat.jpg', caption=i18n("Join WeChat Group"))
 # st.sidebar.image('https://sunoapi.net/images/donate.jpg', caption=i18n("Buy me a Coffee"))
-st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"><a href="/rss.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Rss"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/020-rss.svg"></a>&nbsp;&nbsp;{i18n("Friendly Link")}&nbsp;&nbsp;<a href="/sitemap.xml" target="_blank" rel="external nofollow noopener noreferrer" title="Sitemap"><img height="24px" weight="24px" src="https://npm.onmicrosoft.cn/dusays@3.0.0/033-spotify.svg"></a></div>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<div data-testid="stImageCaption" class="st-emotion-cache-1b0udgb e115fcil0" style="max-width: 100%;"> {i18n("Friendly Link")}</div>', unsafe_allow_html=True)
 result = suno_sqlite.query_many("select link,label,status from link where status=0 order by id")
 # print(result)
 # print("\n")
@@ -165,7 +165,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_feed(aids[0].strip(), token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
             print(result)
@@ -191,7 +191,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_feed(aids[0].strip(), token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
             print(result)
@@ -215,7 +215,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_feed(aids[1].strip(), token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[1].strip(),))
             print(result)
@@ -240,7 +240,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_page_feed(aids, token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             if len(resp) > 1:
                 for row in resp:
