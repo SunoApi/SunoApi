@@ -256,36 +256,36 @@ if aid != "" and len(aid) == 36:
                 max_width = max_width * len(data['metadata']['history'])
             
 
-            part_modal = Modal(title=title, key="part_modal", padding=15, max_width=max_width)
-            if part_button and (data['metadata']['history'] is not None or data['metadata']['concat_history'] is not None):
-                part_modal.open()
-            if part_modal.is_open():
-                with part_modal.container():
-                    token = get_random_token()
-                    if data['metadata']['concat_history'] is not None:
-                        part_modal_cols = st.columns(len(data['metadata']['concat_history']))
-                        for index, item in enumerate(data['metadata']['concat_history']):
-                            part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
-                            <a href="/song?id={item['id'].replace("m_", "")}" target="_blank">{item['id'].replace("m_", "")}</a></div>
-                            ''', unsafe_allow_html=True)
-                            resp = get_feed(item['id'].replace("m_", ""), token)
-                            status = resp["detail"] if "detail" in resp else resp[0]["status"]
-                            if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
-                                part_modal_cols[index].video(resp[0]['video_url'])
-                            else:
-                                part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
-                    elif data['metadata']['history'] is not None:
-                        part_modal_cols = st.columns(len(data['metadata']['history']))
-                        for index, item in enumerate(data['metadata']['history']):
-                            part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
-                            <a href="/song?id={item['id'].replace("m_", "")}" target="_blank">{item['id'].replace("m_", "")}</a></div>
-                            ''', unsafe_allow_html=True)
-                            resp = get_feed(item['id'].replace("m_", ""), token)
-                            status = resp["detail"] if "detail" in resp else resp[0]["status"]
-                            if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
-                                part_modal_cols[index].video(resp[0]['video_url'])
-                            else:
-                                part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            # part_modal = Modal(title=title, key="part_modal", padding=15, max_width=max_width)
+            # if part_button and (data['metadata']['history'] is not None or data['metadata']['concat_history'] is not None):
+            #     part_modal.open()
+            # if part_modal.is_open():
+            #     with part_modal.container():
+            #         token = get_random_token()
+            #         if data['metadata']['concat_history'] is not None:
+            #             part_modal_cols = st.columns(len(data['metadata']['concat_history']))
+            #             for index, item in enumerate(data['metadata']['concat_history']):
+            #                 part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
+            #                 <a href="/song?id={item['id'].replace("m_", "")}" target="_blank">{item['id'].replace("m_", "")}</a></div>
+            #                 ''', unsafe_allow_html=True)
+            #                 resp = get_feed(item['id'].replace("m_", ""), token)
+            #                 status = resp["detail"] if "detail" in resp else resp[0]["status"]
+            #                 if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
+            #                     part_modal_cols[index].video(resp[0]['video_url'])
+            #                 else:
+            #                     part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
+            #         elif data['metadata']['history'] is not None:
+            #             part_modal_cols = st.columns(len(data['metadata']['history']))
+            #             for index, item in enumerate(data['metadata']['history']):
+            #                 part_modal_cols[index].markdown(f'''<div style="display: flex; justify-content: center; align-items: center;height:50px;">{i18n("Song Part")} {str(index+1)}&nbsp;&nbsp;:&nbsp;&nbsp;
+            #                 <a href="/song?id={item['id'].replace("m_", "")}" target="_blank">{item['id'].replace("m_", "")}</a></div>
+            #                 ''', unsafe_allow_html=True)
+            #                 resp = get_feed(item['id'].replace("m_", ""), token)
+            #                 status = resp["detail"] if "detail" in resp else resp[0]["status"]
+            #                 if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
+            #                     part_modal_cols[index].video(resp[0]['video_url'])
+            #                 else:
+            #                     part_modal_cols[index].error(i18n("FetchFeed Error") + (status if "metadata" not in resp else resp[0]['metadata']["error_message"]))
 
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
