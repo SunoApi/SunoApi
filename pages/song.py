@@ -227,7 +227,7 @@ if aid != "" and len(aid) == 36:
                 <h3>{title}</h3> 
                 ''', unsafe_allow_html=True)
             cols = None
-            if data['metadata']['audio_prompt_id'] is not None:
+            if ('audio_prompt_id' in data['metadata'] and data['metadata']['audio_prompt_id'] is not None) or ('stem_from_id' in data['metadata'] and data['metadata']['stem_from_id'] is not None):
                 cols = container.columns(4)
             else:
                 cols = container.columns(3)
@@ -307,7 +307,7 @@ if aid != "" and len(aid) == 36:
                 st.session_state['model_name'] = "chirp-v3-0" if data['model_name'] == "chirp-v3" else "chirp-v3-5"
                 st.switch_page("main.py")
 
-            if data['metadata']['audio_prompt_id'] is not None:
+            if ('audio_prompt_id' in data['metadata'] and data['metadata']['audio_prompt_id'] is not None) or ('stem_from_id' in data['metadata'] and data['metadata']['stem_from_id'] is not None):
                 whole_button = cols[3].button(i18n("Get Whole Song"), type="secondary")
                 if whole_button:
                     data1 = {
