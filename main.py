@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 import schemas
-from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token,get_page_token,get_clip_token
+from cookie import get_suno_auth,new_suno_auth,start_keep_alive,get_random_token,get_page_token
 from utils import generate_lyrics, generate_music, get_feed, get_page_feed, get_lyrics, check_url_available,local_time,get_random_style,get_random_lyrics,put_upload_file,get_new_tags,suno_upload_audio
 
 root_dir = os.path.dirname(os.path.realpath(__file__))
@@ -156,16 +156,13 @@ if 'model_name' not in st.session_state:
     st.session_state['model_name'] = "chirp-v3-5"
 # print(st.session_state['model_name'])
 
-if 'token_id' not in st.session_state:
-    st.session_state['token_id'] = 0
-
 # @st.cache_data
 def fetch_feed(aids: list, token: str):
     if len(aids) == 1 and len(aids[0].strip()) == 36:
         resp = get_feed(aids[0].strip(), token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
             print(result)
@@ -191,7 +188,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_feed(aids[0].strip(), token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[0].strip(),))
             print(result)
@@ -215,7 +212,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_feed(aids[1].strip(), token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             result = suno_sqlite.query_one("select aid from music where aid =?", (aids[1].strip(),))
             print(result)
@@ -240,7 +237,7 @@ def fetch_feed(aids: list, token: str):
         resp = get_page_feed(aids, token)
         print(resp)
         print("\n")
-        status = resp["detail"] if "detail" in resp else "Not found." if len(resp) == 0 else resp[0]["status"]
+        status = resp["detail"] if "detail" in resp else resp[0]["status"]
         if status != "Unauthorized" and status != "Not found." and status != "error" and "refused" not in status:
             if len(resp) > 1:
                 for row in resp:
@@ -250,10 +247,10 @@ def fetch_feed(aids: list, token: str):
                     print(result)
                     print("\n")
                     if result:
-                        result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+                        result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"],row["metadata"]["tags"] if "tags" in row["metadata"] else "", row["metadata"]["prompt"], row["metadata"]["duration"], row["status"], row["id"]))
                         print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
                     else:
-                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, created, updated, status, private) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"], row["metadata"]["tags"], row["metadata"]["gpt_description_prompt"], row["metadata"]["duration"],localdatetime(row['created_at']),localdatetime(row['created_at']), row["status"], st.session_state.Private))
+                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, created, updated, status, private) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"],row["metadata"]["tags"] if "tags" in row["metadata"] else "", row["metadata"]["prompt"], row["metadata"]["duration"],localdatetime(row['created_at']),localdatetime(row['created_at']), row["status"], st.session_state.Private))
                         print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
                     print(result)
                     print("\n")
@@ -352,13 +349,13 @@ with container.container():
                                     "stream": False,
                                     "presence_penalty": 0,
                                     "frequency_penalty": 0,
-                                    "model": "gpt-4o-mini"
+                                    "model": "gpt-4o"
                                 }
                         )
                         if resp.status_code != 200:
                             placeholder.error(i18n("Analytics Images Error") + f"{resp.text}")
                         else:
-                            print(local_time() + f" ***gpt-4o-mini image_url -> {image_url} content -> {resp.text} ***\n")
+                            print(local_time() + f" ***gpt-4o image_url -> {image_url} content -> {resp.text} ***\n")
                             content = resp.json()["choices"][0]["message"]["content"].strip()
                             if Custom:
                                 st.session_state['prompt_input'] = content
@@ -393,15 +390,12 @@ with container.container():
                 with open(upload_folder / filename, "wb") as f:
                     f.write(bytes_data)
                 my_bar.progress(10)
-                token_id, token = get_clip_token()
-                st.session_state['token_id'] = token_id
+                token = get_random_token()
                 audio_id = suno_upload_audio(uploaded_audio.name, bytes_data, token, my_bar)
                 if "detail" in audio_id:
                     placeholder.error(i18n("Analytics Audio Error") + audio_id["detail"])
                     my_bar.empty()
                 else:
-                    token_id,token = get_clip_token(st.session_state['token_id'])
-                    st.session_state['token_id'] = token_id
                     fetch_feed(audio_id.split(","), token)
                     my_bar.progress(100)
                     placeholder.success(i18n("Upload Audio Success"))
@@ -428,7 +422,7 @@ with container.container():
         else:
             options = container.multiselect(
             i18n("Tags"),
-            ["  Country（乡村）","• Bluegrass（草莓乐）","• Country（乡村音乐）","• Folk（民谣）","  Dance（舞曲）","• Afro-Cuban（阿弗罗-古巴）","• Dance Pop（流行舞曲）","• Disco（迪斯科）","• Dubstep（配音步）","• Disco Funk（迪斯科放克）","• EDM（电子舞曲）","• Electro（电子）","• High-NRG（高能量）","• House（浩室音乐）","• Trance（迷幻舞曲）","  Downtempo（缓拍）","• Ambient（环境音）","• Drum'n'bass（鼓与贝斯）","• Dubstep（配音步）","• Electronic（电子音乐）","• IDM（智能舞曲）","• Synthpop（合成流行）","• Synthwave（合成波）","• Techno（技术音乐）","• Trap（陷阱音乐）","  Jazz/Soul（爵士/灵魂）","• Bebop（比博普）","• Gospel（福音）","• Jazz（爵士）","• Latin Jazz（拉丁爵士）","• RnB（节奏蓝调）","• Soul（灵魂乐）","  Latin（拉丁）","• Bossa Nova（波萨诺瓦）","• Latin Jazz（拉丁爵士）","• Forró（弗约罗）","• Salsa（萨尔萨舞）","• Tango（探戈）","  Reggae（雷鬼）","• Dancehall（舞厅）","• Dub（配音）","• Reggae（雷鬼）","• Reggaeton（雷盖顿）","• Afrobeat（非洲节奏）","  Metal（金属）","• Black Metal（黑金属）","• Deathcore（死亡核）","• Death Metal（死亡金属）","• Festive Heavy Metal（节日重金属）","• Heavy Metal（重金属）","• Nu Metal（新金属）","• Power Metal（力量金属）","• Metalcore（金属核）","  Popular（流行）","• Pop（流行音乐）","• Chinese pop（中国流行音乐）","• Dance Pop（流行舞曲）","• Pop Rock（流行摇滚）","• Kpop（韩流音乐）","• Jpop（日流音乐）","• RnB（节奏蓝调）","• Synthpop（合成流行）","  Rock（摇滚）","• Classic Rock（经典摇滚）","• Blues Rock（布鲁斯摇滚）","• Emo（情绪）","• Glam Rock（华丽摇滚）","• Indie（独立音乐）","• Industrial Rock（工业摇滚）","• Punk（朋克摇滚）","• Rock（摇滚）","• Skate Rock（滑板摇滚）","• Skatecore（滑板核）","  Urban（城市音乐）","• Funk（放克）","• HipHop（嘻哈）","• RnB（节奏蓝调）","• Phonk（酸音乐）","• Rap（说唱）","• Trap（陷阱音乐）","  Danceable（可跳舞的）","• Disco（迪斯科）","• Syncopated（切分节奏）","• Groovy（悠扬）","• Tipsy（微醺）","  Dark（黑暗）","• Dark（黑暗）","• Doom（末日）","• Dramatic（戏剧性）","• Sinister（阴险）","  Electric（电子）","• Art（艺术）","• Nu（新流行）","• Progressive（进步）","  Hard（强硬）","• Aggressive（激进）","• Banger（热门曲目）","• Power（力量）","• Stadium（体育场）","• Stomp（重踏）","  Lyrical（抒情的）","• Broadway（百老汇）","• Cabaret（歌舞表演）","• Lounge（酒吧歌手）","• Operatic（歌剧式的）","• Storytelling（讲故事）","• Torch-Lounge（酒吧歌曲）","• Theatrical（戏剧性的）","• Troubadour（吟游诗人）","• Vegas（拉斯维加斯风格）","  Magical（神奇）","• Ethereal（虚幻）","• Majestic（雄伟）","• Mysterious（神秘）","  Minimal（简约）","• Ambient（环境音乐）","• Cinematic（电影）","• Slow（缓慢）","• Sparse（稀疏）","  Party（派对）","• Glam（华丽）","• Glitter（闪耀）","• Groovy（悠扬）","• Grooveout（活力爆发）","  Soft（柔和）","• Ambient（环境音乐）","• Bedroom（卧室）","• Chillwave（轻松浪潮）","• Ethereal（虚幻）","• Intimate（亲密）","  Weird（奇怪）","• Carnival（嘉年华）","• Haunted（鬼屋）","• Random（随机）","• Musicbox（音乐盒）","• Hollow（空洞）","  World/Ethnic（世界/民族）","• Arabian（阿拉伯）","• Bangra（班格拉舞）","• Calypso（卡利普索）","• Egyptian（埃及）","• Adhan（安讫）","• Jewish Music（犹太音乐）","• Klezmer（克莱兹默音乐）","• Middle East（中东）","• Polka（波尔卡）","• Russian Navy Song（俄罗斯海军歌曲）","• Suomipop（芬兰流行音乐）","• Tribal（部落）","  BackGround（背景乐）","• Elevator（电梯音乐）","• Jingle（广告歌曲）","• Muzak（环境音乐）","  Call to Prayer（祈祷呼唤）","• Call to Prayer（祈祷呼唤）","• Gregorian Chant（格里高利圣歌）","  Character（角色）","• Strut（趾高气昂地走）","• March（进行曲）","• I Want Song（渴望之歌）","  Children（儿童）","• Children's（儿童的）","• Lullaby（摇篮曲）","• Sing-along（合唱歌曲）","  Retro（复古）","• 1960s（1960年代）","• Barbershop（理发店四重唱）","• Big Band（大乐队）","• Classic（经典的）","• Doo Wop（一种节奏蓝调风格的音乐）","• Girl Group（女子组合）","• Swing（摇摆乐）","• Traditional（传统的）","  Traditional（传统的）","• Barbershop（理发店四重唱）","• Christmas Carol（圣诞颂歌）","• Traditional（传统的）"],
+            ["  Country（乡村）","• Bluegrass（草莓乐）","• Country（乡村音乐）","• Folk（民谣）","  Dance（舞曲）","• Afro-Cuban（阿弗罗-古巴）","• Dance Pop（流行舞曲）","• Disco（迪斯科）","• Dubstep（配音步）","• Disco Funk（迪斯科放克）","• EDM（电子舞曲）","• Electro（电子）","• High-NRG（高能量）","• House（浩室音乐）","• Trance（迷幻舞曲）","  Downtempo（缓拍）","• Ambient（环境音）","• Drum'n'bass（鼓与贝斯）","• Dubstep（配音步）","• Electronic（电子音乐）","• IDM（智能舞曲）","• Synthpop（合成流行）","• Synthwave（合成波）","• Techno（技术音乐）","• Trap（陷阱音乐）","  Jazz/Soul（爵士/灵魂）","• Bebop（比博普）","• Gospel（福音）","• Jazz（爵士）","• Latin Jazz（拉丁爵士）","• RnB（节奏蓝调）","• Soul（灵魂乐）","  Latin（拉丁）","• Bossa Nova（波萨诺瓦）","• Latin Jazz（拉丁爵士）","• Forró（弗约罗）","• Salsa（萨尔萨舞）","• Tango（探戈）","  Reggae（雷鬼）","• Dancehall（舞厅）","• Dub（配音）","• Reggae（雷鬼）","• Reggaeton（雷盖顿）","• Afrobeat（非洲节奏）","  Metal（金属）","• Black Metal（黑金属）","• Deathcore（死亡核）","• Death Metal（死亡金属）","• Festive Heavy Metal（节日重金属）","• Heavy Metal（重金属）","• Nu Metal（新金属）","• Power Metal（力量金属）","• Metalcore（金属核）","  Popular（流行）","• Pop（流行音乐）","• Chinese pop（中国流行音乐）","• Dance Pop（流行舞曲）","• Pop Rock（流行摇滚）","• Kpop（韩流音乐）","• Jpop（日流音乐）","• RnB（节奏蓝调）","• Synthpop（合成流行）","  Rock（摇滚）","• Classic Rock（经典摇滚）","• Blues Rock（布鲁斯摇滚）","• Emo（情绪）","• Glam Rock（华丽摇滚）","• Indie（独立音乐）","• Industrial Rock（工业摇滚）","• Punk（朋克摇滚）","• Rock（摇滚）","• Skate Rock（滑板摇滚）","• Skatecore（滑板核）","  Urban（城市音乐）","• Funk（放克）","• HipHop（嘻哈）","• RnB（节奏蓝调）","• Phonk（酸音乐）","• Rap（说唱）","• Trap（陷阱音乐）","  Danceable（可跳舞的）","• Disco（迪斯科）","• Syncopated（切分节奏）","• Groovy（悠扬）","• Tipsy（微醺）","  Dark（黑暗）","• Dark（黑暗）","• Doom（末日）","• Dramatic（戏剧性）","• Sinister（阴险）","  Electric（电子）","• Art（艺术）","• Nu（新流行）","• Progressive（进步）","  Hard（强硬）","• Aggressive（激进）","• Banger（热门曲目）","• Power（力量）","• Stadium（体育场）","• Stomp（重踏）","  Lyrical（抒情的）","• Broadway（百老汇）","• Cabaret（歌舞表演）","• Lounge（酒吧歌手）","• Operatic（歌剧式的）","• Storytelling（讲故事）","• Torch-Lounge（酒吧歌曲）","• Theatrical（戏剧性的）","• Troubadour（吟游诗人）","• Vegas（拉斯维加斯风格）","  Magical（神奇）","• Ethereal（虚幻）","• Majestic（雄伟）","• Mysterious（神秘）","  Minimal（简约）","• Ambient（环境音乐）","• Cinematic（电影）","• Slow（缓慢）","• Sparse（稀疏）","  Party（派对）","• Glam（华丽）","• Glitter（闪耀）","• Groovy（悠扬）","• Grooveout（活力爆发）","  Soft（柔和）","• Ambient（环境音乐）","• Bedroom（卧室）","• Chillwave（轻松浪潮）","• Ethereal（虚幻）","• Intimate（亲密）","  Weird（奇怪）","• Carnival（嘉年华）","• Haunted（鬼屋）","• Random（随机）","• Musicbox（音乐盒）","• Hollow（空洞）","  World/Ethnic（世界/民族）","• Arabian（阿拉伯）","• Bangra（班格拉舞）","• Calypso（卡利普索）","• Egyptian（埃及）","• Adhan（安讫）","• Jewish Music（犹太音乐）","• Klezmer（克莱兹默音乐）","• Middle East（中东）","• Polka（波尔卡）","• Russian Navy Song（俄罗斯海军歌曲）","• Suomipop（芬兰流行音乐）","• Tribal（部落）","  BackGround（背景乐）","• Elevator（电梯音乐）","• Jingle（广告歌曲）","• Muzak（环境音乐）","  Call to Prayer（祈祷呼唤）","• Call to Prayer（祈祷呼唤）","• Gregorian Chant（格里高利圣歌）","  Character（角色）","• Strut（趾高气昂地走）","• March（进行曲）","• I Want Song（渴望之歌）","  Children（儿童）","• Children's（儿童的）","• Lullaby（摇篮曲）","• Sing-along（合唱歌曲）","  Retro（复古）","• 1960s（1960年代）","• Barbershop（理发店四重唱）","• Big Band（大乐队）","• Classic（经典的）","• Doo Wop（一种节奏蓝调风格的音乐）","• Girl Group（女子组合）","• Swing（摇摆乐）","• Traditional（传统的）","  Traditional（传统的）","• Barbershop（理发店四重唱）","• Christmas Carol（圣诞颂歌）","• Traditional（传统的）"],
             [] if st.session_state['tags_input']=="" else st.session_state['tags_input'].split(","),
             placeholder=i18n("Tags Placeholder"),
             help=i18n("Tags Desc"),
@@ -547,7 +541,7 @@ if Setting:
     Session = container1.text_input(label="Session:", value=Session, placeholder=i18n("Session Placeholder"),max_chars=50, help=i18n("Session Help"))
     st.session_state.Session = Session
     # print(st.session_state.Session)
-    Cookie = container1.text_area(label="Cookie:", value=Cookie, placeholder=i18n("Cookie Placeholder"), height=150, max_chars=2000, help=i18n("Cookie Help"))
+    Cookie = container1.text_area(label="Cookie:", value=Cookie, placeholder=i18n("Cookie Placeholder"), height=150, max_chars=1500, help=i18n("Cookie Help"))
     st.session_state.Cookie = Cookie
     # print(st.session_state.Cookie)
 
@@ -663,23 +657,14 @@ else:
 
 def generate(data: schemas.CustomModeGenerateParam):
     try:
-        token_id = 0
-        token = ""
-        if st.session_state['token_id'] == 0:
-            token_id, token = get_clip_token()
-        else:
-            token_id, token = get_clip_token(st.session_state['token_id'])
-        resp = generate_music(data, token)
-        st.session_state['token_id'] = token_id
+        resp = generate_music(data, get_random_token())
         return resp
     except Exception as e:
         return {"detail":str(e)}
 
 def generate_with_song_description(data: schemas.DescriptionModeGenerateParam):
     try:
-        token_id, token = get_clip_token()
-        resp = generate_music(data, token)
-        st.session_state['token_id'] = token_id
+        resp = generate_music(data, get_random_token())
         return resp
     except Exception as e:
         return {"detail":str(e)}
@@ -691,8 +676,7 @@ def fetch_status(aid: str, twice=False):
     percent_complete = 0
     my_bar.progress(percent_complete, text=progress_text)
     while True:
-        token_id,token = get_clip_token(st.session_state['token_id'])
-        resp = get_feed(aid, token)
+        resp = get_feed(aid, get_random_token())
         print(resp)
         print("\n")
         percent_complete = percent_complete + 1 if percent_complete >= 90 else percent_complete + 5
@@ -718,7 +702,7 @@ def fetch_status(aid: str, twice=False):
             #     if get_random_token() != "" and get_random_token() != "401":
             #         print(local_time() + f" ***fetch_status identity -> {st.session_state.suno_auth.get_identity()} session -> {st.session_state.suno_auth.get_session_id()} token -> {st.session_state.suno_auth.get_token()} ***\n")
             #         break
-            token_id,st.session_state.token = get_clip_token(token_id)
+            st.session_state.token = get_random_token()
             continue
         elif status == "Not found.":
             continue
@@ -733,10 +717,10 @@ def fetch_status(aid: str, twice=False):
         print(result)
         print("\n")
         if result:
-            result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, aid))
+            result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], "", resp[0]["title"], "", resp[0]["metadata"]["gpt_description_prompt"], "", status, aid))
             print(local_time() + f" ***fetch_status_update aid -> {aid} status -> {status} data -> {str(resp[0])} ***\n")
         else:
-            result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], resp[0]["image_url"], resp[0]["title"], resp[0]["metadata"]["tags"], resp[0]["metadata"]["gpt_description_prompt"], resp[0]["metadata"]["duration"], status, st.session_state.Private))
+            result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, status, private) values(?,?,?,?,?,?,?,?,?,?,?)", (str(resp[0]["id"]), str(resp[0]), resp[0]["user_id"], resp[0]["display_name"], "", resp[0]["title"], "", resp[0]["metadata"]["gpt_description_prompt"], "", status, st.session_state.Private))
         print(result)
         print("\n")
 
