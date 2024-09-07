@@ -167,7 +167,7 @@ if result is not None and len(result) > 0:
         title += i18n("FeedID") + ("None\n" if data['id'] is None or "" else data['id'] + "\n")
         title += i18n("Title") + ("None\n" if data['title'] is None or "" else data['title'] + "\n")
         title += i18n("Desc Prompt") + ("None\n" if "gpt_description_prompt" not in data else data['metadata']['gpt_description_prompt'] + "\n")
-        title += i18n("Tags") + ("None\n" if data['metadata']['tags'] is None or "" else data['metadata']['tags'] + "  " + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n"))
+        title += i18n("Tags") + ("None\n" if "tags" not in data else data['metadata']['tags'] + "  " + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n"))
         title += i18n("Music Created At")  + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "  " +  i18n("Select Model") + ("None\n" if data['model_name'] is None or "" else i18n("Upload Audio Type") + "\n\n" if data['metadata']['type'] == "upload" else data['model_name'] + "\n\n")
         title += i18n("Music Prompt")  + ("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'] + "\n")
         
