@@ -227,33 +227,33 @@ if aid != "" and len(aid) == 36:
                 <h3>{title}</h3> 
                 ''', unsafe_allow_html=True)
             cols = None
-            if ('audio_prompt_id' in data['metadata'] and data['metadata']['audio_prompt_id'] is not None) or ('stem_from_id' in data['metadata'] and data['metadata']['stem_from_id'] is not None):
-                cols = container.columns(4)
-            else:
-                cols = container.columns(3)
+            # if ('audio_prompt_id' in data['metadata'] and data['metadata']['audio_prompt_id'] is not None) or ('stem_from_id' in data['metadata'] and data['metadata']['stem_from_id'] is not None):
+            #     cols = container.columns(4)
+            # else:
+            cols = container.columns(3)
 
             # part_button = None
-            if data['metadata']['concat_history'] is not None:
-                # cols[0].markdown(f'''
-                # <h3>{i18n("Full Song")}</h3> 
-                # ''', unsafe_allow_html=True)
-                part_button = cols[0].button(f'''{i18n("Full Song")}''', type="secondary")
-            elif data['metadata']['history'] is not None:
-                # cols[0].markdown(f'''
-                # <h3>{i18n("Song Part")} {len(data['metadata']['history'])+1}</h3> 
-                # ''', unsafe_allow_html=True)
-                part_button = cols[0].button(f'''{i18n("Song Part")} {len(data['metadata']['history'])+1}''', type="secondary")
-            else:
+            # if data['metadata']['concat_history'] is not None:
+            #     # cols[0].markdown(f'''
+            #     # <h3>{i18n("Full Song")}</h3> 
+            #     # ''', unsafe_allow_html=True)
+            #     part_button = cols[0].button(f'''{i18n("Full Song")}''', type="secondary")
+            # elif data['metadata']['history'] is not None:
+            #     # cols[0].markdown(f'''
+            #     # <h3>{i18n("Song Part")} {len(data['metadata']['history'])+1}</h3> 
+            #     # ''', unsafe_allow_html=True)
+            #     part_button = cols[0].button(f'''{i18n("Song Part")} {len(data['metadata']['history'])+1}''', type="secondary")
+            # else:
                 # cols[0].markdown(f'''
                 # <h3>{i18n("Song Part")} 1</h3> 
                 # ''', unsafe_allow_html=True)
-                part_button = cols[0].button(f'''{i18n("Song Part")} 1''', type="secondary")
+            part_button = cols[0].button(f'''{i18n("Song Part")} 1''', type="secondary")
 
             max_width = 540
-            if data['metadata']['concat_history'] is not None:
-                max_width = max_width * len(data['metadata']['concat_history'])
-            elif data['metadata']['history'] is not None:
-                max_width = max_width * len(data['metadata']['history'])
+            # if data['metadata']['concat_history'] is not None:
+            #     max_width = max_width * len(data['metadata']['concat_history'])
+            # elif data['metadata']['history'] is not None:
+            #     max_width = max_width * len(data['metadata']['history'])
             
 
             # part_modal = Modal(title=title, key="part_modal", padding=15, max_width=max_width)
@@ -307,30 +307,30 @@ if aid != "" and len(aid) == 36:
                 st.session_state['model_name'] = "chirp-v3-0" if data['model_name'] == "chirp-v3" else "chirp-v3-5"
                 st.switch_page("main.py")
 
-            if ('audio_prompt_id' in data['metadata'] and data['metadata']['audio_prompt_id'] is not None) or ('stem_from_id' in data['metadata'] and data['metadata']['stem_from_id'] is not None):
-                whole_button = cols[3].button(i18n("Get Whole Song"), type="secondary")
-                if whole_button:
-                    data1 = {
-                        "clip_id": aid
-                    }
-                    # print(data1)
-                    # print("\n")
-                    resp = get_whole_song(data1)
-                    # print(resp)
-                    # print("\n")
-                    status = resp["status"] if "status" in resp else resp["detail"]
-                    if status == "queued" or status == "complete":
-                        result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["id"]), str(resp), 0))
-                        resp0 = fetch_status(resp["id"], col2)
-                        if resp0[0]["status"] == "complete":
-                            col2.success(i18n("Generate Success") + resp0[0]["id"])
-                            st.session_state.aid = resp0[0]["id"]
-                            # print(st.session_state.aid)
-                            st.switch_page("pages/song.py")
-                        else:
-                            col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
-                    else:
-                        col2.error(i18n("Generate Submit Error") + status)
+            # if ('audio_prompt_id' in data['metadata'] and data['metadata']['audio_prompt_id'] is not None) or ('stem_from_id' in data['metadata'] and data['metadata']['stem_from_id'] is not None):
+            #     whole_button = cols[3].button(i18n("Get Whole Song"), type="secondary")
+            #     if whole_button:
+            #         data1 = {
+            #             "clip_id": aid
+            #         }
+            #         # print(data1)
+            #         # print("\n")
+            #         resp = get_whole_song(data1)
+            #         # print(resp)
+            #         # print("\n")
+            #         status = resp["status"] if "status" in resp else resp["detail"]
+            #         if status == "queued" or status == "complete":
+            #             result = suno_sqlite.operate_one("insert into music (aid, data, private) values(?,?,?)", (str(resp["id"]), str(resp), 0))
+            #             resp0 = fetch_status(resp["id"], col2)
+            #             if resp0[0]["status"] == "complete":
+            #                 col2.success(i18n("Generate Success") + resp0[0]["id"])
+            #                 st.session_state.aid = resp0[0]["id"]
+            #                 # print(st.session_state.aid)
+            #                 st.switch_page("pages/song.py")
+            #             else:
+            #                 col2.error(i18n("Generate Status Error")  + (resp0[0]['status'] if resp0[0]['metadata']["error_message"] is None else resp0[0]['metadata']["error_message"]))
+            #         else:
+            #             col2.error(i18n("Generate Submit Error") + status)
 
             # similar_button = None
             # if data['metadata']['audio_prompt_id'] is not None:
