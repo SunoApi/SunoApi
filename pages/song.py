@@ -290,7 +290,7 @@ if aid != "" and len(aid) == 36:
             reuse_button = cols[1].button(i18n("Reuse Prompt"), type="secondary")
             if reuse_button:
                 st.session_state['title_input'] = title
-                st.session_state['tags_input'] = "(no style)" if "tags" not in data else data['metadata']['tags']
+                st.session_state['tags_input'] = "(no style)" if "tags" not in data['metadata'] else data['metadata']['tags']
                 st.session_state['prompt_input'] = "" if data['metadata']['prompt'] == "[Instrumental]" else data['metadata']['prompt']
                 st.session_state['continue_at'] = ""
                 st.session_state['continue_clip_id'] = ""
@@ -300,7 +300,7 @@ if aid != "" and len(aid) == 36:
             continue_button = cols[2].button(i18n("Continue Extend"), type="secondary")
             if continue_button:
                 st.session_state['title_input'] = title
-                st.session_state['tags_input'] = "(no style)" if "tags" not in data else data['metadata']['tags']
+                st.session_state['tags_input'] = "(no style)" if "tags" not in data['metadata'] else data['metadata']['tags']
                 st.session_state['prompt_input'] = ""
                 st.session_state['continue_at'] = str(data['metadata']['duration'])[0:6]
                 st.session_state['continue_clip_id'] = aid
@@ -347,7 +347,7 @@ if aid != "" and len(aid) == 36:
                             <a href="/song?id={aid}" target="_blank">{aid}</a>
                             ''', unsafe_allow_html=True)
 
-            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if "gpt_description_prompt" not in data else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if "tags" not in data else data['metadata']['tags'] + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else i18n("Upload Audio Type") if data['metadata']['type'] == "upload" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
+            container.write("\n\n" + i18n("Desc Prompt") + ("None\n" if "gpt_description_prompt" not in data else data['metadata']['gpt_description_prompt']) + " \n\n" + i18n("Tags") +  ("None\n" if "tags" not in data['metadata'] else data['metadata']['tags'] + "\n") + "&nbsp;&nbsp;" + i18n("Music Duration")  + ("None\n" if data['metadata']['duration'] is None or "" else str(int(data['metadata']['duration']/60)) + ":" + str("00" if int(data['metadata']['duration']%60) == 0 else ("0" + str(int(data['metadata']['duration']%60))  if int(data['metadata']['duration']%60) <10 else int(data['metadata']['duration']%60))) + " \n") + "\n\n" + i18n("Music Created At") + ("None\n" if data['created_at'] is None or "" else localdatetime(data['created_at'])) + "&nbsp;&nbsp;" + i18n("Select Model") +  ("None\n" if data['model_name'] is None or "" else i18n("Upload Audio Type") if data['metadata']['type'] == "upload" else data['model_name'] + "\n") + "\n\n" + i18n("Music Prompt"))
 
             container.markdown("None\n" if data['metadata']['prompt'] is None or "" else data['metadata']['prompt'].replace("\n", "\n\n").replace("        ", ""), unsafe_allow_html=True)
 
