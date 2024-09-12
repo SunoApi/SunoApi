@@ -247,10 +247,10 @@ def fetch_feed(aids: list, token: str):
                     print(result)
                     print("\n")
                     if result:
-                        result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"],row["metadata"]["tags"] if "tags" in row["metadata"] else "", row["metadata"]["prompt"], row["metadata"]["duration"], row["status"], row["id"]))
+                        result = suno_sqlite.operate_one("update music set data=?, updated=(datetime('now', 'localtime')), sid=?, name=?, image=?, title=?, tags=?, prompt=?, duration=?, status=? where aid =?", (str(row), row["user_id"], row["display_name"], row["image_url"], row["title"],row["metadata"]["tags"] if "tags" in row["metadata"] else "", row["metadata"]["prompt"], "", row["status"], row["id"]))
                         print(local_time() + f" ***get_page_feed_update page -> {aids} ***\n")
                     else:
-                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, created, updated, status, private) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"],row["metadata"]["tags"] if "tags" in row["metadata"] else "", row["metadata"]["prompt"], row["metadata"]["duration"],localdatetime(row['created_at']),localdatetime(row['created_at']), row["status"], st.session_state.Private))
+                        result = suno_sqlite.operate_one("insert into music (aid, data, sid, name, image, title, tags, prompt,duration, created, updated, status, private) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", (str(row["id"]), str(row), row["user_id"], row["display_name"], row["image_url"], row["title"],row["metadata"]["tags"] if "tags" in row["metadata"] else "", row["metadata"]["prompt"], "", localdatetime(row['created_at']),localdatetime(row['created_at']), row["status"], st.session_state.Private))
                         print(local_time() + f" ***get_page_feed_insert page -> {aids} ***\n")
                     print(result)
                     print("\n")
