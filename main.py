@@ -755,6 +755,12 @@ if StartBtn :
                         "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
                         "continue_at": None if st.session_state["continue_at"]=="" else st.session_state["continue_at"] if "continue_at" in st.session_state else None,
                         "continue_clip_id": None if st.session_state["continue_clip_id"]=="" else st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
+                        "generation_type":"TEXT",
+                        "task": None,
+                        "continued_aligned_prompt": None,
+                        "negative_tags": "",
+                        "infill_end_s": None,
+                        "infill_start_s": None
                     }
                 else:
                     data = {
@@ -764,6 +770,12 @@ if StartBtn :
                         "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
                         "continue_at": None if st.session_state["continue_at"]=="" else st.session_state["continue_at"] if "continue_at" in st.session_state else None,
                         "continue_clip_id": None if st.session_state["continue_clip_id"]=="" else st.session_state["continue_clip_id"] if "continue_clip_id" in st.session_state else None,
+                        "generation_type":"TEXT",
+                        "task": "extend" if "continue_at" in st.session_state else None,
+                        "continued_aligned_prompt": None,
+                        "negative_tags": "",
+                        "infill_end_s": None,
+                        "infill_start_s": None
                     }
                 print(data)
                 print("\n")
@@ -810,10 +822,12 @@ if StartBtn :
                 placeholder.error(i18n("Select Model Error"))
             else:
                 data = {
+                    "generation_type":"TEXT",
                     "gpt_description_prompt": st.session_state.DescPrompt,
                     "make_instrumental": st.session_state.Instrumental,
                     "mv": st.session_state['model_name'] if "model_name" in st.session_state else "chirp-v3-0",
-                    "prompt": ""
+                    "prompt": "",
+                    "user_uploaded_images_b64":[]
                 }
                 print(data)
                 print("\n")
